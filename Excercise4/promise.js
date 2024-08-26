@@ -27,10 +27,6 @@ function orderIt() {
 
 orderIt();
 
-
-
-
-
 // second way
 const myPromise = new Promise((resolve, reject) => {
   const success = true; // Simulating a successful async operation
