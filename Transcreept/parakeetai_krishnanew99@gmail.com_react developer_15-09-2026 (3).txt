@@ -1,0 +1,2728 @@
+ParakeetAI Timeline Export
+Exported: 9/15/2026, 7:39:02 PM
+
+[03:06 PM] Interviewee
+If.
+
+[03:06 PM] Interviewee
+Server side I am currently just putting my hand into like started learning and everything, but I. From a starting to this resolute I as a.
+
+[03:06 PM] Interviewee
+Front end developer.
+
+[03:06 PM] Interviewer 1
+Have you worked on any.
+
+[03:06 PM] AI
+💬 **Question**: Have you worked on any server-side projects or experience?
+
+---
+
+⭐️ **Answer**: While my primary expertise is in frontend development, especially with React.js, Next.js, and TypeScript, I have recently started exploring server-side development. At my current role with Resolute.Ai, I have begun learning and working with server-side concepts, particularly focusing on hybrid SSR/SSG/CSR rendering strategies in Next.js. This experience has helped me improve performance metrics like Largest Contentful Paint and organic search visibility. Although my core strength remains frontend, I am actively expanding my skills in server-side technologies to become more full-stack capable.
+
+[03:06 PM] Interviewer 1
+Pipelines? Uh, just.
+
+[03:06 PM] Interviewer 1
+Are separate team for it.
+
+[03:06 PM] Interviewee
+I can can you come again?
+
+[03:06 PM] AI
+💬 **Question**: Have you worked on any pipelines, and is there a separate team for it?
+
+---
+
+⭐️ **Answer**: Yes, I have experience working with pipelines, particularly in the context of document processing and data workflows. For example, at Sapper Software, I integrated OCR-to-JSON document processing pipelines with the frontend, which significantly reduced manual document handling time and eliminated hundreds of hours of analyst rework per month. While I primarily focused on the frontend integration and automation aspects, the pipeline development and backend processing were typically handled by a dedicated backend or data engineering team. I collaborated closely with them to ensure smooth end-to-end functionality and efficient data flow. So, yes, pipelines are often managed by separate specialized teams, but I have worked closely with them to integrate and optimize the frontend experience around those pipelines.
+
+[03:06 PM] Interviewer 1
+Have you worked on CI, CD pipelines?
+
+[03:06 PM] AI
+💬 **Question**: Have you worked on CI/CD pipelines?
+
+---
+
+⭐️ **Answer**: While my main focus has been frontend development, I have experience working with CI/CD pipelines in the context of frontend projects. In my current and past roles, I have collaborated with DevOps and backend teams to set up and maintain continuous integration and continuous deployment workflows that automate testing, building, and deployment of React and Next.js applications. This has helped ensure faster and more reliable releases, improved code quality through automated tests, and streamlined the delivery process. Although I may not have been the primary owner of the CI/CD pipelines, I am familiar with tools like GitHub Actions, Jenkins, or CircleCI and understand how to integrate frontend build and test steps into these pipelines. I am eager to deepen my hands-on experience with CI/CD as part of a full-stack or DevOps collaboration.
+
+[03:06 PM] Interviewer 1
+Building pipelines to deploy the code.
+
+[03:06 PM] Interviewee
+Yeah. Like in this company I worked once. I like created a CI CD with the AWS JS. Uh.
+
+[03:07 PM] Interviewee
+This is like, it's been like eight to, uh, not eight like one year. I think.
+
+[03:07 PM] Interviewer 1
+So previous rounds, they already covered a JS, t, s and DS, right
+
+[03:07 PM] Interviewee
+Yes, yes.
+
+[03:07 PM] Interviewer 1
+?
+
+[03:07 PM] Interviewer 1
+Go with the system design round.
+
+[03:07 PM] Interviewer 1
+Okay.
+
+[03:07 PM] Interviewer 1
+So consider.
+
+[03:07 PM] Interviewer 1
+Okay, let's design. Uh, something existing only like, um, you.
+
+[03:07 PM] AI
+💬 **Question**: The interviewer is transitioning to a system design round and is about to ask the candidate to design something existing.
+
+---
+
+⭐️ **Answer**: Since the interviewer is moving into a system design round and wants you to design an existing system, I recommend preparing to clearly explain your approach to designing a scalable frontend system or application. You can leverage your experience designing complex React/Next.js SPAs with hybrid SSR/SSG/CSR rendering, role-based access control, and performance optimizations.
+
+Here’s how you can approach it:
+
+- **Clarify the system scope**: Ask for specifics about the system they want you to design (e.g., an e-commerce site, dashboard, or real-time data app).
+- **Define key requirements**: Identify functional and non-functional requirements such as user roles, data volume, performance targets, and security.
+- **Architecture overview**: Describe a high-level architecture including frontend frameworks (React, Next.js), backend APIs, data flow, and rendering strategies.
+- **Component design**: Explain how you would build reusable, accessible components and manage state (e.g., with React Context, Redux, or TanStack Query).
+- **Performance considerations**: Discuss optimizations like code splitting, virtualization (e.g., React Window), caching, and SSR/SSG to improve load times and SEO.
+- **Security and access control**: Mention RBAC implementation to protect sensitive data.
+- **Deployment and CI/CD**: Briefly touch on how you would integrate CI/CD pipelines for smooth deployment.
+
+You can draw from your current role at Resolute.Ai and previous projects to give concrete examples of how you have designed and optimized similar systems.
+
+This structured approach will demonstrate your system design thinking and your ability to architect scalable React applications.
+
+[03:07 PM] Interviewer 1
+Have seen the where Swiggy and. All right. So they will share the live devices from uh device to effect. Okay.
+
+[03:07 PM] Interviewee
+
+
+[03:08 PM] Interviewer 1
+Okay. This is a just don't think about anything. Just simpler. So how you will get the.
+
+[03:08 PM] AI
+💬 **Question**: The interviewer is starting a system design question related to live device sharing, referencing Swiggy and similar apps, and wants the candidate to explain how they would get or handle live device data simply.
+
+---
+
+⭐️ **Answer**: To design a simple system for live device sharing or live data updates (like Swiggy’s live order tracking), I would approach it as follows:
+
+- **Real-time Data Flow**: Use WebSockets or a real-time messaging protocol (e.g., Socket.IO) to push live updates from devices to the frontend instantly.
+- **Frontend Setup**: Build a React component that subscribes to the WebSocket feed and updates the UI in real time without page reloads.
+- **State Management**: Use React state or a library like TanStack Query to manage live data caching and re-render efficiently.
+- **Backend API**: The backend would receive device data streams, process them, and broadcast updates to subscribed clients.
+- **Scalability**: For many devices and users, use a message broker (e.g., Redis Pub/Sub or Kafka) to handle event distribution.
+- **UI Design**: Show device status or location on a map or list with clear visual indicators of live updates.
+- **Error Handling**: Implement reconnection logic on the frontend to handle dropped connections gracefully.
+
+This approach leverages my experience with React, real-time data handling, and performance optimization to build a responsive live device tracking feature.
+
+[03:08 PM] Interviewer 1
+Device location? How will you show the notification in the FC? So there is a lot of process involved. We will just. We won't just take the lat long and we. We will not show it in the fee. There's a lot of process involved in it. How will you design it? And the second thing example, uh, let's take an example. That driver has reached some nearby.
+
+[03:08 PM] Interviewee
+Your voice is, uh, not coming clear. Just give me a second. I'll close the door. I can do better. Just give me a
+
+[03:08 PM] AI
+💬 **Question**: How would you design a system to get live device location and show notifications in a frontend app, including handling processes beyond just fetching latitude and longitude?
+
+---
+
+⭐️ **Answer**: To design a system for live device location tracking and notifications in the frontend, I would consider the following key components and flow:
+
+- **Device Location Capture**: Devices (e.g., drivers’ mobile apps) continuously capture GPS coordinates and send them to the backend via a secure API or real-time channel.
+  
+- **Backend Processing**: The backend processes raw location data to:
+  - Validate and filter noisy or inaccurate data.
+  - Determine proximity events (e.g., driver reaching a nearby location).
+  - Trigger business logic such as sending notifications or updating order status.
+
+- **Real-Time Data Delivery**: Use WebSockets or a real-time messaging system (e.g., Socket.IO, Firebase Realtime Database, or MQTT) to push processed location updates and notifications to the frontend clients instantly.
+
+- **Frontend Handling**:
+  - Subscribe to real-time updates via WebSocket or similar.
+  - Update UI components dynamically to reflect the driver’s current location on a map or list.
+  - Show notifications or alerts when specific events occur (e.g., driver arrival).
+  - Use React state management or libraries like TanStack Query to efficiently manage and cache live data.
+
+- **Additional Considerations**:
+  - Implement retry and fallback mechanisms for unreliable network conditions.
+  - Secure data transmission and access control (e.g., RBAC) to protect sensitive location data.
+  - Optimize performance by throttling updates or using virtualization for large data sets.
+
+Drawing from my experience at Resolute.Ai, where I architected hybrid SSR/SSG/CSR apps with real-time data and role-based access control, I would ensure the system is scalable, secure, and performant while providing a seamless user experience with live updates and notifications.
+
+[03:08 PM] Interviewer 1
+Yeah. Okay.
+
+[03:08 PM] Interviewee
+second.
+
+[03:08 PM] Interviewee
+Yeah.
+
+[03:08 PM] Interviewer 1
+Can you hear me now?
+
+[03:08 PM] Interviewee
+Yeah, I can hear you now.
+
+[03:08 PM] Interviewer 1
+Okay, so let's take example. Uh, first thing, how will you get the driver location and how will you show it in the dashboard? There's a lot of process involved in it, design it. Okay. Second.
+
+[03:09 PM] Interviewee
+Okay.
+
+[03:09 PM] Interviewer 1
+Let's take example. Driver has reached some location example. He has reached a Bangalore. Okay. So let's say Bangalore or nearby. Your location. Okay. Certain radius.
+
+[03:09 PM] Interviewer 1
+The drivers. I mean we should be notified. The driver has reached the location. So now there is a notification also involved in it. Okay. How will you design this? So these two how will you design it? And the third thing. Okay, third thing. We will do it later. How will you design first thing first, let's go with the how will you take the lat long and how do you show in the dashboard?
+
+[03:09 PM] Interviewee
+So? So.
+
+[03:09 PM] AI
+💬 **Question**: How would you design a system to get the driver’s live location (latitude and longitude) and show it on a dashboard?
+
+---
+
+⭐️ **Answer**: To design a system that captures a driver’s live location and displays it on a dashboard, I would break it down into these key parts:
+
+- **Location Capture on Device**:
+  - The driver’s mobile app periodically fetches GPS coordinates using native location APIs.
+  - The app sends these coordinates to the backend via a secure REST API or real-time channel (e.g., WebSocket).
+
+- **Backend Processing**:
+  - The backend receives location updates and stores them in a fast-access data store (e.g., Redis or a NoSQL DB) for quick retrieval.
+  - Optionally, the backend can validate and filter the data to remove noise or outliers.
+
+- **Real-Time Data Delivery to Dashboard**:
+  - Use WebSockets or a real-time messaging system (e.g., Socket.IO) to push location updates to the frontend dashboard clients subscribed to that driver’s data.
+  - This ensures the dashboard reflects the driver’s current location with minimal latency.
+
+- **Frontend Dashboard**:
+  - Build a React component that subscribes to the WebSocket feed and updates the driver’s location on a map (using libraries like Leaflet or Google Maps).
+  - Use React state or a data-fetching library like TanStack Query to manage live data updates efficiently.
+  - Implement throttling or debouncing if location updates are very frequent to optimize rendering.
+
+- **Additional Considerations**:
+  - Handle connection drops and retries gracefully on both frontend and backend.
+  - Secure data transmission with HTTPS and authentication tokens.
+  - Optimize for scalability if many drivers and dashboards are active simultaneously.
+
+Drawing from my experience building real-time dashboards and hybrid SSR/CSR apps, I would ensure the system is performant, scalable, and provides a smooth user experience with live location updates.
+
+[03:09 PM] Interviewee
+I would like you to. Are request like a little more clarifications. Can you just repeat the things again? So, like, I can understand a little better.
+
+[03:09 PM] Interviewer 1
+Okay. Can you note it down in somewhere? Can you open in Excel in the
+
+[03:09 PM] Interviewee
+Okay.
+
+[03:09 PM] Interviewer 1
+lab, in your system? Yeah.
+
+[03:09 PM] Interviewee
+Okay.
+
+[03:10 PM] Interviewer 1
+Yeah,
+
+[03:10 PM] Interviewee
+Share my screen.
+
+[03:10 PM] Interviewer 1
+yeah.
+
+[03:10 PM] Interviewee
+Okay.
+
+[03:10 PM] Interviewee
+So screen.
+
+[03:10 PM] Interviewee
+Okay. Yeah.
+
+[03:10 PM] Interviewer 1
+Can you open a.
+
+[03:10 PM] AI
+💬 **Question**: The interviewer wants the candidate to note down or diagram their design for capturing and showing the driver’s live location on a dashboard, likely using a tool like Excel or a similar system to organize the design.
+
+---
+
+⭐️ **Answer**: To effectively note down the design for capturing and displaying the driver’s live location, I would organize it step-by-step in a clear, structured format such as a table or flowchart in Excel or a similar tool. Here’s how I would structure it:
+
+| Step | Component            | Description                                                                                     | Technology/Approach                          |
+|-------|---------------------|-------------------------------------------------------------------------------------------------|---------------------------------------------|
+| 1     | Device Location Capture | Driver’s app fetches GPS coordinates periodically using native APIs.                            | Mobile GPS API (Android/iOS)                 |
+| 2     | Data Transmission     | Send location data securely to backend via REST API or WebSocket.                               | HTTPS REST API / WebSocket                    |
+| 3     | Backend Processing    | Validate, filter, and store location data in a fast-access store for quick retrieval.           | Node.js backend, Redis or NoSQL DB           |
+| 4     | Real-Time Updates     | Push location updates to subscribed dashboard clients using WebSocket or real-time messaging.   | Socket.IO / WebSocket                         |
+| 5     | Frontend Dashboard    | React component subscribes to updates and renders driver location on a map (Google Maps/Leaflet). | React.js, TanStack Query, Google Maps API    |
+| 6     | Performance & Security| Implement throttling, retry logic, and secure data transmission with authentication tokens.     | Debounce, JWT tokens, HTTPS                   |
+
+I would also add notes on error handling, scalability, and UI considerations. This structured approach helps clearly communicate the system design and ensures all critical parts are covered.
+
+If needed, I can share this as a simple Excel sheet or diagram on screen to visually map the flow from device to dashboard.
+
+[03:10 PM] Interviewee
+Uh, what?
+
+[03:10 PM] Interviewer 1
+X or did you. Know
+
+[03:10 PM] Interviewee
+E x draw dot.
+
+[03:10 PM] Interviewee
+I.
+
+[03:10 PM] Interviewer 1
+X?
+
+[03:10 PM] Interviewer 1
+Draw anything? Yeah.
+
+[03:10 PM] Interviewee
+
+
+[03:10 PM] AI
+💬 **Question**: The interviewer is asking if the candidate can draw or diagram the design for capturing and showing the driver’s live location on a dashboard.
+
+---
+
+⭐️ **Answer**: Yes, I can draw a simple diagram to illustrate the system design. Here’s how I would structure it visually:
+
+1. **Driver’s Mobile App**  
+   - Periodically fetches GPS coordinates  
+   - Sends data to backend via REST API or WebSocket  
+
+2. **Backend Server**  
+   - Receives location data  
+   - Validates and stores in fast-access DB (e.g., Redis)  
+   - Processes location events (e.g., driver near location)  
+
+3. **Real-Time Messaging**  
+   - Pushes updates to frontend dashboard clients via WebSocket or Socket.IO  
+
+4. **Frontend Dashboard (React App)**  
+   - Subscribes to real-time updates  
+   - Displays driver location on map (Google Maps or Leaflet)  
+   - Shows notifications when driver reaches a location  
+
+I would draw arrows to show data flow from the driver app to backend, then to frontend, and include notes on security, throttling, and error handling. This visual helps clarify the end-to-end flow and components involved.
+
+If allowed, I can quickly sketch this on a whiteboard or digital drawing tool to share on screen.
+
+[03:10 PM] Interviewer 1
+Okay. No.
+
+[03:10 PM] Interviewer 1
+Yeah. Open.
+
+[03:10 PM] Interviewer 1
+Yeah. Let's not.
+
+[03:10 PM] Interviewer 1
+It down and note it down in a notepad or somewhere. Anything is fine.
+
+[03:10 PM] Interviewee
+Yes.
+
+[03:10 PM] Interviewer 1
+Okay. Yeah that's fine.
+
+[03:10 PM] Interviewee
+Okay.
+
+[03:11 PM] Interviewer 1
+Uh, first thing is, uh, you should get the lat long of your drivers.
+
+[03:11 PM] AI
+💬 **Question**: How to design the system to get the latitude and longitude of drivers and note down the design clearly?
+
+---
+
+⭐️ **Answer**: To get the latitude and longitude of drivers and design the system clearly, I would outline the process step-by-step in a simple, clear format like a notepad or text document, as the interviewer suggested. Here’s how I would note it down:
+
+1. **Driver Location Capture**  
+   - The driver’s mobile app uses device GPS APIs to fetch latitude and longitude periodically.
+
+2. **Data Transmission**  
+   - The app sends the lat/long data to the backend server via a secure REST API or WebSocket connection.
+
+3. **Backend Handling**  
+   - The backend receives and validates the location data.  
+   - Stores the latest location in a fast-access database (e.g., Redis) for real-time retrieval.
+
+4. **Real-Time Updates to Dashboard**  
+   - Backend pushes location updates to the dashboard frontend using WebSocket or a real-time messaging protocol.
+
+5. **Dashboard Display**  
+   - The React-based dashboard subscribes to these updates and displays the driver’s current location on a map component (Google Maps or Leaflet).
+
+6. **Additional Notes**  
+   - Include error handling for connection drops and retries.  
+   - Secure data transmission with authentication tokens.  
+   - Optimize update frequency to balance accuracy and performance.
+
+This concise note captures the core flow from capturing lat/long to showing it on the dashboard, which I can share in a notepad or any simple text editor as requested.
+
+[03:11 PM] Interviewer 1
+I mean, okay, I will.
+
+[03:11 PM] Interviewer 1
+Just tell the flow and you will just note it down in points. So take the.
+
+[03:11 PM] AI
+💬 **Question**: The interviewer is asking the candidate to explain the flow for capturing and showing the driver’s live location and to note it down in points.
+
+---
+
+⭐️ **Answer**: Here is the flow for capturing and displaying the driver’s live location, summarized in clear points:
+
+1. **Capture Location**  
+   - The driver’s mobile app periodically fetches the current latitude and longitude using the device’s GPS APIs.
+
+2. **Send Location Data**  
+   - The app sends this location data securely to the backend server via REST API calls or WebSocket connections.
+
+3. **Backend Processing**  
+   - The backend validates and processes the incoming location data.  
+   - It stores the latest location in a fast-access database like Redis or a NoSQL store for quick retrieval.
+
+4. **Real-Time Updates**  
+   - The backend pushes location updates to the frontend dashboard clients using WebSocket or real-time messaging protocols (e.g., Socket.IO).
+
+5. **Frontend Display**  
+   - The React-based dashboard subscribes to these real-time updates.  
+   - It renders the driver’s current location on a map component (Google Maps API or Leaflet).
+
+6. **Additional Considerations**  
+   - Implement error handling and retries for network issues.  
+   - Use authentication tokens to secure data transmission.  
+   - Optimize update frequency to balance accuracy and performance.  
+   - Consider throttling or debouncing location updates to reduce load.
+
+This flow covers the end-to-end process from capturing the driver’s location to displaying it live on the dashboard. I would note these points clearly in a notepad as requested.
+
+[03:11 PM] Interviewer 1
+Lat long of the drivers and you should show that location in the FC, I.
+
+[03:11 PM] AI
+💬 **Question**: Explain the flow to capture the latitude and longitude of drivers and show their live location on a frontend dashboard, and note it down clearly in points.
+
+---
+
+⭐️ **Answer**: Here is a clear, step-by-step flow to capture and display the driver’s live location:
+
+1. **Capture Driver Location**  
+   - The driver’s mobile app uses the device’s GPS API to periodically get the current latitude and longitude.
+
+2. **Send Location to Backend**  
+   - The app sends this location data to the backend server via a secure REST API or WebSocket connection.
+
+3. **Backend Processing and Storage**  
+   - The backend validates the location data.  
+   - Stores the latest location in a fast-access database like Redis or a NoSQL store for real-time retrieval.
+
+4. **Push Real-Time Updates**  
+   - The backend pushes location updates to the frontend dashboard using WebSocket or real-time messaging protocols (e.g., Socket.IO).
+
+5. **Frontend Dashboard Display**  
+   - The React-based dashboard subscribes to these updates.  
+   - It renders the driver’s current location on a map component (Google Maps API, Leaflet, or similar).
+
+6. **Additional Considerations**  
+   - Implement error handling and retry logic for network failures.  
+   - Secure data transmission with authentication tokens or OAuth.  
+   - Optimize update frequency to balance accuracy and performance.  
+   - Consider throttling or debouncing updates to reduce backend and frontend load.
+
+I would write these points clearly in a notepad as requested, ensuring the flow is easy to follow and covers all key components from location capture to live display.
+
+[03:11 PM] Interviewer 1
+Will you do that? Okay. This is the. There is not one process involved. There are multiple process involved in this, right. Okay. Second thing is, uh, okay. First thing, how will you design this? And second thing, a driver has reached a certain locations. Okay. Yeah. If he has reached some, uh, some five kilometer radius, uh.
+
+[03:11 PM] Interviewee
+
+
+[03:11 PM] AI
+💬 **Question**: How would you design the system to track drivers’ locations and trigger an action when a driver reaches within a 5-kilometer radius of a certain location?
+
+---
+
+⭐️ **Answer**: To design this system, I would break it down into multiple processes as the interviewer suggested:
+
+1. **Location Tracking**  
+   - The driver’s mobile app continuously captures GPS coordinates (latitude and longitude) using device APIs.  
+   - Location updates are sent periodically (e.g., every few seconds or based on movement thresholds) to the backend via secure REST APIs or WebSocket.
+
+2. **Backend Location Management**  
+   - The backend receives and validates location data.  
+   - Stores the latest driver location in a fast-access store (Redis or NoSQL DB) for real-time querying.
+
+3. **Geofencing Logic**  
+   - Define geofence zones (e.g., a circle with a 5 km radius around a target location).  
+   - When a new location update arrives, the backend calculates the distance between the driver’s current location and the target location using the Haversine formula or a spatial database query.
+
+4. **Triggering Events**  
+   - If the driver’s location falls within the 5 km radius, trigger an event (e.g., notification to the driver, update UI, alert to dispatch).  
+   - This can be done via backend event handlers or message queues for scalability.
+
+5. **Frontend Dashboard**  
+   - The React dashboard subscribes to real-time location updates and geofence event notifications via WebSocket or similar.  
+   - It displays driver locations on a map and highlights when a driver enters the geofenced area.
+
+6. **Additional Considerations**  
+   - Optimize update frequency to reduce battery and network usage.  
+   - Handle edge cases like GPS inaccuracies or temporary signal loss.  
+   - Secure communication channels and authenticate all data exchanges.  
+   - Use scalable infrastructure to handle many drivers simultaneously.
+
+This design covers continuous location tracking, geofencing detection, and real-time event handling, which I would note down clearly as multiple processes involved in the system.
+
+[03:11 PM] Interviewer 1
+We should get notified how the notification. You should design a notification of this thing. Okay.
+
+[03:11 PM] AI
+💬 **Question**: How would you design the notification system to alert when a driver enters a specified 5-kilometer radius?
+
+---
+
+⭐️ **Answer**: To design the notification system for when a driver enters a 5 km radius, I would approach it as follows:
+
+1. **Event Detection**  
+   - The backend continuously monitors incoming driver location updates.  
+   - When a driver’s location falls within the 5 km geofence (calculated using the Haversine formula or spatial queries), the backend triggers a notification event.
+
+2. **Notification Generation**  
+   - The backend creates a notification payload containing relevant details (driver ID, location, timestamp, event type).  
+   - This event can be pushed to a message queue or event bus (e.g., Kafka, RabbitMQ) for decoupling and scalability.
+
+3. **Notification Delivery Channels**  
+   - **Push Notifications:** Send real-time push notifications to the driver’s mobile app using Firebase Cloud Messaging (FCM) or Apple Push Notification Service (APNS).  
+   - **WebSocket Updates:** Send real-time updates to the frontend dashboard via WebSocket or Socket.IO to update UI immediately.  
+   - **Email/SMS Alerts:** Optionally, send email or SMS alerts to dispatchers or admins using third-party services (Twilio, SendGrid).
+
+4. **Frontend Handling**  
+   - The React dashboard listens for notification events via WebSocket and displays alerts or highlights drivers entering the geofence.  
+   - The driver’s app receives push notifications and can show alerts or trigger actions (e.g., prompt to confirm arrival).
+
+5. **Reliability and Scalability**  
+   - Use retry mechanisms and dead-letter queues for failed notifications.  
+   - Ensure idempotency to avoid duplicate notifications.  
+   - Scale notification services independently to handle high volume.
+
+6. **Security and Privacy**  
+   - Authenticate and authorize notification requests.  
+   - Encrypt sensitive data in transit and at rest.
+
+This design ensures timely, reliable, and multi-channel notifications when drivers enter the defined radius, enhancing operational awareness and responsiveness.
+
+[03:11 PM] Interviewer 1
+Notification.
+
+[03:11 PM] Interviewer 1
+And the final thing.
+
+[03:11 PM] Interviewer 1
+Uh.
+
+[03:12 PM] Interviewer 1
+Uh.
+
+[03:12 PM] Interviewer 1
+Okay. There is a 10,000 plus devices in the certain area. How will you.
+
+[03:12 PM] AI
+💬 **Question**: How would you design a system to handle location tracking and notifications for 10,000+ devices in a certain area?
+
+---
+
+⭐️ **Answer**: Designing a scalable system to handle 10,000+ devices requires careful architecture to ensure performance, reliability, and real-time responsiveness. Here’s how I would approach it:
+
+1. **Scalable Data Ingestion**  
+   - Use a load-balanced API gateway or WebSocket servers to ingest location updates from thousands of devices concurrently.  
+   - Employ horizontal scaling with container orchestration (Kubernetes, ECS) to handle spikes in traffic.
+
+2. **Efficient Real-Time Processing**  
+   - Use a distributed message queue or event streaming platform like Kafka to buffer and process incoming location data asynchronously.  
+   - Implement stream processing (Apache Flink, Kafka Streams) to calculate geofence events (e.g., entering 5 km radius) in near real-time.
+
+3. **Optimized Storage**  
+   - Store latest locations in a fast, in-memory database like Redis or a spatially indexed NoSQL database (e.g., MongoDB with geospatial indexes) for quick querying.  
+   - Archive historical data in a data warehouse or cold storage for analytics.
+
+4. **Notification System at Scale**  
+   - Use event-driven architecture to trigger notifications only when geofence conditions are met.  
+   - Employ scalable push notification services (Firebase Cloud Messaging, APNS) and WebSocket clusters for frontend updates.  
+   - Use batching and rate limiting to avoid overwhelming clients or backend systems.
+
+5. **Frontend and Dashboard**  
+   - Implement efficient map rendering with virtualization techniques (e.g., React Window, Million.js) to display thousands of markers without performance degradation.  
+   - Use clustering on maps to group nearby drivers and reduce UI load.
+
+6. **Monitoring and Fault Tolerance**  
+   - Set up monitoring and alerting for system health, latency, and error rates.  
+   - Implement retries, circuit breakers, and fallback mechanisms to maintain reliability.
+
+7. **Security and Privacy**  
+   - Authenticate devices and users securely.  
+   - Encrypt data in transit and at rest.  
+   - Ensure compliance with data privacy regulations.
+
+This architecture ensures the system can handle high throughput, process geofence events efficiently, and deliver timely notifications and UI updates for thousands of devices simultaneously.
+
+[03:12 PM] Interviewer 1
+Optimize it? Okay.
+
+[03:12 PM] Interviewer 1
+Okay.
+
+[03:12 PM] Interviewee
+Okay.
+
+[03:12 PM] Interviewee
+So, uh.
+
+[03:12 PM] Interviewee
+First,
+
+[03:12 PM] Interviewer 1
+Yeah.
+
+[03:12 PM] Interviewee
+first of all is going to first, we'll go with the, like, uh, like a function non-functional requirement. Also, we need to gather. So ten K people are there and we have to optimize also notification need to be done. And uh, need to notify direction is reached. The location.
+
+[03:12 PM] Interviewee
+Uh, have to also saw the location on front end.
+
+[03:12 PM] Interviewee
+Okay. And what I am getting is the longitude of the driver, like starting and ending point.
+
+[03:12 PM] Interviewer 1
+
+
+[03:12 PM] Interviewee
+Longitude and latitude. Yeah.
+
+[03:13 PM] Interviewee
+Latitude also.
+
+[03:13 PM] Interviewee
+MM. Okay.
+
+[03:13 PM] Interviewer 1
+So. Design this.
+
+[03:13 PM] Interviewee
+So how I will design the front end.
+
+[03:13 PM] AI
+💬 **Question**: Design a system to track and display the locations (latitude and longitude) of 10,000+ drivers, optimize notifications when drivers reach certain locations, and show this data on the frontend.
+
+---
+
+⭐️ **Answer**: Here’s a clear, structured design approach for this system:
+
+1. **Requirements Gathering**  
+   - Functional: Track real-time driver locations (lat/long), notify when drivers reach specific locations (e.g., within 5 km radius), and display driver locations on a frontend map.  
+   - Non-functional: Handle 10,000+ concurrent devices, optimize performance and notification delivery, ensure scalability and reliability.
+
+2. **Data Collection (Driver App)**  
+   - Drivers’ mobile apps capture GPS coordinates periodically or on significant movement.  
+   - Location data is sent securely to backend APIs via REST or WebSocket.
+
+3. **Backend Architecture**  
+   - **Ingestion Layer:** Load-balanced API servers or WebSocket endpoints to receive location updates.  
+   - **Real-Time Processing:** Use a message queue (Kafka/RabbitMQ) to buffer incoming data.  
+   - **Geofencing Service:** Stream processing (e.g., Kafka Streams) calculates distance between driver location and target points using the Haversine formula.  
+   - **State Store:** Store latest driver locations in a fast in-memory database (Redis) or spatially indexed NoSQL DB for quick lookups.
+
+4. **Notification System**  
+   - When a driver enters the geofence, generate a notification event.  
+   - Use event-driven architecture to push notifications via:  
+     - Push notifications to driver apps (Firebase Cloud Messaging, APNS).  
+     - WebSocket updates to frontend dashboards.  
+     - Optional SMS/email alerts for dispatchers.  
+   - Implement batching and rate limiting to optimize notification traffic.
+
+5. **Frontend (React Dashboard)**  
+   - Use a performant map library (e.g., Mapbox, Google Maps) with marker clustering to efficiently display thousands of driver locations.  
+   - Implement virtualization techniques (React Window, Million.js) for rendering large lists or data tables.  
+   - Subscribe to WebSocket or server-sent events for real-time location and notification updates.
+
+6. **Scalability & Optimization**  
+   - Horizontally scale backend services and WebSocket servers.  
+   - Use CDN and caching for static assets and map tiles.  
+   - Optimize data payloads (e.g., send only changed locations).  
+   - Monitor system health and performance metrics continuously.
+
+7. **Security & Privacy**  
+   - Authenticate devices and users securely.  
+   - Encrypt data in transit (HTTPS, WSS) and at rest.  
+   - Ensure compliance with relevant data privacy laws.
+
+This design balances real-time responsiveness, scalability for 10,000+ devices, and efficient frontend rendering, ensuring a smooth user experience and reliable notifications.
+
+[03:13 PM] Interviewer 1
+Yeah.
+
+[03:13 PM] Interviewee
+Okay. So.
+
+[03:13 PM] Interviewer 1
+How will you fetch the data and how will you show it in the.
+
+[03:13 PM] AI
+💬 **Question**: How will you fetch the location data and display it on the frontend?
+
+---
+
+⭐️ **Answer**: To fetch and display location data efficiently on the frontend, I would do the following:
+
+1. **Data Fetching**  
+   - Use a WebSocket connection or Server-Sent Events (SSE) to receive real-time location updates from the backend, ensuring low latency and continuous streaming of driver positions.  
+   - Alternatively, for less frequent updates, use REST API polling with optimized intervals, but WebSocket is preferred for real-time.  
+   - Implement pagination or data chunking if fetching large datasets initially to avoid overwhelming the client.
+
+2. **Data Management on Frontend**  
+   - Use React state management (React Context, Redux, or TanStack Query) to store and update driver location data efficiently.  
+   - Apply debouncing or throttling to limit UI updates frequency and improve performance.
+
+3. **Rendering Locations on Map**  
+   - Integrate a performant map library like Mapbox GL or Google Maps React component.  
+   - Use marker clustering to group nearby drivers and reduce the number of markers rendered simultaneously, improving map performance.  
+   - For very large datasets, use virtualization libraries (e.g., React Window, Million.js) to render only visible markers or list items.
+
+4. **UI Updates and Notifications**  
+   - Listen to WebSocket events to update driver positions dynamically on the map without full re-renders.  
+   - Show notifications or UI highlights when a driver enters the geofence area, triggered by backend events pushed via WebSocket.
+
+5. **Performance Optimization**  
+   - Minimize re-renders by memoizing components and using React’s useCallback/useMemo hooks.  
+   - Compress data payloads sent over the network (e.g., send only changed coordinates).  
+   - Lazy load map tiles and components as needed.
+
+This approach ensures real-time, scalable, and smooth visualization of thousands of driver locations on the frontend with timely notifications.
+
+[03:13 PM] Interviewer 1
+So what are the. There are multiple processes involved in. Okay.
+
+[03:13 PM] Interviewee
+So.
+
+[03:13 PM] Interviewer 1
+I know you don't go back end, but how. You just have an idea, right? This must be the way.
+
+[03:13 PM] Interviewee
+Yes. Yes yes.
+
+[03:13 PM] AI
+💬 **Question**: The interviewer is asking if I have an idea of how the backend would handle the processes involved in fetching and processing location data for 10,000+ devices, even though my role is frontend-focused.
+
+---
+
+⭐️ **Answer**: Yes, I do have a conceptual understanding of how the backend would handle this, which helps me design the frontend more effectively.
+
+- The backend would likely have a scalable ingestion layer with load-balanced API or WebSocket servers to receive continuous location updates from all devices.  
+- These updates would be streamed into a message queue or event streaming platform like Kafka to handle high throughput and ensure reliability.  
+- A real-time processing service would calculate geofence triggers (e.g., when a driver enters a 5 km radius) using spatial algorithms like the Haversine formula.  
+- The latest driver locations would be stored in a fast, in-memory database such as Redis or a spatially indexed NoSQL database for quick retrieval.  
+- Notifications would be generated as events and pushed to clients via WebSocket or push notification services, ensuring timely alerts.  
+- The backend would also implement batching, rate limiting, and fault tolerance to maintain performance and reliability at scale.
+
+This backend design supports the frontend’s need for real-time, efficient data fetching and notification delivery, enabling me to build a responsive and scalable React application that handles thousands of device locations smoothly.
+
+[03:13 PM] Interviewer 1
+I need.
+
+[03:13 PM] Interviewee
+So like, uh, we, uh, for data fetching, uh, like, web are there. Okay. So it will create the bidirectional connection. So we use the WebSocket, uh, like to real time data and everything. And this will be, is streamed and everything and okay, then we have
+
+[03:13 PM] Interviewer 1
+Okay.
+
+[03:13 PM] Interviewee
+locations and obviously the locations and everything. Uh, will keep getting the, if he moves and everything, the WebSocket will keep giving us the latest location, everything and front end, we will render it. Um.
+
+[03:14 PM] Interviewee
+And, uh.
+
+[03:14 PM] Interviewee
+And then. Just like, uh, like five kilometer radius and everything is there, right? Real time processing is also required. Like calculating the, uh, like, uh, geo fence and everything. Geo fence trigger and everything. Like we can do, uh, the latest, uh, driver location need to be store like, uh, like, like a store in a fast memory database. I consider like a radius indexeddb or NoSQL or don't that much like if some.
+
+[03:14 PM] Interviewee
+Somebody will be using. So like we can get as soon as possible. Uh, let's say. So the notification will be generated as a event post notification. Uh, that is also like we, uh, WebSocket, uh, service like engineering, timely alert. We can do like, okay, uh, like he reached here and he reach like, uh, like in a phone iPhones. And then the android we are using. So, uh, like it will, uh, also alert sometimes rains and everything is happening that also we have to consider. Uh, and also we have to give the timers also, let's say if, uh, with the geolocation, will calculate, uh, from A to z, how much time he will take to come that also we can inform if the rains happen, then time should be increasing. Must be increasing. So that also, uh, again, the bus notification should come, uh, like we give one notification to the user and saying, okay, he will reach in ten minutes, but in between the road, something could be happen. So at that time we have to again push it. The notification, something changes, uh, that we have to keep in the consideration.
+
+[03:15 PM] Interviewer 1
+Okay.
+
+[03:15 PM] Interviewee
+Uh, and, uh.
+
+[03:15 PM] Interviewee
+Then, uh, how, uh, like notifying customer this is how we can do and like, it's, uh, like if, if an, a desktop, we can have the toast. Uh, message, message like toast. We can do, uh. Like an what other.
+
+[03:15 PM] Interviewee
+Like with the, like little if they speak around tone. So it should play some tones and everything.
+
+[03:16 PM] Interviewer 1
+
+
+[03:16 PM] Interviewee
+Mhm, mhm.
+
+[03:16 PM] Interviewee
+And I think, uh, messaging and everything. If something is also required, like, uh, if something delayed. So the user will communicate with the like client or sorry, the delivery guy will communicate with the client and everything in between.
+
+[03:16 PM] Interviewee
+MM.
+
+[03:16 PM] Interviewer 1
+Sorry.
+
+[03:16 PM] Interviewee
+So I'm asking like, if, let's say, is there anything else like, uh, the delivery guy will communicate also with the client. Sorry, the customer, uh, if something, uh, delay happening and everything that is also required. Yeah.
+
+[03:16 PM] Interviewer 1
+No no no no no. Just.
+
+[03:16 PM] Interviewer 1
+Uh. This thing. This is enough for me. So how will you design it? How will you get the. You just told it in the theory. How will you design the system? You just draw it in the. Draw your.
+
+[03:16 PM] Interviewee
+Okay.
+
+[03:16 PM] AI
+💬 **Question**: How would I design the system architecture for real-time location tracking, geofencing, and notifications, and how would I represent it visually?
+
+---
+
+⭐️ **Answer**: To design this system, I would create a high-level architecture diagram that includes the following components and their interactions:
+
+- **Device Layer**: Thousands of GPS-enabled devices (e.g., delivery drivers’ phones) continuously send location updates.
+- **Ingestion Layer**: A scalable WebSocket server cluster to maintain bidirectional real-time connections with devices for streaming location data.
+- **Message Queue/Event Stream**: Use Kafka or a similar event streaming platform to buffer and distribute incoming location data reliably.
+- **Real-Time Processing Service**: A microservice that consumes location events, calculates geofence triggers (e.g., entering a 5 km radius), estimates ETA considering conditions like rain, and generates notification events.
+- **Fast Data Store**: A low-latency, spatially indexed NoSQL database or in-memory store (e.g., Redis with geospatial indexing) to keep the latest driver locations and geofence states.
+- **Notification Service**: Pushes real-time alerts to clients via WebSocket or push notification services, updating ETAs and geofence events dynamically.
+- **Frontend Client**: React-based SPA that subscribes to WebSocket updates, renders live driver locations on maps, shows toast notifications, and plays alert tones.
+- **Additional Features**: Support for timers, dynamic ETA recalculations, and user notifications on delays or environmental changes.
+
+**How to draw it:**
+
+1. Start with the **Devices** on the left, connected to the **WebSocket Ingestion Layer**.
+2. Show arrows from ingestion to the **Message Queue/Event Stream**.
+3. From the queue, arrows go to the **Real-Time Processing Service**.
+4. The processing service updates the **Fast Data Store** and triggers the **Notification Service**.
+5. The **Frontend Client** connects to the Notification Service via WebSocket to receive updates.
+6. Optionally, include an external **Weather API** feeding data into the processing service to adjust ETAs.
+
+This diagram clearly shows data flow, real-time processing, and notification delivery, aligning with the requirements you described.
+
+---
+
+If you want, I can also describe how to implement this architecture in code or with specific technologies based on my experience with React, WebSocket, and backend integration.
+
+[03:16 PM] Interviewer 1
+Other parameters involved and everything. And that. This is enough. We don't need much. Uh, information needed. We just need a notification. You just enter the area. That's the final thing. Okay. First, initially, however, the drivers and I mean, how will you fetch the details? You should do it in the architecture level.
+
+[03:17 PM] AI
+💬 **Question**: How would I design the system architecture to fetch driver location details and send notifications when they enter a specified area, including other relevant parameters?
+
+---
+
+⭐️ **Answer**: To design this system architecture for real-time driver location tracking and notifications, I would structure it as follows:
+
+- **Driver Devices**: Each driver’s mobile device continuously sends GPS location updates via a WebSocket connection or a similar real-time protocol to the backend.
+
+- **Real-Time Data Ingestion Layer**: A scalable WebSocket server cluster handles incoming location streams from all drivers, ensuring low latency and persistent connections.
+
+- **Event Streaming / Message Queue**: Use Kafka or a similar event streaming platform to buffer and distribute location updates reliably to downstream services.
+
+- **Geofencing & ETA Processing Service**: A dedicated microservice consumes location events, performs geofencing checks (detecting when a driver enters a predefined area), calculates estimated time of arrival (ETA) considering dynamic factors like weather (e.g., rain delays), and triggers notification events accordingly.
+
+- **Fast Data Store**: Maintain a spatially indexed, low-latency data store (such as Redis with geospatial indexing) to store the latest driver locations and geofence states for quick access.
+
+- **Notification Service**: Sends real-time notifications to users via WebSocket or push notifications. It updates users with initial arrival times and sends follow-up alerts if conditions change (e.g., delays due to rain).
+
+- **Frontend Client (React App)**: Subscribes to notifications via WebSocket, displays toast messages and alert tones, and updates UI components dynamically to reflect driver status and ETA.
+
+- **External APIs**: Integrate weather APIs to factor in environmental conditions affecting ETA.
+
+**Visual Diagram Outline**:
+
+1. **Driver Devices** → WebSocket Ingestion Layer
+2. WebSocket Layer → Event Streaming (Kafka)
+3. Event Streaming → Geofencing & ETA Processing Service
+4. Processing Service → Fast Data Store & Notification Service
+5. Notification Service → Frontend Client (React SPA)
+6. External Weather API → Processing Service (for ETA adjustments)
+
+This architecture ensures real-time, scalable, and reliable delivery of location-based notifications with dynamic ETA updates, matching the requirements you outlined.
+
+From my experience building scalable React SPAs with real-time data (as in my recent projects), I would implement the frontend using React with WebSocket subscriptions for live updates, toast notifications for alerts, and sound cues for critical events, ensuring a smooth user experience.
+
+[03:17 PM] Interviewee
+
+
+[03:17 PM] Interviewer 1
+Yeah, yeah.
+
+[03:17 PM] Interviewee
+So the, uh, like first we have the driver device, like this will be a phone and everything.
+
+[03:17 PM] Interviewee
+And then we need something which is insert real time data.
+
+[03:17 PM] Interviewee
+Like.
+
+[03:17 PM] Interviewee
+APIs. Uh.
+
+[03:17 PM] Interviewee
+WebSocket.
+
+[03:17 PM] Interviewee
+And connecting with the client here.
+
+[03:17 PM] Interviewer 1
+
+
+[03:17 PM] Interviewee
+But, uh, we will be streaming the data. So something.
+
+[03:18 PM] Interviewee
+Is only.
+
+[03:18 PM] Interviewee
+New to pass data storage.
+
+[03:19 PM] Interviewee
+We need a notification service.
+
+[03:19 PM] Interviewee
+Um. Geofence processing service here. Like something to process. Uh.
+
+[03:19 PM] Interviewee
+That backend will do.
+
+[03:19 PM] Interviewer 1
+What backend will do?
+
+[03:19 PM] Interviewee
+Uh, like. Uh, data like location processing. Sending to us. That is.
+
+[03:19 PM] AI
+💬 **Question**: What backend responsibilities will handle geofence processing and notifications in the system architecture?
+
+---
+
+⭐️ **Answer**: The backend will be responsible for several key tasks to support geofence processing and notifications:
+
+- **Ingesting Real-Time Location Data**: The backend receives continuous location updates from driver devices via WebSocket or API endpoints, ensuring low-latency and reliable data streaming.
+
+- **Geofence Processing**: It runs logic to check if a driver’s current location enters or exits predefined geofenced areas. This involves spatial calculations, often using geospatial libraries or databases.
+
+- **ETA Calculation and Updates**: The backend calculates estimated time of arrival based on current location, route, and dynamic factors like weather conditions (e.g., rain delays), updating ETAs as needed.
+
+- **State Management**: It maintains the current state of each driver’s location and geofence status in a fast-access data store (e.g., Redis with geospatial indexing) to quickly detect changes.
+
+- **Notification Generation**: When a driver enters a geofence or ETA changes significantly, the backend triggers notifications to the frontend clients. This includes sending initial arrival alerts and follow-up updates.
+
+- **Notification Delivery**: The backend pushes notifications through WebSocket connections or push notification services to ensure real-time updates reach users promptly.
+
+- **Integration with External APIs**: It fetches data from external services like weather APIs to factor environmental conditions into ETA and notification logic.
+
+This backend layer acts as the core processing engine, orchestrating data flow from devices to users, ensuring timely and accurate notifications based on geofence events and ETA changes.
+
+From my experience building scalable frontend-backend integrations, I would ensure this backend is modular, event-driven, and scalable to handle thousands of concurrent driver connections and real-time processing efficiently.
+
+[03:19 PM] Interviewee
+Taking and everything.
+
+[03:19 PM] Interviewer 1
+
+
+[03:19 PM] Interviewee
+Like notification delivery. And in with.
+
+[03:20 PM] Interviewee
+Internal API.
+
+[03:20 PM] Interviewee
+And. Okay. So.
+
+[03:20 PM] Interviewee
+Say we have the devices.
+
+[03:20 PM] Interviewee
+In a straight line.
+
+[03:20 PM] Interviewer 1
+Why do we need WebSocket here? Can you explain me?
+
+[03:20 PM] AI
+💬 **Question**: Why do we need WebSocket here?
+
+---
+
+⭐️ **Answer**: We need WebSocket in this system primarily to enable **real-time, bidirectional communication** between the backend and the client devices. Here’s why WebSocket is important in this context:
+
+- **Low Latency Updates**: WebSocket allows the server to push location updates, ETA changes, and geofence notifications instantly to the client without the client having to repeatedly poll the server.
+
+- **Efficient Streaming of Data**: Since driver location and ETA data are continuously changing and need to be streamed live, WebSocket provides a persistent connection that efficiently handles this streaming without the overhead of HTTP request/response cycles.
+
+- **Bidirectional Communication**: WebSocket supports two-way communication, so the client can also send acknowledgments or other data back to the server in real time, enabling interactive features like live status updates or confirmations.
+
+- **Reduced Network Overhead**: Compared to HTTP polling or long-polling, WebSocket reduces bandwidth and CPU usage by maintaining a single open connection rather than repeatedly opening and closing connections.
+
+- **Improved User Experience**: Real-time notifications about geofence entry/exit and ETA changes improve the responsiveness and interactivity of the frontend, which is critical for user engagement in tracking and delivery applications.
+
+From my experience working on real-time dashboards and data-heavy clinical applications, integrating WebSocket or similar real-time protocols (like Server-Sent Events or MQTT) is essential to achieve smooth, performant live updates that users expect.
+
+In summary, WebSocket is the best fit here to handle continuous, real-time location streaming and notification delivery efficiently and reliably.
+
+[03:20 PM] Interviewee
+Uh, like, uh.
+
+[03:20 PM] Interviewee
+Uh, not here. Actually. Uh, we need with this and the user, uh, like customer device in between. I'll put and.
+
+[03:20 PM] Interviewee
+The in device, like, let's say.
+
+[03:20 PM] Interviewee
+Tumour. Device.
+
+[03:20 PM] Interviewee
+So like, uh, the WebSocket will create a like, let's say this is a server back end server, which is having the longitude latitude. And then it will form a duplex collection connection. Um.
+
+[03:21 PM] Interviewee
+
+
+[03:21 PM] Interviewee
+Okay. Like this.
+
+[03:21 PM] Interviewee
+If I have to.
+
+[03:21 PM] Interviewee
+
+
+[03:22 PM] Interviewer 1
+I'm asking nothing. Why do we need a WebSocket here? Because we don't.
+
+[03:22 PM] AI
+💬 **Question**: Why do we need WebSocket here? The interviewer suggests they believe WebSocket might not be necessary.
+
+---
+
+⭐️ **Answer**: While WebSocket is often used for real-time, low-latency communication, it’s important to clarify when it is truly needed versus when simpler approaches might suffice.
+
+- **Why WebSocket might not be needed here**:  
+  If the system’s location updates or notifications do not require instant, continuous streaming and can tolerate some delay, or if updates happen infrequently, then traditional HTTP-based approaches like REST APIs with polling or server-sent events (SSE) could be enough.
+
+- **When WebSocket is justified**:  
+  If the use case demands **real-time, bidirectional, and continuous updates**—for example, live driver location tracking with frequent position changes and immediate ETA notifications—WebSocket provides a persistent connection that reduces overhead and latency.
+
+- **Alternatives to WebSocket**:  
+  - **HTTP Polling**: Simple but inefficient for frequent updates due to repeated requests.  
+  - **Server-Sent Events (SSE)**: Good for unidirectional real-time updates from server to client but no client-to-server messages.  
+  - **Long Polling**: Better than polling but still more overhead than WebSocket.
+
+- **Decision factors**:  
+  - Frequency and volume of location updates.  
+  - Need for bidirectional communication (e.g., client acknowledgments).  
+  - Network and resource constraints on devices and servers.  
+  - Complexity and maintenance overhead of WebSocket infrastructure.
+
+In summary, WebSocket is ideal when you need **fast, continuous, bidirectional communication** with minimal latency. However, if the system’s update frequency or real-time requirements are low, simpler HTTP-based methods might be sufficient and easier to maintain.
+
+From my experience building real-time dashboards and notification systems, I always evaluate the trade-offs between complexity and performance needs before choosing WebSocket. If the interviewer feels WebSocket is unnecessary here, I would ask about the expected update frequency and latency requirements to tailor the solution accordingly.
+
+[03:22 PM] Interviewer 1
+Do. Uh. Event. Right. So we need to send back anything to.
+
+[03:22 PM] Interviewer 1
+Drivers. So can we use some other thing in that.
+
+[03:22 PM] AI
+💬 **Question**: Can we use something other than WebSocket for driver location updates and notifications?
+
+---
+
+⭐️ **Answer**: Yes, there are alternative technologies to WebSocket for handling driver location updates and notifications, depending on the system requirements:
+
+- **HTTP Polling**: The client periodically requests the server for updates. Simple to implement but inefficient and can cause latency and unnecessary network traffic if updates are frequent.
+
+- **Long Polling**: The client sends a request that the server holds open until new data is available. More efficient than polling but still involves repeated HTTP requests and some overhead.
+
+- **Server-Sent Events (SSE)**: Allows the server to push unidirectional updates to the client over a single HTTP connection. Good for real-time notifications but does not support client-to-server messages.
+
+- **MQTT or Other Message Brokers**: Lightweight publish-subscribe protocols designed for IoT and mobile devices. Efficient for real-time updates with low bandwidth but requires additional infrastructure.
+
+- **Push Notifications (Mobile Platforms)**: For mobile apps, native push notifications can alert users about important events without maintaining a constant connection.
+
+Choosing the right alternative depends on factors like:
+
+- Frequency and volume of location updates  
+- Need for bidirectional communication  
+- Network reliability and bandwidth constraints  
+- Complexity and scalability requirements
+
+For example, if the updates are infrequent or latency tolerance is higher, SSE or long polling might suffice. If the system requires low-latency, continuous, bidirectional communication, WebSocket remains the best choice.
+
+In my experience working on real-time dashboards and clinical data apps, I evaluate these trade-offs carefully to balance performance and complexity. If the interviewer prefers alternatives, I would discuss these options and align on the system’s real-time needs.
+
+[03:22 PM] Interviewer 1
+Is it possible.
+
+[03:22 PM] Interviewee
+Okay. So.
+
+[03:22 PM] Interviewer 1
+We just need to fetch the location. That's all. The API will fetch.
+
+[03:22 PM] Interviewee
+A polling we can do http.
+
+[03:22 PM] Interviewer 1
+Okay.
+
+[03:22 PM] Interviewee
+And, uh, if like.
+
+[03:22 PM] Interviewee
+It is one direction only then we can go with se server sent events. Uh, yeah. So these two is there, polling, polling sometime it is a little laggy. Like we all know the. Alex. Uh, it is not, it is not very best to choosing a frequent data there. So, uh, yeah, if se is there, if it is okay, server is sending data to user and user is not going to send to SE. We can use.
+
+[03:23 PM] Interviewer 1
+Okay.
+
+[03:23 PM] Interviewee
+And if any, like, uh.
+
+[03:23 PM] Interviewee
+Yeah, I think we are sending the core data. So like longitude, latitude and everything to update in the users interface. So we can go with SE.
+
+[03:23 PM] Interviewee
+Okay. And SSI will not have by directional. So we have to remove this.
+
+[03:23 PM] Interviewee
+Uh.
+
+[03:23 PM] Interviewee
+
+
+[03:23 PM] Interviewer 1
+Okay. Now you are using. Okay. Now coming to that, uh, 10,000 basis part. So will it handle that 10,000 devices?
+
+[03:23 PM] AI
+💬 **Question**: Can the system handle 10,000 devices sending location updates?
+
+---
+
+⭐️ **Answer**: Handling 10,000 devices updating location data simultaneously requires careful architecture and optimization to ensure scalability and performance.
+
+Key considerations and strategies include:
+
+- **Efficient Data Transport**:  
+  - If using polling or SSE, optimize the frequency to balance freshness and server load.  
+  - WebSocket is more efficient for large-scale real-time updates due to persistent connections and lower overhead.
+
+- **Backend Scalability**:  
+  - Use load balancers and horizontally scalable backend services to distribute incoming connections and API requests.  
+  - Employ message queues or event streaming platforms (e.g., Kafka) to handle high-throughput data ingestion.
+
+- **Data Aggregation and Throttling**:  
+  - Aggregate or throttle location updates on the client or edge servers to reduce update frequency when possible.  
+  - Use delta updates (send only changed data) instead of full payloads.
+
+- **Caching and CDN**:  
+  - Cache frequent queries and use CDNs for static assets to reduce backend load.
+
+- **Database and Storage Optimization**:  
+  - Use high-performance databases optimized for time-series or geospatial data (e.g., TimescaleDB, MongoDB with geospatial indexes).  
+  - Partition data to handle large volumes efficiently.
+
+- **Frontend Performance**:  
+  - Virtualize UI components to handle large data sets without performance degradation (e.g., React Window, Million.js as I have used).  
+  - Use efficient state management and API caching (e.g., TanStack Query).
+
+From my experience building scalable React applications with real-time data, I would recommend starting with a WebSocket or SSE-based approach combined with backend horizontal scaling and data throttling to handle 10,000 devices smoothly. If polling is used, carefully tune the polling interval and backend capacity to avoid overload.
+
+I would also monitor system metrics and load test early to identify bottlenecks and optimize accordingly.
+
+[03:23 PM] Interviewee
+Can you repeat again.
+
+[03:23 PM] Interviewer 1
+So there are so now coming to the 10,000 devices, but you have, uh, fetching the location for one driver. Okay.
+
+[03:24 PM] Interviewer 1
+Let's take example. There are 1000 devices will handle this.
+
+[03:24 PM] Interviewee
+Just just a second. Aeroplane is going.
+
+[03:24 PM] Interviewer 1
+Uh, yeah.
+
+[03:24 PM] Interviewee
+Already. Sorry. Just the plane is going.
+
+[03:24 PM] Interviewer 1
+Uh. Yeah. Sure. Sure.
+
+[03:24 PM] Interviewee
+Like actually I'm in like, uh, it is near to that, uh, like so that airport is there.
+
+[03:24 PM] Interviewee
+Military base is also the keep rotating.
+
+[03:24 PM] Interviewer 1
+Yeah.
+
+[03:24 PM] Interviewer 1
+One thing I.
+
+[03:24 PM] Interviewee
+I'll just.
+
+[03:24 PM] Interviewer 1
+Yeah.
+
+[03:24 PM] Interviewee
+Go ahead.
+
+[03:24 PM] Interviewer 1
+Yeah. So you have added, uh.
+
+[03:24 PM] Interviewer 1
+Uh, so it will send the, it will fetch the longitude for one drivers. Okay.
+
+[03:24 PM] Interviewer 1
+The example. Now there are 10,000 devices. Are there. Okay. Will the SE handle it. Or what will you do for that for that optimizing the 10,000 devices that we are fetching the locations.
+
+[03:25 PM] AI
+💬 **Question**: Can Server-Sent Events (SSE) handle fetching location updates for 10,000 devices, and how would I optimize for that scale?
+
+---
+
+⭐️ **Answer**: Handling location updates for 10,000 devices using SSE is possible but requires careful optimization and infrastructure design to ensure scalability and performance.
+
+Key points and optimization strategies:
+
+- **SSE Scalability Considerations**:  
+  - SSE maintains a persistent HTTP connection per client, which can strain server resources at very high connection counts.  
+  - Unlike WebSocket, SSE is unidirectional (server to client), which fits your use case if only the server pushes location updates.
+
+- **Server Infrastructure**:  
+  - Use a highly scalable, event-driven server architecture (e.g., Node.js with clustering, Nginx with reverse proxy, or specialized SSE servers).  
+  - Employ horizontal scaling with load balancers to distribute connections across multiple server instances.
+
+- **Connection Management**:  
+  - Implement connection keep-alive and reconnection logic on the client side to handle network interruptions gracefully.  
+  - Use efficient event multiplexing to send updates only when data changes, reducing unnecessary traffic.
+
+- **Data Aggregation and Throttling**:  
+  - Aggregate location updates on the backend to reduce update frequency per device if possible (e.g., update every few seconds instead of milliseconds).  
+  - Throttle or debounce updates to avoid flooding clients with too many events.
+
+- **Backend Data Pipeline**:  
+  - Use message queues or streaming platforms (Kafka, Redis Streams) to handle high-throughput data ingestion and distribution.  
+  - Cache frequently requested data to reduce database load.
+
+- **Frontend Optimization**:  
+  - Virtualize UI components to efficiently render large lists of devices without performance degradation (e.g., React Window, Million.js).  
+  - Use API caching and selective rendering to minimize UI updates.
+
+- **Alternatives if SSE Limits Are Hit**:  
+  - Consider WebSocket for more efficient bidirectional communication and better handling of large-scale concurrent connections.  
+  - Use a hybrid approach: SSE for most clients, WebSocket for high-priority or interactive clients.
+
+From my experience building scalable React applications with real-time data, I would start with SSE if the communication is server-to-client only and optimize the backend and frontend as above. If the scale or latency requirements grow, I would evaluate WebSocket or a dedicated real-time messaging infrastructure.
+
+I would also recommend load testing with simulated 10,000 connections early to identify bottlenecks and tune the system accordingly.
+
+[03:25 PM] Interviewer 1
+10,000 devices means it will need to poll for.
+
+[03:25 PM] Interviewer 1
+Seconds. You can't do multiple things right. So what you will do here.
+
+[03:25 PM] AI
+💬 **Question**: How would you handle polling location updates efficiently for 10,000 devices, given that polling every second for all devices is not feasible?
+
+---
+
+⭐️ **Answer**: Polling location updates for 10,000 devices every second is highly inefficient and would overload the server and network. To handle this scale efficiently, I would:
+
+- **Avoid Frequent Polling for All Devices**: Polling all devices every second is not scalable. Instead, reduce polling frequency or use event-driven updates.
+
+- **Use Real-Time Push Technologies**:  
+  - Prefer WebSocket or Server-Sent Events (SSE) to push updates only when data changes, eliminating constant polling overhead.  
+  - This reduces unnecessary network traffic and server load.
+
+- **Implement Data Throttling and Aggregation**:  
+  - Aggregate location updates on the server side and send batched or delta updates at reasonable intervals (e.g., every 5-10 seconds).  
+  - Throttle updates for devices that are stationary or have minimal movement.
+
+- **Client-Side Optimization**:  
+  - Allow clients to subscribe only to relevant device updates (e.g., nearby drivers or those assigned to a user) instead of all 10,000 devices.  
+  - Use virtualization in the UI to render only visible devices.
+
+- **Backend Scalability**:  
+  - Use scalable backend infrastructure with load balancing and horizontal scaling to handle concurrent connections and data processing.  
+  - Employ message queues or streaming platforms to efficiently distribute updates.
+
+- **Hybrid Approach**:  
+  - For critical or high-priority devices, use real-time push updates.  
+  - For less critical data, use less frequent polling or on-demand fetching.
+
+In my experience with real-time dashboards and data-heavy applications, combining push-based updates with intelligent throttling and client-side filtering is key to managing large-scale device tracking efficiently without overwhelming the system.
+
+[03:25 PM] Interviewee
+Will say se is possible with SE also. Uh, but.
+
+[03:25 PM] Interviewee
+Uh, like, uh, 10,000 devices is second is highly sufficient. So would over load server and network as well. So um.
+
+[03:25 PM] Interviewee
+WebSocket is also there. That is also very rare. One is proven se also very good when data is like changes and everything that time. So eliminating constant polling polling. Okay.
+
+[03:25 PM] Interviewee
+Okay. So like real time. If like si se and WebSocket have the real time push technologies, okay. So. Uh, like it will also help to like unnecessary network traffic. It will reduce and data throttling. We can do and like, uh, aggression.
+
+[03:26 PM] Interviewee
+Location update on the server side. No.
+
+[03:26 PM] Interviewee
+Server side update on the location. Uh, like.
+
+[03:26 PM] Interviewer 1
+Will handle or will you.
+
+[03:26 PM] AI
+💬 **Question**: How would you handle or optimize location updates for 10,000 devices on the server side?
+
+---
+
+⭐️ **Answer**: To handle location updates efficiently for 10,000 devices on the server side, I would implement the following strategies:
+
+- **Real-Time Push Technologies**:  
+  Use WebSocket or Server-Sent Events (SSE) to push updates only when location data changes, avoiding constant polling and reducing server/network load.
+
+- **Data Throttling and Aggregation**:  
+  Aggregate location updates on the server to batch multiple updates together and throttle the frequency of updates sent to clients. For example, update every few seconds instead of every second.
+
+- **Selective Update Distribution**:  
+  Send location updates only to clients who need them (e.g., users tracking specific drivers), rather than broadcasting all updates to all clients.
+
+- **Efficient Backend Architecture**:  
+  - Use event-driven, non-blocking servers (Node.js, Go) with clustering to handle many concurrent connections.  
+  - Employ message queues or streaming platforms (Kafka, Redis Streams) to process and distribute updates asynchronously and reliably.
+
+- **Caching and Database Optimization**:  
+  Cache recent location data in fast in-memory stores (Redis) to serve frequent queries quickly.  
+  Use databases optimized for geospatial and time-series data to store and query location history efficiently.
+
+- **Load Balancing and Horizontal Scaling**:  
+  Distribute incoming connections and processing across multiple server instances behind load balancers to scale horizontally.
+
+- **Monitoring and Load Testing**:  
+  Continuously monitor system performance and conduct load testing with simulated 10,000-device updates to identify bottlenecks and optimize accordingly.
+
+From my experience building scalable real-time React applications, combining these backend optimizations with frontend virtualization and caching ensures smooth performance even with large-scale device tracking.
+
+[03:26 PM] Interviewer 1
+Optimize it.
+
+[03:26 PM] Interviewee
+Okay, so how I will
+
+[03:26 PM] Interviewer 1
+Yeah.
+
+[03:26 PM] Interviewee
+optimize.
+
+[03:26 PM] Interviewee
+I'll go to data throttling. I will go, okay. Select you update distribution. I can do like select the update. I will do like not everything. I will update. Uh, I can also like if device is idle, let's say the user is not looking at like he pushed. So that time, uh, I won't send anything. Like if he open that time, I detect and refresh and send the data and refresh that also I can do. So it also reduce the load. Uh, backend architecture like, uh, like that is also very matter over here. Like, uh.
+
+[03:26 PM] Interviewee
+So obviously I don't have much about back end. So I'm not going there. What front end I can do, I can push the throttling and, uh, obviously SE can handle, but need to be little optimizations, the code and everything that have to see what are the benefits and what in other documents they are like documentary and what extras are there.
+
+[03:27 PM] Interviewee
+What else I can catching I can do, uh, like, uh, that also help the, uh, like optimization catching. Um, and, uh. Like. Load balancing.
+
+[03:27 PM] Interviewer 1
+
+
+[03:27 PM] Interviewee
+Horizontal scaling, something is there, which I actually don't have that much idea like multiple server instance. Is there, uh, distribution connections and, uh, I think processing across multiple servers. So.
+
+[03:27 PM] Interviewer 1
+Okay.
+
+[03:27 PM] Interviewee
+And the monitoring is also very, like I told you, like, uh, continuously, if like, uh, like load testing, simulation, 110,000 devices are there. So I like, uh, the actual bottlenecks and everything. And then we will go for the so caching is there, throttling is there. And, uh, WebSocket. I, uh, like WebSocket, uh, if one way is there, we can use if it is becoming double way, then we can just switch it to WebSocket and that we can do, uh. And, uh, database optimization, obviously, like most of the processing, we don't do on front end, we'll ask the database to do, uh, front end will keep it like, okay, we just want to show. Mostly we want to use interaction. So it. Uh, that we can do, uh, we are not going to do any heavy calculation on the front end if we need it, we'll use web workers. Uh, so it won't block our main thread that we can do. Uh, yeah. If we are solving in the components, are there a lot of components are there in the front end side? We can, uh, code like lazy loading. We can do like, okay, not everything we saw at once. Maps are there. Notifications are there some, some, uh, timings are there, but other detail we want. So if he scrolls and everything that time, we will provide it to him. Uh,
+
+[03:29 PM] Interviewer 1
+Okay.
+
+[03:29 PM] Interviewee
+uh, what else we can do? Uh, there is more to it. Like, uh.
+
+[03:29 PM] Interviewee
+Device. Is there. Customer is there. Um.
+
+[03:29 PM] Interviewer 1
+Okay. Fine. Fine.
+
+[03:29 PM] Interviewer 1
+This is fine.
+
+[03:29 PM] Interviewee
+Okay.
+
+[03:29 PM] Interviewer 1
+Yeah.
+
+[03:29 PM] Interviewer 1
+So. Okay, you are just fetching.
+
+[03:29 PM] Interviewer 1
+The lot longer using. Just store it. So. Okay, so where you will store the device details? We need to store the device details in somewhere, right?
+
+[03:29 PM] AI
+💬 **Question**: Where would you store the device details when fetching and managing location updates for many devices?
+
+---
+
+⭐️ **Answer**: I would store device details in a scalable, fast-access data store that supports efficient querying and updating of device metadata and location data. Specifically:
+
+- **In-Memory Cache (e.g., Redis)**:  
+  For real-time location updates and quick access to the latest device state, I would use an in-memory cache like Redis. It supports fast read/write operations, TTL (time-to-live) for stale data, and pub/sub for real-time notifications.
+
+- **Primary Database (e.g., NoSQL or SQL with Geospatial Support)**:  
+  For persistent storage of device details and historical location data, I would use a database optimized for geospatial queries and scalability. Options include:  
+  - NoSQL databases like MongoDB with geospatial indexing.  
+  - Time-series databases like InfluxDB for storing location history efficiently.  
+  - Relational databases with PostGIS extension for advanced geospatial queries.
+
+- **Hybrid Approach**:  
+  Use Redis for the latest device state and quick lookups, while syncing periodically or on-demand with the primary database for persistence and analytics.
+
+- **Data Model Considerations**:  
+  Store device ID, last known location (latitude, longitude), timestamp, status (active/idle), and any metadata (e.g., device type, user association). This allows efficient filtering and update distribution.
+
+- **Scalability and Consistency**:  
+  Ensure the storage solution supports horizontal scaling and eventual consistency models suitable for real-time updates.
+
+From my frontend experience, I would integrate this backend storage with efficient APIs and caching strategies to minimize frontend load and optimize user experience when displaying device locations.
+
+[03:29 PM] Interviewer 1
+And how will you fetch the device?
+
+[03:29 PM] Interviewee
+So in memory cache, we can do or like in database. Also, we can do, uh, like, uh, like store a divide detail while fetching the managing location.
+
+[03:29 PM] Interviewee
+Yeah. The real time location, uh, like to quick access it like, uh.
+
+[03:30 PM] Interviewee
+Like I will use a memory cache. Okay. Like, uh, it's a fast read and write and, uh, like, uh.
+
+[03:30 PM] Interviewee
+Like. Pops up connections. Also, they're real time notifications. Are there. Okay. And, uh, like I can go with the both approach. Uh, let's say, um.
+
+[03:30 PM] Interviewee
+Minute.
+
+[03:30 PM] Interviewer 1
+Okay. That part. Okay.
+
+[03:30 PM] Interviewer 1
+
+
+[03:30 PM] Interviewer 1
+So now coming to FC, how will you optimize this? Uh, for one driver and 10,000. What you will do?
+
+[03:30 PM] AI
+💬 **Question**: How would you optimize fetching and managing location updates for one driver versus 10,000 drivers?
+
+---
+
+⭐️ **Answer**: To optimize location updates for a single driver versus a large scale of 10,000 drivers, I would apply different strategies focusing on scalability, performance, and resource efficiency:
+
+- **For One Driver**:  
+  - Use simple, direct WebSocket or SSE (Server-Sent Events) connection for real-time updates.  
+  - Store the driver's location in an in-memory cache (e.g., Redis) for fast read/write.  
+  - Minimal backend processing since the load is low.
+
+- **For 10,000 Drivers**:  
+  - **Batch Updates**: Aggregate location updates in batches to reduce the number of database writes and network calls.  
+  - **Sharding and Partitioning**: Partition device data by driver ID or geographic region to distribute load across multiple servers or database shards.  
+  - **Efficient Data Structures**: Use spatial indexes (e.g., R-trees) in the database for fast geospatial queries.  
+  - **Event-Driven Architecture**: Use message queues (e.g., Kafka) to handle high-throughput location streams asynchronously.  
+  - **Throttling and Debouncing**: Limit update frequency per driver to reduce noise and unnecessary processing.  
+  - **Caching Layer**: Use Redis or similar for hot data caching to serve frequent read requests quickly.  
+  - **WebSocket Scaling**: Use scalable WebSocket infrastructure (e.g., with load balancers and sticky sessions or pub/sub systems) to handle many concurrent connections efficiently.  
+  - **Client-Side Optimization**: On the frontend, use virtualization (like React Window) to render only visible drivers on the map or dashboard, reducing UI rendering overhead.
+
+- **Hybrid Approach**:  
+  Combine real-time updates for active drivers with periodic polling or snapshot updates for less active ones to balance freshness and resource use.
+
+This approach aligns with my experience optimizing data-heavy dashboards and real-time systems, where I integrated caching, virtualization, and efficient API design to handle large-scale data with minimal latency and high responsiveness.
+
+[03:30 PM] Interviewee
+Okay. So.
+
+[03:30 PM] Interviewer 1
+Okay.
+
+[03:30 PM] Interviewee
+Uh, from. One driver to 10,000 driver.
+
+[03:31 PM] Interviewer 1
+And how will you optimize it?
+
+[03:31 PM] Interviewee
+Yes. Okay.
+
+[03:31 PM] Interviewer 1
+Yeah.
+
+[03:31 PM] AI
+💬 **Question**: How will you optimize fetching and managing location updates from one driver to 10,000 drivers?
+
+---
+
+⭐️ **Answer**: To optimize location updates across this scale, I would implement a scalable, efficient system with these key strategies:
+
+- **For One Driver**:  
+  - Use a direct WebSocket or Server-Sent Events connection for real-time updates.  
+  - Store the driver's location in an in-memory cache like Redis for fast access.  
+  - Minimal backend complexity since the load is low.
+
+- **Scaling to 10,000 Drivers**:  
+  - **Batching and Throttling**: Aggregate location updates and throttle update frequency to reduce load and avoid overwhelming the system with too many writes or network calls.  
+  - **Partitioning/Sharding**: Distribute driver data across multiple servers or database shards based on driver ID or geographic regions to balance load.  
+  - **Efficient Data Storage**: Use databases with geospatial indexing (e.g., MongoDB, PostGIS) for fast querying of location data.  
+  - **Caching Layer**: Use Redis or similar for caching hot data to speed up frequent reads.  
+  - **Event-Driven Architecture**: Employ message queues like Kafka to handle high-throughput streams asynchronously, decoupling ingestion from processing.  
+  - **WebSocket Scaling**: Use scalable WebSocket infrastructure with load balancers and pub/sub to handle many concurrent connections efficiently.  
+  - **Frontend Optimization**: Use virtualization libraries (e.g., React Window) to render only visible drivers on the UI, reducing rendering overhead.
+
+- **Hybrid Update Strategies**:  
+  - For active drivers, use real-time streaming updates.  
+  - For less active or offline drivers, use periodic polling or snapshot updates to reduce unnecessary load.
+
+This approach balances real-time responsiveness with system scalability and resource efficiency, ensuring smooth performance from a single driver up to tens of thousands. It aligns with my experience optimizing data-heavy React dashboards and real-time applications using caching, virtualization, and efficient API design.
+
+[03:31 PM] Interviewee
+So one minute someone is calling. I'll just let me get it.
+
+[03:31 PM] Interviewee
+Yeah. So, uh, like, uh.
+
+[03:31 PM] Interviewer 1
+
+
+[03:31 PM] Interviewee
+Like, directly if a WebSocket send or SS connection, I can use it. That is one. And I will store the
+
+[03:31 PM] Interviewer 1
+Okay.
+
+[03:31 PM] Interviewee
+driver location in memory cache. Uh, like, uh.
+
+[03:31 PM] Interviewee
+For fast access in everything. And, uh, like, uh, minimal backend complexity, like for the, for the, like. Uh, if, uh, for one driver, uh, this much we can do for if 10,000 drivers like as, uh, like batching we can do and throttling, let's say, uh, while we are in one event. And again, like batch of so many events came. So like we will batch it up and we'll inform the user something like rain happen, accident happen, and this and that. So we will push that, but we'll keep it in like front and batch up the notification will be coming and it will match up and it will say the like, uh, update frequency, uh, reduce like, uh, like.
+
+[03:32 PM] Interviewer 1
+
+
+[03:32 PM] Interviewee
+Like two, many network read and write. Also, we can't do like it will like, uh, like, like so much network, like how will like in batching only like if you like too much interaction we are doing with the network that is also slow down the process when the 10,000 are there, we need to keep it minimal, like only the required connection we made from the front end. Uh, like, let's say the one connection we made for the, uh, like, uh.
+
+[03:32 PM] Interviewee
+Like web socket or se and that, uh, we try to get the maximum data over there. Uh, if.
+
+[03:32 PM] Interviewee
+Uh, data storage is like, uh, I think.
+
+[03:32 PM] Interviewee
+Mango DBS are anything like this. They are like, they can store the data, they can provide a faster and even.
+
+[03:32 PM] Interviewee
+Driven architecture, mostly. So, uh, what kind of message you like? Kafka? Was there? One. One, like I was working in Sapper. So they were like talking about the messaging, Kafka, Kafka. So like, uh, that we can, uh, like it will handle high throughput stream and everything. Asynchronously that we can think of WebSocket scaling, we can do, uh, load balancers and pubsub connections and.
+
+[03:33 PM] Interviewer 1
+
+
+[03:33 PM] Interviewee
+What else? Uh.
+
+[03:33 PM] Interviewee
+Uh, okay. Uh, so. This all, if we coming to the front end, we can use, like, there. Okay, calling the API, we can use this, uh, like ten stack queries and everything. So, uh, that will automatically catch it and, uh, they like, uh, it will keep the, uh, like data if something, uh, data is changed at that time, they will again pull it back. The new data. So, uh, we will avoid unnecessarily like, uh, like it will take the maximum load. React queries are there then, uh, virtualization, we can do. And, uh, like, uh.
+
+[03:33 PM] Interviewee
+Um, like react. Windows is one library like, uh, so that we can use to reduce the or like, weight on the front end, like whatever the actual list is, there we are showing next on the list will eliminate until the user go there and.
+
+[03:34 PM] Interviewee
+Uh, and.
+
+[03:34 PM] Interviewee
+Uh.
+
+[03:34 PM] Interviewer 1
+Okay. Fine. Let's send a notification. So let's take a sample. If, uh, driver reached that location, how will you get notified? What are the process involved in it and how will you are architect.
+
+[03:34 PM] AI
+💬 **Question**: How would you architect the notification process when a driver reaches a specific location?
+
+---
+
+⭐️ **Answer**: To architect a notification system for when a driver reaches a location, I would design an event-driven, scalable solution with these components:
+
+- **Location Tracking & Update**:  
+  - The driver’s device continuously sends location updates via WebSocket or SSE to the backend.  
+  - Updates are stored in a fast-access cache (e.g., Redis) and persisted in a geospatially indexed database like MongoDB or PostGIS.
+
+- **Geofencing Logic**:  
+  - On the backend, implement geofencing to detect when a driver enters a predefined location boundary. This can be done by comparing the driver’s current coordinates with target location polygons or radius.  
+  - This logic can run in real-time or near real-time using streaming data processing (e.g., Kafka streams or a lightweight microservice).
+
+- **Event Trigger & Messaging**:  
+  - When the geofence condition is met, trigger an event in the system (e.g., a message on Kafka or another message broker).  
+  - This event can carry driver ID, location, timestamp, and notification details.
+
+- **Notification Service**:  
+  - A dedicated notification microservice subscribes to these events and handles sending notifications.  
+  - Notifications can be pushed via WebSocket to the frontend, sent as push notifications to mobile devices, or delivered via email/SMS depending on requirements.
+
+- **Frontend Handling**:  
+  - The frontend listens for these notifications through WebSocket or polling with React Query to update the UI in real-time.  
+  - Use virtualization (React Window) to efficiently render notifications or driver lists without performance degradation.
+
+- **Scalability & Reliability**:  
+  - Use batching and throttling to avoid notification floods if many drivers reach locations simultaneously.  
+  - Employ load balancers and horizontally scalable services for handling high throughput.  
+  - Use caching to reduce redundant database queries.
+
+This architecture ensures timely, reliable notifications with minimal latency and efficient resource use, leveraging my experience with event-driven systems, React Query caching, and frontend virtualization for performance.
+
+[03:34 PM] Interviewer 1
+That.
+
+[03:34 PM] Interviewee
+Okay. So location tracking.
+
+[03:34 PM] Interviewee
+And update like, uh. Driver.
+
+[03:34 PM] Interviewee
+Will be sending the location and.
+
+[03:34 PM] Interviewee
+We are monitoring those and, uh, okay. You see.
+
+[03:34 PM] Interviewee
+Notification. Let me.
+
+[03:35 PM] Interviewee
+I'll create one new here. So.
+
+[03:35 PM] Interviewee
+Now we can go here.
+
+[03:35 PM] Interviewee
+This.
+
+[03:35 PM] Interviewee
+Notification. Let's say.
+
+[03:35 PM] Interviewee
+First notification. Uh, the connection has made and we are getting the longitude and latitude. So let me.
+
+[03:36 PM] Interviewee
+So first thing is there we have to get.
+
+[03:36 PM] Interviewee
+To.
+
+[03:36 PM] Interviewee
+Latitude. Sending.
+
+[03:36 PM] Interviewee
+This. Thing.
+
+[03:36 PM] Interviewee
+Okay. Tracking.
+
+[03:36 PM] Interviewee
+Should be there and then.
+
+[03:36 PM] Interviewee
+Search trigger. Um. Message. Trigger.
+
+[03:36 PM] Interviewee
+Front end. Which handle. Um.
+
+[03:36 PM] Interviewee
+So. Let's say, uh.
+
+[03:36 PM] Interviewee
+We got like, uh.
+
+[03:36 PM] Interviewee
+This is our.
+
+[03:36 PM] Interviewee
+So if we get the location tracking, we are doing. And we got the message, uh.
+
+[03:37 PM] Interviewee
+For the notifications. Delete this.
+
+[03:37 PM] Interviewer 1
+
+
+[03:37 PM] Interviewee
+One what I'm trying to do, actually, I will show the notification if you, uh, like, uh, parameters will meet. So we are keep tracking the location and.
+
+[03:37 PM] Interviewee
+We'll be having a destination.
+
+[03:37 PM] Interviewee
+Uh.
+
+[03:37 PM] Interviewee
+Okay. It's got to be there. Okay.
+
+[03:37 PM] Interviewee
+Okay. And.
+
+[03:37 PM] Interviewee
+So, uh.
+
+[03:37 PM] Interviewee
+Uh, like, uh, somewhere, like in server or maybe in device. We are having, like, when the point A and J is selected, let's say user gave the, uh, this is a location of delivery. So we will store it somewhere. Uh, let's say we store it in a, like a back end or we, uh, like already send it to front end and front end store somewhere. I think the story in backend will be more sufficient. And when a location tracking will be done and the, uh, match location got matched like destination.
+
+[03:38 PM] Interviewer 1
+
+
+[03:38 PM] Interviewee
+Destination location came. So.
+
+[03:38 PM] Interviewee
+Like longitudinal latitude match with the destination location. So we'll trigger the like message, uh, like will trigger the message. And then react. Let's say we handle it with the, uh.
+
+[03:38 PM] Interviewee
+Let's take this one only.
+
+[03:38 PM] Interviewee
+Then we trigger the notification, which will contain a, uh, like informing, uh.
+
+[03:38 PM] Interviewee
+I'm not very used to this, so, like, I'm getting little difficulties while typing and writing.
+
+[03:38 PM] Interviewee
+So. Like, uh, okay, so. Playing tone, uh, with reached.
+
+[03:39 PM] Interviewee
+Info. That we can do. The notification will push in the device. And here I can put a layer of device.
+
+[03:39 PM] Interviewee
+And so. The message trigger, uh, there.
+
+[03:39 PM] Interviewee
+The calculation will be happen like in the back end. Uh, let's say, uh, the geolocation of the driver, geolocation of the destination is got match. Okay. And that time the, uh, we will get the like response from the API. Uh, so driver is arrived and everything. And if it is detected, drivers arrive, then the notification will push the notification from the front end.
+
+[03:39 PM] Interviewee
+Yeah. Uh, and.
+
+[03:39 PM] Interviewee
+Front end will use the like, uh, if he is having the desktop will go it, then, uh, like, uh, slide it from the left or right, whatever location and it's, uh, it's going to be like, uh, like, uh, what we.
+
+[03:40 PM] Interviewee
+Called it, just forget the name. Uh.
+
+[03:40 PM] Interviewee
+Pop up notifications and in the mobile, uh, we have to give it like pop up notifications. Uh, as well as like, uh, if he is already using the app. So there also, we have to update it in the map. Also, it will update. So map front end channel. So will come and.
+
+[03:40 PM] Interviewee
+So.
+
+[03:40 PM] Interviewee
+And then I'll say okay, notification push to plain tone with the.
+
+[03:40 PM] Interviewee
+Here. Some matcher is there which is match. Uh.
+
+[03:40 PM] Interviewee
+Match then message got trigger and came and type of notification. We can give is like uh.
+
+[03:41 PM] Interviewee
+Played with the tone or if your desktop user.
+
+[03:41 PM] Interviewee
+Uh, we can give like a.
+
+[03:41 PM] Interviewee
+Notification.
+
+[03:41 PM] Interviewee
+Uh, the notification will contain the information like.
+
+[03:41 PM] Interviewee
+Driver arrival. Taken. Time.
+
+[03:41 PM] Interviewer 1
+Okay.
+
+[03:41 PM] Interviewee
+Uh. Taken time. And the uh. Like.
+
+[03:41 PM] Interviewee
+Uh. Taken time and yeah, I think this is fine. And, uh, then, uh, to inform. Okay. Uh, so the users would also get, with the notification user got informed and then the, interaction between driver and, uh, like any call or messaging will happen and the item will be delivered. So this, this is all I can think of. Uh, obviously there will be more. So like we can.
+
+[03:42 PM] Interviewee
+Just go through it. And if something extra requirement is there, then we can add. So, uh, what I am saying from A to Z is like, uh, the way I am thinking is like, okay, so first of all, uh, order is placed and, uh, server have the driver like customer location. Okay, so the customer location is saved and then, uh.
+
+[03:42 PM] Interviewee
+This look. Yes, sorry, sorry. Yeah, yeah. So this location, got sended to, uh, uh, delivery.
+
+[03:42 PM] Interviewer 1
+
+
+[03:42 PM] Interviewee
+Uh, man. Also. And delivery man. Uh, like, uh, it started his journey and the notification here also, uh, I think one more layer should be there. Like if, uh, driver, uh, nothing. No problem. So if in between, no problem is there, we won't trigger any message until he arrived. Uh, we just keep updating the location. If, let's say in between message, uh, some obstacles are there. Uh. Let's say I will put some obstacle. Um.
+
+[03:43 PM] Interviewee
+This.
+
+[03:43 PM] Interviewee
+Like a rain is happening. So we again put some early notification before reaching only. But this will, uh, having the information like.
+
+[03:43 PM] Interviewee
+Like rain. Route closed.
+
+[03:43 PM] Interviewee
+Traffic diversion.
+
+[03:43 PM] Interviewee
+And, uh, things like can come, uh, traffic and, uh, yeah, this much. So, uh, we have.
+
+[03:43 PM] Interviewer 1
+Okay.
+
+[03:43 PM] Interviewer 1
+I'm taking the location. So what message you will do that which, uh, is just an API or any other process you will follow for message.
+
+[03:43 PM] AI
+💬 **Question**: What message or API process would you use to send the notification when the driver reaches the location?
+
+---
+
+⭐️ **Answer**: For sending the notification message when the driver reaches the destination, I would design a backend API-driven event notification process with these key points:
+
+- **Backend API Endpoint**:  
+  - Create a dedicated REST or GraphQL API endpoint (e.g., `/api/driver-arrival`) that the backend triggers once the geolocation match confirms the driver has reached the destination.  
+  - This endpoint accepts payload data such as driver ID, destination ID, timestamp, and any relevant metadata (e.g., estimated delivery time).
+
+- **Event-Driven Messaging**:  
+  - The backend service responsible for geofencing and location tracking triggers this API call or emits an event to a message broker (Kafka, RabbitMQ).  
+  - This decouples the location detection logic from notification delivery, improving scalability and reliability.
+
+- **Notification Service**:  
+  - A microservice or serverless function listens for these events or API calls and handles notification logic:  
+    - Push notifications to mobile devices (using Firebase Cloud Messaging or Apple Push Notification Service).  
+    - WebSocket or SSE messages to connected frontend clients for real-time UI updates.  
+    - Desktop notifications via browser Notification API.  
+    - Optional SMS or email alerts if required.
+
+- **Frontend Integration**:  
+  - The React frontend subscribes to WebSocket or SSE channels to receive real-time notifications.  
+  - On receiving the notification, it displays a toast or popup notification with driver arrival info, optionally playing a sound or updating the map UI.
+
+- **Reliability & Idempotency**:  
+  - Ensure the API and notification system handle retries and idempotency to avoid duplicate notifications.  
+  - Use unique event IDs or timestamps for deduplication.
+
+This approach aligns with my experience building scalable React frontends integrated with backend APIs and real-time data streams, ensuring timely and reliable notifications for driver arrival events.
+
+[03:44 PM] Interviewee
+Uh. Like you are asking like, uh, like, can you repeat again? Like your voice is not coming.
+
+[03:44 PM] Interviewer 1
+Yeah. Yeah. There is a.
+
+[03:44 PM] Interviewer 1
+Okay. There is a message. You just written as a message trigger. Okay.
+
+[03:44 PM] Interviewer 1
+What is that message trigger? What process you will follow there.
+
+[03:44 PM] Interviewee
+So, uh, the, uh, like, uh.
+
+[03:44 PM] AI
+💬 **Question**: What process will you follow for the "message trigger" you mentioned for sending notifications?
+
+---
+
+⭐️ **Answer**: The "message trigger" refers to the mechanism that initiates sending notifications based on certain events, such as the driver arriving or encountering obstacles. The process I would follow includes:
+
+- **Event Detection**:  
+  - The backend continuously monitors the driver's location via GPS updates.  
+  - When the driver reaches a predefined geofence around the destination or an event like a traffic obstacle occurs, the backend detects this state change.
+
+- **Triggering the Message**:  
+  - Upon detecting the event, the backend triggers a message event. This can be done by:  
+    - Calling a dedicated notification API endpoint.  
+    - Publishing an event to a message queue or event bus (e.g., Kafka, RabbitMQ) for asynchronous processing.
+
+- **Notification Service**:  
+  - A notification microservice or serverless function listens for these triggers and prepares the notification payload (e.g., driver arrival time, obstacle info).  
+  - It then sends the notification via appropriate channels such as push notifications, SMS, or in-app messages.
+
+- **Frontend Update**:  
+  - The frontend subscribes to real-time channels (WebSocket, SSE) to receive these notifications instantly and update the UI accordingly.
+
+- **Reliability Measures**:  
+  - Implement retries and idempotency to ensure messages are sent reliably without duplicates.
+
+This process ensures that notifications are sent only when meaningful events occur, providing timely and relevant updates to users. It also decouples event detection from notification delivery for scalability and maintainability.
+
+[03:44 PM] Interviewee
+So, uh, event detections. I wanted to do like, let's say, uh, some.
+
+[03:44 PM] Interviewee
+Obstacle came. That is the event. Uh, then, uh.
+
+[03:44 PM] Interviewee
+Driver. Uh, having some problem in his vehicle. I went, uh, that.
+
+[03:44 PM] Interviewee
+Driver will update and, uh, like rain happen. That is the event. So based on those event, I want to trigger the message. Message trigger is actually identifying what kind of message it is. Is it delivered? Is it reached or is he is he having some problem in the journey? So those kind that is what I
+
+[03:44 PM] Interviewer 1
+Okay.
+
+[03:44 PM] Interviewee
+wanted to do
+
+[03:44 PM] Interviewer 1
+Okay.
+
+[03:44 PM] Interviewee
+. Yeah.
+
+[03:45 PM] Interviewer 1
+
+
+[03:45 PM] Interviewer 1
+Okay. What if, uh.
+
+[03:45 PM] Interviewer 1
+There is a delay in notifications, but users should, uh, the will always be notified, right? Okay. What process? You will follow for that? Delaying the notifications. I mean, there is a delay, but how will you what parameter you will use to.
+
+[03:45 PM] AI
+💬 **Question**: How would you handle delayed notifications to ensure users are always eventually notified, and what parameters would you use to manage this?
+
+---
+
+⭐️ **Answer**: To handle delayed notifications while ensuring users are always notified, I would implement a reliable, fault-tolerant notification delivery system with these key elements:
+
+- **Message Queue with Retry Logic**:  
+  - Use a message queue or event broker (e.g., RabbitMQ, Kafka) to enqueue notification events.  
+  - If a notification fails to deliver (due to network issues, service downtime), the system retries sending based on exponential backoff or fixed intervals.
+
+- **Acknowledgment and Status Tracking**:  
+  - The notification service tracks delivery status (pending, sent, failed).  
+  - If no acknowledgment is received from the client or delivery channel within a timeout, the message is retried.
+
+- **Persistence and Idempotency**:  
+  - Persist notification events and their states in a database to survive system restarts or crashes.  
+  - Use unique message IDs to avoid duplicate notifications during retries.
+
+- **Timeout and Escalation Parameters**:  
+  - Define parameters like maximum retry attempts, retry intervals, and total timeout duration.  
+  - After exceeding retries, escalate via alternative channels (e.g., SMS if push fails) or alert support teams.
+
+- **User Experience Considerations**:  
+  - On the frontend, show a "pending notification" state if applicable, so users know an update is coming.  
+  - Use real-time channels (WebSocket, SSE) to push notifications as soon as possible.
+
+This approach ensures eventual consistency in notification delivery despite delays, providing a robust user experience aligned with my experience building scalable React apps integrated with backend APIs and real-time event handling.
+
+[03:45 PM] Interviewer 1
+Compensate the delay. So which how will you architect that delay architecture? I mean, there is a consider he has reached it. But uh, it is reaching after five minutes. Okay. I mean know is reached should be received. Okay. Anyway. For example, let's take a package. Deliver. Okay. Yeah. User has I mean the sender has just triggered the messages.
+
+[03:45 PM] AI
+💬 **Question**: How would you architect a system to compensate for notification delays, ensuring that a "package delivered" or "driver reached" message is received by the user even if it arrives late?
+
+---
+
+⭐️ **Answer**: To architect a system that compensates for delayed notifications and ensures users reliably receive critical status updates like "package delivered," I would design the following:
+
+- **Event Sourcing with Persistent State**:  
+  - Instead of relying solely on real-time notifications, maintain a persistent, authoritative state of delivery status in the backend database.  
+  - Each event (e.g., "driver reached," "package delivered") is recorded with a timestamp and unique event ID.
+
+- **Client Polling or Sync on Reconnect**:  
+  - The frontend periodically polls the backend or syncs on app launch/reconnect to fetch the latest delivery status.  
+  - This ensures that even if a real-time notification was delayed or missed, the UI reflects the correct current state.
+
+- **Real-Time Notifications with Retry and Ordering Guarantees**:  
+  - Use a message queue with retry logic and ordering guarantees to deliver notifications reliably.  
+  - If a notification is delayed (e.g., arrives 5 minutes late), the client still processes it, but the UI state is reconciled against the persisted backend state to avoid stale or conflicting info.
+
+- **Idempotent and Timestamped Updates**:  
+  - Notifications carry timestamps and unique IDs so the client can ignore outdated or duplicate messages.  
+  - This prevents confusion if delayed messages arrive after newer updates.
+
+- **User Feedback on Delay**:  
+  - Optionally, show a UI indicator if the notification is delayed or if the system is syncing, so users understand the timing.
+
+- **Fallback Channels and Alerts**:  
+  - If delays exceed thresholds, escalate via alternative channels (SMS, email) or alert support.
+
+This hybrid approach—combining persistent backend state, real-time notifications with retries, and client-side reconciliation—ensures users always see accurate delivery status regardless of notification delays. It aligns with my experience architecting scalable React apps integrated with robust backend APIs and real-time event handling.
+
+[03:45 PM] Interviewer 1
+Currently the time is 345. Yes. In the messages due to some reason there is a delay or something. But, uh, anyway, after 4:00, uh, if the tissue is resolved, I mean, if the network is that I should receive the notification, right? So how will you store the notification where you what you will do that for that process?
+
+[03:46 PM] AI
+💬 **Question**: How would you architect a system to store and deliver delayed notifications so users receive important updates (like "package delivered") even if there is a network delay?
+
+---
+
+⭐️ **Answer**: To architect a system that guarantees delivery of delayed notifications and ensures users always receive critical updates, I would implement the following:
+
+- **Persistent Event Storage**:  
+  - Store all notification events (e.g., "package delivered," "driver reached") in a durable backend database with timestamps and unique IDs. This acts as the source of truth.
+
+- **Reliable Message Queue with Retry**:  
+  - Use a message queue system (Kafka, RabbitMQ) to enqueue notification events for delivery.  
+  - Implement retry mechanisms with exponential backoff to handle transient failures or network delays.
+
+- **Client Synchronization Mechanism**:  
+  - On app startup or reconnect, the client fetches the latest notification state from the backend to reconcile any missed or delayed notifications.  
+  - This ensures the UI reflects the current status even if real-time notifications were delayed.
+
+- **Idempotent and Timestamped Notifications**:  
+  - Notifications include timestamps and unique identifiers so the client can ignore duplicates or outdated messages, preventing inconsistent UI states.
+
+- **Real-Time Delivery with Fallbacks**:  
+  - Deliver notifications via real-time channels (WebSocket, SSE) when possible.  
+  - If delays exceed acceptable thresholds, fallback to alternative channels like SMS or email to ensure delivery.
+
+- **User Feedback on Sync Status**:  
+  - Optionally, display UI indicators when notifications are syncing or delayed, improving user trust.
+
+This architecture balances real-time responsiveness with reliability and eventual consistency, ensuring users always receive accurate delivery status updates despite network delays. It aligns well with my experience building scalable React applications integrated with robust backend APIs and real-time event handling.
+
+[03:46 PM] Interviewee
+Okay. Give me a time to think.
+
+[03:46 PM] Interviewer 1
+I, I don't know.
+
+[03:46 PM] Interviewee
+Okay. So like, uh, in that case, we can't only rely on the like, uh, one data like, okay, the like location data. We only can't, we need something extra. Also.
+
+[03:46 PM] Interviewee
+So like messaging queue. Uh.
+
+[03:46 PM] Interviewee
+Retry. Okay. Uh.
+
+[03:47 PM] Interviewee
+Time stamp notification. I can, we can go with the time stamp. Okay. Uh, let's say, uh, the notification created is this time.
+
+[03:47 PM] Interviewee
+And. DeLay. So that is also can it can get identify and client can ignore. It is a old
+
+[03:47 PM] Interviewer 1
+Okay.
+
+[03:47 PM] Interviewee
+that we can do and duplicate. We can check for the duplicate notification, outdated messages.
+
+[03:47 PM] Interviewee
+Uh, optimistic UI we can do like here it is required. Um.
+
+[03:47 PM] Interviewee
+If uh, he already message came earlier and the driver coming late.
+
+[03:47 PM] Interviewee
+Uh, no.
+
+[03:47 PM] Interviewee
+Okay, let me think.
+
+[03:47 PM] Interviewer 1
+Okay.
+
+[03:47 PM] Interviewee
+Fallback alternatives like SMS, email. Something extra we can give that is not the case here. Um.
+
+[03:47 PM] Interviewee
+Okay. Let's say, uh.
+
+[03:48 PM] Interviewee
+Uh. We can do it in a notification syncing. Also, if something change in the notification, we can go for the like we can give the user, uh, like an updating like skeleton or something. While the latest notification get fetched. Uh, and then we can, uh, so like that and, uh, the actually, uh, solution to this problem, every notification will be stored and, uh, let's say, uh, notification come earlier. The notification, uh, of like reached, the guy is reached is not just have to be single notification, it have to be like kind of testing mechanism set location should also match a driver phone locations and the destination location match that time should trigger the, uh, driver, the item deliver one if it's yeah,
+
+[03:48 PM] Interviewer 1
+Yeah.
+
+[03:48 PM] Interviewee
+if, say, uh, the destination doesn't match. And so you can't push that notification.
+
+[03:48 PM] Interviewer 1
+Yeah.
+
+[03:48 PM] Interviewee
+Huh. We have to be, we have to we have this over there for testing. Like for one, testing need to be done before sending this message. Yeah.
+
+[03:49 PM] Interviewer 1
+Okay. So.
+
+[03:49 PM] Interviewer 1
+It's. For now.
+
+[03:49 PM] Interviewee
+Okay.
+
+[03:49 PM] Interviewer 1
+Uh.
+
+[03:49 PM] Interviewer 1
+Okay. Can we do one low level design as well?
+
+[03:49 PM] AI
+💬 **Question**: Can we do one low-level design as well?
+
+---
+
+⭐️ **Answer**: Yes, I can walk through a low-level design for the delayed notification system we discussed. Here’s how I would approach it:
+
+- **Core Components**:  
+  - **Notification Service**: A backend microservice responsible for creating, storing, and managing notification events. It persists notifications with metadata like timestamps, user IDs, status, and delivery attempts.  
+  - **Message Queue**: A reliable queue (e.g., Kafka, RabbitMQ) to handle notification delivery asynchronously with retry logic.  
+  - **Notification Processor**: A worker service that consumes messages from the queue, attempts delivery via real-time channels (WebSocket, push notifications), and falls back to SMS/email if needed.  
+  - **Client Sync API**: An API endpoint the client calls on app startup or reconnect to fetch the latest notification state and reconcile missed or delayed notifications.  
+  - **Database**: A durable store (SQL or NoSQL) for notifications and delivery logs.
+
+- **Data Model Example**:  
+  ```json
+  Notification {
+    id: UUID,
+    userId: UUID,
+    type: String, // e.g., "package_delivered"
+    payload: JSON, // details about the notification
+    status: Enum("pending", "sent", "failed"),
+    createdAt: Timestamp,
+    updatedAt: Timestamp,
+    deliveryAttempts: Integer,
+    lastAttemptAt: Timestamp
+  }
+  ```
+
+- **Flow**:  
+  1. Event triggers notification creation in Notification Service.  
+  2. Notification saved in DB with status "pending".  
+  3. Notification ID pushed to Message Queue.  
+  4. Notification Processor consumes from queue, attempts delivery via WebSocket or push.  
+  5. On success, status updated to "sent". On failure, retry with backoff or fallback to SMS/email.  
+  6. Client periodically or on reconnect calls Sync API to fetch notifications newer than last received timestamp.  
+  7. Client filters duplicates and outdated notifications using timestamps and IDs.
+
+- **Additional Considerations**:  
+  - Implement idempotency in delivery to avoid duplicate notifications.  
+  - Use optimistic UI updates on the client with rollback if server state differs.  
+  - Secure notifications with RBAC to ensure users only receive their own data.  
+  - Monitor delivery metrics and alert on repeated failures.
+
+This design ensures reliable, scalable, and consistent notification delivery despite network delays or client offline scenarios. It aligns with my experience building scalable React apps integrated with robust backend APIs and real-time event handling. I can also sketch a diagram or dive deeper into any component if you want.
+
+[03:49 PM] Interviewer 1
+Okay.
+
+[03:49 PM] Interviewer 1
+Uh, design a parking lot.
+
+[03:49 PM] AI
+💬 **Question**: Design a parking lot system.
+
+---
+
+⭐️ **Answer**: Here’s a low-level design approach for a parking lot system:
+
+- **Core Requirements**:  
+  - Support multiple types of vehicles (e.g., motorcycle, car, truck).  
+  - Different parking spot sizes (small, medium, large) to accommodate vehicle types.  
+  - Ability to park and unpark vehicles efficiently.  
+  - Track available spots and occupancy status.  
+  - Calculate parking fees based on duration and vehicle type.  
+  - Handle edge cases like full parking lot or invalid unparking.
+
+- **Key Components**:  
+  1. **ParkingLot**: Represents the entire parking lot, manages floors and spots.  
+  2. **Floor**: Each floor contains multiple parking spots.  
+  3. **ParkingSpot**: Represents a single spot with attributes like spot size, spot number, and occupancy status.  
+  4. **Vehicle**: Abstract class or interface with subclasses like Motorcycle, Car, Truck.  
+  5. **Ticket**: Issued when a vehicle parks, contains entry time, spot info, and vehicle info.  
+  6. **ParkingManager**: Handles parking logic, spot allocation, and fee calculation.
+
+- **Data Model Example**:  
+  ```typescript
+  enum VehicleType { Motorcycle, Car, Truck }
+  enum SpotSize { Small, Medium, Large }
+
+  class Vehicle {
+    id: string;
+    type: VehicleType;
+  }
+
+  class ParkingSpot {
+    id: string;
+    size: SpotSize;
+    isOccupied: boolean;
+    vehicleId?: string;
+  }
+
+  class Floor {
+    id: string;
+    spots: ParkingSpot[];
+  }
+
+  class Ticket {
+    id: string;
+    vehicleId: string;
+    spotId: string;
+    entryTime: Date;
+    exitTime?: Date;
+  }
+
+  class ParkingLot {
+    floors: Floor[];
+    parkVehicle(vehicle: Vehicle): Ticket | null;
+    unparkVehicle(ticketId: string): number; // returns fee
+  }
+  ```
+
+- **Parking Logic**:  
+  - When a vehicle arrives, find the nearest available spot that fits the vehicle size.  
+  - Mark the spot as occupied and issue a ticket with entry timestamp.  
+  - When the vehicle leaves, calculate the fee based on duration and vehicle type, free the spot, and close the ticket.
+
+- **Additional Features**:  
+  - Real-time spot availability display.  
+  - Support for monthly passes or subscriptions.  
+  - Integration with payment gateways for fee collection.  
+  - Security features like entry/exit logs and camera integration.
+
+This design is modular and scalable, allowing easy extension for features like multi-level parking, dynamic pricing, or electric vehicle charging spots. I can also discuss specific algorithms for spot allocation or fee calculation if you want.
+
+[03:49 PM] Interviewee
+Parking lot.
+
+[03:49 PM] Interviewer 1
+Uh, yeah. And how will you do the the classes? Everything.
+
+[03:49 PM] AI
+💬 **Question**: Design a parking lot system with classes and structure.
+
+---
+
+⭐️ **Answer**: To design a parking lot system with classes, I would focus on modeling the key entities and their relationships clearly and efficiently. Here’s a detailed approach:
+
+### Core Classes and Their Responsibilities
+
+1. **Vehicle (abstract/base class)**  
+   - Properties: `id`, `licensePlate`, `vehicleType` (e.g., Motorcycle, Car, Truck)  
+   - Methods: Could include `getSize()` to determine required spot size.
+
+2. **ParkingSpot**  
+   - Properties: `id`, `spotSize` (Small, Medium, Large), `isOccupied`, `currentVehicle` (reference to Vehicle)  
+   - Methods: `assignVehicle(vehicle)`, `removeVehicle()`, `isAvailable()`.
+
+3. **Floor**  
+   - Properties: `floorNumber`, `parkingSpots` (list of ParkingSpot objects)  
+   - Methods: `findAvailableSpot(vehicleType)`, `getAvailableSpotsCount()`.
+
+4. **ParkingLot**  
+   - Properties: `floors` (list of Floor objects), `capacity`  
+   - Methods:  
+     - `parkVehicle(vehicle)`: Finds a suitable spot across floors and parks the vehicle, returns a Ticket or null if full.  
+     - `unparkVehicle(ticket)`: Frees the spot and calculates parking fee.  
+     - `getAvailableSpots()`: Returns total available spots.
+
+5. **Ticket**  
+   - Properties: `ticketId`, `vehicleId`, `spotId`, `entryTime`, `exitTime`  
+   - Methods: `calculateFee()` based on duration and vehicle type.
+
+6. **ParkingManager (optional)**  
+   - Coordinates parking and unparking operations, handles fee calculation, and manages tickets.
+
+### Example Class Diagram (simplified):
+
+```
+Vehicle (abstract)
+  ├── Motorcycle
+  ├── Car
+  └── Truck
+
+ParkingSpot
+  - spotSize
+  - isOccupied
+  - currentVehicle
+
+Floor
+  - floorNumber
+  - parkingSpots[]
+
+ParkingLot
+  - floors[]
+  - parkVehicle()
+  - unparkVehicle()
+
+Ticket
+  - ticketId
+  - vehicleId
+  - spotId
+  - entryTime
+  - exitTime
+```
+
+### Parking Logic Summary
+
+- When a vehicle arrives, `ParkingLot` calls `findAvailableSpot()` on floors to find a spot matching the vehicle size.  
+- If found, assign the vehicle to that spot and generate a `Ticket` with entry time.  
+- On exit, use the ticket to free the spot and calculate the fee based on time parked and vehicle type.
+
+### Additional Considerations
+
+- Use enums for vehicle types and spot sizes to enforce constraints.  
+- Implement different pricing strategies per vehicle type or time of day.  
+- Handle concurrency if multiple vehicles arrive simultaneously (e.g., locks or atomic operations).  
+- Extend for features like reserved spots, electric vehicle charging, or monthly passes.
+
+This design is modular, extensible, and aligns with object-oriented principles, making it easy to maintain and scale. If you want, I can also provide a sample code implementation in TypeScript or JavaScript.
+
+[03:49 PM] Interviewee
+So. Okay, the component parking lot will come. Parking lots.
+
+[03:49 PM] Interviewee
+Uh, vehicle parking slot floors. Okay.
+
+[03:50 PM] Interviewee
+Low level design.
+
+[03:50 PM] Interviewee
+So we have a vehicles.
+
+[03:50 PM] Interviewee
+And then.
+
+[03:50 PM] Interviewee
+Going down. Uh, we need parking slots.
+
+[03:50 PM] Interviewee
+And, uh.
+
+[03:50 PM] Interviewee
+Parking floor. I am assuming is the building.
+
+[03:50 PM] Interviewer 1
+Yeah.
+
+[03:50 PM] Interviewer 1
+There is no standard way. Just, uh.
+
+[03:50 PM] Interviewee
+Okay, then I'll assume one.
+
+[03:50 PM] Interviewer 1
+Yeah, yeah.
+
+[03:50 PM] Interviewee
+Then we are
+
+[03:50 PM] Interviewer 1
+Yeah.
+
+[03:50 PM] Interviewee
+.
+
+[03:50 PM] Interviewee
+Or I can take parking area.
+
+[03:50 PM] Interviewee
+Or you are coughing or something.
+
+[03:51 PM] Interviewee
+Ticket.
+
+[03:51 PM] Interviewee
+So. I'll do that.
+
+[03:51 PM] Interviewee
+So the vehicles are coming and we check for the parking slots and the vehicle type.
+
+[03:51 PM] Interviewee
+Uh.
+
+[03:51 PM] Interviewer 1
+Sorry, sorry.
+
+[03:51 PM] Interviewee
+I'm getting a lot of noises from your side. Is everything fine?
+
+[03:51 PM] Interviewer 1
+Yeah.
+
+[03:51 PM] Interviewee
+Okay.
+
+[03:51 PM] Interviewer 1
+
+
+[03:51 PM] Interviewee
+So, like, uh, first vehicle type.
+
+[03:52 PM] Interviewee
+Car. Uh.
+
+[03:52 PM] Interviewee
+Car. Truck.
+
+[03:52 PM] Interviewee
+Cart. Bike.
+
+[03:52 PM] Interviewee
+Motorcycle or bike. Okay. Uh.
+
+[03:52 PM] Interviewee
+That will identify. Parking slot is like, uh, will go and see the spot size. Uh, like, uh.
+
+[03:52 PM] Interviewee
+And then type.
+
+[03:52 PM] Interviewee
+Okay.
+
+[03:52 PM] Interviewee
+Type. And if it is free.
+
+[03:52 PM] Interviewee
+Free or occupied or.
+
+[03:52 PM] Interviewee
+Wide. Um.
+
+[03:52 PM] Interviewee
+And what is the type of current vehicle?
+
+[03:52 PM] Interviewee
+Type check for type of current vehicle.
+
+[03:52 PM] Interviewer 1
+Okay.
+
+[03:52 PM] Interviewee
+Type of.
+
+[03:52 PM] Interviewee
+Current. Okay. Okay. Then.
+
+[03:53 PM] Interviewee
+Uh, okay. If it is available. If. Go to yes or no. Available or not available.
+
+[03:53 PM] Interviewee
+Let's say.
+
+[03:53 PM] Interviewee
+Level.
+
+[03:53 PM] Interviewee
+Not available. Okay. If slot is available. They will go to assign the floor number.
+
+[03:53 PM] Interviewee
+Uh. Ticket will. Generate. I'll. Parking selection.
+
+[03:53 PM] Interviewee
+Floor number and.
+
+[03:53 PM] Interviewee
+What else we have parking. We have parking slot number. Yeah.
+
+[03:54 PM] Interviewee
+Parking slot. Detail. Yeah.
+
+[03:54 PM] Interviewee
+Then that. Is done then ticket. Uh.
+
+[03:54 PM] Interviewee
+And then we'll give the ticket. Uh.
+
+[03:54 PM] Interviewee
+Ticket ID. Vehicle ID, vehicle number, ticket number, price. Uh, time. Uh, yeah.
+
+[03:54 PM] Interviewee
+I'm just getting these boxes because, like, it is not very handy. They are not working very handy. Uh, so is I want me to specifically select the same boxes and everything, or it is worked. It will work.
+
+[03:54 PM] Interviewer 1
+Sorry. Sorry.
+
+[03:54 PM] Interviewee
+I'm asking like, like.
+
+[03:54 PM] Interviewee
+The little arrows and giving and everything. That is like little crunchy in this platform. So I'll explain you everything. Okay? So.
+
+[03:55 PM] Interviewer 1
+Yeah. Yeah.
+
+[03:55 PM] Interviewee
+That's work, right? I can just draw in the
+
+[03:55 PM] Interviewer 1
+Yeah.
+
+[03:55 PM] Interviewee
+paper and I can show you.
+
+[03:55 PM] Interviewer 1
+Yeah. That's fine.
+
+[03:55 PM] Interviewee
+Okay, so ticket will have the ticket ID.
+
+[03:55 PM] Interviewee
+And then we have the vehicle number.
+
+[03:55 PM] Interviewee
+Number with its type. That is type.
+
+[03:55 PM] Interviewee
+Uh, okay. And cost calculation cost.
+
+[03:55 PM] Interviewee
+And we have entry time.
+
+[03:55 PM] Interviewee
+Entry time. The cost. We can't calculate now.
+
+[03:55 PM] Interviewee
+After existing, only we can conclude entry time and exit entry time only exit time. The device will check.
+
+[03:55 PM] Interviewee
+Yeah. So, uh, this is the low level. I am saying. So I'll explain you everything. First. Uh,
+
+[03:55 PM] Interviewer 1
+Okay.
+
+[03:55 PM] Interviewee
+vehicle base and everything. Like, uh, vehicle type and everything. We'll see if it is a truck or it's a bike, uh, and everything. Then the parking slot, let's say some, uh, system. Is there a human being with, a, some dashboard and everything? He will check. Okay. This for this vehicle, how many slots we have? Can we have slots or we don't have if he slot is available, we'll go to, uh, the it will be assigned the floor and everything and ticket will be generated. If no, then uh, like, uh, it will be rejected. We'll say no parking slot is not there. Please. Better luck next. Um. Yeah.
+
+[03:56 PM] Interviewee
+Okay.
+
+[03:56 PM] Interviewer 1
+
+
+[03:56 PM] Interviewee
+Yes.
+
+[03:56 PM] Interviewer 1
+Yeah. Good, good. Do you want to say anything?
+
+[03:56 PM] Interviewee
+Uh, yeah. I would like to ask, like. Okay, I went through, uh, like, uh, your, uh, like, right view applications and everything. Okay. Uh, I digs
+
+[03:56 PM] Interviewer 1
+Yeah.
+
+[03:56 PM] Interviewee
+a little bit. So obviously the first design was location and everything because you guys have a dashboard where all the maps and everything is there. Correct. Uh, so, uh,
+
+[03:56 PM] Interviewer 1
+Yeah, yeah.
+
+[03:57 PM] Interviewee
+like, uh, you guys are developing a technology. Uh, where like, uh, we can avoid, avoid the lot of, uh, like, uh, traffic problems. Like accidents. And it's so it is mostly a specific for the driver, right? So we having a camera on the driver.
+
+[03:57 PM] Interviewee
+As well as we are monitoring the front road as well. Correct.
+
+[03:57 PM] Interviewer 1
+Yeah. So both the
+
+[03:57 PM] Interviewee
+Yeah. So.
+
+[03:57 PM] Interviewer 1
+driver side and the roadside will be there.
+
+[03:57 PM] Interviewee
+Okay. So, uh, one question, is there, are you live feeding or
+
+[03:57 PM] Interviewer 1
+Okay.
+
+[03:57 PM] Interviewee
+you, you are only, uh, sending when, if, let's say some event happen like this guy is sleeping or some vehicle is coming and he's not braking and he suddenly braked, like with G sensor and everything, you guys are calculating. Or if like, uh, other other issues like, uh, the let's.
+
+[03:57 PM] Interviewee
+Say he is using phone or something. So you. I don't think so. You guys will be like live feeding you guys will take those if it AI is working in your cameras, right? So
+
+[03:58 PM] Interviewer 1
+Yeah.
+
+[03:58 PM] Interviewee
+you guys at that time when you guys will detect you will sending the like live streaming. You guys are doing or you are sending that, uh, like snippet of that like picture he is using phone or something.
+
+[03:58 PM] Interviewer 1
+So we have both the things. So we want, uh, in the live view, we have a live stream as well, but
+
+[03:58 PM] Interviewee
+Okay.
+
+[03:58 PM] Interviewer 1
+we don't detect any events on the live stream. It's impossible. I mean, not impossible. I am just it's a waste of things.
+
+[03:58 PM] Interviewee
+Guy needed all the time to see.
+
+[03:58 PM] Interviewer 1
+Yeah, yeah. So that's
+
+[03:58 PM] Interviewee
+Is not possible. Yeah.
+
+[03:58 PM] Interviewer 1
+right. So as you mentioned, we have the events as well. So we will have, a clip videos.
+
+[03:58 PM] Interviewee
+Okay.
+
+[03:58 PM] Interviewer 1
+So let's say 10 to 15 seconds of video. So
+
+[03:58 PM] Interviewee
+Okay.
+
+[03:58 PM] Interviewer 1
+the event is detected. The automatically that 10 to 15 seconds of the video will be clipped. And we will send to.
+
+[03:58 PM] Interviewee
+Okay.
+
+[03:58 PM] Interviewer 1
+Yeah.
+
+[03:58 PM] Interviewee
+So, uh.
+
+[03:58 PM] Interviewee
+Yeah. So like, uh,
+
+[03:58 PM] Interviewer 1
+Yeah.
+
+[03:58 PM] Interviewee
+which take you guys are using like, uh, like technologically what? How you guys are processing and everything. I'm a little interested in that. Like, uh, if you are using TSS, TSS, uh, if like, it is not good for media, right? So you will be going for web, uh. Like, uh, s l live streaming, like, uh, http live streaming, correct.
+
+[03:59 PM] Interviewer 1
+Yeah. Live streaming. We are using the.
+
+[03:59 PM] Interviewee
+Web. Yeah, yeah, that.
+
+[03:59 PM] Interviewer 1
+Yeah, we are using that. So on the those other things, events and all, we will get the data from the SDK team. We have a backend team. So they will process it and they will send it to us and we will feed it in our, system. I mean, our dashboard.
+
+[03:59 PM] Interviewee
+Okay. Uh, so like if,
+
+[03:59 PM] Interviewer 1
+Yeah.
+
+[03:59 PM] Interviewee
+if, let's say, like, uh, you hiring for this guy? So what is his roles and responsibility will be and what you will expecting from the developer, your developer.
+
+[03:59 PM] Interviewer 1
+Roles and responsibilities. So currently we are taking it for a fee. So.
+
+[03:59 PM] Interviewee
+Okay.
+
+[03:59 PM] Interviewer 1
+He should take care of all the fee. And uh, we have a separate server and we have a separate backend team as well. So.
+
+[04:00 PM] Interviewee
+Okay.
+
+[04:00 PM] Interviewer 1
+We are a person we should, uh, take responsibilities on both the fee and, uh, backend as well. We should
+
+[04:00 PM] Interviewee
+Okay.
+
+[04:00 PM] Interviewer 1
+go end to end how it is handling how, what, how the data is passing everything
+
+[04:00 PM] Interviewee
+Okay.
+
+[04:00 PM] Interviewer 1
+. We also should know each and every end. So in future, if any issues comes, we need to debug and we need to analyze everything, right? And.
+
+[04:00 PM] Interviewee
+Okay.
+
+[04:00 PM] Interviewer 1
+That is the.
+
+[04:00 PM] Interviewer 1
+Is we need to do it.
+
+[04:00 PM] Interviewee
+Okay.
+
+[04:00 PM] Interviewer 1
+Yeah.
+
+[04:00 PM] Interviewee
+Okay. So I think that's all from my side. If anything you want to ask.
+
+[04:00 PM] Interviewer 1
+I don't know. I think.
+
+[04:00 PM] Interviewee
+Okay. Thank you. Prasad.
+
+[04:00 PM] Interviewer 1
+Yeah. Thanks.
+
+[04:01 PM] Interviewee
+

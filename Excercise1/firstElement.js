@@ -10,4 +10,4 @@ function firstElement(arr, n) {
   return result;
 }
 
-console.log(firstElement([2, 4, 6, 7], 3));
+console.log(firstElement([2, 4, 6, 7] ,3));

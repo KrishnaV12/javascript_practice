@@ -8,3 +8,6 @@ function chopString(str, n) {
 }
 
 console.log(chopString("vishwakarma", 2));
+
+
+

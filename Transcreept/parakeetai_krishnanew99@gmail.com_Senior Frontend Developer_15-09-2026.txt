@@ -1,0 +1,1529 @@
+ParakeetAI Timeline Export
+Exported: 9/15/2026, 7:38:43 PM
+
+[03:18 PM] Interviewer 1
+At..
+
+[03:18 PM] Interviewer 2
+So what I want you to do is like, whenever I say sale is on, you show the items with the discounted price. And whenever I say sale is off, you go back to the actual prices.
+
+[03:18 PM] AI
+💬 **Question**: How to implement a feature that toggles item prices between discounted and actual prices based on a "sale on" or "sale off" command?
+
+---
+
+⭐️ **Answer**: To implement this feature, I would maintain a state variable to track whether the sale is on or off. When the sale is on, I would display the discounted prices; when off, I would revert to the original prices. This can be done efficiently in React by:
+
+- Using a boolean state, e.g., `isSaleOn`.
+- Conditionally rendering the price based on this state.
+- Updating the state when the "sale on" or "sale off" command is received (e.g., via a button click, voice command, or other event).
+- Ensuring the price data includes both original and discounted prices for each item.
+
+**Example approach:**
+
+```tsx
+// State to track sale status
+const [isSaleOn, setIsSaleOn] = useState(false);
+
+// Sample item data with original and discounted prices
+const items = [
+  { id: 1, name: "Item A", price: 100, discountedPrice: 80 },
+  { id: 2, name: "Item B", price: 200, discountedPrice: 150 },
+];
+
+// Function to toggle sale status
+const toggleSale = (status: "on" | "off") => {
+  setIsSaleOn(status === "on");
+};
+
+// Rendering items with conditional price
+return (
+  <div>
+    <button onClick={() => toggleSale("on")}>Sale On</button>
+    <button onClick={() => toggleSale("off")}>Sale Off</button>
+    <ul>
+      {items.map(item => (
+        <li key={item.id}>
+          {item.name}: ${isSaleOn ? item.discountedPrice : item.price}
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+```
+
+This approach ensures a clear separation of concerns, easy state management, and efficient UI updates. It also aligns with React best practices for state-driven rendering.
+
+If the commands come from voice or external input, I would hook the state update to those event handlers accordingly.
+
+[03:18 PM] Interviewee
+Okay, so you want me to add one more filter?
+
+[03:18 PM] Interviewer 2
+Not filter. I want you to add a discount based on the sale. Whenever I say sale is live or sale is are done, something like that.
+
+[03:18 PM] Interviewee
+Okay.
+
+[03:18 PM] Interviewer 2
+So depending on the different categories, you will be having a different discounts. So you show that discount in the.
+
+[03:18 PM] AI
+💬 **Question**: How to implement dynamic discounts by category that toggle on/off based on "sale live" or "sale done" commands?
+
+---
+
+⭐️ **Answer**: To implement category-based discounts that activate when a sale is live and deactivate when the sale ends, I would:
+
+- Maintain a state variable, e.g., `isSaleLive`, to track if the sale is active.
+- Store discount percentages or amounts mapped by category.
+- When `isSaleLive` is true, calculate and display discounted prices per item based on their category's discount.
+- When `isSaleLive` is false, display the original prices.
+- Update `isSaleLive` state based on commands like "sale live" or "sale done".
+- Ensure the UI updates reactively when the sale status changes.
+
+**Example approach:**
+
+```tsx
+// State to track sale status
+const [isSaleLive, setIsSaleLive] = useState(false);
+
+// Discounts by category
+const categoryDiscounts = {
+  electronics: 0.2, // 20% discount
+  clothing: 0.15,   // 15% discount
+  books: 0.1,       // 10% discount
+};
+
+// Sample items with category and price
+const items = [
+  { id: 1, name: "Laptop", category: "electronics", price: 1000 },
+  { id: 2, name: "T-Shirt", category: "clothing", price: 50 },
+  { id: 3, name: "Novel", category: "books", price: 20 },
+];
+
+// Function to toggle sale status
+const toggleSale = (status: "live" | "done") => {
+  setIsSaleLive(status === "live");
+};
+
+// Calculate price based on sale status and category discount
+const getPrice = (item) => {
+  if (isSaleLive && categoryDiscounts[item.category]) {
+    return (item.price * (1 - categoryDiscounts[item.category])).toFixed(2);
+  }
+  return item.price.toFixed(2);
+};
+
+// Render items with conditional discounted prices
+return (
+  <div>
+    <button onClick={() => toggleSale("live")}>Sale Live</button>
+    <button onClick={() => toggleSale("done")}>Sale Done</button>
+    <ul>
+      {items.map(item => (
+        <li key={item.id}>
+          {item.name}: ${getPrice(item)}
+        </li>
+      ))}
+    </ul>
+  </div>
+);
+```
+
+This approach cleanly separates discount logic by category and toggles pricing based on sale status. It’s scalable for adding more categories or changing discounts dynamically. The UI updates immediately when the sale status changes, providing a seamless user experience.
+
+[03:18 PM] Interviewer 2
+Uh, like each of the item it is there, right? That item thing you can show.
+
+[03:19 PM] Interviewee
+Okay.
+
+[03:19 PM] Interviewer 2
+Depending on the discount that is available.
+
+[03:19 PM] Interviewee
+Okay. So.
+
+[03:19 PM] Interviewee
+Discount available.
+
+[03:19 PM] Interviewer 2
+
+
+[03:19 PM] AI
+💬 **Question**: How to handle and display discounts dynamically based on the available discount for each category when the sale is live or done?
+
+---
+
+⭐️ **Answer**: To handle discounts dynamically based on the available discount per category during a sale, I would:
+
+- Keep a data structure mapping categories to their current discount rates, which can be updated as discounts change.
+- Maintain a state variable to track whether the sale is active or not.
+- When the sale is active, calculate the discounted price for each item using its category’s discount.
+- When the sale ends, revert to showing the original prices.
+- Ensure the discount data can be updated dynamically, for example, fetched from an API or updated via admin input.
+- Display the discounted price alongside the original price (optionally struck through) to clearly communicate the discount to users.
+
+This approach allows flexibility to change discounts per category at any time and reflects those changes immediately in the UI when the sale status toggles.
+
+If needed, I can also implement a UI control or API integration to update the discount values dynamically during the sale.
+
+[03:19 PM] Interviewer 2
+Yeah. Sorry. Go ahead.
+
+[03:19 PM] Interviewer 2
+You are asking something.
+
+[03:19 PM] Interviewee
+Till.
+
+[03:19 PM] Interviewer 2
+Now you are asking something.
+
+[03:19 PM] Interviewee
+Yeah. So like. So I don't mind this little not audible. Just explain me once clearly.
+
+[03:19 PM] Interviewee
+Once again, please.
+
+[03:19 PM] Interviewer 2
+Okay. So I want you to introduce a sale discount in your site. Okay.
+
+[03:19 PM] Interviewee
+Okay.
+
+[03:19 PM] Interviewer 2
+So whenever I say sale is on, you will be getting a discount based on the category. And you will apply those discounts to each and every item. So let's say
+
+[03:20 PM] Interviewee
+Okay.
+
+[03:20 PM] Interviewer 2
+for home, I am giving 10% discount for books. I'm giving 15% discount. So like.
+
+[03:20 PM] Interviewer 2
+Wise, you will get discounts and you will be applying that. Okay.
+
+[03:20 PM] Interviewee
+Okay.
+
+[03:20 PM] Interviewer 2
+Clear till now.
+
+[03:20 PM] Interviewee
+Yeah. But, uh. So you you like little specifically. You tell me like you want a button and like that, uh, like.
+
+[03:20 PM] Interviewee
+So I have to, like, little, uh,
+
+[03:20 PM] Interviewer 3
+
+
+[03:20 PM] Interviewer 2
+See? Right.
+
+[03:20 PM] Interviewee
+do changes in Json also.
+
+[03:20 PM] Interviewer 2
+Correct. Now
+
+[03:20 PM] Interviewee
+Yeah.
+
+[03:20 PM] Interviewer 2
+why will you give button here. So it might be a back end. You can just have a flag in the code right.
+
+[03:20 PM] Interviewee
+Okay.
+
+[03:20 PM] AI
+💬 **Question**: How to implement a sale discount feature that applies category-wise discounts dynamically based on a backend flag, without using a UI button?
+
+---
+
+⭐️ **Answer**: Since the sale status and discounts are controlled by the backend via a flag and discount data (likely in JSON), I would implement the feature as follows:
+
+- Fetch the sale status flag and category-wise discount data from the backend API or configuration JSON.
+- Store this data in React state or context to trigger UI updates.
+- When the sale flag is true (sale is on), apply the corresponding category discounts dynamically to each item’s price.
+- When the sale flag is false (sale is off), show the original prices.
+- Avoid using a UI button to toggle the sale; instead, rely on the backend flag to control the sale state.
+- Use React’s effect hooks (`useEffect`) to listen for changes in the sale flag or discount data and update the UI accordingly.
+- Ensure the discount data structure is flexible to accommodate different categories and discount percentages.
+- Optionally, display both original and discounted prices to clearly communicate the discount to users.
+
+This approach aligns with real-world scenarios where sales and discounts are managed by backend systems and pushed to the frontend, ensuring the UI reflects the current sale state automatically without manual toggles.
+
+If needed, I can demonstrate a sample React snippet showing how to consume such backend flags and discount JSON to update prices dynamically.
+
+[03:20 PM] Interviewer 2
+So that is what I'm expecting from you. I cannot give you a very detailed thing. I want you to come up with something. So I'm saying there might be a sale for your website. Okay. Whenever the sale
+
+[03:20 PM] Interviewee
+Okay. Okay.
+
+[03:20 PM] Interviewer 2
+is on, you will be applying the discount based on the categories. And
+
+[03:20 PM] Interviewee
+Okay.
+
+[03:20 PM] Interviewer 2
+whenever the sale is completed. So you will be removing those discounts. And
+
+[03:21 PM] Interviewee
+Okay.
+
+[03:21 PM] Interviewer 2
+whenever a I discount, it should be coming in each and every item like stripe through it. If it is a 10% discount, stripe through it and show the actual discounted price. Whenever the sale of you fall back to the normal one.
+
+[03:21 PM] Interviewee
+Okay, sure, sure, sure.
+
+[03:21 PM] Interviewer 2
+Yeah.
+
+[03:21 PM] Interviewee
+So.
+
+[03:21 PM] Interviewee
+First, what I will do. I will have some data.
+
+[03:21 PM] Interviewee
+Uh. Which is having a flash sale.
+
+[03:22 PM] Interviewer 2
+Okay.
+
+[03:22 PM] Interviewer 2
+For items.
+
+[03:22 PM] Interviewee
+Yes, I am adding more items. What I will do, uh, the.
+
+[03:22 PM] Interviewee
+Sale price. One sale price will be there. Or if not, then there is like I can put. Okay. Sale is on. So those will be get categorized as per sale in the in the back end. What will happen? The data itself. The API will sell. Okay. This item is on the sale. So that flag I need to add.
+
+[03:22 PM] Interviewer 2
+So that is fine. That is like, I'm not going on item level sale. I'm
+
+[03:22 PM] Interviewee
+Okay.
+
+[03:22 PM] Interviewer 2
+saying depending on the category, you have the categories, right?
+
+[03:22 PM] Interviewee
+Yes, yes.
+
+[03:22 PM] Interviewer 2
+So I'll say for home category, I'll give 10% discount. So for all the
+
+[03:22 PM] Interviewee
+Okay.
+
+[03:22 PM] Interviewer 2
+items which are in home category, it is a 10% discount. Don't
+
+[03:22 PM] Interviewee
+Okay.
+
+[03:22 PM] Interviewer 2
+go an item level.
+
+[03:22 PM] Interviewee
+Okay. Okay,
+
+[03:23 PM] Interviewee
+so let's say book have 10% discount.
+
+[03:23 PM] Interviewee
+And.
+
+[03:24 PM] Interviewee
+
+
+[03:24 PM] Interviewer 2
+Why do you want to add a button? Can you just have a, let's say a state variable or something.
+
+[03:24 PM] AI
+💬 **Question**: Why not use a button to toggle the sale discount, and how to implement sale discounts dynamically without a UI button?
+
+---
+
+⭐️ **Answer**: I wouldn’t add a button to toggle the sale because the sale state should be controlled by the backend or a global state, not manually by the user. Instead, I would use a state variable in React that reflects the sale status, which is fetched from the backend API or a configuration. This way, the sale discount applies automatically when the backend signals the sale is active, and it’s removed when the sale ends.
+
+- The backend provides a flag indicating if the sale is on or off, plus a mapping of categories to discount percentages.
+- On the frontend, I store this sale flag and discount data in state or context.
+- When rendering items, I check if the sale is active and apply the discount based on the item’s category.
+- I display the original price with a strikethrough and the discounted price next to it.
+- When the sale flag is false, I simply render the original prices without discounts.
+- This approach avoids manual toggling and ensures the UI always reflects the current sale status automatically.
+
+This method aligns with best practices for dynamic pricing and keeps the UI consistent with backend-driven business logic.
+
+[03:24 PM] Interviewer 2
+Can you hear me?
+
+[03:24 PM] Interviewee
+Yes, yes, I can hear you.
+
+[03:24 PM] Interviewer 2
+Why you want to add a button? So for the user facing you will be not showing any button, right? You can
+
+[03:24 PM] Interviewee
+Okay.
+
+[03:24 PM] Interviewer 2
+have it in the local state itself.
+
+[03:24 PM] Interviewee
+So, like, uh, like we.
+
+[03:24 PM] Interviewer 2
+Your approach. I don't want to comment on it, but yeah.
+
+[03:24 PM] AI
+💬 **Question**: Why add a button for sale discount toggling when it can be handled in local state without user-facing controls?
+
+---
+
+⭐️ **Answer**: I understand that adding a button for toggling sale discounts on the user-facing UI is unnecessary and could confuse users. Instead, I would manage the sale state internally within the component’s local state or a global state management solution like Redux or React Context. This state would be updated based on backend data indicating whether a sale is active or not.
+
+- The sale flag and discount percentages come from the backend API.
+- The frontend listens for these changes and updates the local state accordingly.
+- UI components render prices dynamically based on this state without exposing any toggle controls to users.
+- This keeps the UI clean and ensures discounts are applied consistently and automatically.
+- It also aligns with best practices for separating business logic (backend) from presentation (frontend).
+
+This approach avoids manual toggling and ensures the sale logic is transparent and reliable for users.
+
+[03:24 PM] Interviewee
+I think little, like I'm confused about it. Like, okay, books have their pricing and there is one sale pricing. Is there. Okay. So you want me to like sale is on. So you want me to like, if I go to the book, it will show a sale price. Like, like the offer price. Correct. So
+
+[03:25 PM] Interviewer 2
+Correct.
+
+[03:25 PM] Interviewee
+how, how you want me to like demonstrate a sale is on. So let's.
+
+[03:25 PM] Interviewer 2
+See right now how we are rendering all the items. You have a list of items in a, in a single file, right. So.
+
+[03:25 PM] Interviewee
+So. Yeah. Yes.
+
+[03:25 PM] Interviewer 2
+Add add a sale discount to a single file. You.
+
+[03:25 PM] AI
+💬 **Question**: How to demonstrate applying a sale discount to a list of items rendered in a single file?
+
+---
+
+⭐️ **Answer**: To demonstrate a sale discount in a single file rendering a list of items, I would:
+
+- Maintain a sale discount percentage in a state variable or a constant within the file.
+- Iterate over the list of items, each having a category and original price.
+- For each item, check if its category matches the sale category.
+- If yes, calculate the discounted price by applying the sale percentage.
+- Render the item’s original price with a strikethrough and show the discounted price next to it.
+- If the item is not in the sale category, render the original price normally.
+- Optionally, add a label or badge like “Sale” to highlight discounted items.
+
+This approach keeps all logic in one file for demonstration, clearly showing how the sale discount affects item prices dynamically during rendering. It also aligns with React best practices by using state or props to control UI changes.
+
+[03:25 PM] Interviewer 2
+Can later move it to API if you want.
+
+[03:25 PM] Interviewer 2
+Correct.
+
+[03:25 PM] Interviewee
+Okay.
+
+[03:25 PM] Interviewer 2
+See, it is. Your implementation only. You have all the items in a particular. File. You have a Json object of list of all the items. Likewise, you can have.
+
+[03:25 PM] Interviewee
+Okay.
+
+[03:25 PM] Interviewer 2
+Whenever the sale is on, you will. You'll get a hidden API saying like get all the category discount prices that you can have in a file and implement it.
+
+[03:25 PM] Interviewee
+Yeah. So that is what I'm thinking. Like how I will enable the sale because because backend will tell the sale is on and anything.
+
+[03:26 PM] AI
+💬 **Question**: How to implement sale discounts dynamically in a single file with a JSON list of items and category-based discount data, simulating an API response?
+
+---
+
+⭐️ **Answer**: To implement sale discounts dynamically in a single file with a JSON list of items and category discount data (simulating an API response), I would:
+
+- Define a JSON object or array representing the list of items, each with properties like id, name, category, and original price.
+- Define another JSON object simulating the API response for category discounts, mapping categories to discount percentages.
+- Store the category discount data in a state variable or constant to simulate fetching from an API.
+- When rendering the list, for each item:
+  - Check if its category exists in the discount data.
+  - If yes, calculate the discounted price by applying the discount percentage.
+  - Render the original price with a strikethrough and the discounted price next to it.
+  - If no discount applies, render the original price normally.
+- Optionally, add a "Sale" badge or highlight discounted items for better UX.
+- This logic can be encapsulated in a React component that maps over the items and applies discounts based on the simulated API data.
+
+This approach keeps the implementation self-contained for demonstration but easily extensible to real API integration later. It also clearly separates item data from discount logic, making the code maintainable and scalable.
+
+[03:26 PM] Interviewer 2
+So you already.
+
+[03:26 PM] Interviewer 2
+Did. These items, keeping it in a file. I'll expect you to implement in that way only. No.
+
+[03:26 PM] AI
+💬 **Question**: Should I implement the sale discount feature by keeping all items and discount data in a single file as currently done?
+
+---
+
+⭐️ **Answer**: Yes, I will implement the sale discount feature by keeping all the items and the discount data in a single file, as you expect. I will simulate the backend API response for category discounts within that file, using a JSON object or state to represent the discount data. Then, I will render the list of items applying the discount dynamically based on the category discount mapping. This approach keeps the implementation simple and self-contained for demonstration, and it can be easily refactored later to fetch real data from an API.
+
+[03:26 PM] Interviewee
+This all the files.
+
+[03:26 PM] Interviewer 2
+That's what.
+
+[03:26 PM] Interviewer 2
+Okay. Are you assume the things uh. It's fine. I just want to see your approach, how you want to implement it. It's fine. Whatever the approach you take.
+
+[03:26 PM] Interviewee
+Okay.
+
+[03:27 PM] Interviewee
+
+
+[03:27 PM] Interviewee
+This one I can do so like say.
+
+[03:27 PM] Interviewee
+Categorize as a sale. Uh.
+
+[03:27 PM] Interviewee
+Like in category. If you go in the cell section, like, okay, some sale item. Is there. So, uh, this.
+
+[03:28 PM] Interviewer 2
+I think you are getting it completely wrong. Okay, I'll
+
+[03:28 PM] Interviewee
+Okay.
+
+[03:28 PM] Interviewer 2
+, uh.
+
+[03:28 PM] Interviewer 2
+Tell you. Okay. You have the categories. Okay
+
+[03:28 PM] Interviewee
+Okay.
+
+[03:28 PM] Interviewer 2
+.
+
+[03:28 PM] Interviewer 2
+Okay. Whenever you know, Amazon sale. Flipkart sale. Right.
+
+[03:28 PM] Interviewee
+Yes, yes.
+
+[03:28 PM] Interviewer 2
+What happens during that sale? There will be same item on the discounted prices.
+
+[03:28 PM] Interviewee
+Yes.
+
+[03:28 PM] AI
+💬 **Question**: How to implement a sale discount system where the backend provides category-based discount percentages dynamically, and the frontend applies these discounts to items in those categories during a sale?
+
+---
+
+⭐️ **Answer**: I understand that during a sale event like Amazon or Flipkart sales, the backend sends discount information per category, and the frontend needs to apply these discounts dynamically to items in those categories.
+
+To implement this:
+
+- I will keep a JSON list of all items in a single file, each with properties like id, name, category, and original price.
+- I will simulate the backend API response as a JSON object mapping categories to discount percentages (e.g., `{ "electronics": 20, "clothing": 15 }`).
+- When rendering the items, I will check if the item's category exists in the discount mapping.
+- If yes, I will calculate the discounted price by applying the discount percentage to the original price.
+- I will render the original price with a strikethrough and show the discounted price prominently.
+- If the category has no discount, I will render the original price normally.
+- This logic will be encapsulated in a React component that maps over the items and applies discounts dynamically based on the simulated API data.
+- This approach keeps the implementation self-contained and clear, and it can be easily extended to fetch real discount data from an API later.
+
+This method aligns with the expected approach of having all data and logic in one file for demonstration, while accurately reflecting how sales discounts are applied dynamically based on backend data.
+
+[03:28 PM] Interviewer 2
+Correct. Now, let's
+
+[03:28 PM] Interviewee
+Yes.
+
+[03:28 PM] Interviewer 2
+say whenever the sale is on, you set a variable in your local
+
+[03:28 PM] Interviewee
+Okay.
+
+[03:28 PM] Interviewer 2
+, let's say sale is on. When that variable is on to try to fetch the API
+
+[03:28 PM] Interviewee
+Okay.
+
+[03:28 PM] Interviewer 2
+. What. What will the API give? Is for books, there will be 10% discount clothing. 15 electronics, 20 that it will. Okay. Use
+
+[03:28 PM] Interviewee
+Okay.
+
+[03:28 PM] Interviewer 2
+that. Thing and in your items. If that item belongs to books, give a 10% discount on the price.
+
+[03:28 PM] Interviewee
+Okay.
+
+[03:28 PM] AI
+💬 **Question**: How to implement a sale feature where a local variable indicates if the sale is on, and the frontend fetches category-based discount percentages from an API to apply discounts dynamically to items?
+
+---
+
+⭐️ **Answer**: To implement this sale feature:
+
+- I would maintain a local state variable, for example `isSaleOn`, which indicates whether the sale is active.
+- When `isSaleOn` is true, I would simulate fetching the discount data from an API that returns a mapping of categories to discount percentages, e.g., `{ books: 10, clothing: 15, electronics: 20 }`.
+- This discount data can be stored in a state variable, say `categoryDiscounts`.
+- When rendering the list of items, for each item, I would check if its category exists in `categoryDiscounts`.
+- If yes, I calculate the discounted price by applying the discount percentage to the original price.
+- I display both the original price (with strikethrough) and the discounted price prominently.
+- If the sale is not on (`isSaleOn` is false), I simply render the original prices without any discount.
+- This logic can be implemented in a React component using hooks like `useState` and `useEffect` to simulate the API call when the sale status changes.
+- Keeping all item data and discount logic in a single file for this demo makes it easy to manage and test.
+
+This approach ensures that the sale discounts are applied dynamically based on the backend-provided category discounts whenever the sale is active.
+
+[03:28 PM] Interviewer 2
+Do that.
+
+[03:28 PM] Interviewee
+Okay. So, okay, I'll repeat you again. Uh.
+
+[03:28 PM] Interviewee
+Fine. So.
+
+[03:29 PM] Interviewer 2
+I don't want you to introduce a new category
+
+[03:29 PM] Interviewee
+Okay.
+
+[03:29 PM] Interviewer 2
+. Existing categories only you do it.
+
+[03:29 PM] Interviewer 2
+And whenever I say API, if you don't have the API, you can put it in some like, uh, sale dot Json and get those.
+
+[03:29 PM] Interviewee
+
+
+[03:29 PM] Interviewer 2
+Have any questions?
+
+[03:29 PM] Interviewee
+Uh, no. Not. So. Uh. Like what I will do here. Uh. So.
+
+[03:29 PM] Interviewee
+So I'm a little confused in this part is like, okay, the sale is on. Uh.
+
+[03:29 PM] Interviewee
+How you want that? Like any, when we have to enable, right? We don't have anything. So.
+
+[03:29 PM] Interviewer 2
+Enable it. That is fine. You can enable and disable that variable
+
+[03:29 PM] Interviewee
+Okay. MM.
+
+[03:29 PM] Interviewer 2
+manually.
+
+[03:29 PM] Interviewee
+Okay.
+
+[03:29 PM] Interviewee
+So like I will say, okay, sale is on. So, uh, like this, all the cards I have, like, let's say the products I will have a sale price. Then I will replace this price with the sale price. Correct.
+
+[03:30 PM] Interviewer 2
+Correct.
+
+[03:30 PM] Interviewee
+Yeah.
+
+[03:30 PM] Interviewee
+Okay.
+
+[03:30 PM] Interviewee
+The sale is on sale.
+
+[03:30 PM] Interviewee
+Jason. I mean.
+
+[03:30 PM] Interviewee
+
+
+[03:34 PM] AI
+💬 **Question**: How to implement the sale toggle logic in the `ProductCard` component to conditionally display the sale price based on the `sale` status in `product.json`.
+
+---
+
+⭐️ **Answer**: To implement this, I will update the `ProductCard` component to check the `sale` property of the product object. If `sale === "on"`, I will render the `salePrice` instead of the original `price`, and optionally apply a strikethrough style to the original price to highlight the discount.
+
+**🔑 Key Steps**:
+*   **Conditional Rendering**: In the `ProductCard` component, check if `product.sale === "on"`.
+*   **Price Display**: If the sale is active, display the `salePrice` as the primary price and show the original `price` with a `text-decoration: line-through` style.
+*   **Fallback**: If the sale is not active, simply display the original `price`.
+*   **Data Handling**: Since the `product.json` already contains the `sale` status and `salePrice` for each item, I will use these fields directly to drive the UI.
+
+**💻 Code**:
+```jsx
+// Inside ProductCard.jsx
+const ProductCard = ({ product }) => {
+  const isSaleActive = product.sale === "on";
+
+  return (
+    <div className="product-card">
+      <h3>{product.name}</h3>
+      <div className="price-container">
+        {isSaleActive ? (
+          <>
+            {/* Display discounted price */}
+            <span className="sale-price">${product.salePrice}</span>
+            {/* Strikethrough original price */}
+            <span className="original-price" style={{ textDecoration: 'line-through' }}>
+              ${product.price}
+            </span>
+          </>
+        ) : (
+          // Display standard price
+          <span className="price">${product.price}</span>
+        )}
+      </div>
+    </div>
+  );
+};
+```
+
+**💡 Explanation**:
+*   **Efficiency**: By leveraging the existing data structure in `product.json`, I avoid unnecessary API calls or complex state management for individual items.
+*   **UX**: Using a strikethrough for the original price provides immediate visual feedback to the user that a discount is being applied.
+*   **Maintainability**: This approach is declarative and keeps the UI logic tightly coupled with the data model, making it easy to toggle the sale status globally or per item by simply updating the JSON data.
+
+[03:35 PM] AI
+💬 **Question**: Fixing the "Unexpected token" error in `filtersSlice.jsx` by correctly implementing the `saleToggle` reducer.
+
+---
+
+⭐️ **Answer**: The error is occurring because the `saleToggle` reducer in `filtersSlice.jsx` is currently empty and syntactically incomplete, causing a parsing error. To fix this, I need to define the reducer function properly. Since this is a global filter slice, I should add a boolean state property (e.g., `showSaleOnly`) to the `initialState` and update it via the `saleToggle` reducer.
+
+**🔑 Key Steps**:
+*   **Update State**: Add `showSaleOnly: false` to the `initialState` object.
+*   **Implement Reducer**: Define `saleToggle` to flip the `showSaleOnly` boolean value.
+*   **Syntax Correction**: Ensure the function body is properly enclosed in curly braces.
+
+**💻 Code**:
+```javascript
+// src/features/filtersSlice.jsx
+
+const initialState = { 
+  category: "All", 
+  minRating: 0, 
+  sort: "none",
+  showSaleOnly: false // Added state property
+};
+
+const filtersSlice = createSlice({
+  name: "filters",
+  initialState,
+  reducers: {
+    setCategory: (s, a) => { s.category = a.payload; },
+    setMinRating: (s, a) => { s.minRating = a.payload; },
+    setSort: (s, a) => { s.sort = a.payload; },
+    // Correctly implemented reducer
+    saleToggle: (s) => {
+      s.showSaleOnly = !s.showSaleOnly;
+    },
+    resetFilters: () => initialState,
+  },
+});
+```
+
+**💡 Explanation**:
+*   **State Management**: By adding `showSaleOnly` to the global slice, I can easily filter the product list in the `ProductGrid` or `ProductCard` components by checking this flag against the `product.sale` status.
+*   **Redux Toolkit**: Using `createSlice` allows me to mutate the state directly (thanks to Immer), so `s.showSaleOnly = !s.showSaleOnly` is the clean, idiomatic way to handle this toggle.
+*   **Error Resolution**: The "Unexpected token" error was caused by the trailing comma and lack of a function body for `saleToggle`; providing the implementation resolves the build error immediately.
+
+[03:37 PM] AI
+💬 **Question**: Resolving the "Unexpected token" and "saleToggle is not defined" errors in `filtersSlice.jsx`.
+
+---
+
+⭐️ **Answer**: The errors are occurring because the `saleToggle` action is being referenced in your components but hasn't been properly exported or defined within the `filtersSlice.jsx` file. To fix this, you need to ensure the reducer is defined inside `createSlice` and that the corresponding action is exported.
+
+**🔑 Key Steps**:
+*   **Define the Reducer**: Add the `saleToggle` function inside the `reducers` object in `filtersSlice.jsx`.
+*   **Export the Action**: Ensure `saleToggle` is destructured from `filtersSlice.actions` and exported.
+*   **Fix Syntax**: The "Unexpected token" error usually stems from a missing comma or an improperly closed object/function block in the slice definition.
+
+**💻 Code**:
+```javascript
+// src/features/filtersSlice.jsx
+
+const filtersSlice = createSlice({
+  name: "filters",
+  initialState: { 
+    category: "All", 
+    showSaleOnly: false // Ensure this state exists
+  },
+  reducers: {
+    // ... other reducers
+    saleToggle: (state) => {
+      state.showSaleOnly = !state.showSaleOnly;
+    },
+  },
+});
+
+// Export the action so it can be imported in your components
+export const { setCategory, saleToggle } = filtersSlice.actions;
+export default filtersSlice.reducer;
+```
+
+**💡 Explanation**:
+*   **Redux Toolkit Pattern**: When you use `createSlice`, it automatically generates action creators for every function defined in the `reducers` object. If you try to dispatch `saleToggle` without exporting it from the slice file, Redux will throw a "not defined" error.
+*   **Parsing Error**: The "Unexpected token" at line 20 likely indicates a syntax error—check for a missing comma after the previous reducer or an unclosed brace.
+*   **Debugging Tip**: Always check the `export` statement at the bottom of your slice file to ensure the new action is included in the destructuring assignment.
+
+[03:38 PM] AI
+💬 **Question**: Fixing the "Unexpected token" and "saleToggle is not defined" errors in `filtersSlice.jsx`.
+
+---
+
+⭐️ **Answer**: The errors are occurring because the `saleToggle` reducer is incomplete and not exported. You have a syntax error on line 18 where the function body is not properly closed, and you haven't added `saleToggle` to your `export` statement on line 25.
+
+**🔑 Key Steps**:
+*   **Fix Syntax**: Ensure the `saleToggle` function body is correctly closed with a closing brace `}`.
+*   **Update Exports**: Add `saleToggle` to the destructuring assignment in the `export const` statement on line 25.
+*   **Verify State**: Ensure `showSaleOnly` is defined in your `initialState` object at the top of the file.
+
+**💻 Code**:
+```javascript
+// src/features/filtersSlice.jsx
+
+const initialState = { category: "All", minRating: 0, sort: "none", showSaleOnly: false };
+
+const filtersSlice = createSlice({
+  name: "filters",
+  initialState,
+  reducers: {
+    setCategory: (s, a) => { s.category = a.payload; },
+    setMinRating: (s, a) => { s.minRating = a.payload; },
+    setsort: (s, a) => { s.sort = a.payload; },
+    // Corrected function syntax
+    saleToggle: (s) => {
+      s.showSaleOnly = !s.showSaleOnly;
+    },
+    resetFilters: () => initialState,
+  },
+});
+
+// Added saleToggle to the export
+export const { setCategory, setMinRating, setsort, saleToggle, resetFilters } = filtersSlice.actions;
+export default filtersSlice.reducer;
+```
+
+**💡 Explanation**:
+*   **Parsing Error**: The "Unexpected token" error at line 20 was likely caused by the incomplete function definition on line 18. Redux Toolkit requires the reducer function to be fully enclosed within the `reducers` object.
+*   **"Not Defined" Error**: This occurs because your component is trying to import `saleToggle` from this file, but since it wasn't included in the `export const` line, the build tool cannot find it.
+*   **State Management**: By adding `showSaleOnly` to `initialState`, you ensure the Redux store is initialized with the correct boolean value, preventing undefined errors when the app first loads.
+
+[03:40 PM] AI
+💬 **Question**: Fixing the "saleToggle is not defined" error in `Header.jsx`.
+
+---
+
+⭐️ **Answer**: The error occurs because `saleToggle` is being used in `Header.jsx` but has not been imported from your Redux slice. You need to import the action creator at the top of your `Header.jsx` file.
+
+**🔑 Key Steps**:
+*   **Import the Action**: Add `saleToggle` to the import statement that brings in your actions from `../features/filtersSlice`.
+*   **Verify Dispatch**: Ensure that `useDispatch` is initialized in your component so that `dispatch(saleToggle())` can successfully trigger the state change.
+
+**💻 Code**:
+```javascript
+// src/components/Header.jsx
+
+// 1. Add saleToggle to your existing import from filtersSlice
+import { resetFilters, saleToggle } from '../features/filtersSlice';
+import { useDispatch } from 'react-redux';
+
+export default function Header({ onOpenFavorites }) {
+  const dispatch = useDispatch();
+
+  // ... existing code
+
+  return (
+    // ... existing JSX
+    <button
+      type="button"
+      className="link-btn"
+      onClick={() => dispatch(saleToggle())} // Now this will work
+    >
+      SaleToggle
+    </button>
+  );
+}
+```
+
+**💡 Explanation**:
+*   **ESLint Error**: The `no-undef` error indicates that the JavaScript engine doesn't recognize `saleToggle` within the scope of `Header.jsx`. Even if you exported it correctly from `filtersSlice.jsx` (as we addressed previously), it must be explicitly imported into any component that uses it.
+*   **Redux Flow**: In Redux Toolkit, actions are generated automatically by `createSlice`. To use them in a component, you must import the specific action creator from the slice file and pass it into the `dispatch` function.
+
+[03:42 PM] Interviewee
+Jason. If I toggle is true.
+
+[03:42 PM] Interviewee
+Sale is true. The sale price was it come.
+
+[03:42 PM] You
+if in json sale is true then show salePrize
+
+[03:42 PM] AI
+💬 **Question**: How to conditionally show `salePrice` if `sale` is true in JSON data.
+
+---
+
+⭐️ **Answer**: To show `salePrice` only when `sale` is true in your JSON data, you can use conditional rendering in React. For example, if you have an object like `{ sale: true, salePrice: 100 }`, you check the `sale` property and render `salePrice` accordingly.
+
+Here’s how you can do it:
+
+```jsx
+{item.sale && <span>{item.salePrice}</span>}
+```
+
+This means: if `item.sale` is true, then render the `salePrice` inside a `<span>`. Otherwise, render nothing.
+
+If you want to show a fallback or the regular price when `sale` is false, you can do:
+
+```jsx
+{item.sale ? <span>{item.salePrice}</span> : <span>{item.regularPrice}</span>}
+```
+
+This approach ensures your UI only shows the sale price when the sale flag is true.
+
+If you want me to help with a specific code snippet or component, I can tailor it to your current setup.
+
+[03:42 PM] AI
+💬 **Question**: How to conditionally render the `salePrize` in your `ProductCard` component based on the `sale` boolean.
+
+---
+
+⭐️ **Answer**: Since your `product.json` uses the key `salePrize` (note the 'z'), you need to check the `sale` boolean and conditionally render the price. You should also apply a strikethrough style to the original `price` when an item is on sale to make the UI clear.
+
+**🔑 Key Steps**:
+*   **Conditional Logic**: Use a ternary operator or logical AND (`&&`) to check `product.sale`.
+*   **Styling**: Wrap the original `price` in a class that applies `text-decoration: line-through` when `sale` is true.
+*   **Data Access**: Ensure you are accessing `product.salePrize` and `product.price` correctly from your mapped data.
+
+**💻 Code**:
+```jsx
+// Inside your ProductCard component
+<div className="price-container">
+  {product.sale ? (
+    <>
+      {/* Show sale price */}
+      <span className="sale-price">${product.salePrize}</span>
+      {/* Strikethrough original price */}
+      <span className="original-price" style={{ textDecoration: 'line-through' }}>
+        ${product.price}
+      </span>
+    </>
+  ) : (
+    // Show regular price
+    <span className="regular-price">${product.price}</span>
+  )}
+</div>
+```
+
+**💡 Explanation**:
+*   **Conditional Rendering**: The ternary operator `product.sale ? (...) : (...)` is the cleanest way to handle two distinct UI states (on-sale vs. regular).
+*   **UX Best Practice**: Simply showing the `salePrize` isn't enough; showing the original `price` with a strikethrough provides visual context for the discount, which is standard for e-commerce platforms like the one you are building.
+*   **Typo Check**: Your JSON data specifically uses `salePrize` (with a 'z'). Ensure your component code matches this key exactly, or you will receive `undefined` values in your UI.
+
+[03:43 PM] AI
+💬 **Question**: Fixing the "saleToggle is not defined" error in `Header.jsx`.
+
+---
+
+⭐️ **Answer**: The error `no-undef` in your terminal confirms that `saleToggle` is being used in `Header.jsx` but hasn't been imported. You need to import the action creator from your `filtersSlice.js` file at the top of `Header.jsx`.
+
+**🔑 Key Steps**:
+*   **Import the Action**: Add `saleToggle` to the import statement for your `filtersSlice`.
+*   **Verify Dispatch**: Ensure `useDispatch` is imported from `react-redux` and initialized inside your component.
+
+**💻 Code**:
+```javascript
+// src/components/Header.jsx
+
+// 1. Import saleToggle from your slice
+import { resetFilters, saleToggle } from '../features/filtersSlice';
+import { useDispatch } from 'react-redux';
+
+export default function Header({ onOpenFavorites }) {
+  const dispatch = useDispatch();
+
+  // ... existing code
+
+  return (
+    // ... existing JSX
+    <button
+      type="button"
+      className="link-btn"
+      onClick={() => dispatch(saleToggle())} // Now this will work
+    >
+      SaleToggle
+    </button>
+  );
+}
+```
+
+**💡 Explanation**:
+*   **Scope Issue**: Even if `saleToggle` is exported from `filtersSlice.js`, it is not automatically available in other files. You must explicitly import it to bring it into the scope of `Header.jsx`.
+*   **Redux Flow**: In Redux Toolkit, `createSlice` automatically generates action creators. Importing them and passing them to `dispatch()` is the standard way to trigger state updates in your components.
+
+[03:43 PM] You
+how i will toggle that json
+
+[03:43 PM] AI
+💬 **Question**: How to toggle a boolean value (like `sale`) in JSON data within a React app.
+
+---
+
+⭐️ **Answer**: To toggle the `sale` boolean in your JSON data, you typically keep the data in React state and update it with a toggle function. Here’s how you can do it:
+
+- Store your JSON data in a state variable using `useState`.
+- Create a toggle function that updates the `sale` property for the relevant item.
+- Use this function on a button or event handler to flip the `sale` value from `true` to `false` or vice versa.
+
+**🔑 Key Steps**:
+1. Initialize state with your JSON data:
+   ```jsx
+   const [products, setProducts] = useState(initialProductsJson);
+   ```
+2. Create a toggle function that updates the `sale` property for a product by id or index:
+   ```jsx
+   const toggleSale = (productId) => {
+     setProducts((prevProducts) =>
+       prevProducts.map((product) =>
+         product.id === productId
+           ? { ...product, sale: !product.sale }
+           : product
+       )
+     );
+   };
+   ```
+3. Use this function in your component, e.g., on a button click:
+   ```jsx
+   <button onClick={() => toggleSale(product.id)}>Toggle Sale</button>
+   ```
+
+This approach updates the React state immutably, triggering a re-render and reflecting the toggled `sale` value in your UI.
+
+If you want me to help with a specific code snippet or integration in your current component, I can provide that as well.
+
+[03:45 PM] AI
+💬 **Question**: How to fix the `saleToggle` is not defined error and correctly export it from your Redux slice.
+
+---
+
+⭐️ **Answer**: You are currently missing `saleToggle` in your export statement at the bottom of `filtersSlice.jsx`. Because it isn't exported, `Header.jsx` cannot import it, leading to the `no-undef` error.
+
+**🔑 Key Steps**:
+*   **Update Exports**: Add `saleToggle` to the destructuring assignment in your `export const` line.
+*   **Update Header**: Ensure `Header.jsx` imports `saleToggle` from `../features/filtersSlice`.
+
+**💻 Code**:
+
+In `src/features/filtersSlice.jsx`:
+```javascript
+// Update the export line at the bottom of the file
+export const { 
+  setCategory, 
+  setMinRating, 
+  setSort, 
+  resetFilters, 
+  saleToggle // Add this here
+} = filtersSlice.actions;
+```
+
+In `src/components/Header.jsx`:
+```javascript
+// Ensure your import looks like this
+import { saleToggle } from '../features/filtersSlice';
+
+// Then use it in your component
+const handleSaleToggle = () => {
+  dispatch(saleToggle());
+};
+```
+
+**💡 Explanation**:
+*   **Redux Toolkit Exports**: When you define a reducer in `createSlice`, the corresponding action creator is automatically generated and attached to `filtersSlice.actions`. You must explicitly export these actions so they can be used in your UI components.
+*   **ESLint Error**: The `no-undef` error occurs because the compiler sees you calling `saleToggle()` in `Header.jsx`, but since it wasn't exported from your slice, it doesn't exist in the scope of that file. Adding it to the export list resolves the reference.
+
+[03:47 PM] AI
+💬 **Question**: How to correctly export the `saleToggle` action from your Redux slice.
+
+---
+
+⭐️ **Answer**: You have defined the `saleToggle` reducer, but it is missing from your export statement on line 25. Because it isn't exported, your components cannot access or dispatch this action.
+
+**🔑 Key Steps**:
+*   **Update the Export**: Add `saleToggle` to the destructuring assignment on line 25.
+*   **Verify State**: Ensure your `initialState` (defined on line 3) includes the `showSaleOnly` property so that the toggle has a default boolean value to flip.
+
+**💻 Code**:
+
+```javascript
+// Update line 25 in src/features/filtersSlice.jsx
+export const { 
+  setCategory, 
+  setMinRating, 
+  setSort, 
+  resetFilters, 
+  saleToggle // Add this here
+} = filtersSlice.actions;
+```
+
+**💡 Explanation**:
+*   **Redux Toolkit Exports**: When you use `createSlice`, the actions are generated automatically and attached to `filtersSlice.actions`. You must explicitly export them to use them in your `Header.jsx` or other components.
+*   **Initial State**: Since you are toggling `s.showSaleOnly`, make sure your `initialState` object at the top of the file looks like this: `const initialState = { category: "All", minRating: 0, sort: "none", showSaleOnly: false };`. If `showSaleOnly` is missing from the initial state, the toggle will result in `undefined` values.
+
+[03:48 PM] You
+once i have toggle sale it should show sale true item only with salePrize
+
+[03:48 PM] AI
+💬 **Question**: How to filter and display only items with sale true and show their salePrice after toggling sale filter.
+
+---
+
+⭐️ **Answer**: After toggling the sale filter (`showSaleOnly`), you should filter your product list to include only items where `sale` is true. Then, in your UI, display the `salePrice` for those filtered items.
+
+To implement this:
+
+- In your Redux slice, ensure `showSaleOnly` is toggled correctly.
+- In your component where you render the product list, apply a filter like:
+  ```js
+  const filteredItems = items.filter(item => !showSaleOnly || item.sale === true);
+  ```
+  This means if `showSaleOnly` is true, only items with `sale === true` are shown; otherwise, all items are shown.
+- When rendering each item, check if `item.sale` is true, then display `item.salePrice` instead of the regular price.
+
+This approach ensures that toggling the sale filter dynamically updates the displayed list to only show sale items with their sale prices.
+
+If you want, I can help you with the exact code snippet for your React component or Redux selector.
+
+[03:48 PM] AI
+💬 **Question**: How to implement the logic to filter products by sale status and display the sale price.
+
+---
+
+⭐️ **Answer**: To achieve this, you need to update your `initialState` in `filtersSlice.jsx` to include `showSaleOnly`, and then update your component logic (likely in `ProductGrid.jsx` or wherever you map your products) to conditionally filter and display the price.
+
+**🔑 Key Steps**:
+*   **Update State**: Add `showSaleOnly: false` to your `initialState` in `filtersSlice.jsx`.
+*   **Filter Logic**: In your component, use the `showSaleOnly` selector to filter the array before mapping.
+*   **Conditional Rendering**: Use a ternary operator to show `salePrize` if `item.sale` is true, otherwise show the original `price`.
+
+**💻 Code**:
+
+```javascript
+// 1. Update initialState in filtersSlice.jsx
+const initialState = { category: "All", minRating: 0, sort: "none", showSaleOnly: false };
+
+// 2. In your Product component (e.g., ProductCard.jsx)
+const { showSaleOnly } = useSelector((state) => state.filters);
+
+// 3. Filter logic before mapping
+const displayProducts = products.filter(item => !showSaleOnly || item.sale);
+
+// 4. Rendering the price
+<div>
+  {item.sale ? (
+    <span>Sale Price: ${item.salePrize}</span>
+  ) : (
+    <span>Price: ${item.price}</span>
+  )}
+</div>
+```
+
+**💡 Explanation**:
+*   **State Management**: By adding `showSaleOnly` to the initial state, you ensure the Redux store tracks the toggle correctly.
+*   **Filtering**: The filter `!showSaleOnly || item.sale` is a clean way to say: "If the toggle is off, show everything; if it's on, only show items where `sale` is true."
+*   **UI Logic**: Using a ternary operator (`item.sale ? ... : ...`) inside your JSX allows you to dynamically switch between the original price and the sale price based on the item's data.
+
+[03:50 PM] AI
+💬 **Question**: How to correctly filter the product list based on the `showSaleOnly` state from Redux.
+
+---
+
+⭐️ **Answer**: Since you are using `useInfiniteProducts()` in `App.jsx`, you need to apply the filter to the `items` array *after* it is returned from your hook. You should select the `showSaleOnly` state from your Redux store and then filter the `items` array before passing it to your product grid.
+
+**🔑 Key Steps**:
+*   **Select State**: Use `useSelector` to get `showSaleOnly` from your `filtersSlice`.
+*   **Filter Data**: Create a derived variable that filters the `items` array based on the `showSaleOnly` boolean.
+*   **Pass to Grid**: Pass this filtered array to your `ProductGrid` component instead of the raw `items` array.
+
+**💻 Code**:
+
+```javascript
+// 1. Inside App.jsx, import useSelector
+import { useSelector } from 'react-redux';
+
+// 2. Inside your component function
+const { showSaleOnly } = useSelector((state) => state.filters);
+
+// 3. Filter the items before rendering
+const filteredItems = items?.filter(item => !showSaleOnly || item.sale === true);
+
+// 4. Use filteredItems in your render logic
+// Example:
+<ProductGrid items={filteredItems} />
+```
+
+**💡 Explanation**:
+*   **Derived State**: It is best practice to keep your raw data (`items`) intact and create a "derived" version (`filteredItems`) for the UI. This ensures that if you turn the filter off, you still have access to the full list.
+*   **Safety Check**: I added `items?.filter` (optional chaining) to prevent errors if `items` is null or undefined while the infinite scroll is still fetching the initial data.
+*   **Logic**: The condition `!showSaleOnly || item.sale === true` acts as a toggle: if `showSaleOnly` is `false`, the first part of the `||` is `true`, so all items pass. If it is `true`, it only returns items where `item.sale` is `true`.
+
+[03:55 PM] Interviewee
+So can you hear me?
+
+[03:55 PM] Interviewer 2
+Yes. Yes.
+
+[03:55 PM] Interviewee
+Uh, yeah. So what I did, uh.
+
+[03:55 PM] Interviewee
+I show you.
+
+[03:55 PM] Interviewee
+I added a sale. Uh, like I, instead of adding a again, a like, separate Jason for sale to demonstrate, I just added a sale key. Uh, which.
+
+[03:55 PM] Interviewee
+The sale is true for some product. Okay. And also I added sale price.
+
+[03:55 PM] Interviewee
+Okay. But currently we don't have anything to like trigger the sale. So I created a sale toggle button. Okay, so in sale toggle button, what I did when you toggle the sale, it will show you the.
+
+[03:55 PM] Interviewee
+Yeah, it will show you the product which is in sale, which sale is on, and also the price sale price like like this is I given what I can do. Also, I can, I can show you the actual price and put it, uh, like cut on this. And again, I can show you the like sale price this, I can do. But I think that for demonstrating this much, I have done anything else you need, I, I can do it.
+
+[03:56 PM] Interviewer 2
+We thought of adding the sale. Button as a state. Right. Why you are again showing it.
+
+[03:56 PM] AI
+💬 **Question**: Why did you implement the sale toggle as a separate state instead of using the Redux state for filtering?
+
+---
+
+⭐️ **Answer**: I implemented the sale toggle button as a local state initially to quickly demonstrate the filtering functionality on the product list by toggling the sale items. However, I understand that the better approach is to manage this toggle state globally using Redux, as it allows consistent state management across components and better integration with the rest of the app. In my full implementation, I would connect the sale toggle to the Redux store’s `showSaleOnly` state, dispatch actions on toggle, and filter the product list based on that global state. This ensures the UI reflects the global filter state and keeps the logic centralized and scalable.
+
+[03:56 PM] Interviewer 2
+Okay. So.
+
+[03:56 PM] Interviewee
+Sale.
+
+[03:56 PM] Interviewer 2
+Uh. Okay. Leave that. Leave that button. So what you meant is whenever the sale is on, you are
+
+[03:56 PM] Interviewee
+On. Yeah.
+
+[03:56 PM] Interviewer 2
+showing only sale items.
+
+[03:56 PM] Interviewee
+Yes. Yes.
+
+[03:56 PM] Interviewer 2
+Where you are considering, uh, let's say, uh, for home or books. I am giving 10% discount. Right? Where are you considering it?
+
+[03:56 PM] AI
+💬 **Question**: Where are you considering the 10% discount for sale items like home or books in your implementation?
+
+---
+
+⭐️ **Answer**: I consider the 10% discount as part of the product data model by adding a `sale` flag and a `salePrice` field directly on each product object. When a product is marked as on sale (`sale: true`), I calculate the discounted price either upfront and store it as `salePrice` or compute it dynamically based on the original price and discount percentage. In the UI, when the sale toggle is active, I filter the product list to show only those with `sale: true` and display the `salePrice` alongside the original price, often showing the original price crossed out to highlight the discount. This approach keeps the discount logic close to the product data and makes it easy to render sale prices consistently across different categories like home or books.
+
+[03:56 PM] Interviewee
+10% discount.
+
+[03:56 PM] Interviewer 2
+Are you remember I say I was saying that, right? Depending on the category, I will give some percentage discount.
+
+[03:56 PM] Interviewee
+Correct. Correct. Correct. Depends on the.
+
+[03:57 PM] Interviewee
+Uh, we need to give discount also. Yeah.
+
+[03:57 PM] Interviewer 2
+Considering that.
+
+[03:57 PM] Interviewee
+Yeah. No no no, I.
+
+[03:57 PM] Interviewer 2
+You have completely missed that.
+
+[03:57 PM] Interviewee
+Yeah. So give me time. I'll implement that.
+
+[03:57 PM] Interviewer 2
+It's okay. We are almost on time. It's been an hour.
+
+[03:57 PM] Interviewer 2
+So let me know if you have any other questions with respect to.
+
+[03:57 PM] Interviewee
+Uh.
+
+[03:57 PM] Interviewer 2
+
+
+[03:57 PM] AI
+💬 **Question**: How would you implement category-based percentage discounts for sale items, which you missed in your initial implementation?
+
+---
+
+⭐️ **Answer**: To implement category-based percentage discounts, I would extend the product data model to include a discount percentage tied to each category rather than hardcoding discounts per product. Here’s how I would approach it:
+
+- Maintain a discount configuration object or map keyed by category, e.g., `{ books: 10, home: 15 }` representing discount percentages.
+- When rendering product prices, check the product’s category and look up the corresponding discount percentage.
+- Calculate the sale price dynamically as `salePrice = originalPrice * (1 - discountPercentage / 100)`.
+- Mark products as on sale if their category has a discount applied.
+- Update the UI to show the original price crossed out and the discounted sale price prominently.
+- If the sale toggle is on, filter products based on whether their category has an active discount.
+- This approach keeps discount logic centralized, flexible, and easy to update without modifying individual product data.
+
+I can implement this quickly by adding the discount map and updating the price calculation and filtering logic accordingly.
+
+[03:57 PM] Interviewee
+Uh, like nothing, uh, let's say, uh, like.
+
+[03:57 PM] Interviewee
+You are also medical based company, right? So what the technology you guys are working and, uh, what you are actually in, what's your like, what you wanted to achieve in the future market? That's what I wanted to know.
+
+[03:57 PM] Interviewer 2
+So right now we are into EMR. Uh, so we are maintaining the EMR records and all those things. So we have multiple applications for. Let's say.
+
+[03:57 PM] Interviewee
+
+
+[03:57 PM] Interviewer 2
+Therapists. And then we have application for patients. And we are into a different web applications as well as iOS applications as well. And iPad based apps also. So. So we have the.
+
+[03:58 PM] Interviewer 2
+Complete tech stack and we are kind of using AI to understand the patient therapist conversations in the physiotherapy side and trying to
+
+[03:58 PM] Interviewee
+Okay.
+
+[03:58 PM] Interviewer 2
+fetch all. Uh.
+
+[03:58 PM] Interviewer 2
+Auto fill the medical records and all those things. So that is what we are doing. So we are trying to capture
+
+[03:58 PM] AI
+💬 **Question**: How do you respond to the interviewer's explanation of their EMR/AI-driven tech stack?
+
+---
+
+⭐️ **Answer**: That sounds like a fascinating and high-impact domain. Given my background at **Resolute.Ai** working on clinical dashboards and HIPAA-aligned patient data, I find the intersection of EMR systems and AI-driven clinical documentation particularly compelling.
+
+*   **Relevant Experience**: I have direct experience architecting portals for doctors and clinicians, so I understand the importance of building performant, secure, and intuitive interfaces for medical professionals.
+*   **AI Integration**: Using AI to parse therapist-patient conversations is a complex challenge. I’m very interested in how you handle the frontend representation of that data—specifically, how you ensure the UI remains responsive while processing real-time AI insights.
+*   **Scalability**: Since you are managing multi-platform applications (Web, iOS, iPad), I’d love to hear more about how you maintain consistency across these platforms—are you using a shared component library or a specific cross-platform strategy to keep the user experience unified?
+
+It’s clear you’re solving real-world problems that directly improve clinical workflows, and I’d be very excited to contribute to that kind of mission-driven development.
+
+[03:58 PM] Interviewee
+So we are trying to.
+
+[03:58 PM] Interviewer 2
+that physiotherapy market in us. So that is what we are headed at.
+
+[03:58 PM] Interviewer 2
+Okay. Cool. Thanks for your time.
+
+[03:58 PM] Interviewee
+Thank you. Thank you very much. Okay. One thing I wanted to add like, okay, the discount part. Uh, was there, uh, like, uh, as based on like book 10% discount and, uh, that is also very easy for me. I can do it. Uh, like if you can give me time, I can demonstrate, but it's fine. Uh.
+
+[03:58 PM] Interviewer 2
+Okay. Uh, that is fine. Uh, I understood your approach. No worries. I was actually
+
+[03:59 PM] Interviewee
+Okay.
+
+[03:59 PM] Interviewer 2
+looking. I don't want to add a sale price. You haven't
+
+[03:59 PM] Interviewee
+Okay.
+
+[03:59 PM] Interviewer 2
+considered the percentage based on this home. I agree, you can do it. But at least when you are implementing it, you need to consider what are the requirements. This is completely.
+
+[03:59 PM] Interviewee
+Not sure. Like, uh, but actually, what is, uh, sorry to like, bring this, but, uh, some wise I'm not able to hear from your side. It was like roaming. I could have, like, wrote it everything. I could have done it. Uh, so anyways. Fine. Uh, I'll tell you everything. So.
+
+[03:59 PM] Interviewer 2
+It's okay, it's okay. I.
+
+[03:59 PM] Interviewee
+Hope you satisfied. And any query, please. Uh, like, connect with me. I'll let you. Okay. Thank you.
+
+[03:59 PM] Interviewer 2
+
+
+[04:02 PM] You
+if sale is true book should have 10% discount and cloathing should have 20%
+
+[04:02 PM] AI
+💬 **Question**: How to implement the conditional discount logic for "Books" (10%) and "Clothing" (20%) when `sale` is true.
+
+---
+
+⭐️ **Answer**: To implement this, you should calculate the `salePrice` dynamically based on the `category` and `price` fields rather than relying on a hardcoded value in your JSON. This ensures your data remains clean and your business logic is centralized.
+
+**🔑 Key Steps**:
+*   **Centralize Logic**: Create a helper function or a utility that takes the product object as an argument.
+*   **Conditional Check**: Check if `product.sale` is true.
+*   **Apply Multiplier**: If true, use a `switch` or `if/else` block to apply the specific discount multiplier (0.9 for Books, 0.8 for Clothing).
+*   **Format Output**: Ensure the resulting price is rounded to two decimal places for currency display.
+
+**💻 Code**:
+```javascript
+// Helper function to calculate discounted price
+const getDiscountedPrice = (product) => {
+  if (!product.sale) return product.price;
+
+  const discounts = {
+    'Books': 0.10,    // 10% discount
+    'Clothing': 0.20  // 20% discount
+  };
+
+  const discount = discounts[product.category] || 0;
+  const finalPrice = product.price * (1 - discount);
+  
+  return parseFloat(finalPrice.toFixed(2));
+};
+
+// Usage in your component (e.g., ProductCard.jsx)
+const displayPrice = product.sale ? getDiscountedPrice(product) : product.price;
+```
+
+**💡 Explanation**:
+*   **Maintainability**: By using a `discounts` lookup object, you make it trivial to add new categories or change discount percentages in the future without touching the core rendering logic.
+*   **Data Integrity**: You no longer need to manually update `salePrice` in `product.json`. This prevents "stale" data where the price in the JSON might not match the actual discount rule.
+*   **Scalability**: This approach works seamlessly whether you are mapping over a list of products or displaying a single product detail page.
+
+[04:02 PM] AI
+💬 **Question**: How to dynamically calculate `salePrize` in `product.json` based on category-specific discount rules (10% for Books, 20% for Clothing).
+
+---
+
+⭐️ **Answer**: Since your `product.json` currently has hardcoded `salePrize` values, the best practice is to remove those static fields and calculate the price dynamically in your React components. This ensures that if your business logic changes (e.g., changing the discount from 10% to 15%), you only update it in one place rather than editing every entry in your JSON file.
+
+**🔑 Key Steps**:
+*   **Remove `salePrize` from JSON**: Clean your data source to only contain the base `price` and `category`.
+*   **Create a Utility Function**: Define a function that applies the specific discount percentage based on the `category` string.
+*   **Implement in `ProductCard.jsx`**: Use this function to render the price conditionally.
+
+**💻 Code**:
+```javascript
+// utils/priceCalculator.js
+export const calculateSalePrice = (product) => {
+  if (!product.sale) return product.price;
+
+  const discountRates = {
+    'Books': 0.10,
+    'Clothing': 0.20,
+    'Home': 0.05 // Example for other categories
+  };
+
+  const discount = discountRates[product.category] || 0;
+  return (product.price * (1 - discount)).toFixed(2);
+};
+
+// Inside ProductCard.jsx
+const finalPrice = calculateSalePrice(product);
+
+return (
+  <div>
+    {product.sale && <span className="original-price">${product.price}</span>}
+    <span className="current-price">${finalPrice}</span>
+  </div>
+);
+```
+
+**💡 Explanation**:
+*   **Single Source of Truth**: By calculating the price at runtime, you eliminate the risk of having inconsistent data in your `product.json`.
+*   **Scalability**: Adding a new category or changing a discount rate now requires modifying only the `discountRates` object, making your application much easier to maintain.
+*   **Performance**: This calculation is extremely lightweight (O(1) lookup), so it will not impact your render performance, even with large product lists.
+
+[04:15 PM] You
+sale text show cut mark on text
+
+[04:15 PM] AI
+💬 **Question**: How to handle text overflow with a cut-off mark for "sale" text?
+
+---
+
+⭐️ **Answer**: To show a cut-off mark (ellipsis) on text like "sale" when it overflows its container, you can use CSS properties to truncate the text with an ellipsis. This is common in frontend development to keep UI clean and readable.
+
+**🔑 Key Steps**:
+- Set the container's width or max-width to limit the text space.
+- Use `white-space: nowrap;` to prevent text wrapping.
+- Use `overflow: hidden;` to hide overflowed text.
+- Use `text-overflow: ellipsis;` to show the cut-off mark (…).
+
+**💻 Code**:
+```css
+.sale-text {
+  width: 100px; /* or any fixed width */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+```
+
+**💡 Explanation**:
+- `white-space: nowrap;` keeps the text in a single line.
+- `overflow: hidden;` hides anything that goes beyond the container.
+- `text-overflow: ellipsis;` adds the "…" at the cut-off point.
+- Adjust the width according to your layout needs.
+- This approach works well in React.js or Next.js components by applying the class to the text element.
+
+If you want a more dynamic or responsive solution, consider using CSS flexbox or grid with max-width constraints, but the above is the standard way to show a cut mark on overflowing text.

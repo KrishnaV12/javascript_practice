@@ -1,0 +1,3544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>JS Mastery — Senior Dev Interview Prep</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+/* ═══════════════════════════════════════════════
+   JS MASTERY — STYLESHEET
+   Theme: Dark terminal-inspired with neon accents
+═══════════════════════════════════════════════ */
+
+:root {
+  --bg-base:       #0d0f14;
+  --bg-card:       #13161e;
+  --bg-card2:      #1a1e2a;
+  --bg-sidebar:    #0a0c10;
+  --accent:        #f0c040;
+  --accent2:       #4dd9a0;
+  --accent3:       #7c8cff;
+  --accent4:       #ff6b8a;
+  --text-primary:  #e8eaf0;
+  --text-secondary:#8a90a8;
+  --text-muted:    #4a5068;
+  --border:        #1e2235;
+  --border2:       #2a2f45;
+  --code-bg:       #080a0f;
+  --correct:       #2a5c3f;
+  --wrong:         #5c2a2a;
+  --font-code:     'JetBrains Mono', monospace;
+  --font-ui:       'Syne', sans-serif;
+  --radius:        10px;
+  --radius-lg:     16px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  background: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  line-height: 1.6;
+  overflow: hidden;
+}
+
+/* ── LAYOUT ── */
+.app-shell {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── SIDEBAR ── */
+.sidebar {
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebar-header {
+  padding: 22px 20px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.logo { display: flex; align-items: center; gap: 12px; }
+.logo-icon { font-size: 28px; }
+.logo-title { font-size: 18px; font-weight: 800; color: var(--accent); letter-spacing: -0.5px; }
+.logo-sub   { font-size: 11px; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; }
+
+.sidebar-nav { flex: 1; padding: 12px 10px; }
+
+.nav-section-label {
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: 14px 10px 6px;
+  font-weight: 600;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 13.5px;
+  font-weight: 600;
+  margin-bottom: 2px;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+
+.nav-item:hover  { background: var(--bg-card2); color: var(--text-primary); }
+.nav-item.active { background: #1e2235; color: var(--accent); border-left: 3px solid var(--accent); }
+.nav-icon { font-size: 16px; }
+
+.sidebar-footer {
+  padding: 16px 20px;
+  border-top: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.progress-label { font-size: 11px; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+.progress-bar-wrap { background: var(--border); border-radius: 99px; height: 5px; overflow: hidden; }
+.progress-bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 99px; transition: width 0.5s ease; }
+.progress-text { font-size: 12px; color: var(--text-muted); margin-top: 6px; }
+
+/* ── MAIN ── */
+.main-content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100vh;
+  padding: 36px 48px;
+}
+
+/* ── MODULE HEADER ── */
+.module-header {
+  margin-bottom: 32px;
+}
+
+.module-tag {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.module-title {
+  font-size: 34px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: var(--text-primary);
+  line-height: 1.15;
+  margin-bottom: 10px;
+}
+
+.module-desc {
+  font-size: 15px;
+  color: var(--text-secondary);
+  max-width: 680px;
+  line-height: 1.7;
+}
+
+/* ── SECTION ── */
+.section {
+  margin-bottom: 32px;
+}
+
+.section-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--accent2);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* ── THEORY BLOCK ── */
+.theory-block {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.theory-block::before {
+  content: attr(data-step);
+  position: absolute;
+  top: -11px;
+  left: 20px;
+  background: var(--accent);
+  color: #000;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 2px 10px;
+  border-radius: 99px;
+}
+
+.theory-block h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.theory-block p {
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+
+.theory-block p:last-child { margin-bottom: 0; }
+
+.callout {
+  background: rgba(77,217,160,0.07);
+  border-left: 3px solid var(--accent2);
+  padding: 12px 16px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  margin-top: 12px;
+}
+
+.callout strong { color: var(--accent2); }
+
+.warn-callout {
+  background: rgba(240,192,64,0.07);
+  border-left: 3px solid var(--accent);
+  padding: 12px 16px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  margin-top: 12px;
+}
+
+.warn-callout strong { color: var(--accent); }
+
+/* ── CODE BLOCK ── */
+.code-wrap {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin: 14px 0;
+  overflow: hidden;
+}
+
+.code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--border);
+  background: #0d0f16;
+}
+
+.code-lang {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent);
+}
+
+.copy-btn {
+  font-size: 11px;
+  color: var(--text-muted);
+  background: none;
+  border: 1px solid var(--border2);
+  padding: 3px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  transition: all 0.15s;
+}
+
+.copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+pre {
+  padding: 18px 20px;
+  overflow-x: auto;
+  font-family: var(--font-code);
+  font-size: 13px;
+  line-height: 1.7;
+  color: #c8d0e8;
+}
+
+/* Syntax highlight classes */
+.kw  { color: #c792ea; }   /* keyword */
+.fn  { color: #82aaff; }   /* function */
+.str { color: #f0c040; }   /* string */
+.cm  { color: #4a5068; font-style: italic; } /* comment */
+.num { color: #f78c6c; }   /* number */
+.op  { color: #89ddff; }   /* operator */
+
+/* ── QUIZ / INTERVIEW ── */
+.quiz-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  margin-bottom: 20px;
+}
+
+.quiz-q-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent3);
+  margin-bottom: 8px;
+}
+
+.quiz-question {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.quiz-opt {
+  background: var(--bg-card2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-align: left;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quiz-opt:hover { border-color: var(--accent3); color: var(--text-primary); }
+.quiz-opt.correct { background: var(--correct); border-color: var(--accent2); color: var(--accent2); }
+.quiz-opt.wrong   { background: var(--wrong);   border-color: var(--accent4); color: var(--accent4); }
+.quiz-opt:disabled { cursor: default; }
+
+.quiz-opt-letter {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.quiz-explanation {
+  margin-top: 16px;
+  background: rgba(124,140,255,0.07);
+  border-left: 3px solid var(--accent3);
+  padding: 14px 16px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  display: none;
+}
+
+.quiz-explanation.show { display: block; }
+.quiz-explanation strong { color: var(--accent3); }
+
+/* ── DIFFICULTY BADGE ── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 99px;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+.badge-easy   { background: rgba(77,217,160,0.15); color: var(--accent2); }
+.badge-medium { background: rgba(240,192,64,0.15); color: var(--accent); }
+.badge-hard   { background: rgba(255,107,138,0.15); color: var(--accent4); }
+
+/* ── PLAYGROUND ── */
+.playground-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  height: 520px;
+}
+
+.editor-wrap, .output-wrap {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+
+.panel-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-muted);
+}
+
+.run-btn {
+  background: var(--accent);
+  color: #000;
+  border: none;
+  padding: 6px 18px;
+  border-radius: 6px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: opacity 0.15s;
+}
+
+.run-btn:hover { opacity: 0.85; }
+
+.code-editor {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 18px 20px;
+  font-family: var(--font-code);
+  font-size: 13px;
+  color: #c8d0e8;
+  resize: none;
+  line-height: 1.7;
+}
+
+.output-log {
+  flex: 1;
+  padding: 18px 20px;
+  font-family: var(--font-code);
+  font-size: 13px;
+  overflow-y: auto;
+  line-height: 1.7;
+}
+
+.log-line { margin-bottom: 4px; }
+.log-line.log-error { color: var(--accent4); }
+.log-line.log-info  { color: var(--accent2); }
+.log-line.log-warn  { color: var(--accent); }
+
+/* ── TABS ── */
+.tab-bar {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0;
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  padding: 10px 18px;
+  cursor: pointer;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 700;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: all 0.15s;
+}
+
+.tab-btn:hover  { color: var(--text-secondary); }
+.tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* ── CHALLENGE BOX ── */
+.challenge-box {
+  background: rgba(124,140,255,0.05);
+  border: 1px dashed var(--accent3);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  margin-top: 20px;
+}
+
+.challenge-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent3);
+  margin-bottom: 8px;
+}
+
+.challenge-text {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ── OUTPUT PREVIEW ── */
+.output-preview {
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  font-family: var(--font-code);
+  font-size: 13px;
+  color: var(--accent2);
+  margin-top: 12px;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 99px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .app-shell { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .main-content { padding: 20px 18px; }
+  .playground-split { grid-template-columns: 1fr; height: auto; }
+}
+
+  </style>
+</head>
+<body>
+
+
+<div class="app-shell">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="logo-icon">⚡</span>
+        <div>
+          <div class="logo-title">JS Mastery</div>
+          <div class="logo-sub">Senior Dev Prep</div>
+        </div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="nav-section-label">Core Concepts</div>
+      <a class="nav-item active" data-module="closures" href="#">
+        <span class="nav-icon">🔒</span> Closures
+      </a>
+      <a class="nav-item" data-module="prototypes" href="#">
+        <span class="nav-icon">🔗</span> Prototypes & Inheritance
+      </a>
+      <a class="nav-item" data-module="async" href="#">
+        <span class="nav-icon">⏳</span> Async / Promises
+      </a>
+      <a class="nav-item" data-module="eventloop" href="#">
+        <span class="nav-icon">🔄</span> Event Loop
+      </a>
+
+      <div class="nav-section-label">Advanced</div>
+      <a class="nav-item" data-module="currying" href="#">
+        <span class="nav-icon">🍛</span> Currying & Composition
+      </a>
+      <a class="nav-item" data-module="patterns" href="#">
+        <span class="nav-icon">🏗️</span> Design Patterns
+      </a>
+      <a class="nav-item" data-module="memory" href="#">
+        <span class="nav-icon">🧠</span> Memory & Performance
+      </a>
+      <a class="nav-item" data-module="arrays" href="#">
+        <span class="nav-icon">📦</span> Array Methods Deep Dive
+      </a>
+
+      <div class="nav-section-label">Interview Zone</div>
+      <a class="nav-item" data-module="interview" href="#">
+        <span class="nav-icon">🎯</span> Interview Questions
+      </a>
+      <a class="nav-item" data-module="playground" href="#">
+        <span class="nav-icon">🛝</span> Live Playground
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="progress-label">Overall Progress</div>
+      <div class="progress-bar-wrap">
+        <div class="progress-bar-fill" id="globalProgress" style="width:10%"></div>
+      </div>
+      <div class="progress-text" id="progressText">1 / 10 modules</div>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content" id="mainContent">
+    <!-- injected by JS -->
+  </main>
+
+</div>
+
+
+<script>
+
+/* ===== js/utils.js ===== */
+/**
+ * ═══════════════════════════════════════════════════════════
+ * utils.js — Shared Utility Functions
+ *
+ * PURPOSE: Reusable helpers used by every module.
+ * Includes: HTML builders, syntax highlighter, code copy,
+ * quiz engine, tab switcher, and progress tracker.
+ * ═══════════════════════════════════════════════════════════
+ */
+
+// ── Syntax Highlighter ──────────────────────────────────────
+// A lightweight regex-based highlighter for JS code snippets.
+// Applies CSS classes (.kw .fn .str .cm .num .op) to tokens.
+window.highlight = function(code) {
+  return code
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    // Comments first (before other patterns consume //)
+    .replace(/(\/\/.*)/g, '<span class="cm">$1</span>')
+    .replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="cm">$1</span>')
+    // Strings (single, double, template literals)
+    .replace(/(`[^`]*`|'[^']*'|"[^"]*")/g, '<span class="str">$1</span>')
+    // Keywords
+    .replace(/\b(const|let|var|function|return|new|class|extends|this|super|if|else|for|while|of|in|typeof|instanceof|async|await|try|catch|finally|throw|import|export|default|from|null|undefined|true|false|=>)\b/g, '<span class="kw">$1</span>')
+    // Built-in functions & methods
+    .replace(/\b(console|Promise|Array|Object|setTimeout|setInterval|fetch|JSON|Math|Symbol|Proxy|Reflect|Map|Set|WeakMap|WeakSet|Error|eval)\b/g, '<span class="fn">$1</span>')
+    // Numbers
+    .replace(/\b(\d+(\.\d+)?)\b/g, '<span class="num">$1</span>')
+    // Operators
+    .replace(/(\.\.\.|===|!==|=>|&&|\|\||\?\?|\.)/g, '<span class="op">$1</span>');
+};
+
+// ── Code Block Builder ──────────────────────────────────────
+// Creates a styled code block with copy-to-clipboard button.
+window.codeBlock = function(code, lang = 'JavaScript') {
+  const id = 'cb_' + Math.random().toString(36).slice(2, 7);
+  return `
+    <div class="code-wrap">
+      <div class="code-header">
+        <span class="code-lang">${lang}</span>
+        <button class="copy-btn" onclick="copyCode('${id}')">Copy</button>
+      </div>
+      <pre id="${id}">${highlight(code)}</pre>
+    </div>`;
+};
+
+// ── Copy Code ───────────────────────────────────────────────
+window.copyCode = function(id) {
+  const el = document.getElementById(id);
+  const text = el.innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = el.previousElementSibling.querySelector('.copy-btn');
+    btn.textContent = 'Copied!';
+    setTimeout(() => btn.textContent = 'Copy', 1500);
+  });
+};
+
+// ── Theory Block Builder ────────────────────────────────────
+// Wraps a title, body HTML, and optional callout in a theory card.
+window.theoryBlock = function({ step, title, body, callout, warn }) {
+  const calloutHtml = callout
+    ? `<div class="callout"><strong>💡 Key Insight:</strong> ${callout}</div>`
+    : '';
+  const warnHtml = warn
+    ? `<div class="warn-callout"><strong>⚠️ Watch Out:</strong> ${warn}</div>`
+    : '';
+  return `
+    <div class="theory-block" data-step="${step}">
+      <h3>${title}</h3>
+      ${body}
+      ${calloutHtml}
+      ${warnHtml}
+    </div>`;
+};
+
+// ── Section Builder ─────────────────────────────────────────
+window.section = function(title, content) {
+  return `
+    <div class="section">
+      <div class="section-title">${title}</div>
+      ${content}
+    </div>`;
+};
+
+// ── Module Header Builder ───────────────────────────────────
+window.moduleHeader = function({ tag, title, desc }) {
+  return `
+    <div class="module-header">
+      <div class="module-tag">${tag}</div>
+      <h1 class="module-title">${title}</h1>
+      <p class="module-desc">${desc}</p>
+    </div>`;
+};
+
+// ── Tab System ──────────────────────────────────────────────
+// Call buildTabs([{id, label, content}]) to get a tab group.
+// Each pane with id="tab-{id}" is shown/hidden on click.
+window.buildTabs = function(tabs) {
+  const btnHtml = tabs.map((t, i) =>
+    `<button class="tab-btn ${i === 0 ? 'active' : ''}"
+       onclick="switchTab('${t.id}', this)">${t.label}</button>`
+  ).join('');
+  const paneHtml = tabs.map((t, i) =>
+    `<div class="tab-pane ${i === 0 ? 'active' : ''}" id="tab-${t.id}">${t.content}</div>`
+  ).join('');
+  return `<div class="tab-bar">${btnHtml}</div>${paneHtml}`;
+};
+
+window.switchTab = function(id, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + id).classList.add('active');
+};
+
+// ── Quiz Engine ─────────────────────────────────────────────
+// Renders a multiple-choice quiz card.
+// Tracks correct answers and updates global progress bar.
+window._quizState = {}; // stores answered state per card
+
+window.buildQuiz = function({ id, label, question, options, correct, explanation, difficulty }) {
+  const diffClass = { Easy: 'badge-easy', Medium: 'badge-medium', Hard: 'badge-hard' }[difficulty] || 'badge-medium';
+  const letters = ['A', 'B', 'C', 'D', 'E'];
+  const optsHtml = options.map((opt, i) =>
+    `<button class="quiz-opt" onclick="answerQuiz('${id}', ${i}, ${correct})" id="${id}_opt_${i}">
+       <span class="quiz-opt-letter">${letters[i]}</span> ${opt}
+     </button>`
+  ).join('');
+
+  return `
+    <div class="quiz-card" id="${id}">
+      <div class="quiz-q-label">${label} <span class="badge ${diffClass}">${difficulty}</span></div>
+      <div class="quiz-question">${question}</div>
+      <div class="quiz-options">${optsHtml}</div>
+      <div class="quiz-explanation" id="${id}_exp">
+        <strong>Explanation:</strong> ${explanation}
+      </div>
+    </div>`;
+};
+
+window.answerQuiz = function(id, chosen, correct) {
+  if (window._quizState[id]) return; // already answered
+  window._quizState[id] = true;
+
+  const card = document.getElementById(id);
+  card.querySelectorAll('.quiz-opt').forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === correct) btn.classList.add('correct');
+    else if (i === chosen) btn.classList.add('wrong');
+  });
+
+  document.getElementById(id + '_exp').classList.add('show');
+  updateProgress();
+};
+
+// ── Progress Tracker ────────────────────────────────────────
+window._modulesVisited = new Set();
+
+window.trackModule = function(name) {
+  window._modulesVisited.add(name);
+  updateProgress();
+};
+
+window.updateProgress = function() {
+  const total = 10;
+  const visited = window._modulesVisited.size;
+  const pct = Math.round((visited / total) * 100);
+  const bar = document.getElementById('globalProgress');
+  const txt = document.getElementById('progressText');
+  if (bar) bar.style.width = pct + '%';
+  if (txt) txt.textContent = `${visited} / ${total} modules`;
+};
+
+// ── Challenge Box Builder ────────────────────────────────────
+window.challengeBox = function(text) {
+  return `
+    <div class="challenge-box">
+      <div class="challenge-label">🎯 Your Challenge</div>
+      <div class="challenge-text">${text}</div>
+    </div>`;
+};
+
+
+/* ===== js/closures.js ===== */
+/**
+ * ═══════════════════════════════════════════════════════════
+ * closures.js — JavaScript Closures Deep Dive
+ *
+ * WHAT IS A CLOSURE?
+ * A closure is a function that "remembers" the variables from
+ * its outer (lexical) scope even after that scope has finished
+ * executing. The inner function carries a reference to the
+ * environment in which it was created.
+ *
+ * WHY IT MATTERS FOR INTERVIEWS:
+ * Closures are arguably the most asked JS topic. They underpin:
+ *   - Data privacy / module pattern
+ *   - Factory functions
+ *   - Memoization
+ *   - Event handlers in loops (the classic bug)
+ *   - React hooks internals
+ * ═══════════════════════════════════════════════════════════
+ */
+
+window.modules = window.modules || {};
+
+window.modules.closures = function() {
+  trackModule('closures');
+
+  return `
+    ${moduleHeader({
+      tag: '01 — Core Concept',
+      title: 'Closures',
+      desc: 'A closure gives a function persistent, private access to its birth environment. Master this and you understand half of modern JavaScript.'
+    })}
+
+    ${buildTabs([
+      { id: 'theory', label: '📖 Theory', content: closuresTheory() },
+      { id: 'examples', label: '💻 Examples', content: closuresExamples() },
+      { id: 'quiz', label: '🎯 Interview Q&A', content: closuresQuiz() }
+    ])}
+  `;
+};
+
+function closuresTheory() {
+  return `
+    ${theoryBlock({
+      step: 'Step 1 — What is Lexical Scope?',
+      title: 'Lexical Scope: Where a function is WRITTEN determines what it sees',
+      body: `<p>JavaScript uses <em>lexical (static) scoping</em>. A function can access variables defined in its own body, 
+      in its parent function's body, and all the way up to the global scope. This chain is determined at <em>write time</em>, 
+      not at <em>call time</em>.</p>
+      <p>Think of each function as a bubble. Bubbles can see outward but the outer cannot see in.</p>`,
+      callout: 'The scope chain is fixed when code is written. It never changes regardless of how or where you call the function.'
+    })}
+
+    ${codeBlock(`// Lexical scope example
+const globalVar = "I am global";
+
+function outer() {
+  const outerVar = "I am outer";
+
+  function inner() {
+    const innerVar = "I am inner";
+    // inner can see ALL of these:
+    console.log(innerVar);   // ✅ own scope
+    console.log(outerVar);   // ✅ parent scope (closure!)
+    console.log(globalVar);  // ✅ global scope
+  }
+
+  inner();
+  // console.log(innerVar); // ❌ ReferenceError — outer can't see in
+}
+
+outer();`)}
+
+    ${theoryBlock({
+      step: 'Step 2 — The Closure Mechanism',
+      title: 'A closure = function + its surrounding variable environment',
+      body: `<p>When a function is created, JavaScript attaches an internal <code>[[Environment]]</code> property 
+      pointing to the scope where it was defined. Even after the outer function returns and its call-stack frame is 
+      gone, the inner function keeps the reference alive — this is the <em>closure</em>.</p>
+      <p>The key insight: <strong>closures capture variables by REFERENCE, not by value.</strong> 
+      This is why the classic loop bug exists.</p>`,
+      warn: 'Closures hold REFERENCES to variables, not copies. If the variable changes after the closure is created, the closure sees the new value.'
+    })}
+
+    ${codeBlock(`// Classic closure — counter factory
+function createCounter(start = 0) {
+  let count = start; // private to this call
+
+  return {
+    increment() { return ++count; },
+    decrement() { return --count; },
+    reset()     { count = start; return count; },
+    value()     { return count; }
+  };
+}
+
+const counter1 = createCounter(10);
+const counter2 = createCounter(0);
+
+console.log(counter1.increment()); // 11
+console.log(counter1.increment()); // 12
+console.log(counter2.increment()); // 1  — independent!
+console.log(counter1.value());     // 12 — still 12`)}
+
+    ${theoryBlock({
+      step: 'Step 3 — The Famous Loop Bug',
+      title: 'var in loops creates a single shared variable',
+      body: `<p>This is one of the most asked interview traps. When you use <code>var</code> inside a 
+      <code>for</code> loop and attach event listeners or callbacks, all callbacks share the <em>same</em> 
+      <code>i</code> variable — so by the time they execute, <code>i</code> is already the final value.</p>`,
+      warn: 'var is function-scoped, not block-scoped. The for-loop does NOT create a new scope per iteration.'
+    })}
+
+    ${codeBlock(`// ❌ THE BUG — every button alerts "3"
+for (var i = 0; i < 3; i++) {
+  setTimeout(function() {
+    console.log(i); // always 3 — all share the same i
+  }, 100);
+}
+
+// ✅ FIX 1: Use let (block-scoped, new binding per iteration)
+for (let i = 0; i < 3; i++) {
+  setTimeout(function() {
+    console.log(i); // 0, 1, 2 ✅
+  }, 100);
+}
+
+// ✅ FIX 2: IIFE (Immediately Invoked Function Expression)
+// Creates a new scope capturing current i value
+for (var i = 0; i < 3; i++) {
+  (function(j) {
+    setTimeout(function() {
+      console.log(j); // 0, 1, 2 ✅
+    }, 100);
+  })(i);
+}
+
+// ✅ FIX 3: Pass as argument via .bind()
+for (var i = 0; i < 3; i++) {
+  setTimeout(console.log.bind(null, i), 100); // 0, 1, 2 ✅
+}`)}
+
+    ${theoryBlock({
+      step: 'Step 4 — Practical Patterns',
+      title: 'Module Pattern & Memoization using Closures',
+      body: `<p>The module pattern uses closures to create private state — a precursor to ES modules and 
+      a foundation of the revealing module pattern.</p>
+      <p>Memoization caches expensive function results by closing over a cache object.</p>`
+    })}
+
+    ${codeBlock(`// MODULE PATTERN — private state via closure
+const BankAccount = (function() {
+  let _balance = 0;       // truly private — no access from outside
+  let _transactions = [];
+
+  return {
+    deposit(amount) {
+      _balance += amount;
+      _transactions.push({ type: 'deposit', amount });
+    },
+    withdraw(amount) {
+      if (amount > _balance) throw new Error('Insufficient funds');
+      _balance -= amount;
+      _transactions.push({ type: 'withdrawal', amount });
+    },
+    getBalance() { return _balance; },
+    getHistory() { return [..._transactions]; } // return copy
+  };
+})();
+
+BankAccount.deposit(1000);
+BankAccount.withdraw(300);
+console.log(BankAccount.getBalance()); // 700
+// console.log(_balance); // ❌ ReferenceError — truly private!
+
+// ──────────────────────────────────────────────────────────
+
+// MEMOIZATION — close over a cache map
+function memoize(fn) {
+  const cache = new Map(); // private to this call
+
+  return function(...args) {
+    const key = JSON.stringify(args);
+    if (cache.has(key)) {
+      console.log('Cache hit!');
+      return cache.get(key);
+    }
+    const result = fn.apply(this, args);
+    cache.set(key, result);
+    return result;
+  };
+}
+
+const expensiveCalc = memoize((n) => {
+  // Simulate expensive Fibonacci
+  if (n <= 1) return n;
+  return expensiveCalc(n - 1) + expensiveCalc(n - 2);
+});
+
+console.log(expensiveCalc(40)); // first call — computed
+console.log(expensiveCalc(40)); // Cache hit! — instant`)}
+
+    ${challengeBox(`
+      <strong>Build a rate limiter using closures.</strong><br>
+      Write a function <code>rateLimit(fn, limit, interval)</code> that wraps <code>fn</code> 
+      and ensures it can only be called at most <code>limit</code> times per <code>interval</code> ms.
+      Use closures to maintain the call count and reset timer.
+    `)}
+  `;
+}
+
+function closuresExamples() {
+  return `
+    ${section('Real-World Closure Patterns', `
+      ${theoryBlock({
+        step: 'Pattern A',
+        title: 'Once — run a function only once',
+        body: `<p>The <code>once</code> utility is used in analytics, initialization, and feature setup.
+        It uses a closure to track whether the function has already fired.</p>`
+      })}
+      ${codeBlock(`function once(fn) {
+  let called = false;
+  let result;
+
+  return function(...args) {
+    if (!called) {
+      called = true;
+      result = fn.apply(this, args);
+    }
+    return result; // always returns the first result
+  };
+}
+
+const initApp = once(() => {
+  console.log('App initialized!');
+  return { ready: true };
+});
+
+initApp(); // "App initialized!"
+initApp(); // silent — already called
+initApp(); // silent`)}
+
+      ${theoryBlock({
+        step: 'Pattern B',
+        title: 'Partial Application — pre-fill function arguments',
+        body: `<p>Partial application creates a new function with some arguments already bound.
+        It uses closures to store the pre-filled arguments.</p>`
+      })}
+      ${codeBlock(`function partial(fn, ...presetArgs) {
+  // closure captures fn and presetArgs
+  return function(...laterArgs) {
+    return fn(...presetArgs, ...laterArgs);
+  };
+}
+
+function multiply(a, b, c) {
+  return a * b * c;
+}
+
+const double = partial(multiply, 2, 1); // a=2, b=1 preset
+const triple = partial(multiply, 3, 1);
+
+console.log(double(5));  // 2 * 1 * 5 = 10
+console.log(triple(5));  // 3 * 1 * 5 = 15
+
+// Real use case: API endpoint builder
+const buildUrl = partial((base, endpoint, id) =>
+  \`\${base}/\${endpoint}/\${id}\`, 'https://api.example.com');
+
+console.log(buildUrl('users', 42));    // https://api.example.com/users/42
+console.log(buildUrl('products', 7));  // https://api.example.com/products/7`)}
+
+      ${theoryBlock({
+        step: 'Pattern C',
+        title: 'Event Listeners without memory leaks',
+        body: `<p>Using closures in event listeners can cause memory leaks if DOM elements 
+        are removed but the closure still holds a reference. Always clean up with 
+        <code>removeEventListener</code>.</p>`,
+        warn: 'If a closure inside an event listener references a large object or DOM node, and you never remove the listener, that memory is never freed — even if the element is removed from the DOM.'
+      })}
+      ${codeBlock(`// ✅ Proper cleanup pattern
+function setupDraggable(element) {
+  let startX, startY;
+
+  function onMouseDown(e) {
+    startX = e.clientX;
+    startY = e.clientY;
+    document.addEventListener('mousemove', onMouseMove);
+    document.addEventListener('mouseup', onMouseUp);
+  }
+
+  function onMouseMove(e) {
+    const dx = e.clientX - startX;
+    const dy = e.clientY - startY;
+    element.style.transform = \`translate(\${dx}px, \${dy}px)\`;
+  }
+
+  function onMouseUp() {
+    // CRUCIAL: remove listeners when done
+    document.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+  }
+
+  element.addEventListener('mousedown', onMouseDown);
+
+  // Return cleanup function
+  return () => element.removeEventListener('mousedown', onMouseDown);
+}`)}
+    `)}
+  `;
+}
+
+function closuresQuiz() {
+  return `
+    ${buildQuiz({
+      id: 'cl_q1',
+      label: 'Q1 — Closure Output',
+      question: 'What does this code log? <br><code>function make() { let x = 0; return () => ++x; }<br>const a = make(), b = make();<br>a(); a(); b();<br>console.log(a(), b());</code>',
+      options: ['3, 2', '3, 1', '2, 1', '3, 3'],
+      correct: 0,
+      difficulty: 'Medium',
+      explanation: '<code>a</code> and <code>b</code> have independent closures over separate <code>x</code> variables. <code>a</code> is called 3 times total (returning 3), <code>b</code> is called twice total (returning 2). So it logs <strong>3, 2</strong>.'
+    })}
+
+    ${buildQuiz({
+      id: 'cl_q2',
+      label: 'Q2 — Loop Classic',
+      question: 'What logs to the console? <br><code>for (var i = 0; i < 3; i++) { setTimeout(() => console.log(i), 0); }</code>',
+      options: ['0, 1, 2', '3, 3, 3', '0, 0, 0', 'undefined x3'],
+      correct: 1,
+      difficulty: 'Easy',
+      explanation: '<code>var</code> is function-scoped, so all three callbacks share the SAME <code>i</code>. By the time the callbacks execute (after the loop), <code>i === 3</code>. Fix: use <code>let</code> instead of <code>var</code>.'
+    })}
+
+    ${buildQuiz({
+      id: 'cl_q3',
+      label: 'Q3 — Memory & Closures',
+      question: 'Which statement about closures and memory is TRUE?',
+      options: [
+        'Closures always cause memory leaks',
+        'Closures prevent garbage collection of variables they reference',
+        'Closures copy the values of outer variables at creation time',
+        'Closures are automatically cleaned up when outer function returns'
+      ],
+      correct: 1,
+      difficulty: 'Hard',
+      explanation: 'Closures hold REFERENCES to outer variables, preventing the garbage collector from reclaiming them. This is not inherently a leak — it\'s the intended behavior. But if a large object is captured and the closure lives long, it can cause unintended memory retention. Closures do NOT copy values; they maintain live references.'
+    })}
+
+    ${buildQuiz({
+      id: 'cl_q4',
+      label: 'Q4 — Practical Use',
+      question: 'Which pattern BEST demonstrates using a closure for data privacy?',
+      options: [
+        'Storing data in localStorage',
+        'Using a WeakMap for private fields',
+        'The revealing module pattern with an IIFE',
+        'Using Object.freeze() on an object'
+      ],
+      correct: 2,
+      difficulty: 'Medium',
+      explanation: 'The revealing module pattern wraps code in an IIFE, creating a private scope. Only what is explicitly returned is public. The closed-over variables are genuinely inaccessible from outside — true data privacy before private class fields (#field) were introduced.'
+    })}
+  `;
+}
+
+
+/* ===== js/prototypes.js ===== */
+/**
+ * ═══════════════════════════════════════════════════════════
+ * prototypes.js — Prototypal Inheritance & the Prototype Chain
+ *
+ * CORE IDEA:
+ * JavaScript does NOT use classical inheritance (like Java/C++).
+ * It uses PROTOTYPAL inheritance — objects inherit directly from
+ * other objects via the prototype chain ([[Prototype]] link).
+ *
+ * ES6 classes are syntactic sugar over prototypal inheritance —
+ * understanding the underlying prototype chain is essential for
+ * debugging, extending built-ins, and interview questions.
+ * ═══════════════════════════════════════════════════════════
+ */
+
+window.modules = window.modules || {};
+
+window.modules.prototypes = function() {
+  trackModule('prototypes');
+
+  return `
+    ${moduleHeader({
+      tag: '02 — OOP in JS',
+      title: 'Prototypes & Inheritance',
+      desc: 'JavaScript OOP is prototype-based, not class-based. Classes are syntactic sugar. Know the chain and nothing in OOP will surprise you.'
+    })}
+
+    ${buildTabs([
+      { id: 'theory', label: '📖 Theory', content: protoTheory() },
+      { id: 'classes', label: '🏛️ ES6 Classes', content: classesTheory() },
+      { id: 'quiz', label: '🎯 Interview Q&A', content: protoQuiz() }
+    ])}
+  `;
+};
+
+function protoTheory() {
+  return `
+    ${theoryBlock({
+      step: 'Step 1 — The [[Prototype]] Chain',
+      title: 'Every object has a hidden [[Prototype]] link to another object',
+      body: `<p>When you access a property on an object, JavaScript first checks the object itself.
+      If not found, it follows the <code>[[Prototype]]</code> link to the parent object and checks there.
+      This continues up the chain until it reaches <code>null</code> (the end of all chains).</p>
+      <p>You can access the prototype via <code>Object.getPrototypeOf(obj)</code> or (legacy) 
+      <code>obj.__proto__</code>.</p>`,
+      callout: 'Property lookup ALWAYS travels up the prototype chain. This is called property shadowing when a child defines a property that exists on the parent.'
+    })}
+
+    ${codeBlock(`// The prototype chain in action
+const animal = {
+  breathe() { return 'breathing...'; },
+  type: 'animal'
+};
+
+const dog = Object.create(animal); // dog's [[Prototype]] = animal
+dog.bark = function() { return 'Woof!'; };
+dog.type = 'dog'; // SHADOWS animal.type
+
+const puppy = Object.create(dog);  // puppy → dog → animal → Object.prototype → null
+
+console.log(puppy.bark());    // ✅ Found on dog via chain
+console.log(puppy.breathe()); // ✅ Found on animal via chain
+console.log(puppy.type);      // 'dog' — dog's type shadows animal's
+console.log(puppy.toString()); // ✅ Found on Object.prototype
+
+// Check the chain:
+console.log(Object.getPrototypeOf(puppy) === dog);    // true
+console.log(Object.getPrototypeOf(dog) === animal);   // true
+console.log(Object.getPrototypeOf(animal) === Object.prototype); // true
+console.log(Object.getPrototypeOf(Object.prototype)); // null — end of chain
+
+// hasOwnProperty — check if property is OWN (not inherited)
+console.log(puppy.hasOwnProperty('bark'));  // false — bark is on dog
+console.log(dog.hasOwnProperty('bark'));    // true`)}
+
+    ${theoryBlock({
+      step: 'Step 2 — Constructor Functions & new',
+      title: 'What "new" does under the hood (4 steps)',
+      body: `<p>Before ES6 classes, constructor functions were the way to create objects.
+      Understanding <code>new</code> is critical for class syntax comprehension.</p>
+      <p>When you call <code>new Foo()</code>, JavaScript:<br>
+      <strong>1.</strong> Creates a new empty object<br>
+      <strong>2.</strong> Sets its <code>[[Prototype]]</code> to <code>Foo.prototype</code><br>
+      <strong>3.</strong> Runs <code>Foo</code> with <code>this</code> = the new object<br>
+      <strong>4.</strong> Returns the new object (unless constructor explicitly returns an object)</p>`
+    })}
+
+    ${codeBlock(`// Constructor function — pre-ES6 pattern
+function Person(name, age) {
+  // 'this' is the newly created object (step 3)
+  this.name = name;
+  this.age = age;
+  // DON'T define methods here — every instance gets its own copy!
+}
+
+// Methods go on the PROTOTYPE — shared across all instances
+Person.prototype.greet = function() {
+  return \`Hi, I'm \${this.name}, \${this.age} years old\`;
+};
+
+Person.prototype.isAdult = function() {
+  return this.age >= 18;
+};
+
+const alice = new Person('Alice', 28);
+const bob   = new Person('Bob', 17);
+
+console.log(alice.greet());   // Hi, I'm Alice, 28 years old
+console.log(bob.isAdult());   // false
+
+// Verify the chain:
+console.log(alice.__proto__ === Person.prototype);        // true
+console.log(alice instanceof Person);                     // true
+console.log(alice.greet === bob.greet);                   // true — SAME function ref
+// ↑ This is the memory efficiency of prototypes. One function, shared by all instances.
+
+// Simulate 'new' manually:
+function myNew(Constructor, ...args) {
+  const obj = Object.create(Constructor.prototype); // step 1 & 2
+  const result = Constructor.apply(obj, args);       // step 3
+  return result instanceof Object ? result : obj;    // step 4
+}
+
+const carol = myNew(Person, 'Carol', 30);
+console.log(carol.greet()); // Hi, I'm Carol, 30 years old`)}
+
+    ${theoryBlock({
+      step: 'Step 3 — Prototypal Inheritance (pre-class)',
+      title: 'Setting up inheritance chains manually',
+      body: `<p>To inherit from a constructor function, you need to:</p>
+      <p>1. Call the parent constructor in the child (to initialize own properties)<br>
+      2. Set the child's prototype to an instance of the parent (for method inheritance)<br>
+      3. Fix the constructor reference back to the child</p>`,
+      warn: 'Never do Child.prototype = Parent.prototype — they would share the SAME object. Methods added to Child.prototype would accidentally pollute Parent.prototype.'
+    })}
+
+    ${codeBlock(`function Animal(name) {
+  this.name = name;
+  this.alive = true;
+}
+
+Animal.prototype.speak = function() {
+  return \`\${this.name} makes a sound\`;
+};
+
+function Dog(name, breed) {
+  Animal.call(this, name);  // ① call parent constructor
+  this.breed = breed;
+}
+
+// ② Set up prototype chain
+Dog.prototype = Object.create(Animal.prototype);
+
+// ③ Fix the constructor reference
+Dog.prototype.constructor = Dog;
+
+// Add Dog-specific methods
+Dog.prototype.bark = function() {
+  return \`\${this.name} barks: Woof!\`;
+};
+
+// Override parent method (polymorphism)
+Dog.prototype.speak = function() {
+  return this.bark(); // override
+};
+
+const rex = new Dog('Rex', 'Labrador');
+console.log(rex.speak());         // Rex barks: Woof!
+console.log(rex instanceof Dog);  // true
+console.log(rex instanceof Animal); // true — chain works!
+console.log(rex.constructor === Dog); // true — fixed!`)}
+  `;
+}
+
+function classesTheory() {
+  return `
+    ${theoryBlock({
+      step: 'ES6 Classes',
+      title: 'Classes are syntactic sugar — the prototype chain is identical underneath',
+      body: `<p>ES6 classes provide a cleaner syntax but do NOT change the prototype-based model.
+      Every class feature maps directly to prototype operations.</p>`,
+      callout: 'typeof ClassName === "function" — classes ARE functions in JavaScript. The class body defines the constructor and sets up the prototype.'
+    })}
+
+    ${codeBlock(`// ES6 Class — same prototype chain as before, cleaner syntax
+class Animal {
+  #alive = true; // private field (ES2022) — truly private
+
+  constructor(name) {
+    this.name = name;
+  }
+
+  speak() {  // → Animal.prototype.speak
+    return \`\${this.name} makes a sound\`;
+  }
+
+  get isAlive() { return this.#alive; }   // getter
+
+  static create(name) {                  // static — on Animal itself, not prototype
+    return new Animal(name);
+  }
+}
+
+class Dog extends Animal {
+  #breed;
+
+  constructor(name, breed) {
+    super(name);         // ← must call super() before using 'this'
+    this.#breed = breed;
+  }
+
+  // Override
+  speak() {
+    return \`\${this.name} barks!\`;
+  }
+
+  // Call parent method
+  fullIntro() {
+    return \`\${super.speak()} and \${this.speak()}\`;
+  }
+
+  get breed() { return this.#breed; }
+}
+
+const rex = new Dog('Rex', 'Lab');
+console.log(rex.speak());       // Rex barks!
+console.log(rex.fullIntro());   // Rex makes a sound and Rex barks!
+console.log(rex.isAlive);       // true
+console.log(rex instanceof Dog);    // true
+console.log(rex instanceof Animal); // true
+
+// Under the hood — SAME as before:
+console.log(Object.getPrototypeOf(Dog.prototype) === Animal.prototype); // true
+console.log(typeof Dog); // 'function' — classes are functions!`)}
+
+    ${theoryBlock({
+      step: 'Mixins',
+      title: 'Composing behaviors — JavaScript has no multiple inheritance, but mixins work',
+      body: `<p>Since you can only extend one class, mixins let you compose multiple behaviors 
+      into a class without a deep inheritance tree. The pattern: functions that take a class and 
+      return an extended class.</p>`
+    })}
+
+    ${codeBlock(`// Mixin pattern — composable behaviors
+const Serializable = (Base) => class extends Base {
+  serialize() {
+    return JSON.stringify(this);
+  }
+  static deserialize(json) {
+    return Object.assign(new this(), JSON.parse(json));
+  }
+};
+
+const Timestamped = (Base) => class extends Base {
+  constructor(...args) {
+    super(...args);
+    this.createdAt = new Date().toISOString();
+  }
+};
+
+const Validatable = (Base) => class extends Base {
+  validate() {
+    return Object.keys(this).every(key => this[key] !== null);
+  }
+};
+
+// Compose all three behaviors onto User
+class User extends Serializable(Timestamped(Validatable(class {
+  constructor(name, email) {
+    this.name = name;
+    this.email = email;
+  }
+}))) {}
+
+const user = new User('Alice', 'alice@example.com');
+console.log(user.validate());    // true
+console.log(user.createdAt);     // ISO timestamp
+console.log(user.serialize());   // JSON string`)}
+  `;
+}
+
+function protoQuiz() {
+  return `
+    ${buildQuiz({
+      id: 'pt_q1',
+      label: 'Q1 — instanceof',
+      question: 'After <code>class B extends A {}</code>, which is TRUE?',
+      options: [
+        'B instanceof A is true',
+        'new B() instanceof A is true',
+        'B.prototype === A.prototype',
+        'B.constructor === A'
+      ],
+      correct: 1,
+      difficulty: 'Medium',
+      explanation: '<code>new B() instanceof A</code> is true because the prototype chain of a B instance includes A.prototype. <code>B instanceof A</code> is false — B (the class/function itself) is not an instance of A. <code>B.prototype !== A.prototype</code> — they have a prototype LINK but are separate objects.'
+    })}
+
+    ${buildQuiz({
+      id: 'pt_q2',
+      label: 'Q2 — Own vs Inherited',
+      question: 'What does <code>Object.keys()</code> return vs <code>for...in</code>?',
+      options: [
+        'Both return the same properties',
+        'Object.keys() returns own enumerable; for...in includes inherited enumerable',
+        'for...in returns own properties only',
+        'Object.keys() includes inherited properties'
+      ],
+      correct: 1,
+      difficulty: 'Medium',
+      explanation: '<code>Object.keys()</code> returns only OWN enumerable string properties. <code>for...in</code> iterates ALL enumerable properties — own AND inherited through the prototype chain. Use <code>hasOwnProperty()</code> inside for...in to filter to own properties only.'
+    })}
+
+    ${buildQuiz({
+      id: 'pt_q3',
+      label: 'Q3 — new keyword',
+      question: 'What does the "new" keyword do when calling a constructor function? (Select most complete answer)',
+      options: [
+        'Creates an object and runs the function',
+        'Creates an object, links its prototype, runs constructor, returns the object',
+        'Allocates memory for the object only',
+        'Creates a class instance using class syntax'
+      ],
+      correct: 1,
+      difficulty: 'Hard',
+      explanation: '"new" performs 4 steps: (1) Creates a fresh empty object, (2) Sets its [[Prototype]] to Constructor.prototype, (3) Executes the constructor with "this" = new object, (4) Returns the new object (unless constructor returns another object). All 4 steps are needed for the complete answer.'
+    })}
+  `;
+}
+
+
+/* ===== js/async.js ===== */
+/**
+ * ═══════════════════════════════════════════════════════════
+ * async.js — Async JavaScript: Callbacks → Promises → Async/Await
+ *
+ * EVOLUTION OF ASYNC IN JS:
+ *   1. Callbacks (callback hell / pyramid of doom)
+ *   2. Promises (chaining, .then/.catch/.finally)
+ *   3. Async/Await (syntactic sugar over Promises)
+ *   4. Promise combinators (all, race, allSettled, any)
+ *
+ * INTERVIEW IMPORTANCE: ★★★★★
+ * Nearly every senior frontend interview covers async patterns,
+ * error handling, Promise.all vs allSettled, and common pitfalls.
+ * ═══════════════════════════════════════════════════════════
+ */
+
+window.modules = window.modules || {};
+
+window.modules.async = function() {
+  trackModule('async');
+
+  return `
+    ${moduleHeader({
+      tag: '03 — Async JavaScript',
+      title: 'Promises & Async/Await',
+      desc: 'From callback hell to elegant async/await — understand every layer of JavaScript\'s asynchronous model and handle any interview scenario.'
+    })}
+
+    ${buildTabs([
+      { id: 'theory', label: '📖 Theory', content: asyncTheory() },
+      { id: 'combinators', label: '⚡ Combinators', content: asyncCombinatorsTheory() },
+      { id: 'quiz', label: '🎯 Interview Q&A', content: asyncQuiz() }
+    ])}
+  `;
+};
+
+function asyncTheory() {
+  return `
+    ${theoryBlock({
+      step: 'Step 1 — Why Async?',
+      title: 'JavaScript is single-threaded — async prevents blocking',
+      body: `<p>JavaScript runs on a single thread. If a network request blocked the thread for 2 seconds,
+      the entire page would freeze. Async patterns delegate slow work (I/O, timers, network) to Web APIs,
+      freeing the main thread to keep running.</p>
+      <p>The call stack executes synchronous code. When async work completes, a callback is placed in 
+      the task queue and the event loop picks it up when the stack is empty.</p>`,
+      callout: 'JavaScript is non-blocking by design. The async model is the engine\'s solution to keeping a single-threaded environment responsive.'
+    })}
+
+    ${theoryBlock({
+      step: 'Step 2 — Callback Hell',
+      title: 'The problem Promises were invented to solve',
+      body: `<p>Nesting callbacks for sequential async operations creates code that is: hard to read,
+      nearly impossible to handle errors in, and difficult to reason about. This is called "callback hell"
+      or the "pyramid of doom".</p>`
+    })}
+
+    ${codeBlock(`// ❌ CALLBACK HELL — unreadable, error-prone
+getUser(id, function(user) {
+  getPosts(user.id, function(posts) {
+    getComments(posts[0].id, function(comments) {
+      getLikes(comments[0].id, function(likes) {
+        // lost in the pyramid... where is error handling?
+        console.log(likes);
+      }, handleError);
+    }, handleError);
+  }, handleError);
+}, handleError);`)}
+
+    ${theoryBlock({
+      step: 'Step 3 — Promises',
+      title: 'A Promise represents a value that may be available now, or in the future, or never',
+      body: `<p>A Promise is an object in one of three states:</p>
+      <p><strong>pending</strong> → initial state, neither fulfilled nor rejected<br>
+      <strong>fulfilled</strong> → the operation completed successfully (value available)<br>
+      <strong>rejected</strong> → the operation failed (reason available)</p>
+      <p>Once settled (fulfilled or rejected), a Promise cannot change state — it is immutable.</p>`,
+      callout: 'Promises are EAGER — the executor function runs immediately when you call new Promise(). The promise is "fired" at construction, not when you call .then().'
+    })}
+
+    ${codeBlock(`// Building a Promise from scratch
+function fetchUser(id) {
+  return new Promise((resolve, reject) => {
+    // Executor runs IMMEDIATELY
+    setTimeout(() => {
+      if (id > 0) {
+        resolve({ id, name: 'Alice', role: 'dev' }); // success
+      } else {
+        reject(new Error('Invalid user ID'));           // failure
+      }
+    }, 1000);
+  });
+}
+
+// Consuming a Promise — chain of .then()
+fetchUser(1)
+  .then(user => {
+    console.log('Got user:', user.name);
+    return user.id;           // pass value to next .then
+  })
+  .then(id => {
+    console.log('User ID:', id);
+  })
+  .catch(err => {
+    // ONE catch handles errors from ANY step above
+    console.error('Error:', err.message);
+  })
+  .finally(() => {
+    // Always runs — perfect for cleanup (hide spinner, etc.)
+    console.log('Request complete');
+  });`)}
+
+    ${theoryBlock({
+      step: 'Step 4 — Async/Await',
+      title: 'Syntactic sugar that makes Promise code look synchronous',
+      body: `<p>The <code>async</code> keyword before a function makes it return a Promise.
+      The <code>await</code> keyword pauses execution of that async function until the 
+      awaited Promise settles, then resumes with the resolved value.</p>
+      <p><strong>Key rule:</strong> <code>await</code> can only be used inside an <code>async</code> function 
+      (or at the top level of a module in modern JS).</p>`,
+      warn: 'await does NOT block the main thread — it only pauses the current async function. Other code continues running. This is a common misconception in interviews.'
+    })}
+
+    ${codeBlock(`// ✅ CLEAN async/await — reads like sync code
+async function loadUserDashboard(userId) {
+  try {
+    const user    = await fetchUser(userId);
+    const posts   = await fetchPosts(user.id);     // sequential
+    const profile = await fetchProfile(user.id);    // sequential
+
+    return { user, posts, profile };
+  } catch (err) {
+    // single catch for all awaited failures
+    console.error('Dashboard load failed:', err);
+    throw err; // re-throw so callers know it failed
+  }
+}
+
+// ──────────────────────────────────────────────────────────
+
+// PARALLEL execution — much faster!
+async function loadDashboardFast(userId) {
+  try {
+    const user = await fetchUser(userId);
+
+    // Fire both in parallel — NOT sequential
+    const [posts, profile] = await Promise.all([
+      fetchPosts(user.id),
+      fetchProfile(user.id)
+    ]);
+
+    return { user, posts, profile };
+  } catch (err) {
+    console.error('Failed:', err);
+    throw err;
+  }
+}
+
+// KEY INSIGHT: the sequential version takes 2s (1s + 1s)
+// The parallel version takes 1s (max of both)`)}
+
+    ${theoryBlock({
+      step: 'Step 5 — Error Handling Patterns',
+      title: 'Robust error handling is what separates junior from senior',
+      body: `<p>Many developers know try/catch but miss nuances: what if you need different 
+      handling per step? What if some failures are acceptable? What if you need a fallback value?</p>`
+    })}
+
+    ${codeBlock(`// Pattern 1: Per-step error handling
+async function resilientFetch(url) {
+  let data;
+  try {
+    data = await fetch(url).then(r => r.json());
+  } catch (err) {
+    console.warn('Primary failed, using fallback:', err);
+    data = await fetchFallback();  // graceful fallback
+  }
+  return data;
+}
+
+// Pattern 2: Helper to avoid try/catch boilerplate
+// Returns [error, result] tuple — inspired by Go error handling
+async function safeAwait(promise) {
+  try {
+    return [null, await promise];
+  } catch (err) {
+    return [err, null];
+  }
+}
+
+async function example() {
+  const [err, user] = await safeAwait(fetchUser(1));
+  if (err) {
+    console.error('Could not load user:', err.message);
+    return;
+  }
+  console.log('User:', user.name);
+}
+
+// Pattern 3: Timeout wrapper
+function withTimeout(promise, ms) {
+  const timeout = new Promise((_, reject) =>
+    setTimeout(() => reject(new Error(\`Timed out after \${ms}ms\`)), ms)
+  );
+  return Promise.race([promise, timeout]);
+}
+
+const data = await withTimeout(fetchUser(1), 5000);`)}
+  `;
+}
+
+function asyncCombinatorsTheory() {
+  return `
+    ${section('Promise Combinators — Know Every One', `
+      ${theoryBlock({
+        step: 'Promise.all()',
+        title: 'All must succeed — fails fast on any rejection',
+        body: `<p>Runs all promises in parallel. Resolves when ALL resolve (returns array of results).
+        Rejects immediately if ANY promise rejects (the others are abandoned).</p>
+        <p><strong>Use when:</strong> You need ALL results and any failure is unacceptable.</p>`
+      })}
+      ${codeBlock(`// Promise.all — parallel, fail-fast
+const [users, products, orders] = await Promise.all([
+  fetch('/api/users').then(r => r.json()),
+  fetch('/api/products').then(r => r.json()),
+  fetch('/api/orders').then(r => r.json())
+]);
+// If orders fails → entire promise rejects
+// users and products results are LOST`)}
+
+      ${theoryBlock({
+        step: 'Promise.allSettled()',
+        title: 'Wait for ALL, regardless of success or failure',
+        body: `<p>Always resolves (never rejects). Returns an array of objects with 
+        <code>{status: 'fulfilled', value}</code> or <code>{status: 'rejected', reason}</code>.</p>
+        <p><strong>Use when:</strong> Failures are acceptable — you want to handle each outcome individually.</p>`
+      })}
+      ${codeBlock(`// Promise.allSettled — no fail-fast, see all results
+const results = await Promise.allSettled([
+  fetch('/api/users').then(r => r.json()),
+  fetch('/api/broken-endpoint').then(r => r.json()),  // will fail
+  fetch('/api/products').then(r => r.json())
+]);
+
+results.forEach((result, i) => {
+  if (result.status === 'fulfilled') {
+    console.log(\`Request \${i} succeeded:\`, result.value);
+  } else {
+    console.warn(\`Request \${i} failed:\`, result.reason);
+  }
+});
+// Best for: dashboards where partial data is OK`)}
+
+      ${theoryBlock({
+        step: 'Promise.race()',
+        title: 'First to settle wins — fulfilled OR rejected',
+        body: `<p>Resolves/rejects with the value of the <em>first</em> promise to settle, 
+        regardless of whether that's a success or failure.</p>
+        <p><strong>Use when:</strong> Implementing timeouts, racing multiple data sources.</p>`
+      })}
+      ${codeBlock(`// Promise.race — first settles wins
+const result = await Promise.race([
+  fetchFromPrimary(),
+  fetchFromSecondary(),
+  new Promise((_, reject) =>
+    setTimeout(() => reject(new Error('Global timeout')), 3000)
+  )
+]);
+// Whichever resolves or rejects first wins`)}
+
+      ${theoryBlock({
+        step: 'Promise.any()',
+        title: 'First SUCCESSFUL one wins — ignores rejections',
+        body: `<p>Resolves with the first <em>fulfilled</em> promise. Only rejects if ALL promises reject 
+        (throws AggregateError). Added in ES2021.</p>
+        <p><strong>Use when:</strong> Trying multiple sources, wanting the fastest success.</p>`
+      })}
+      ${codeBlock(`// Promise.any — first SUCCESS wins (ignores failures)
+try {
+  const data = await Promise.any([
+    fetch('https://cdn1.example.com/data'),
+    fetch('https://cdn2.example.com/data'),
+    fetch('https://cdn3.example.com/data')
+  ]);
+  // Gets data from whichever CDN responds first
+} catch (err) {
+  // Only if ALL three CDNs fail — AggregateError
+  console.error('All CDNs failed:', err.errors);
+}`)}
+    `)}
+  `;
+}
+
+function asyncQuiz() {
+  return `
+    ${buildQuiz({
+      id: 'as_q1',
+      label: 'Q1 — Output Order',
+      question: 'What is the output order? <br><code>console.log("1");<br>setTimeout(() => console.log("2"), 0);<br>Promise.resolve().then(() => console.log("3"));<br>console.log("4");</code>',
+      options: ['1, 2, 3, 4', '1, 4, 3, 2', '1, 4, 2, 3', '4, 1, 3, 2'],
+      correct: 1,
+      difficulty: 'Hard',
+      explanation: 'Sync code runs first: 1, 4. Then microtasks (Promise callbacks): 3. Then macrotasks (setTimeout): 2. Output: <strong>1, 4, 3, 2</strong>. Promises use the microtask queue which has higher priority than the macrotask queue (where setTimeout goes).'
+    })}
+
+    ${buildQuiz({
+      id: 'as_q2',
+      label: 'Q2 — Promise.all vs allSettled',
+      question: 'You\'re building a dashboard that loads 5 widgets. If widget 3 fails, you want widgets 1, 2, 4, 5 to still display. Which combinator should you use?',
+      options: ['Promise.all', 'Promise.race', 'Promise.allSettled', 'Promise.any'],
+      correct: 2,
+      difficulty: 'Easy',
+      explanation: '<code>Promise.allSettled</code> waits for all promises and gives you each result individually — fulfilled or rejected. It never short-circuits on failure, so you get all the data you CAN get. Perfect for dashboards with independent widgets.'
+    })}
+
+    ${buildQuiz({
+      id: 'as_q3',
+      label: 'Q3 — Async Return Value',
+      question: 'What does an async function ALWAYS return?',
+      options: [
+        'The raw value returned in the function body',
+        'A Promise that wraps the return value',
+        'undefined unless you explicitly return a Promise',
+        'A Generator object'
+      ],
+      correct: 1,
+      difficulty: 'Medium',
+      explanation: 'An <code>async</code> function ALWAYS returns a Promise, regardless of what you return inside. If you return 42, the caller gets <code>Promise.resolve(42)</code>. If you throw, the caller gets a rejected Promise. This is why you can <code>await</code> any async function call.'
+    })}
+
+    ${buildQuiz({
+      id: 'as_q4',
+      label: 'Q4 — Error Handling',
+      question: 'In an async function, which approach correctly handles errors from an awaited Promise?',
+      options: [
+        '.catch() on the function call site only',
+        'try/catch wrapping the await expression',
+        'Both are valid and equivalent',
+        'Neither — async functions cannot throw'
+      ],
+      correct: 2,
+      difficulty: 'Medium',
+      explanation: 'Both approaches work. <code>try/catch</code> inside the async function catches errors inline. <code>.catch()</code> on the returned Promise catches at the call site. You can even combine them. The choice depends on where you want to handle the error and whether you need per-step handling or a global catch.'
+    })}
+  `;
+}
+
+
+/* ===== js/eventloop.js ===== */
+/**
+ * ═══════════════════════════════════════════════════════════
+ * eventloop.js — The JavaScript Event Loop
+ *
+ * CONCEPT OVERVIEW:
+ * The event loop is the mechanism that allows JS to perform
+ * non-blocking I/O despite being single-threaded. Understanding
+ * it deeply is what separates senior devs from juniors.
+ *
+ * KEY QUEUES:
+ *   Call Stack        — where code executes (LIFO)
+ *   Microtask Queue   — Promise callbacks, queueMicrotask
+ *   Macrotask Queue   — setTimeout, setInterval, I/O, UI events
+ *   Render Queue      — requestAnimationFrame (between tasks)
+ *
+ * PRIORITY: Call Stack → Microtasks → Render → Macrotasks
+ * ═══════════════════════════════════════════════════════════
+ */
+
+window.modules = window.modules || {};
+
+window.modules.eventloop = function() {
+  trackModule('eventloop');
+
+  return `
+    ${moduleHeader({
+      tag: '04 — Runtime Model',
+      title: 'The Event Loop',
+      desc: 'The engine behind every async operation. Know this cold and you\'ll never be surprised by execution order again.'
+    })}
+
+    ${buildTabs([
+      { id: 'theory', label: '📖 Theory', content: eventloopTheory() },
+      { id: 'visual', label: '🔍 Trace Examples', content: eventloopTrace() },
+      { id: 'quiz', label: '🎯 Interview Q&A', content: eventloopQuiz() }
+    ])}
+  `;
+};
+
+function eventloopTheory() {
+  return `
+    ${theoryBlock({
+      step: 'Step 1 — The Call Stack',
+      title: 'Synchronous code executes on the call stack (LIFO)',
+      body: `<p>The call stack is a data structure that tracks which function is currently executing.
+      When a function is called, a frame is pushed. When it returns, the frame is popped.</p>
+      <p>JavaScript has ONE call stack. Only one piece of code runs at any moment.
+      If the stack is busy, nothing else can run — this is called "blocking".</p>`,
+      callout: 'Stack overflow occurs when recursive calls push frames faster than they pop — the stack exceeds its memory limit.'
+    })}
+
+    ${codeBlock(`// Call stack trace — read bottom to top at each moment
+
+function c() { console.log('c'); }   // [c, b, a, main]
+function b() { c(); }                // [b, a, main] → [c, b, a, main]
+function a() { b(); }                // [a, main] → [b, a, main]
+
+a();
+// Stack frames at peak:
+// c()   <- top (currently executing)
+// b()
+// a()
+// main  <- global frame at bottom`)}
+
+    ${theoryBlock({
+      step: 'Step 2 — Web APIs',
+      title: 'Browser (or Node) handles async work outside JS',
+      body: `<p>When JS calls <code>setTimeout</code>, <code>fetch</code>, <code>addEventListener</code>, etc.,
+      it hands the work to the browser's Web APIs (or Node's libuv). The JS thread is immediately free.</p>
+      <p>When the Web API finishes (timer fires, response arrives), it puts a callback into the appropriate queue.</p>`
+    })}
+
+    ${theoryBlock({
+      step: 'Step 3 — Microtask Queue (HIGH PRIORITY)',
+      title: 'Promise callbacks and queueMicrotask run before ANY macrotask',
+      body: `<p>After every task (or after sync code), the event loop drains the <em>entire</em> 
+      microtask queue before moving on. This means:</p>
+      <p>• Promise <code>.then()</code> / <code>.catch()</code> / <code>.finally()</code><br>
+      • <code>await</code> resumes<br>
+      • <code>queueMicrotask(cb)</code><br>
+      • MutationObserver callbacks</p>
+      <p>All of these run <strong>before</strong> any macrotask (setTimeout, etc.).</p>`,
+      warn: 'An infinite loop of microtasks (microtask queuing more microtasks) will starve macrotasks and freeze the page — the microtask queue must fully drain before macrotasks run.'
+    })}
+
+    ${theoryBlock({
+      step: 'Step 4 — Macrotask Queue (LOWER PRIORITY)',
+      title: 'setTimeout, setInterval, I/O events — one per loop tick',
+      body: `<p>After microtasks drain, the event loop picks ONE macrotask from the queue, 
+      runs it to completion, then checks microtasks again.</p>
+      <p>Sources of macrotasks:<br>
+      • <code>setTimeout(cb, delay)</code><br>
+      • <code>setInterval(cb, interval)</code><br>
+      • DOM events (click, keydown, etc.)<br>
+      • I/O callbacks<br>
+      • <code>MessageChannel</code></p>`,
+      callout: 'setTimeout(fn, 0) does NOT run "immediately". It runs after the current sync code AND all microtasks complete. Minimum actual delay is ~4ms in browsers.'
+    })}
+
+    ${codeBlock(`// COMPLETE EVENT LOOP WALKTHROUGH
+// Predict the output before reading the answer!
+
+console.log('A');  // 1. Sync → logs A
+
+setTimeout(() => console.log('B'), 0);  // 2. Macrotask queue
+
+Promise.resolve()
+  .then(() => console.log('C'))   // 3. Microtask queue
+  .then(() => console.log('D'));  // 4. Microtask (chained after C)
+
+queueMicrotask(() => console.log('E'));  // 5. Microtask queue
+
+console.log('F');  // 6. Sync → logs F
+
+// EXECUTION ORDER:
+// ┌─ Sync runs first ──────────────┐
+// │ logs: A, F                     │
+// └────────────────────────────────┘
+// ┌─ Microtasks drain completely ──┐
+// │ logs: C, E, D                  │
+// │ (C and E both queued; C runs   │
+// │  first, its .then queues D,    │
+// │  then E runs, then D runs)     │
+// └────────────────────────────────┘
+// ┌─ One macrotask runs ───────────┐
+// │ logs: B                        │
+// └────────────────────────────────┘
+// FINAL OUTPUT: A F C E D B`)}
+  `;
+}
+
+function eventloopTrace() {
+  return `
+    ${section('Execution Tracing Examples', `
+      ${theoryBlock({
+        step: 'Trace 1',
+        title: 'Mixed async operations — trace carefully',
+        body: `<p>Walk through this step by step. Write down what you think the output is before revealing.</p>`
+      })}
+      ${codeBlock(`async function first() {
+  console.log('first-1');         // sync inside async
+  await Promise.resolve();        // pause here — schedules resume as microtask
+  console.log('first-2');         // runs after microtask queue picks it up
+}
+
+async function second() {
+  console.log('second-1');        // sync inside async
+  await Promise.resolve();        // pause here
+  console.log('second-2');
+}
+
+console.log('start');             // [1] Sync
+first();                          // [2] starts first() synchronously
+second();                         // [3] starts second() synchronously
+console.log('end');               // [4] Sync
+
+// Output: start, first-1, second-1, end, first-2, second-2
+//
+// EXPLANATION:
+// 1. 'start' → sync
+// 2. first() called → runs sync until await → logs 'first-1' → pauses
+// 3. second() called → runs sync until await → logs 'second-1' → pauses
+// 4. 'end' → sync
+// 5. Microtasks: first() resumes → 'first-2'
+// 6. Microtasks: second() resumes → 'second-2'`)}
+
+      ${theoryBlock({
+        step: 'Trace 2',
+        title: 'setTimeout vs Promise in nested context',
+        body: `<p>A more complex scenario with nested async operations.</p>`
+      })}
+      ${codeBlock(`console.log('1');
+
+setTimeout(function timeout() {
+  console.log('2');
+  Promise.resolve().then(() => console.log('3'));
+}, 0);
+
+Promise.resolve()
+  .then(function p1() {
+    console.log('4');
+    setTimeout(() => console.log('5'), 0);
+  })
+  .then(() => console.log('6'));
+
+console.log('7');
+
+// OUTPUT: 1, 7, 4, 6, 2, 3, 5
+//
+// STEP BY STEP:
+// Sync: 1, 7
+// Microtasks: p1 runs → logs 4, schedules setTimeout(5)
+//             .then(6) is now queued as microtask
+//             6 runs → logs 6
+// Macrotask: timeout() runs → logs 2
+//            schedules Promise → microtask queue gets 3
+// Microtasks drain: logs 3
+// Macrotask: logs 5`)}
+
+      ${challengeBox(`
+        Write a function <code>sequence(tasks)</code> that takes an array of async functions 
+        and runs them one after another (not in parallel), collecting all results.
+        <br><br>
+        Bonus: implement it 3 ways — using <code>reduce</code>, using a <code>for...of</code> loop, 
+        and using <code>Promise</code> chaining manually.
+      `)}
+    `)}
+  `;
+}
+
+function eventloopQuiz() {
+  return `
+    ${buildQuiz({
+      id: 'el_q1',
+      label: 'Q1 — Queue Priority',
+      question: 'Which queue has the HIGHEST priority in the JavaScript event loop?',
+      options: [
+        'Macrotask queue (setTimeout, setInterval)',
+        'Render queue (requestAnimationFrame)',
+        'Microtask queue (Promises, queueMicrotask)',
+        'All queues have equal priority'
+      ],
+      correct: 2,
+      difficulty: 'Medium',
+      explanation: 'Microtasks have the highest priority. After each task (or after sync code finishes), ALL microtasks are drained before the browser renders or picks up a macrotask. This is why Promise callbacks always run before setTimeout callbacks, even with setTimeout(fn, 0).'
+    })}
+
+    ${buildQuiz({
+      id: 'el_q2',
+      label: 'Q2 — Blocking the Loop',
+      question: 'What happens if synchronous code runs for 5 seconds in the browser?',
+      options: [
+        'Other tasks run on separate threads while waiting',
+        'The page freezes completely for 5 seconds',
+        'The browser automatically moves it to a worker',
+        'setTimeout callbacks still fire on schedule'
+      ],
+      correct: 1,
+      difficulty: 'Easy',
+      explanation: 'JavaScript is single-threaded. A synchronous 5-second loop blocks the entire call stack. No events, no rendering, no callbacks can run — the page is completely frozen. This is why long computations should be moved to Web Workers or broken up with async patterns.'
+    })}
+
+    ${buildQuiz({
+      id: 'el_q3',
+      label: 'Q3 — requestAnimationFrame',
+      question: 'Where does requestAnimationFrame fit in the event loop?',
+      options: [
+        'It\'s a microtask — runs before setTimeout',
+        'It\'s a macrotask — same queue as setTimeout',
+        'It runs between macrotasks and before painting',
+        'It runs on a separate rendering thread'
+      ],
+      correct: 2,
+      difficulty: 'Hard',
+      explanation: 'requestAnimationFrame callbacks run between macrotasks and before the browser\'s next paint. The order within a tick is: macrotask → microtasks drain → rAF → render (paint). This makes rAF ideal for smooth 60fps animations because it syncs with the display refresh rate.'
+    })}
+  `;
+}
+
+
+/* ===== js/currying.js ===== */
+/**
+ * ═══════════════════════════════════════════════════════════
+ * currying.js — Currying, Partial Application & Composition
+ *
+ * CURRYING:
+ * Transforming a function that takes multiple arguments into
+ * a sequence of functions each taking ONE argument.
+ * f(a, b, c) → f(a)(b)(c)
+ *
+ * PARTIAL APPLICATION:
+ * Creating a new function by pre-filling some arguments.
+ * Related to currying but not the same.
+ *
+ * FUNCTION COMPOSITION:
+ * Combining functions so output of one becomes input of next.
+ * compose(f, g)(x) === f(g(x))
+ * ═══════════════════════════════════════════════════════════
+ */
+
+window.modules = window.modules || {};
+
+window.modules.currying = function() {
+  trackModule('currying');
+
+  return `
+    ${moduleHeader({
+      tag: '05 — Functional JS',
+      title: 'Currying & Composition',
+      desc: 'Functional programming techniques that make code more reusable, testable, and expressive. Heavily featured in senior interviews.'
+    })}
+
+    ${buildTabs([
+      { id: 'theory', label: '📖 Theory', content: curryTheory() },
+      { id: 'compose', label: '🔗 Composition', content: composeTheory() },
+      { id: 'quiz', label: '🎯 Interview Q&A', content: curryQuiz() }
+    ])}
+  `;
+};
+
+function curryTheory() {
+  return `
+    ${theoryBlock({
+      step: 'Step 1 — What is Currying?',
+      title: 'Transform a multi-arg function into a chain of single-arg functions',
+      body: `<p>Named after mathematician Haskell Curry. A curried function returns a new function
+      for each argument until all arguments are collected, then executes.</p>
+      <p>This enables <strong>specialization</strong>: create specific versions of generic functions
+      by partially applying arguments.</p>`,
+      callout: 'Currying is about ARITY (number of arguments). A curried binary function f(a, b) becomes f(a)(b) — two unary functions.'
+    })}
+
+    ${codeBlock(`// Manual currying — step by step
+function add(a) {
+  return function(b) {
+    return a + b;
+  };
+}
+
+const add5 = add(5);     // specialist function — a=5 is "remembered" via closure
+console.log(add5(3));    // 8
+console.log(add5(10));   // 15
+console.log(add(2)(3));  // 5 — call all at once
+
+// ──────────────────────────────────────────────────────────
+
+// Arrow function shorthand (elegant but same thing)
+const multiply = a => b => a * b;
+
+const double = multiply(2);
+const triple = multiply(3);
+
+console.log(double(7));  // 14
+console.log(triple(7));  // 21
+console.log([1,2,3,4,5].map(double)); // [2,4,6,8,10]
+// ↑ Curried functions shine with higher-order functions!`)}
+
+    ${theoryBlock({
+      step: 'Step 2 — Generic curry() Implementation',
+      title: 'Write a curry() that works on any function of any arity',
+      body: `<p>The real power of currying comes from a generic <code>curry</code> helper that 
+      automatically transforms any function. This is a classic interview implementation question.</p>`
+    })}
+
+    ${codeBlock(`// Generic curry — handles ANY function
+function curry(fn) {
+  // fn.length is the number of expected parameters
+  return function curried(...args) {
+    if (args.length >= fn.length) {
+      // All arguments collected — execute!
+      return fn.apply(this, args);
+    }
+    // Not enough args — return a function collecting more
+    return function(...moreArgs) {
+      return curried.apply(this, args.concat(moreArgs));
+    };
+  };
+}
+
+// Test it:
+function volume(l, w, h) {
+  return l * w * h;
+}
+
+const curriedVolume = curry(volume);
+
+console.log(curriedVolume(2)(3)(4));   // 24 — one at a time
+console.log(curriedVolume(2, 3)(4));   // 24 — partial batching
+console.log(curriedVolume(2)(3, 4));   // 24 — partial batching
+console.log(curriedVolume(2, 3, 4));   // 24 — all at once
+
+// Create specialists
+const unitCuboid = curriedVolume(1)(1);  // l=1, w=1
+console.log(unitCuboid(5));             // 5 — just need height
+console.log(unitCuboid(10));            // 10
+
+// Real world: curried API helper
+const request = curry(async (method, url, data) => {
+  const res = await fetch(url, {
+    method,
+    body: data ? JSON.stringify(data) : undefined,
+    headers: { 'Content-Type': 'application/json' }
+  });
+  return res.json();
+});
+
+const get  = request('GET');
+const post = request('POST');
+const getUsers = get('/api/users');     // method + url fixed
+// getUsers() — just call!`)}
+
+    ${theoryBlock({
+      step: 'Step 3 — Real-world Currying Examples',
+      title: 'Currying in practice: filtering, validation, events',
+      body: `<p>Currying is most useful for creating configurable, reusable functions from generic ones.</p>`
+    })}
+
+    ${codeBlock(`// 1. Curried filter predicates
+const isGreaterThan = min => num => num > min;
+const isLessThan    = max => num => num < max;
+const inRange = (min, max) => num => num > min && num < max;
+
+const numbers = [1, 5, 12, 20, 35, 50, 7, 8];
+const overTen  = numbers.filter(isGreaterThan(10)); // [12, 20, 35, 50]
+const teens    = numbers.filter(inRange(10, 20));   // [12]
+
+// 2. Curried validator
+const validate = rules => value =>
+  rules.every(rule => rule(value));
+
+const minLen = n => s => s.length >= n;
+const hasUpper = s => /[A-Z]/.test(s);
+const hasNumber = s => /[0-9]/.test(s);
+
+const isStrongPassword = validate([minLen(8), hasUpper, hasNumber]);
+
+console.log(isStrongPassword('weak'));       // false
+console.log(isStrongPassword('Strong1!'));   // true
+
+// 3. Event handling with currying
+const on = type => handler => element =>
+  element.addEventListener(type, handler);
+
+const onClick = on('click');
+const onHover = on('mouseover');
+
+const logClick = onClick(e => console.log('Clicked!', e.target));
+// logClick(document.querySelector('#btn'))  // attach to element`)}
+  `;
+}
+
+function composeTheory() {
+  return `
+    ${theoryBlock({
+      step: 'Composition',
+      title: 'compose() and pipe() — building data pipelines',
+      body: `<p><strong>compose</strong> applies functions RIGHT-to-LEFT: <code>compose(f, g)(x) = f(g(x))</code><br>
+      <strong>pipe</strong> applies functions LEFT-to-RIGHT: <code>pipe(g, f)(x) = f(g(x))</code></p>
+      <p>Both transform data through a sequence of pure functions. Pipe reads more naturally (top-to-bottom).</p>`,
+      callout: 'Think of pipe as an assembly line — data flows left to right through each station.'
+    })}
+
+    ${codeBlock(`// compose — right to left
+const compose = (...fns) => x => fns.reduceRight((acc, fn) => fn(acc), x);
+
+// pipe — left to right (more readable)
+const pipe = (...fns) => x => fns.reduce((acc, fn) => fn(acc), x);
+
+// Pure transformation functions
+const trim      = s => s.trim();
+const toLower   = s => s.toLowerCase();
+const splitWords = s => s.split(/\\s+/);
+const capitalize = s => s[0].toUpperCase() + s.slice(1);
+const join      = sep => arr => arr.join(sep);
+
+// Build a pipeline to normalize a name
+const normalizeName = pipe(
+  trim,
+  toLower,
+  splitWords,
+  arr => arr.map(capitalize),
+  join(' ')
+);
+
+console.log(normalizeName('  JOHN   doe  ')); // John Doe
+console.log(normalizeName('  alice SMITH ')); // Alice Smith
+
+// ──────────────────────────────────────────────────────────
+
+// Async pipe — handles async transformations
+const asyncPipe = (...fns) => x =>
+  fns.reduce((promise, fn) => promise.then(fn), Promise.resolve(x));
+
+const fetchUser    = id => fetch(\`/api/users/\${id}\`).then(r => r.json());
+const extractEmail = user => user.email;
+const sendEmail    = email => fetch('/api/email', {
+  method: 'POST',
+  body: JSON.stringify({ to: email })
+});
+
+const notifyUser = asyncPipe(fetchUser, extractEmail, sendEmail);
+// notifyUser(42) — fetch user 42, extract email, send email`)}
+
+    ${challengeBox(`
+      Implement a <code>memoizedCurry(fn)</code> that combines currying with memoization.
+      Each partial application result should be cached so calling with the same arguments 
+      never re-computes. Then implement <code>debounce(fn, delay)</code> and 
+      <code>throttle(fn, limit)</code> — two of the most common interview implementations.
+    `)}
+  `;
+}
+
+function curryQuiz() {
+  return `
+    ${buildQuiz({
+      id: 'cu_q1',
+      label: 'Q1 — Currying Output',
+      question: 'What does this log? <br><code>const f = a => b => c => a + b + c;<br>console.log(f(1)(2)(3));</code>',
+      options: ['undefined', '6', '[1, 2, 3]', 'f(6)'],
+      correct: 1,
+      difficulty: 'Easy',
+      explanation: 'f(1) returns b => c => 1 + b + c. Calling that with (2) returns c => 1 + 2 + c. Calling THAT with (3) returns 1 + 2 + 3 = <strong>6</strong>. Each call returns the next function until all args are collected.'
+    })}
+
+    ${buildQuiz({
+      id: 'cu_q2',
+      label: 'Q2 — curry() fn.length',
+      question: 'Your curry() uses fn.length to know when to execute. What is the fn.length of: <code>function f(a, b = 0, ...rest) {}</code>?',
+      options: ['3', '2', '1', '0'],
+      correct: 2,
+      difficulty: 'Hard',
+      explanation: '<code>Function.length</code> counts parameters BEFORE the first default or rest parameter. Default parameters and rest parameters are NOT counted. So <code>f.length === 1</code> (only "a" counts). This is an important gotcha when writing a generic curry() function.'
+    })}
+
+    ${buildQuiz({
+      id: 'cu_q3',
+      label: 'Q3 — compose vs pipe',
+      question: 'Given <code>const f = x => x * 2</code> and <code>const g = x => x + 1</code>, what does <code>compose(f, g)(5)</code> return?',
+      options: ['11', '12', '10', '6'],
+      correct: 1,
+      difficulty: 'Medium',
+      explanation: 'compose applies RIGHT to LEFT: first g, then f. So compose(f, g)(5) = f(g(5)) = f(6) = 12. If this were pipe(f, g)(5) it would be g(f(5)) = g(10) = 11. Remember: compose = right-to-left, pipe = left-to-right.'
+    })}
+  `;
+}
+
+
+/* ===== js/patterns.js ===== */
+/**
+ * ═══════════════════════════════════════════════════════════
+ * patterns.js — JavaScript Design Patterns
+ * ═══════════════════════════════════════════════════════════
+ */
+window.modules = window.modules || {};
+
+window.modules.patterns = function() {
+  trackModule('patterns');
+  return `
+    ${moduleHeader({ tag: '06 — Design Patterns', title: 'Design Patterns in JS', desc: 'Proven solutions to recurring problems. Knowing these makes architecture discussions in interviews much cleaner.' })}
+    ${buildTabs([
+      { id: 'creational', label: '🏗️ Creational', content: creationalPatterns() },
+      { id: 'structural', label: '🔗 Structural', content: structuralPatterns() },
+      { id: 'behavioral', label: '⚡ Behavioral', content: behavioralPatterns() }
+    ])}
+  `;
+};
+
+function creationalPatterns() {
+  return `
+    ${theoryBlock({ step: 'Singleton', title: 'Ensures only one instance of a class exists', body: `<p>Used for: configuration, loggers, state stores, connection pools. ES modules are already singletons — the exported object is created once and shared.</p>` })}
+    ${codeBlock(`class EventBus {
+  static #instance = null;
+  #listeners = {};
+
+  static getInstance() {
+    if (!EventBus.#instance) {
+      EventBus.#instance = new EventBus();
+    }
+    return EventBus.#instance;
+  }
+
+  on(event, cb)   { (this.#listeners[event] ||= []).push(cb); }
+  emit(event, data) { (this.#listeners[event] || []).forEach(cb => cb(data)); }
+  off(event, cb)  { this.#listeners[event] = (this.#listeners[event] || []).filter(c => c !== cb); }
+}
+
+const bus1 = EventBus.getInstance();
+const bus2 = EventBus.getInstance();
+console.log(bus1 === bus2); // true — same instance!
+
+bus1.on('login', user => console.log('User logged in:', user));
+bus2.emit('login', { name: 'Alice' }); // 'User logged in: Alice'`)}
+
+    ${theoryBlock({ step: 'Factory', title: 'Create objects without specifying the exact class', body: `<p>Useful when the type of object to create depends on runtime conditions.</p>` })}
+    ${codeBlock(`// Factory Function — no 'new' required
+function createShape(type, options) {
+  const shapes = {
+    circle:    () => ({ type: 'circle',    area: () => Math.PI * options.r ** 2 }),
+    rectangle: () => ({ type: 'rectangle', area: () => options.w * options.h }),
+    triangle:  () => ({ type: 'triangle',  area: () => 0.5 * options.b * options.h })
+  };
+
+  if (!shapes[type]) throw new Error(\`Unknown shape: \${type}\`);
+  return shapes[type]();
+}
+
+const c = createShape('circle', { r: 5 });
+console.log(c.area().toFixed(2)); // 78.54`)}
+
+    ${theoryBlock({ step: 'Observer', title: 'Subscribe/publish event pattern', body: `<p>Used everywhere: DOM events, Redux, RxJS, Node.js EventEmitter, React state updates.</p>` })}
+    ${codeBlock(`class Observable {
+  #subscribers = new Set();
+
+  subscribe(fn)   { this.#subscribers.add(fn); return () => this.#subscribers.delete(fn); }
+  notify(data)    { this.#subscribers.forEach(fn => fn(data)); }
+}
+
+const store = new Observable();
+
+const unsubscribe = store.subscribe(data => console.log('Subscriber A:', data));
+store.subscribe(data => console.log('Subscriber B:', data));
+
+store.notify({ count: 1 }); // Both log
+unsubscribe();               // A unsubscribes
+store.notify({ count: 2 }); // Only B logs`)}
+  `;
+}
+
+function structuralPatterns() {
+  return `
+    ${theoryBlock({ step: 'Decorator', title: 'Add behavior to objects dynamically without modifying the class', body: `<p>Used in Angular (decorators), middleware stacks, logging, rate limiting.</p>` })}
+    ${codeBlock(`// Function decorator — wraps a function with added behavior
+function readonly(fn) {
+  return new Proxy(fn, {
+    set() { throw new TypeError('This object is read-only!'); }
+  });
+}
+
+function withLogging(fn) {
+  return function(...args) {
+    console.log(\`Calling \${fn.name} with\`, args);
+    const result = fn.apply(this, args);
+    console.log(\`\${fn.name} returned:\`, result);
+    return result;
+  };
+}
+
+function withRetry(fn, maxRetries = 3) {
+  return async function(...args) {
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+      try {
+        return await fn.apply(this, args);
+      } catch (err) {
+        if (attempt === maxRetries) throw err;
+        console.warn(\`Attempt \${attempt} failed, retrying...\`);
+        await new Promise(r => setTimeout(r, attempt * 1000));
+      }
+    }
+  };
+}
+
+const fetchData = withRetry(withLogging(async (url) => {
+  const r = await fetch(url);
+  return r.json();
+}));`)}
+
+    ${theoryBlock({ step: 'Proxy', title: 'Intercept and customize fundamental object operations', body: `<p>ES6 Proxy enables metaprogramming — intercept get, set, has, delete, apply operations.</p>` })}
+    ${codeBlock(`// Reactive state proxy — like Vue 3 reactivity
+function reactive(target, onChange) {
+  return new Proxy(target, {
+    get(obj, key) {
+      const val = obj[key];
+      // Deep reactive — proxy nested objects too
+      return typeof val === 'object' && val !== null
+        ? reactive(val, onChange) : val;
+    },
+    set(obj, key, val) {
+      const old = obj[key];
+      obj[key] = val;
+      if (old !== val) onChange(key, val, old); // notify
+      return true;
+    }
+  });
+}
+
+const state = reactive({ user: { name: 'Alice', age: 25 } }, (key, val) => {
+  console.log(\`\${key} changed to\`, val);
+});
+
+state.user.name = 'Bob'; // logs: name changed to Bob`)}
+  `;
+}
+
+function behavioralPatterns() {
+  return `
+    ${theoryBlock({ step: 'Strategy', title: 'Swap algorithms at runtime without changing the client', body: `<p>Used for: sorting algorithms, payment processors, auth strategies, compression.</p>` })}
+    ${codeBlock(`// Strategy pattern — swap sorting algorithm at runtime
+class Sorter {
+  #strategy;
+
+  constructor(strategy) { this.#strategy = strategy; }
+  setStrategy(strategy) { this.#strategy = strategy; }
+  sort(data) { return this.#strategy([...data]); }
+}
+
+const bubbleSort = arr => { /* bubble sort impl */ return arr.sort((a,b) => a-b); };
+const quickSort  = arr => { /* quicksort impl */ return arr.sort((a,b) => a-b); };
+const mergeSort  = arr => { /* mergesort impl */ return arr.sort((a,b) => a-b); };
+
+const sorter = new Sorter(bubbleSort);
+sorter.sort([5,1,4,2]);
+
+// Switch strategy based on input size
+sorter.setStrategy(data.length > 1000 ? quickSort : bubbleSort);`)}
+
+    ${theoryBlock({ step: 'Command', title: 'Encapsulate operations as objects — enables undo/redo', body: `<p>Used for: text editors, transactional systems, queuing operations.</p>` })}
+    ${codeBlock(`class TextEditor {
+  #text = '';
+  #history = [];
+  #redoStack = [];
+
+  execute(command) {
+    this.#text = command.execute(this.#text);
+    this.#history.push(command);
+    this.#redoStack = []; // clear redo on new action
+  }
+
+  undo() {
+    const cmd = this.#history.pop();
+    if (cmd) { this.#text = cmd.undo(this.#text); this.#redoStack.push(cmd); }
+  }
+
+  redo() {
+    const cmd = this.#redoStack.pop();
+    if (cmd) { this.#text = cmd.execute(this.#text); this.#history.push(cmd); }
+  }
+
+  get value() { return this.#text; }
+}
+
+const InsertCommand = (str, pos) => ({
+  execute: text => text.slice(0, pos) + str + text.slice(pos),
+  undo:    text => text.slice(0, pos) + text.slice(pos + str.length)
+});
+
+const editor = new TextEditor();
+editor.execute(InsertCommand('Hello', 0));
+editor.execute(InsertCommand(' World', 5));
+console.log(editor.value); // Hello World
+editor.undo();
+console.log(editor.value); // Hello`)}
+  `;
+}
+
+
+/* ===== js/memory.js ===== */
+/**
+ * memory.js — Memory & Performance
+ */
+window.modules = window.modules || {};
+
+window.modules.memory = function() {
+  trackModule('memory');
+  return `
+    ${moduleHeader({ tag: '07 — Performance', title: 'Memory & Performance', desc: 'Garbage collection, memory leaks, WeakMap/WeakSet, and performance optimization patterns.' })}
+    ${buildTabs([
+      { id: 'gc', label: '♻️ Garbage Collection', content: gcTheory() },
+      { id: 'leaks', label: '💧 Memory Leaks', content: leaksTheory() }
+    ])}
+  `;
+};
+
+function gcTheory() {
+  return `
+    ${theoryBlock({ step: 'Step 1 — Garbage Collection', title: 'Mark-and-Sweep: JS automatically frees unreachable memory', body: `<p>The JS engine periodically finds all objects reachable from "roots" (global, stack, closures). Anything unreachable is garbage-collected. You cannot control WHEN this runs.</p><p><strong>Roots:</strong> global variables, local variables in the call stack, closure references.</p>`, callout: 'An object is eligible for GC when there are zero references to it — not just fewer references.' })}
+    ${codeBlock(`// Memory lifecycle
+let user = { name: 'Alice', data: new Array(10000) }; // allocated
+
+let ref2 = user; // two references
+
+user = null;     // one reference remains (ref2)
+ref2 = null;     // ZERO references → eligible for GC
+
+// WeakMap/WeakSet — weak references (don't prevent GC)
+const cache = new WeakMap();
+
+function process(element) {
+  if (cache.has(element)) return cache.get(element); // cache hit
+
+  const result = /* expensive computation */ {};
+  cache.set(element, result);
+  // When 'element' DOM node is removed from DOM and has no other refs,
+  // the WeakMap entry is automatically deleted — no memory leak!
+  return result;
+}`)}
+
+    ${theoryBlock({ step: 'Step 2 — WeakMap vs Map', title: 'Use WeakMap for metadata on objects you don\'t own', body: `<p><strong>Map</strong>: strong reference — the key object will NOT be GC'd while in the Map.<br><strong>WeakMap</strong>: weak reference — if the key has no other references, GC can collect it, removing the WeakMap entry automatically.</p>`, warn: 'WeakMap keys MUST be objects (not primitives). WeakMaps are not iterable — you cannot loop over them. This is intentional to prevent resurrection of GC\'d objects.' })}
+    ${codeBlock(`// Map — holds strong reference (potential leak!)
+const map = new Map();
+let button = document.querySelector('#btn');
+map.set(button, { clicks: 0 }); // button is now pinned in memory
+
+button = null; // button removed from DOM
+// BUT the Map still holds the button → memory leak!
+
+// WeakMap — holds weak reference (no leak)
+const weakMap = new WeakMap();
+let btn2 = document.querySelector('#btn2');
+weakMap.set(btn2, { clicks: 0 });
+
+btn2 = null; // btn2 removed from DOM
+// WeakMap entry is automatically cleaned up by GC ✅
+
+// Private data pattern with WeakMap (pre-private fields)
+const _private = new WeakMap();
+
+class SecureUser {
+  constructor(name, password) {
+    _private.set(this, { password }); // stored externally, inaccessible
+    this.name = name;
+  }
+
+  validatePassword(attempt) {
+    return _private.get(this).password === attempt;
+  }
+}
+
+const u = new SecureUser('Alice', 'secret123');
+console.log(u.validatePassword('secret123')); // true
+console.log(u.password); // undefined — truly private!`)}
+  `;
+}
+
+function leaksTheory() {
+  return `
+    ${section('Common Memory Leak Patterns', `
+      ${theoryBlock({ step: 'Leak 1', title: 'Detached DOM nodes held by closures', body: `<p>When you remove a DOM node from the document but a JavaScript closure still references it, the entire subtree stays in memory.</p>` })}
+      ${codeBlock(`// ❌ LEAK — detached DOM node
+function setupButton() {
+  const container = document.getElementById('container'); // large DOM tree
+
+  const handler = () => {
+    console.log(container.children.length); // closure captures container
+  };
+
+  document.addEventListener('resize', handler); // event on document
+  container.remove(); // removed from DOM, but handler still refs it!
+  // container and its subtree cannot be GC'd while 'handler' is alive
+}
+
+// ✅ FIX — capture only what you need, remove listeners
+function setupButtonFixed() {
+  const childCount = document.getElementById('container').children.length;
+
+  const handler = () => console.log(childCount); // only a number, not the node
+  document.addEventListener('resize', handler);
+
+  return () => document.removeEventListener('resize', handler); // cleanup!
+}`)}
+
+      ${theoryBlock({ step: 'Leak 2', title: 'Timers and intervals not cleared', body: `<p>setInterval that holds closure references to objects will prevent GC for the lifetime of the interval — potentially forever if never cleared.</p>` })}
+      ${codeBlock(`// ❌ LEAK — interval holds reference to large object
+class DataPoller {
+  constructor() {
+    this.data = new Array(100000); // large
+    this.intervalId = setInterval(() => {
+      this.fetchAndUpdate(); // 'this' is captured → DataPoller is pinned
+    }, 1000);
+  }
+
+  destroy() {
+    clearInterval(this.intervalId); // ✅ MUST call this!
+    this.data = null; // release large data
+  }
+}
+
+// In React: return cleanup from useEffect
+useEffect(() => {
+  const id = setInterval(fetchData, 1000);
+  return () => clearInterval(id); // cleanup on unmount
+}, []);`)}
+    `)}
+  `;
+}
+
+/**
+ * ═══════════════════════════════════════════════════════════
+ * interview.js — Top Interview Questions
+ * ═══════════════════════════════════════════════════════════
+ */
+window.modules.interview = function() {
+  trackModule('interview');
+  return `
+    ${moduleHeader({ tag: '09 — Interview Zone', title: 'Top Interview Questions', desc: 'The most frequently asked JavaScript questions at FAANG and top product companies, with full solutions and explanations.' })}
+    ${buildTabs([
+      { id: 'implementations', label: '🔧 Implement This', content: implementQuestions() },
+      { id: 'tricky', label: '🧠 Tricky Output', content: trickyQuestions() },
+      { id: 'concepts', label: '💡 Concept Q&A', content: conceptQuestions() }
+    ])}
+  `;
+};
+
+function implementQuestions() {
+  return `
+    ${section('Classic Implementation Questions', `
+      ${theoryBlock({ step: 'Q1 — Very Common', title: 'Implement debounce(fn, delay)', body: `<p>Debounce delays execution until after <code>delay</code>ms have passed since the LAST call. Used for search inputs, resize handlers.</p>` })}
+      ${codeBlock(`function debounce(fn, delay) {
+  let timeoutId;
+
+  return function(...args) {
+    clearTimeout(timeoutId); // cancel previous timer
+
+    timeoutId = setTimeout(() => {
+      fn.apply(this, args); // call with correct this and args
+    }, delay);
+  };
+}
+
+// Usage
+const searchInput = document.querySelector('#search');
+const search = debounce((query) => fetch(\`/api/search?q=\${query}\`), 300);
+searchInput.addEventListener('input', e => search(e.target.value));
+// Only fires 300ms after user STOPS typing`)}
+
+      ${theoryBlock({ step: 'Q2 — Very Common', title: 'Implement throttle(fn, limit)', body: `<p>Throttle ensures fn is called AT MOST once per <code>limit</code>ms, regardless of how many times it\'s invoked. Used for scroll events, mousemove.</p>` })}
+      ${codeBlock(`function throttle(fn, limit) {
+  let lastRun = 0;
+  let timeoutId;
+
+  return function(...args) {
+    const now = Date.now();
+    const remaining = limit - (now - lastRun);
+
+    if (remaining <= 0) {
+      clearTimeout(timeoutId);
+      lastRun = now;
+      fn.apply(this, args);
+    } else {
+      // Schedule trailing call to ensure last event fires
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        lastRun = Date.now();
+        fn.apply(this, args);
+      }, remaining);
+    }
+  };
+}
+
+// Usage: scroll handler fires at most once per 100ms
+window.addEventListener('scroll', throttle(handleScroll, 100));`)}
+
+      ${theoryBlock({ step: 'Q3 — Common', title: 'Implement a deep clone function', body: `<p>JSON.parse(JSON.stringify()) doesn\'t handle: functions, undefined, circular refs, Dates, RegExp, Map, Set. Write a proper deep clone.</p>` })}
+      ${codeBlock(`function deepClone(obj, seen = new WeakMap()) {
+  // Handle primitives and null
+  if (obj === null || typeof obj !== 'object') return obj;
+
+  // Handle circular references
+  if (seen.has(obj)) return seen.get(obj);
+
+  // Handle special types
+  if (obj instanceof Date)   return new Date(obj.getTime());
+  if (obj instanceof RegExp) return new RegExp(obj.source, obj.flags);
+  if (obj instanceof Map)    return new Map([...obj].map(([k, v]) => [deepClone(k, seen), deepClone(v, seen)]));
+  if (obj instanceof Set)    return new Set([...obj].map(v => deepClone(v, seen)));
+
+  // Handle Arrays and Objects
+  const clone = Array.isArray(obj) ? [] : Object.create(Object.getPrototypeOf(obj));
+  seen.set(obj, clone); // register before recursing (circular ref protection)
+
+  for (const key of Reflect.ownKeys(obj)) { // includes Symbols!
+    clone[key] = deepClone(obj[key], seen);
+  }
+
+  return clone;
+}
+
+// Test circular reference
+const a = { name: 'a' };
+a.self = a; // circular!
+const cloned = deepClone(a);
+console.log(cloned.self === cloned); // true — circular preserved
+console.log(cloned === a);           // false — different object`)}
+
+      ${theoryBlock({ step: 'Q4 — Common', title: 'Implement Promise.all from scratch', body: `<p>A classic test of async understanding and edge case handling.</p>` })}
+      ${codeBlock(`function myPromiseAll(promises) {
+  return new Promise((resolve, reject) => {
+    if (!Array.isArray(promises)) {
+      return reject(new TypeError('Argument must be an array'));
+    }
+
+    const results = new Array(promises.length);
+    let resolved = 0;
+
+    if (promises.length === 0) return resolve([]);
+
+    promises.forEach((promise, i) => {
+      // Wrap non-promises with Promise.resolve
+      Promise.resolve(promise).then(value => {
+        results[i] = value; // preserve order!
+        resolved++;
+        if (resolved === promises.length) resolve(results);
+      }).catch(reject); // fail fast on any rejection
+    });
+  });
+}
+
+// Test
+myPromiseAll([
+  Promise.resolve(1),
+  Promise.resolve(2),
+  Promise.resolve(3)
+]).then(console.log); // [1, 2, 3]`)}
+    `)}
+  `;
+}
+
+function trickyQuestions() {
+  return `
+    ${buildQuiz({
+      id: 'iv_q1', label: 'Tricky — typeof', difficulty: 'Medium',
+      question: 'What does <code>typeof null</code> return?',
+      options: ['null', '"null"', '"object"', '"undefined"'],
+      correct: 2,
+      explanation: 'typeof null === "object" is a famous JavaScript bug from the very first version of JS. The value null\'s type tag in memory was 0, and objects were also tagged 0. This was never fixed to preserve backwards compatibility. Always use === null to check for null, not typeof.'
+    })}
+    ${buildQuiz({
+      id: 'iv_q2', label: 'Tricky — == coercion', difficulty: 'Hard',
+      question: 'What does <code>[] == ![]</code> evaluate to?',
+      options: ['true', 'false', 'TypeError', 'undefined'],
+      correct: 0,
+      explanation: '![] is false (empty array is truthy, ! inverts it). So: [] == false. Abstract equality converts false to 0. Then [] converts to "" (empty string), then to 0. So 0 == 0 → true. This is why you should ALWAYS use === (strict equality) to avoid type coercion surprises.'
+    })}
+    ${buildQuiz({
+      id: 'iv_q3', label: 'Tricky — this binding', difficulty: 'Hard',
+      question: 'What logs? <br><code>const obj = { x: 1, getX: function() { return () => this.x; } };<br>const fn = obj.getX();<br>console.log(fn());</code>',
+      options: ['undefined', '1', 'TypeError', 'null'],
+      correct: 1,
+      difficulty: 'Hard',
+      explanation: 'getX() is a regular function called as obj.getX() — so this = obj inside getX. The arrow function inside captures this lexically from getX\'s scope, which is obj. So fn() returns obj.x = 1. If getX were an arrow function, this would be the outer context (probably global/undefined in strict mode).'
+    })}
+  `;
+}
+
+function conceptQuestions() {
+  return `
+    ${buildQuiz({
+      id: 'iv_q4', label: 'Concept', difficulty: 'Medium',
+      question: 'What is the difference between == and ===?',
+      options: [
+        '=== is faster, == is more compatible',
+        '== performs type coercion, === does not',
+        '== checks reference equality, === checks value equality',
+        'There is no difference in modern JavaScript'
+      ],
+      correct: 1,
+      explanation: '== (abstract equality) coerces operands to the same type before comparing. === (strict equality) requires both the value AND the type to match. Best practice: always use === unless you explicitly want type coercion (rare). Common trap: null == undefined is true, but null === undefined is false.'
+    })}
+    ${buildQuiz({
+      id: 'iv_q5', label: 'Concept', difficulty: 'Hard',
+      question: 'What is the Temporal Dead Zone (TDZ)?',
+      options: [
+        'The time a variable is garbage collected',
+        'The period where let/const are hoisted but not initialized — accessing them throws ReferenceError',
+        'A zone where async code cannot run',
+        'The time between var declaration and assignment'
+      ],
+      correct: 1,
+      explanation: 'let and const ARE hoisted (the binding exists from the start of the block) but they are NOT initialized until the declaration is reached. The zone between the start of the block and the declaration is the Temporal Dead Zone. Accessing a let/const variable in the TDZ throws ReferenceError — unlike var which gives undefined.'
+    })}
+  `;
+}
+
+/**
+ * ═══════════════════════════════════════════════════════════
+ * playground.js — Live Code Playground
+ * ═══════════════════════════════════════════════════════════
+ */
+window.modules.playground = function() {
+  trackModule('playground');
+  return `
+    ${moduleHeader({ tag: '10 — Practice', title: 'Live Playground', desc: 'Write and run JavaScript in real-time. The console is captured below. Test concepts from any module.' })}
+    <div class="playground-split">
+      <div class="editor-wrap">
+        <div class="panel-header">
+          <span class="panel-title">Editor</span>
+          <button class="run-btn" onclick="runPlayground()">▶ Run</button>
+        </div>
+        <textarea class="code-editor" id="playEditor" spellcheck="false">// Try anything here!
+
+// Example: implement a pipe function
+const pipe = (...fns) => x => fns.reduce((v, f) => f(v), x);
+
+const processName = pipe(
+  s => s.trim(),
+  s => s.toLowerCase(),
+  s => s.split(' ').map(w => w[0].toUpperCase() + w.slice(1)).join(' ')
+);
+
+console.log(processName('  JOHN   doe  '));
+console.log(processName('  alice smith  '));
+
+// Test closures
+function makeAdder(x) {
+  return n => n + x;
+}
+const add10 = makeAdder(10);
+console.log(add10(5));
+console.log([1,2,3,4,5].map(add10));
+</textarea>
+      </div>
+      <div class="output-wrap">
+        <div class="panel-header">
+          <span class="panel-title">Console Output</span>
+          <button class="copy-btn" onclick="clearPlayground()">Clear</button>
+        </div>
+        <div class="output-log" id="playOutput">
+          <div class="log-line log-info">// Click Run to execute code</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 20px;">
+      <div class="section-title">Quick Challenges</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 12px;">
+        ${quickChallenge('Flatten Nested Array', `// Flatten to any depth without .flat()
+const arr = [1, [2, [3, [4, [5]]]]];
+// Expected: [1, 2, 3, 4, 5]`)}
+        ${quickChallenge('Implement once()', `// Function that runs only once
+function once(fn) {
+  // your code here
+}
+
+const init = once(() => console.log('initialized!'));
+init(); // logs
+init(); // silent`)}
+        ${quickChallenge('Deep Equal', `// Deep equality check
+function deepEqual(a, b) {
+  // handles arrays, objects, primitives
+}
+
+console.log(deepEqual({a:1,b:[2,3]}, {a:1,b:[2,3]})); // true
+console.log(deepEqual({a:1}, {a:2})); // false`)}
+        ${quickChallenge('Group By', `// Group array by property
+const items = [
+  {name:'apple',  type:'fruit'},
+  {name:'carrot', type:'veg'},
+  {name:'banana', type:'fruit'}
+];
+// Expected: { fruit: [...], veg: [...] }`)}
+      </div>
+    </div>
+  `;
+};
+
+function quickChallenge(title, code) {
+  return `
+    <div class="quiz-card" style="cursor:pointer" onclick="loadChallenge(this)" data-code="${code.replace(/"/g, '&quot;')}">
+      <div class="challenge-label">🎯 Challenge</div>
+      <div style="font-size:14px; font-weight:700; color:var(--text-primary); margin-bottom:8px;">${title}</div>
+      <div style="font-size:12px; color:var(--text-muted);">Click to load in editor</div>
+    </div>`;
+}
+
+
+/* ===== js/arrays.js ===== */
+/**
+ * ═══════════════════════════════════════════════════════════
+ * arrays.js — Array Methods Deep Dive
+ *
+ * COVERED:
+ *   map, filter, reduce — the functional trio
+ *   flat, flatMap — nested array handling
+ *   find, findIndex, some, every — searching
+ *   sort — gotchas and correct usage
+ *   Implementing map/filter/reduce from scratch (interview!)
+ *   Common array algorithm patterns
+ * ═══════════════════════════════════════════════════════════
+ */
+
+window.modules = window.modules || {};
+
+window.modules.arrays = function() {
+  trackModule('arrays');
+
+  return `
+    ${moduleHeader({
+      tag: '08 — Arrays',
+      title: 'Array Methods Deep Dive',
+      desc: 'The functional trio (map/filter/reduce), sorting gotchas, and implementing them from scratch — all standard senior interview material.'
+    })}
+
+    ${buildTabs([
+      { id: 'theory', label: '📖 Core Methods', content: arrayTheory() },
+      { id: 'implement', label: '🔧 Build from Scratch', content: arrayImplement() },
+      { id: 'patterns', label: '🧩 Patterns', content: arrayPatterns() },
+      { id: 'quiz', label: '🎯 Interview Q&A', content: arrayQuiz() }
+    ])}
+  `;
+};
+
+function arrayTheory() {
+  return `
+    ${theoryBlock({
+      step: 'map()',
+      title: 'Transform every element — always returns new array of SAME length',
+      body: `<p>map() creates a new array by applying a function to each element.
+      It never mutates the original. Always returns an array of the same length.</p>`
+    })}
+    ${codeBlock(`const nums = [1, 2, 3, 4, 5];
+
+// Basic transform
+const doubled = nums.map(n => n * 2); // [2, 4, 6, 8, 10]
+
+// Object transform
+const users = [
+  { id: 1, name: 'Alice', age: 28 },
+  { id: 2, name: 'Bob',   age: 17 },
+];
+
+const names    = users.map(u => u.name);           // ['Alice', 'Bob']
+const withRole = users.map(u => ({ ...u, role: 'user' })); // add field
+const idMap    = users.map(u => [u.id, u.name]);   // [[1,'Alice'],[2,'Bob']]
+
+// map receives: (currentValue, index, array)
+const withIndex = nums.map((n, i) => \`\${i}: \${n}\`);
+// ['0: 1', '1: 2', '2: 3', '3: 4', '4: 5']`)}
+
+    ${theoryBlock({
+      step: 'filter()',
+      title: 'Keep elements matching a predicate — length can shrink',
+      body: `<p>filter() returns a new array with only the elements for which the callback returns truthy.
+      Length can be 0 to original length.</p>`,
+      warn: 'filter() never modifies the original array. If your predicate is wrong and returns empty [], check your condition.'
+    })}
+    ${codeBlock(`const nums = [1, 2, 3, 4, 5, 6, 7, 8];
+
+const evens  = nums.filter(n => n % 2 === 0);         // [2, 4, 6, 8]
+const adults = users.filter(u => u.age >= 18);         // [Alice]
+const unique = arr => arr.filter((v, i, a) => a.indexOf(v) === i); // deduplicate
+
+// Chaining map + filter (mental model: filter first if possible, cheaper map)
+const adultNames = users
+  .filter(u => u.age >= 18)  // filter first = fewer iterations
+  .map(u => u.name.toUpperCase()); // ['ALICE']`)}
+
+    ${theoryBlock({
+      step: 'reduce()',
+      title: 'The Swiss Army knife — fold a list into any single value',
+      body: `<p>reduce() is the most powerful and flexible array method. The accumulator can be any type:
+      number, string, array, object, Map. Everything else (map, filter, find) can be implemented using reduce.</p>`,
+      callout: 'Always provide an initial value as the second argument to reduce(). Without it, the first element is used as the accumulator and iteration starts at index 1 — surprising behavior with empty arrays (throws TypeError).'
+    })}
+    ${codeBlock(`const nums = [1, 2, 3, 4, 5];
+
+// Sum
+const sum = nums.reduce((acc, n) => acc + n, 0);  // 15
+
+// Max value
+const max = nums.reduce((acc, n) => Math.max(acc, n), -Infinity); // 5
+
+// Count occurrences
+const words = ['apple', 'banana', 'apple', 'cherry', 'banana', 'apple'];
+const count = words.reduce((acc, word) => {
+  acc[word] = (acc[word] || 0) + 1;
+  return acc;
+}, {});
+// { apple: 3, banana: 2, cherry: 1 }
+
+// Group by — one of the most useful patterns
+const students = [
+  { name: 'Alice', grade: 'A' },
+  { name: 'Bob',   grade: 'B' },
+  { name: 'Carol', grade: 'A' },
+];
+
+const byGrade = students.reduce((acc, s) => {
+  (acc[s.grade] = acc[s.grade] || []).push(s);
+  return acc;
+}, {});
+// { A: [Alice, Carol], B: [Bob] }
+
+// Flatten with reduce
+const nested = [[1,2], [3,4], [5,6]];
+const flat = nested.reduce((acc, arr) => [...acc, ...arr], []); // [1,2,3,4,5,6]
+
+// Pipeline via reduce
+const pipeline = [trim, toLower, capitalize].reduce(
+  (val, fn) => fn(val), '  hello WORLD  '
+); // 'Hello world'`)}
+
+    ${theoryBlock({
+      step: 'sort() — The Gotcha',
+      title: 'Default sort converts to strings — always provide a comparator',
+      body: `<p>The most commonly misunderstood array method. Without a comparator, elements are 
+      converted to strings and sorted lexicographically. This causes <code>[10, 9, 2].sort()</code> 
+      to return <code>[10, 2, 9]</code> — because "10" < "2" alphabetically!</p>`,
+      warn: 'Array.sort() mutates the original array in place AND returns the same array. Always use [...arr].sort() if you need to preserve the original.'
+    })}
+    ${codeBlock(`// ❌ WRONG — string sorting
+[100, 9, 2, 40].sort();              // [100, 2, 40, 9] — WRONG!
+['banana', 'apple', 'cherry'].sort(); // ['apple', 'banana', 'cherry'] ✅ strings OK
+
+// ✅ CORRECT — provide comparator
+[100, 9, 2, 40].sort((a, b) => a - b); // [2, 9, 40, 100] ascending
+[100, 9, 2, 40].sort((a, b) => b - a); // [100, 40, 9, 2] descending
+
+// Sort objects
+const people = [
+  { name: 'Charlie', age: 30 },
+  { name: 'Alice',   age: 25 },
+  { name: 'Bob',     age: 35 },
+];
+
+// Sort by age
+people.sort((a, b) => a.age - b.age);
+
+// Sort by name (string comparison)
+people.sort((a, b) => a.name.localeCompare(b.name));
+
+// Sort without mutation
+const sorted = [...people].sort((a, b) => a.age - b.age);
+
+// Stable sort — preserved in V8 (Chrome/Node) since 2019
+// Elements with equal sort key maintain original relative order`)}
+  `;
+}
+
+function arrayImplement() {
+  return `
+    ${section('Implement Array Methods from Scratch', `
+      ${theoryBlock({
+        step: 'Interview Task',
+        title: 'Implement map, filter, and reduce on Array.prototype',
+        body: `<p>This is a classic senior interview question. You must implement these without using 
+        the built-in versions. This tests understanding of how they work internally.</p>`
+      })}
+      ${codeBlock(`// Implement Array.prototype.myMap
+Array.prototype.myMap = function(callback, thisArg) {
+  if (typeof callback !== 'function') {
+    throw new TypeError(callback + ' is not a function');
+  }
+
+  const result = new Array(this.length); // pre-allocate — faster than push
+  for (let i = 0; i < this.length; i++) {
+    if (i in this) { // handle sparse arrays (skip holes)
+      result[i] = callback.call(thisArg, this[i], i, this);
+    }
+  }
+  return result;
+};
+
+// Implement Array.prototype.myFilter
+Array.prototype.myFilter = function(callback, thisArg) {
+  if (typeof callback !== 'function') {
+    throw new TypeError(callback + ' is not a function');
+  }
+
+  const result = [];
+  for (let i = 0; i < this.length; i++) {
+    if (i in this && callback.call(thisArg, this[i], i, this)) {
+      result.push(this[i]);
+    }
+  }
+  return result;
+};
+
+// Implement Array.prototype.myReduce
+Array.prototype.myReduce = function(callback, initialValue) {
+  if (typeof callback !== 'function') {
+    throw new TypeError(callback + ' is not a function');
+  }
+  if (this.length === 0 && arguments.length < 2) {
+    throw new TypeError('Reduce of empty array with no initial value');
+  }
+
+  let acc, startIndex;
+  if (arguments.length >= 2) {
+    acc = initialValue;
+    startIndex = 0;
+  } else {
+    acc = this[0];
+    startIndex = 1;
+  }
+
+  for (let i = startIndex; i < this.length; i++) {
+    if (i in this) {
+      acc = callback(acc, this[i], i, this);
+    }
+  }
+  return acc;
+};
+
+// Test:
+console.log([1,2,3].myMap(x => x * 2));         // [2, 4, 6]
+console.log([1,2,3,4].myFilter(x => x % 2));    // [1, 3]
+console.log([1,2,3,4,5].myReduce((a, b) => a + b, 0)); // 15`)}
+
+      ${theoryBlock({
+        step: 'Flatten & flatMap',
+        title: 'Implement Array.prototype.flat() and flatMap()',
+        body: `<p><code>flat(depth)</code> flattens nested arrays up to the specified depth.
+        <code>flatMap</code> is map + flat(1) — more efficient than calling both separately.</p>`
+      })}
+      ${codeBlock(`// Implement flat
+function myFlat(arr, depth = 1) {
+  if (depth === 0) return [...arr];
+
+  return arr.reduce((acc, val) => {
+    if (Array.isArray(val) && depth > 0) {
+      acc.push(...myFlat(val, depth - 1));
+    } else {
+      acc.push(val);
+    }
+    return acc;
+  }, []);
+}
+
+console.log(myFlat([1, [2, [3, [4]]]]));     // [1, 2, [3, [4]]]
+console.log(myFlat([1, [2, [3, [4]]]], Infinity)); // [1, 2, 3, 4]
+
+// flatMap — map then flat(1)
+const sentences = ['hello world', 'foo bar'];
+const words = sentences.flatMap(s => s.split(' '));
+// ['hello', 'world', 'foo', 'bar']
+
+// Use case: expand one item into multiple
+const orders = [
+  { id: 1, items: ['apple', 'banana'] },
+  { id: 2, items: ['cherry'] },
+];
+
+const allItems = orders.flatMap(order => order.items);
+// ['apple', 'banana', 'cherry']`)}
+    `)}
+  `;
+}
+
+function arrayPatterns() {
+  return `
+    ${section('Common Interview Array Algorithms', `
+      ${codeBlock(`// 1. REMOVE DUPLICATES — multiple approaches
+const arr = [1, 2, 2, 3, 4, 4, 5];
+
+const unique1 = [...new Set(arr)];                           // [1,2,3,4,5] ✅ fastest
+const unique2 = arr.filter((v, i) => arr.indexOf(v) === i); // O(n²) — avoid large arrays
+const unique3 = arr.reduce((acc, v) =>
+  acc.includes(v) ? acc : [...acc, v], []);                  // O(n²) — prefer Set
+
+// Deduplicate objects by key
+const users = [{ id:1 }, { id:2 }, { id:1 }];
+const uniqueUsers = [...new Map(users.map(u => [u.id, u])).values()];
+
+// 2. CHUNK ARRAY — split into pieces of size n
+function chunk(arr, size) {
+  return Array.from(
+    { length: Math.ceil(arr.length / size) },
+    (_, i) => arr.slice(i * size, i * size + size)
+  );
+}
+console.log(chunk([1,2,3,4,5], 2)); // [[1,2],[3,4],[5]]
+
+// 3. ZIP ARRAYS — combine corresponding elements
+const zip = (...arrs) =>
+  Array.from({ length: Math.max(...arrs.map(a => a.length)) },
+    (_, i) => arrs.map(a => a[i]));
+
+console.log(zip([1,2,3], ['a','b','c'])); // [[1,'a'],[2,'b'],[3,'c']]
+
+// 4. INTERSECTION, UNION, DIFFERENCE
+const a = [1, 2, 3, 4];
+const b = [3, 4, 5, 6];
+
+const intersection = a.filter(v => b.includes(v));  // [3, 4]
+const union        = [...new Set([...a, ...b])];     // [1,2,3,4,5,6]
+const difference   = a.filter(v => !b.includes(v));  // [1, 2]
+
+// 5. ROTATE ARRAY
+function rotate(arr, k) {
+  const n = arr.length;
+  k = ((k % n) + n) % n; // handle negative & oversized k
+  return [...arr.slice(n - k), ...arr.slice(0, n - k)];
+}
+
+console.log(rotate([1,2,3,4,5], 2));  // [4,5,1,2,3]
+console.log(rotate([1,2,3,4,5], -1)); // [2,3,4,5,1]`)}
+    `)}
+  `;
+}
+
+function arrayQuiz() {
+  return `
+    ${buildQuiz({
+      id: 'ar_q1',
+      label: 'Q1 — Sort Gotcha',
+      question: 'What does <code>[10, 9, 2, 21, 3].sort()</code> return?',
+      options: [
+        '[2, 3, 9, 10, 21]',
+        '[10, 2, 21, 3, 9]',
+        '[10, 21, 2, 3, 9]',
+        '[3, 2, 9, 10, 21]'
+      ],
+      correct: 1,
+      difficulty: 'Medium',
+      explanation: 'Without a comparator, sort() converts numbers to strings and sorts lexicographically. "10" < "2" because "1" < "2" as characters. The correct numeric sort: [2, 3, 9, 10, 21], but the default sort gives [10, 2, 21, 3, 9]. Always pass (a, b) => a - b for numeric sort!'
+    })}
+
+    ${buildQuiz({
+      id: 'ar_q2',
+      label: 'Q2 — reduce() edge case',
+      question: 'What does <code>[].reduce((acc, v) => acc + v)</code> do?',
+      options: [
+        'Returns undefined',
+        'Returns 0',
+        'Throws a TypeError',
+        'Returns null'
+      ],
+      correct: 2,
+      difficulty: 'Medium',
+      explanation: 'Calling reduce() on an empty array WITHOUT an initial value throws TypeError: "Reduce of empty array with no initial value." Always provide an initial value as the second argument to avoid this. With an initial value: [].reduce((acc, v) => acc + v, 0) → 0 (safe).'
+    })}
+
+    ${buildQuiz({
+      id: 'ar_q3',
+      label: 'Q3 — map vs forEach',
+      question: 'What is the key difference between map() and forEach()?',
+      options: [
+        'forEach is faster than map',
+        'map returns a new array, forEach always returns undefined',
+        'forEach can break out of the loop, map cannot',
+        'map mutates the original array, forEach does not'
+      ],
+      correct: 1,
+      difficulty: 'Easy',
+      explanation: 'map() transforms each element and returns a NEW array of the same length. forEach() executes a callback for each element and always returns undefined — it is used for SIDE EFFECTS. Neither can break early; for early exit, use for...of with break, or some()/every()/find().'
+    })}
+  `;
+}
+
+
+/* ===== js/playground.js ===== */
+/**
+ * playground.js — Live Code Playground
+ * Module defined in memory.js; runtime functions here.
+ */
+
+// Run code from playground editor
+window.runPlayground = function() {
+  const code = document.getElementById('playEditor').value;
+  const output = document.getElementById('playOutput');
+  output.innerHTML = '';
+
+  const logs = [];
+
+  // Capture console.log, warn, error
+  const originalLog   = console.log;
+  const originalWarn  = console.warn;
+  const originalError = console.error;
+
+  const format = (args) =>
+    args.map(a => {
+      try {
+        if (typeof a === 'object' && a !== null) return JSON.stringify(a, null, 2);
+        return String(a);
+      } catch { return '[Circular]'; }
+    }).join(' ');
+
+  console.log = (...args) => {
+    logs.push({ type: 'log', msg: format(args) });
+    originalLog.apply(console, args);
+  };
+  console.warn = (...args) => {
+    logs.push({ type: 'warn', msg: format(args) });
+    originalWarn.apply(console, args);
+  };
+  console.error = (...args) => {
+    logs.push({ type: 'error', msg: format(args) });
+    originalError.apply(console, args);
+  };
+
+  try {
+    // eslint-disable-next-line no-new-func
+    new Function(code)();
+  } catch (err) {
+    logs.push({ type: 'error', msg: '⛔ ' + err.message });
+  } finally {
+    console.log   = originalLog;
+    console.warn  = originalWarn;
+    console.error = originalError;
+  }
+
+  if (logs.length === 0) {
+    output.innerHTML = '<div class="log-line log-info">// No output</div>';
+  } else {
+    output.innerHTML = logs.map(l => {
+      const cls = l.type === 'error' ? 'log-error' : l.type === 'warn' ? 'log-warn' : '';
+      return `<div class="log-line ${cls}">${escapeHtml(l.msg)}</div>`;
+    }).join('');
+  }
+};
+
+window.clearPlayground = function() {
+  document.getElementById('playOutput').innerHTML =
+    '<div class="log-line log-info">// Cleared</div>';
+};
+
+window.loadChallenge = function(el) {
+  const code = el.getAttribute('data-code')
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'");
+  document.getElementById('playEditor').value = code;
+};
+
+function escapeHtml(str) {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
+// Ctrl+Enter shortcut
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+    const editor = document.getElementById('playEditor');
+    if (editor && document.activeElement === editor) {
+      e.preventDefault();
+      window.runPlayground();
+    }
+  }
+});
+
+
+/* ===== js/app.js ===== */
+/**
+ * ═══════════════════════════════════════════════════════════
+ * app.js — Main Application Controller
+ *
+ * Handles:
+ *   - Module routing (which content to show)
+ *   - Navigation active state
+ *   - Module rendering pipeline
+ *   - Initial load
+ * ═══════════════════════════════════════════════════════════
+ */
+
+(function() {
+  'use strict';
+
+  // ── Router ───────────────────────────────────────────────
+  // Maps nav-item data-module attributes to module functions
+  const ROUTES = {
+    closures:   window.modules.closures,
+    prototypes: window.modules.prototypes,
+    async:      window.modules.async,
+    eventloop:  window.modules.eventloop,
+    currying:   window.modules.currying,
+    patterns:   window.modules.patterns,
+    memory:     window.modules.memory,
+    arrays:     window.modules.arrays,
+    interview:  window.modules.interview,
+    playground: window.modules.playground,
+  };
+
+  // ── Navigation ───────────────────────────────────────────
+  function navigate(moduleName) {
+    const renderer = ROUTES[moduleName];
+    if (!renderer) return;
+
+    // Update active nav state
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.classList.toggle('active', item.dataset.module === moduleName);
+    });
+
+    // Render module content
+    const main = document.getElementById('mainContent');
+    main.innerHTML = renderer();
+
+    // Scroll to top
+    main.scrollTop = 0;
+  }
+
+  // ── Event Delegation for Nav ─────────────────────────────
+  document.getElementById('sidebar').addEventListener('click', function(e) {
+    const navItem = e.target.closest('.nav-item');
+    if (!navItem) return;
+    e.preventDefault();
+    navigate(navItem.dataset.module);
+  });
+
+  // ── Initial Load ─────────────────────────────────────────
+  navigate('closures');
+
+})();
+
+
+</script>
+</body>
+</html>

@@ -4,8 +4,6 @@ function findKeys(obj){
         result.push(key)
     }
     return result
-
-
 }
 
 const data = {k:1 , r:2 , i:3}

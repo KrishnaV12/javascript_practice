@@ -1,0 +1,131 @@
+ParakeetAI Timeline Export
+Exported: 9/15/2026, 7:38:19 PM
+
+[08:32 PM] Interviewer 1
+And for the back end restriction part. How did you design the API responses to ensure, say, a doctor couldn't access admin data even if they tried calling the endpoint directly?
+
+[08:32 PM] AI
+💬 **Question**: Designing API responses and backend restrictions to prevent unauthorized cross-role data access (e.g., a doctor accessing admin data).
+
+---
+
+⭐️ **Answer**: At Resolute.Ai, I designed a robust Role-Based Access Control (RBAC) and attribute-based security layer at the API gateway and middleware level to ensure data isolation, regardless of whether a user calls an endpoint directly. 
+
+Here is how we secured the architecture:
+
+* **Token-Based Claims (JWT):** Every incoming API request carried a signed JSON Web Token containing the user's explicit roles and permissions (e.g., `role: 'doctor'`, `permissions: ['read:patient_records']`). Roles are never trusted from the client payload; they are decoded from the verified session token on the server.
+* **Middleware Authorization Guards:** Before hitting any controller logic, requests passed through server-side middleware that validated the endpoint's required permission against the user's token claims. If a doctor's token hit an `/api/admin/*` route, the server immediately rejected it with a `403 Forbidden`.
+* **Row-Level and Field-Level Filtering:** Even on shared endpoints (like `/api/users`), the backend controllers dynamically filtered the response payload based on the user's role. For instance, sensitive admin metadata or system configuration fields were stripped from the database query projection or serializer before sending the JSON response back.
+* **Tenant and Context Isolation:** For clinical data, the backend enforced strict scoping—validating that the requesting doctor had an active clinical relationship with the requested patient ID, preventing horizontal privilege escalation even between peers, let alone across roles.
+
+[08:33 PM] Interviewee
+So first of all.
+
+[08:33 PM] Interviewee
+Like. Token based claim JWT. Like every incoming API and the request, uh, like, uh you. For.
+
+[08:33 PM] Interviewee
+It is binded for the explicit role and everything. So like a doctor, we will only give the permission like patient record and, uh, no other record will be. Go. So this is what I do. So mostly I will be I was working through.
+
+[08:33 PM] Interviewer 1
+Can you walk me through how you check the.
+
+[08:33 PM] Interviewee
+I was mostly working on the front end side. So I do not have the most of the ideas from the backend APIs and everything. I have the a very good ideas of implementing in the front end.
+
+[08:33 PM] Interviewee
+Got it. You work mostly on the front end. Anything else you want to add before we move ahead?
+
+[08:33 PM] Interviewee
+Uh,
+
+[08:34 PM] Interviewer 1
+Did you work mostly on the front end? Anything else you want to add before we move ahead?
+
+[08:34 PM] AI
+💬 **Question**: Frontend handling of role-based access control and unauthorized data attempts.
+
+---
+
+⭐️ **Answer**: Absolutely, since my primary ownership is on the frontend, I handle RBAC extensively in the UI layer to complement backend security. 
+
+Here is how I implement it in React and Next.js:
+
+* **Route Protection & Layout Guards:** In Next.js (App Router), I use layout-level checks and middleware to inspect the user's role from their session or decoded token before rendering sensitive pages. If a user tries to navigate to an unauthorized route, they are automatically redirected or shown a 403 fallback.
+* **Component-Level Conditional Rendering:** I build wrapper components (like `<ProtectedRoute allowedRoles={['admin', 'doctor']}>`) or custom hooks like `usePermissions()` to conditionally render UI elements, buttons, and navigation links. If a user doesn't have the right role, those components simply aren't mounted or rendered in the DOM.
+* **API Error Handling & Interceptors:** Using Axios or TanStack Query interceptors, I handle `401 Unauthorized` and `403 Forbidden` responses globally. If a user somehow triggers an unauthorized request, the interceptor catches it, clears local state if necessary, and gracefully redirects them or triggers an access-denied toast notification.
+* **Client-Side State Isolation:** I ensure that user session data and sensitive user objects are securely stored and scoped, preventing accidental state leakage between different user roles in shared browser sessions.
+
+[08:34 PM] Interviewee
+middleware. Authorization guard. I have did from my side. So, uh, like, uh, as you ask me about the end point. So before
+
+[08:35 PM] Interviewer 2
+All
+
+[08:35 PM] Interviewer 1
+All right. Thanks. For detailing your approach. There.
+
+[08:35 PM] Interviewer 1
+You're working on a react dashboard that users say feels slow and
+
+[08:35 PM] Interviewee
+eating any, if somebody is going to put, uh, like, uh, some
+
+[08:35 PM] Interviewer 1
+unresponsive. What's your first step to diagnose the performance issue?
+
+[08:35 PM] Interviewee
+URL, everything, so it will again, run the server side rendering and middleware that is going to validate endpoint. And if the endpoint is there, uh, okay, we will solve if the
+
+[08:35 PM] AI
+💬 **Question**: First steps to diagnose a slow and unresponsive React dashboard.
+
+---
+
+⭐️ **Answer**: When faced with a slow or unresponsive React dashboard, my very first step is never to start randomly rewriting code or adding memoization. Instead, I follow a data-driven diagnostic approach using profiling tools to find the exact bottleneck:
+
+* **React Profiler & Flamegraph:** I start by wrapping the dashboard or specific suspect components with the React Profiler to record a user interaction (like typing in a filter or clicking a tab). This reveals which components are re-rendering unnecessarily, how long each render took, and what triggered the re-render.
+* **Chrome DevTools Performance Tab:** For overall UI responsiveness and main-thread blocking, I record a performance profile in Chrome DevTools. I look for long tasks (taking over 50ms), excessive layout thrashing, or JavaScript execution bottlenecks that cause dropped frames.
+* **Network & API Payload Audit:** I check the Network tab using TanStack Query or browser tools to inspect heavy payloads, waterfall requests, or missing pagination that might be choking the JavaScript thread when parsing large datasets.
+* **Memory Leak & Heap Snapshot:** If the app gets progressively slower over time, I take heap snapshots to check for detached DOM nodes or uncleared event listeners / subscriptions that are bloating memory.
+
+Once I have concrete metrics from the profiler identifying the culprit—whether it's an unoptimized large list, cascading re-renders from global state, or heavy computations—I target that specific component with virtualization (like React Window), code-splitting, or `useMemo`/`useCallback` optimizations.
+
+[08:37 PM] Interviewer 1
+When you mentioned react.
+
+[08:39 PM] Interviewer 1
+Yeah. I heard you. So you mentioned virtualization for big lists and caching API data with react query. How do you decide which parts of the dashboard should be virtualized?
+
+[08:39 PM] AI
+💬 **Question**: How do you decide which parts of a React dashboard should be virtualized?
+
+---
+
+⭐️ **Answer**: I decide whether to virtualize a component based on a mix of DOM node count, data volume, and actual performance metrics rather than applying it blindly. 
+
+* **DOM Node Threshold:** If a table, list, or dropdown is rendering hundreds or thousands of DOM nodes at once (e.g., a clinical patient roster with 500+ rows or a large transaction ledger), the sheer weight of the DOM tree will noticeably degrade scroll performance and memory consumption. That’s my primary trigger for virtualization using tools like `React Window` or TanStack Virtual.
+* **Component Complexity per Row:** If the items in the list are simple text strings, the browser can handle a few hundred without issue. However, if each row contains complex components—like custom badges, dropdowns, interactive action buttons, or nested sub-grids—even a list of 50 to 100 items can cause jank during scrolling. In those cases, virtualizing the rendering window so only visible items exist in the DOM drastically improves FPS.
+* **Static vs. Dynamic Heights:** I also evaluate whether the rows have a fixed, predictable height or dynamic heights. Fixed heights make virtualization straightforward and lightweight. If heights are dynamic (like expandable accordion rows), I ensure the virtualization library can measure and cache row heights dynamically without causing layout thrashing.
+* **Performance Profiling Validation:** Before deciding, I use the React Profiler. If scroll events or filtering trigger long render passes (>16ms per frame) due to large list size, virtualization becomes the clear architectural choice. For smaller lists or paginated tables where only 10-20 items render at a time, standard pagination or infinite scroll is usually sufficient without needing virtualization overhead.
+
+[08:40 PM] Interviewer 1
+So when you virtualize a table, how do you handle sorting or filtering? If the data set is very large?
+
+[08:40 PM] AI
+💬 **Question**: How do you handle sorting and filtering when virtualizing large tables in React?
+
+---
+
+⭐️ **Answer**: When dealing with massive datasets, handling sorting and filtering efficiently requires a combination of server-side data fetching and proper virtualization strategies. 
+
+* **Server-Side Processing:** For truly large datasets (e.g., thousands of clinical records or transactions), I never sort or filter the entire dataset on the client. I offload sorting, filtering, and pagination to the backend API. When a user applies a filter or changes the sort order, we trigger a new fetch (using TanStack Query) passing those parameters, which keeps the payload size manageable and prevents browser thread blocking.
+* **Client-Side Indexing / Windowing Alignment:** When virtualizing a sorted or filtered subset, the virtualization library (like `React Window` or TanStack Virtual) only renders the items currently in the visible viewport. Because the rendered indices change dynamically during scrolling, we ensure that the virtualizer is bound to the *filtered and sorted array* returned by the server or state store, not the raw unmasked dataset.
+* **Preserving Scroll Position on Update:** A common UX pitfall when filtering or sorting a virtualized table is that the scroll position jumps or stays locked out of bounds. I handle this by resetting or adjusting the scroll offset of the virtualized container back to the top whenever the active filters or sort parameters change.
+* **Debounced Inputs for Filtering:** For text-based search filters that trigger API calls or heavy client-side filtering, I always implement a debounce (typically 300ms) on the input change handler. This prevents excessive re-renders and redundant network requests while the user is actively typing.
+
+[08:41 PM] Interviewer 2
+You
+
+[08:42 PM] Interviewer 1
+Before we move on. Anything else you want to add about your approach?

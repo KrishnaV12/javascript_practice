@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Frontend Glossary — A Developer's Dictionary</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F4F5F7;
+    --paper:#FFFFFF;
+    --ink:#191C22;
+    --muted:#646B78;
+    --faint:#9AA0AB;
+    --line:#E4E7EC;
+    --line-strong:#D3D8E0;
+    --c-js:#C99528;
+    --c-ts:#2F6FBF;
+    --c-react:#1C97AE;
+    --c-next:#5B6470;
+    --c-css:#CF6A38;
+    --c-design:#B85284;
+    --c-perf:#4C9A6A;
+    --c-rules:#7565C0;
+    --c-web:#56708A;
+    --c-arch:#B8455C;
+    --c-proc:#2E8B8B;
+    --c-stack:#8A6D3B;
+    --c-cs:#4B4FA0;
+    --c-rjsx:#18A0A0;
+    --c-htmltag:#C85A2C;
+    --c-cssprop:#2F77C9;
+    --c-jsref:#B07D2B;
+    --display:'Space Grotesk',system-ui,sans-serif;
+    --mono:'IBM Plex Mono',ui-monospace,monospace;
+    --serif:'Newsreader',Georgia,serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--ink);font-family:var(--serif);line-height:1.5;-webkit-font-smoothing:antialiased}
+
+  .masthead{max-width:1180px;margin:0 auto;padding:48px 28px 26px;border-bottom:2px solid var(--ink)}
+  .masthead .eyebrow{font-family:var(--mono);font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
+  .masthead h1{font-family:var(--display);font-weight:700;font-size:clamp(2.1rem,6vw,3.9rem);letter-spacing:-.02em;line-height:1.02;margin:.18em 0 .14em}
+  .masthead h1 em{font-family:var(--serif);font-style:italic;font-weight:400;color:var(--muted)}
+  .masthead p.lede{font-size:1.04rem;color:var(--muted);max-width:64ch}
+  .masthead .meta{margin-top:14px;font-family:var(--mono);font-size:.74rem;color:var(--faint);letter-spacing:.04em}
+
+  .controls{position:sticky;top:0;z-index:50;background:rgba(244,245,247,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line-strong)}
+  .controls-inner{max-width:1180px;margin:0 auto;padding:14px 28px;display:flex;flex-direction:column;gap:12px}
+  .search-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .search-wrap{position:relative;flex:1;min-width:220px}
+  .search-wrap svg{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:17px;height:17px;stroke:var(--faint);pointer-events:none}
+  #search{width:100%;font-family:var(--mono);font-size:.92rem;padding:11px 40px;border:1.5px solid var(--line-strong);border-radius:0;background:var(--paper);color:var(--ink);outline:none;transition:border-color .15s}
+  #search:focus{border-color:var(--ink)}
+  #search::placeholder{color:var(--faint)}
+  .kbd{position:absolute;right:12px;top:50%;transform:translateY(-50%);font-family:var(--mono);font-size:.7rem;color:var(--faint);border:1px solid var(--line-strong);border-radius:4px;padding:1px 6px;background:var(--bg)}
+  #clear{font-family:var(--mono);font-size:.78rem;border:1.5px solid var(--line-strong);background:var(--paper);color:var(--muted);padding:10px 14px;cursor:pointer;transition:all .15s;white-space:nowrap}
+  #clear:hover{border-color:var(--ink);color:var(--ink)}
+  .count{font-family:var(--mono);font-size:.78rem;color:var(--muted);white-space:nowrap}
+  .count b{color:var(--ink)}
+
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{font-family:var(--mono);font-size:.74rem;letter-spacing:.02em;text-decoration:none;color:var(--muted);border:1px solid var(--line-strong);padding:6px 11px;display:inline-flex;align-items:center;gap:7px;background:var(--paper);transition:all .15s;cursor:pointer}
+  .chip:hover{border-color:var(--cat);color:var(--ink)}
+  .chip .dot{width:9px;height:9px;border-radius:50%;background:var(--cat);flex-shrink:0}
+  .chip .n{color:var(--faint);font-size:.7rem}
+
+  main{max-width:1180px;margin:0 auto;padding:8px 28px 80px}
+  .section{padding-top:46px;scroll-margin-top:170px}
+  .section-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;border-bottom:1px solid var(--line-strong);padding-bottom:12px;margin-bottom:22px}
+  .section-head .bar{width:30px;height:6px;background:var(--cat);flex-shrink:0;align-self:center}
+  .section-head h2{font-family:var(--display);font-weight:600;font-size:1.55rem;letter-spacing:-.01em}
+  .section-head .tag{font-family:var(--mono);font-size:.72rem;color:var(--muted);letter-spacing:.04em}
+  .section-head .scount{font-family:var(--mono);font-size:.72rem;color:var(--faint);margin-left:auto}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:0;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+  .card{border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--paper);padding:16px 18px 14px;position:relative;display:flex;flex-direction:column;transition:background .12s}
+  .card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--cat);opacity:0;transition:opacity .12s}
+  .card:hover{background:#FbFbFc}
+  .card:hover::before{opacity:1}
+  .card .term{font-family:var(--mono);font-weight:600;font-size:.93rem;color:var(--ink);letter-spacing:-.01em;margin-bottom:5px}
+  .card .def{font-family:var(--serif);font-size:.97rem;line-height:1.45;color:#33373F;flex-grow:1}
+  .card .links{margin-top:12px;display:flex;flex-wrap:wrap;gap:5px 14px}
+  .card .learn{font-family:var(--mono);font-size:.69rem;letter-spacing:.03em;text-transform:uppercase;text-decoration:none;color:var(--faint);border-bottom:1px solid transparent;transition:color .12s,border-color .12s;white-space:nowrap}
+  .card .learn:hover{color:var(--cat);border-color:var(--cat)}
+  .card .learn .arr{font-size:.78rem}
+  .subhead{grid-column:1/-1;font-family:var(--mono);font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--cat);background:#FAFAFB;border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:15px 18px 9px}
+  .subhead:not(:first-child){border-top:1px solid var(--line)}
+  mark{background:#FFEFA8;color:inherit;padding:0 1px;border-radius:2px}
+
+  #empty{display:none;text-align:center;padding:80px 20px;font-family:var(--mono);color:var(--muted)}
+  #empty .big{font-size:2.4rem;margin-bottom:10px;color:var(--faint)}
+  #empty.show{display:block}
+  .section.hidden,.chip.hidden{display:none}
+
+  footer{max-width:1180px;margin:0 auto;padding:32px 28px 60px;border-top:2px solid var(--ink);font-family:var(--mono);font-size:.76rem;color:var(--muted);line-height:1.8}
+  footer b{color:var(--ink)}
+  #footcats{color:var(--muted)}
+
+  @media (max-width:560px){
+    .masthead{padding:34px 20px 22px}
+    .controls-inner{padding:12px 20px}
+    main{padding:8px 20px 60px}
+    .grid{grid-template-columns:1fr}
+    .kbd{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto;transition:none!important}}
+</style>
+</head>
+<body>
+
+  <header class="masthead">
+    <div class="eyebrow">Reference &middot; Frontend Engineering</div>
+    <h1>The Frontend Glossary<br><em>a developer's dictionary</em></h1>
+    <p class="lede">Every term worth knowing across the modern frontend stack — language internals, frameworks, design, performance, system design, process, and the tools of the trade. Defined plainly, grouped by domain — every term carries <b>two reference links</b> (MDN, W3Schools, official docs, or Wikipedia).</p>
+    <div class="meta" id="totalmeta">— terms across — categories</div>
+  </header>
+
+  <div class="controls">
+    <div class="controls-inner">
+      <div class="search-row">
+        <div class="search-wrap">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
+          <input id="search" type="text" placeholder="Search any term or definition…" autocomplete="off" spellcheck="false">
+          <span class="kbd">/</span>
+        </div>
+        <button id="clear">Clear</button>
+        <span class="count" id="count"></span>
+      </div>
+      <nav class="chips" id="chips"></nav>
+    </div>
+  </div>
+
+  <main id="main"></main>
+
+  <div id="empty">
+    <div class="big">∅</div>
+    <div>No terms match "<span id="emptyq"></span>".</div>
+  </div>
+
+  <footer>
+    <b>The Frontend Glossary.</b> A study-and-reference resource — definitions are intentionally concise; tap a <b>reference link ↗</b> under any term for a fuller explanation.<br>
+    <span id="footcats"></span><br>
+    Tip: press <b>/</b> to jump to search, <b>Esc</b> to clear.
+  </footer>
+
+<script>
+const DATA = [
+  {
+    id:"javascript", name:"JavaScript", tag:"the language", accent:"var(--c-js)", links:["mdn","w3"],
+    groups:[
+      {label:"Execution & Scope", items:[
+        ["var / let / const","Variable declarations: var is function-scoped and hoisted; let and const are block-scoped, const can't be reassigned."],
+        ["Hoisting","JavaScript moves declarations to the top of their scope before code runs."],
+        ["Temporal Dead Zone","The period where a let/const variable exists but can't be accessed before its declaration."],
+        ["Scope","Where a variable is accessible — global, function, or block scope."],
+        ["Closure","A function that remembers and keeps access to variables from its outer scope even after that scope has returned."],
+        ["Execution context","The environment in which JS code runs, holding its variables, scope chain, and this."],
+        ["Call stack","The structure that tracks which function is currently executing and what called it."],
+        ["this","A reference to the object that is currently executing the function."],
+        ["Strict mode","An opt-in mode with stricter parsing and error handling."],
+      ]},
+      {label:"Types & Equality", items:[
+        ["Truthy / falsy","Values that coerce to true or false in a boolean context."],
+        ["Type coercion","Automatic conversion of a value from one type to another."],
+        ["== vs ===","Loose equality coerces types; strict equality compares value and type without coercion."],
+        ["null vs undefined","null is an intentional empty value; undefined means a variable was never assigned."],
+        ["NaN","'Not a Number' — the result of an invalid numeric operation."],
+        ["Shallow vs deep copy","Shallow copies share nested references; deep copies fully clone nested data."],
+        ["Pass by value vs reference","Primitives are copied by value; objects and arrays are shared by reference."],
+      ]},
+      {label:"Functions", items:[
+        ["Callback","A function passed into another function to be run later."],
+        ["Callback hell","Deeply nested callbacks that become hard to read and maintain."],
+        ["Higher-order function","A function that takes another function as an argument or returns one."],
+        ["Pure function","Same input always produces the same output, with no side effects."],
+        ["Side effect","Any change a function makes outside its own return value (DOM, network, globals)."],
+        ["Currying","Transforming a multi-argument function into a chain of single-argument functions."],
+        ["IIFE","An Immediately Invoked Function Expression that runs as soon as it is defined."],
+        ["Arrow function","Concise function syntax that does not bind its own this."],
+        ["Recursion","A function that calls itself to break a problem into smaller parts."],
+      ]},
+      {label:"Objects & Syntax", items:[
+        ["Prototype","The object that another object inherits properties and methods from."],
+        ["Prototype chain","The lookup path JS follows up through prototypes to find a property."],
+        ["Prototypal inheritance","Objects inheriting behavior directly from other objects."],
+        ["Destructuring","Unpacking values from arrays or objects into individual variables."],
+        ["Spread operator","Expands an iterable or object into individual elements (...)."],
+        ["Rest parameter","Collects remaining arguments into a single array (...)."],
+        ["Template literals","Strings using backticks that support embedded expressions and multi-line text."],
+        ["Optional chaining (?.)","Safely accesses nested properties that might not exist."],
+        ["Nullish coalescing (??)","Provides a fallback only when a value is null or undefined."],
+      ]},
+      {label:"Async & the Event Loop", items:[
+        ["Event loop","The mechanism that lets single-threaded JS handle async tasks without blocking."],
+        ["Microtask vs macrotask","Two callback queues; microtasks (promises) always run before macrotasks (timers, events)."],
+        ["Promise","An object representing the eventual result of an asynchronous operation."],
+        ["async / await","Syntax for writing promise-based async code that reads like synchronous code."],
+        ["Promise.all / race / allSettled","Combinators for running and coordinating multiple promises."],
+        ["fetch / AJAX","Making asynchronous network requests from the browser."],
+      ]},
+      {label:"Events", items:[
+        ["Event bubbling","An event propagates from the target element up through its ancestors."],
+        ["Event capturing","An event propagates from ancestors down to the target element."],
+        ["Event delegation","Handling events on a parent element instead of attaching to many children."],
+      ]},
+      {label:"Data & Collections", items:[
+        ["map / filter / reduce","Array methods to transform, select, and accumulate values."],
+        ["Generator","A function that can pause and resume execution using yield."],
+        ["Iterator","An object that produces a sequence of values via its next() method."],
+        ["Symbol","A unique, immutable primitive often used as a non-colliding object key."],
+        ["Map / Set","Collections for key-value pairs (Map) and unique values (Set)."],
+        ["WeakMap / WeakSet","Collections holding weak references so entries can be garbage-collected."],
+        ["JSON","A lightweight text format for structured data exchange."],
+        ["localStorage / sessionStorage","Browser key-value storage that persists, or lasts only for a session."],
+      ]},
+      {label:"Performance & Memory", items:[
+        ["Debounce","Delays running a function until a burst of activity has stopped."],
+        ["Throttle","Limits a function to run at most once per time interval."],
+        ["Memoization","Caching a function's results to avoid recomputing the same work."],
+        ["Garbage collection","Automatic reclaiming of memory no longer in use."],
+        ["Memory leak","Memory that is no longer needed but never released."],
+      ]},
+      {label:"Modules", items:[
+        ["ESM vs CommonJS","Modern import/export modules versus Node's older require system."],
+      ]},
+      {label:"Browser APIs & Storage", items:[
+        ["Web APIs","Browser-provided capabilities (DOM, fetch, timers, geolocation) that JS calls but the engine implements."],
+        ["IndexedDB","A large, structured, transactional database stored in the browser."],
+        ["requestAnimationFrame","Schedules a callback right before the next repaint, ideal for smooth animation."],
+        ["requestIdleCallback","Schedules low-priority work to run when the browser is idle."],
+      ]},
+    ]
+  },
+  {
+    id:"jsref", name:"JavaScript A–Z", tag:"types, syntax, methods & modern features", accent:"var(--c-jsref)", links:["mdn","w3"],
+    groups:[
+      {label:"Data Types & Values", items:[
+        ["typeof","Operator returning a value's primitive type as a string."],
+        ["string","Text data, written in single quotes, double quotes, or backticks."],
+        ["number","Numeric type covering integers and decimals (double-precision)."],
+        ["boolean","A logical value: true or false."],
+        ["null","An intentional 'no value' (typeof returns 'object', a known quirk)."],
+        ["undefined","A variable that has been declared but not assigned."],
+        ["symbol","A unique, immutable primitive often used as a hidden object key."],
+        ["bigint","An integer type for values beyond Number's safe range, e.g. 123n."],
+        ["object","A collection of key-value pairs; the base reference type."],
+        ["NaN","A special numeric value meaning 'Not a Number'."],
+        ["Infinity","A value greater than any finite number."],
+        ["instanceof","Tests whether an object was built from a given constructor."],
+        ["Number() / String() / Boolean()","Explicitly convert a value to that type."],
+        ["parseInt() / parseFloat()","Parse a string into an integer or floating-point number."],
+        ["Number.isNaN() / isFinite()","Reliably check whether a value is NaN or finite."],
+        ["coercion","Implicit type conversion JavaScript performs automatically."]
+      ]},
+      {label:"Variables & Declarations", items:[
+        ["var","Function-scoped, hoisted variable declaration (legacy)."],
+        ["let","Block-scoped variable that can be reassigned."],
+        ["const","Block-scoped variable that cannot be reassigned."],
+        ["destructuring assignment","Unpack array or object values into separate variables."],
+        ["spread (...)","Expand an iterable or object's contents in place."],
+        ["rest (...)","Gather remaining items into an array or object."]
+      ]},
+      {label:"Operators", items:[
+        ["Arithmetic ( + - * / % )","Add, subtract, multiply, divide, and remainder."],
+        ["Exponentiation ( ** )","Raise a number to a power."],
+        ["Increment / decrement ( ++ -- )","Add or subtract one from a value."],
+        ["Assignment ( = += -= *= )","Assign, or compound-assign, a value."],
+        ["Comparison ( > < >= <= )","Relational comparisons returning a boolean."],
+        ["Equality ( == === )","Loose (type-coercing) and strict equality."],
+        ["Inequality ( != !== )","Loose and strict 'not equal' checks."],
+        ["Logical ( && || ! )","AND, OR, and NOT boolean logic."],
+        ["Nullish coalescing ( ?? )","Use a fallback only when a value is null or undefined."],
+        ["Optional chaining ( ?. )","Safely access properties that may not exist."],
+        ["Ternary ( ?: )","A compact inline if/else expression."],
+        ["Logical assignment ( &&= ||= ??= )","Assign based on a logical or nullish test."],
+        ["Bitwise ( & | ^ ~ << >> )","Operate on the binary bits of numbers."],
+        ["in / delete","Check for a property, or remove a property from an object."],
+        ["Comma operator","Evaluates several expressions and returns the last."]
+      ]},
+      {label:"Conditionals & Control Flow", items:[
+        ["if / else","Run code depending on whether a condition is true."],
+        ["else if","Chain additional conditions after an if."],
+        ["switch / case","Branch on one value against multiple possible cases."],
+        ["default (switch)","The fallback branch when no case matches."],
+        ["break","Exit a loop or switch immediately."],
+        ["continue","Skip to the next iteration of a loop."],
+        ["short-circuit evaluation","&& and || stop evaluating once the result is known."],
+        ["try / catch / finally","Run risky code, handle errors, and clean up afterward."],
+        ["throw","Raise an exception to signal an error."],
+        ["labeled statement","Name a loop so break/continue can target an outer loop."]
+      ]},
+      {label:"Loops & Iteration", items:[
+        ["for","Loop with an initializer, condition, and update step."],
+        ["while","Repeat as long as a condition stays true."],
+        ["do...while","Like while, but always runs at least once."],
+        ["for...of","Iterate the values of an iterable (arrays, strings, maps)."],
+        ["for...in","Iterate the enumerable keys of an object."],
+        ["forEach()","Run a callback once for each array element."],
+        ["iterator / iterable","The protocol that makes a value usable with for...of."],
+        ["entries() / keys() / values()","Iterator helpers for arrays, objects, and maps."]
+      ]},
+      {label:"Functions", items:[
+        ["function declaration","A named function that is hoisted to the top of its scope."],
+        ["function expression","A function assigned to a variable."],
+        ["arrow function","Concise function syntax that does not bind its own this."],
+        ["default parameters","Parameter values used when an argument is missing."],
+        ["rest parameters","Collect extra arguments into an array."],
+        ["arguments object","An array-like list of all arguments (not in arrow functions)."],
+        ["callback function","A function passed to another function to be run later."],
+        ["higher-order function","A function that takes or returns another function."],
+        ["IIFE","A function expression that runs the moment it is defined."],
+        ["generator (function*)","A function that can pause and resume using yield."],
+        ["async function","Always returns a promise and allows the use of await."],
+        ["call() / apply()","Invoke a function with a chosen this and arguments."],
+        ["bind()","Create a new function with a permanently bound this."],
+        ["closure","A function that keeps access to variables from its outer scope."],
+        ["recursion","A function that calls itself to solve a problem."]
+      ]},
+      {label:"String Methods", items:[
+        ["length","The number of characters in a string."],
+        ["charAt() / at()","Get the character at an index (at() allows negatives)."],
+        ["charCodeAt() / codePointAt()","Get the numeric code of a character."],
+        ["indexOf() / lastIndexOf()","Find the position of a substring."],
+        ["includes()","Check whether a substring is present."],
+        ["startsWith() / endsWith()","Check how a string begins or ends."],
+        ["slice()","Extract a section of a string by start and end index."],
+        ["substring()","Extract characters between two indices."],
+        ["toUpperCase() / toLowerCase()","Change the case of all characters."],
+        ["trim() / trimStart() / trimEnd()","Remove surrounding whitespace."],
+        ["padStart() / padEnd()","Pad a string to a target length."],
+        ["repeat()","Repeat a string a given number of times."],
+        ["replace() / replaceAll()","Substitute matched text with new text."],
+        ["split()","Break a string into an array of substrings."],
+        ["concat()","Join one or more strings together."],
+        ["match() / matchAll()","Find regular-expression matches."],
+        ["search()","Return the index of the first regex match."],
+        ["localeCompare()","Compare strings in a locale-aware way for sorting."],
+        ["template literal","Backtick string supporting ${...} interpolation and multi-line text."]
+      ]},
+      {label:"Array Methods", items:[
+        ["push() / pop()","Add to, or remove from, the end of an array."],
+        ["shift() / unshift()","Remove from, or add to, the start of an array."],
+        ["slice()","Copy a portion of an array without mutating it."],
+        ["splice()","Add or remove elements in place."],
+        ["concat()","Merge arrays into a new array."],
+        ["join()","Combine all elements into a single string."],
+        ["indexOf() / lastIndexOf()","Find the position of an element."],
+        ["includes()","Check whether an element exists in the array."],
+        ["find() / findIndex()","Get the first element, or index, matching a test."],
+        ["findLast() / findLastIndex()","Get the last match (ES2023)."],
+        ["filter()","Build a new array of elements that pass a test."],
+        ["map()","Transform every element into a new array."],
+        ["forEach()","Run a function for each element (returns nothing)."],
+        ["reduce() / reduceRight()","Fold an array down to a single accumulated value."],
+        ["some() / every()","Test whether any, or all, elements pass a condition."],
+        ["sort()","Order elements, optionally with a comparator function."],
+        ["reverse()","Reverse the order of elements in place."],
+        ["flat() / flatMap()","Flatten nested arrays, optionally after mapping."],
+        ["fill()","Fill a range of the array with a static value."],
+        ["at()","Get an element by index, supporting negative indices."],
+        ["Array.from()","Create an array from an iterable or array-like value."],
+        ["Array.of()","Create an array from its arguments."],
+        ["Array.isArray()","Check whether a value is an array."],
+        ["toSorted() / toReversed() / with()","Non-mutating versions of sort, reverse, and replace (ES2023)."]
+      ]},
+      {label:"Object Methods & Features", items:[
+        ["Object.keys()","Get an array of an object's own property names."],
+        ["Object.values()","Get an array of an object's own values."],
+        ["Object.entries()","Get an array of [key, value] pairs."],
+        ["Object.assign()","Copy properties from sources into a target object."],
+        ["Object.freeze()","Make an object immutable."],
+        ["Object.seal()","Prevent adding or removing properties on an object."],
+        ["Object.create()","Create a new object with a specified prototype."],
+        ["Object.fromEntries()","Build an object from key-value pairs."],
+        ["Object.defineProperty()","Define a property with fine-grained descriptors."],
+        ["Object.getPrototypeOf() / setPrototypeOf()","Read or change an object's prototype."],
+        ["Object.is()","Compare two values for strict sameness (handles NaN, -0)."],
+        ["Object.hasOwn()","Check for an own property safely (ES2022)."],
+        ["hasOwnProperty()","Older check for an object's own property."],
+        ["getters / setters","Accessor properties defined with get and set."],
+        ["computed property names","Use [expression] as a dynamic object key."],
+        ["property shorthand","Write {x} instead of {x: x}."],
+        ["spread in objects","Copy or merge objects with {...obj}."],
+        ["structuredClone()","Create a deep copy of an object or array."]
+      ]},
+      {label:"Numbers & Math", items:[
+        ["toFixed()","Format a number to a fixed number of decimals."],
+        ["toPrecision()","Format a number to a set count of significant digits."],
+        ["Number.isInteger()","Check whether a value is a whole number."],
+        ["Number.MAX_SAFE_INTEGER","The largest integer JS can represent safely."],
+        ["Math.round() / floor() / ceil() / trunc()","Round, round down, round up, or drop the fraction."],
+        ["Math.abs()","The absolute (non-negative) value of a number."],
+        ["Math.min() / max()","The smallest or largest of several values."],
+        ["Math.random()","A pseudo-random number from 0 up to (not including) 1."],
+        ["Math.pow() / Math.sqrt()","Raise to a power, or take a square root."],
+        ["Math.sign()","Returns -1, 0, or 1 for a number's sign."],
+        ["numeric separators","Underscores in numbers for readability, e.g. 1_000_000 (ES2021)."]
+      ]},
+      {label:"JSON & Dates", items:[
+        ["JSON.stringify()","Convert a JavaScript value into a JSON string."],
+        ["JSON.parse()","Parse a JSON string back into a value."],
+        ["Date","An object representing a single moment in time."],
+        ["Date.now()","The current time in milliseconds since 1970."],
+        ["new Date()","Create a date; getFullYear, getMonth, etc. read its parts."],
+        ["toISOString()","Format a date as a standard ISO 8601 string."]
+      ]},
+      {label:"Promises & Async", items:[
+        ["Promise","Represents a future value: pending, fulfilled, or rejected."],
+        [".then() / .catch() / .finally()","React to a promise's success, failure, or completion."],
+        ["Promise.all()","Wait for all promises; rejects if any one fails."],
+        ["Promise.allSettled()","Wait for all promises regardless of outcome (ES2020)."],
+        ["Promise.race()","Settle as soon as the first promise settles."],
+        ["Promise.any()","Resolve with the first fulfilled promise (ES2021)."],
+        ["Promise.resolve() / reject()","Create an already-settled promise."],
+        ["async / await","Write asynchronous code that reads like synchronous code."],
+        ["top-level await","Use await directly in a module, outside any function (ES2022)."],
+        ["fetch()","Make a network request that returns a promise."],
+        ["setTimeout() / setInterval()","Run a callback after a delay, or repeatedly."],
+        ["queueMicrotask()","Schedule a callback to run on the microtask queue."]
+      ]},
+      {label:"Classes & OOP", items:[
+        ["class","A blueprint for creating objects with shared structure."],
+        ["constructor","The method that initializes a new instance."],
+        ["extends","Create a subclass that inherits from another class."],
+        ["super","Call the parent class's constructor or methods."],
+        ["static","A member that belongs to the class itself, not instances."],
+        ["get / set","Define accessor methods on a class."],
+        ["private fields (#)","Class members that are truly private (ES2022)."],
+        ["new","Create an instance from a constructor function or class."],
+        ["this","A reference to the current instance or calling context."],
+        ["instance fields","Class properties declared directly in the class body."]
+      ]},
+      {label:"Errors & Debugging", items:[
+        ["Error","The base object for representing runtime errors."],
+        ["TypeError / RangeError / SyntaxError","Common built-in error subtypes."],
+        ["throw","Signal an error by raising an exception."],
+        ["try / catch / finally","Catch errors and run cleanup code."],
+        ["Error cause","Attach an underlying cause to an error (ES2022)."],
+        ["console.log / warn / error / table","Methods for printing debug output."],
+        ["debugger","Pauses execution at that line when dev tools are open."]
+      ]},
+      {label:"Regular Expressions", items:[
+        ["RegExp","An object describing a text-matching pattern."],
+        ["regex literal","Inline pattern syntax written as /pattern/flags."],
+        ["test()","Returns true if a pattern matches a string."],
+        ["exec()","Returns detailed information about a regex match."],
+        ["flags ( g i m s u y )","Modifiers like global, case-insensitive, and multiline."]
+      ]},
+      {label:"Modules & Modern Features", items:[
+        ["import / export","Share code between ES modules."],
+        ["default export","The single primary export of a module."],
+        ["dynamic import()","Load a module on demand; returns a promise."],
+        ["Map","A keyed collection that preserves insertion order."],
+        ["Set","A collection that stores only unique values."],
+        ["WeakMap / WeakSet","Collections with weakly held keys, friendly to garbage collection."],
+        ["Symbol.iterator","Defines how an object behaves in a for...of loop."],
+        ["globalThis","The single global object across every environment (ES2020)."],
+        ["tagged template literals","Process a template string with a custom function."],
+        ["optional catch binding","Write catch without naming the error (ES2019)."],
+        ["Array.fromAsync()","Build an array from an async iterable (ES2024)."],
+        ["Object.groupBy()","Group items into an object keyed by a function (ES2024)."]
+      ]}
+    ]
+  },
+  {
+    id:"typescript", name:"TypeScript", tag:"typed JavaScript", accent:"var(--c-ts)", links:["ts","w3"], q:"typescript",
+    groups:[
+      {label:"Basics", items:[
+        ["Static typing","Types are checked at compile time, before the code ever runs."],
+        ["Type inference","TypeScript automatically deduces a type from how a value is used."],
+        ["Type annotation","Explicitly declaring the type of a variable, parameter, or return value."],
+        ["Literal type","A type that is one exact value, like 'GET' | 'POST'."],
+        ["Optional property","A property that may be absent, marked with a trailing ?."],
+        ["readonly","Marks a property that cannot be reassigned after creation."],
+      ]},
+      {label:"Composing Types", items:[
+        ["interface","Defines the shape of an object; can be extended and merged."],
+        ["type alias","Names any type — including unions, primitives, and functions."],
+        ["interface vs type","Both describe shapes; interfaces extend and merge, type aliases are more flexible."],
+        ["Union type","A value that can be one of several types, written A | B."],
+        ["Intersection type","Combines multiple types into one, written A & B."],
+        ["Enum","A named set of related constant values."],
+        ["Tuple","A fixed-length array with a known type at each position."],
+        ["Index signature","Describes objects with dynamic or unknown keys."],
+        ["Discriminated union","A union of objects sharing a literal field used for safe narrowing."],
+      ]},
+      {label:"Special Types", items:[
+        ["any","Opts a value out of type checking entirely."],
+        ["unknown","A safer any — must be narrowed before it can be used."],
+        ["never","A type for values that never occur (e.g. a function that always throws)."],
+        ["void","Represents the absence of a return value."],
+      ]},
+      {label:"Generics & Utility Types", items:[
+        ["Generics","Reusable code that works across a range of types using <T>."],
+        ["Utility types","Built-in type transformers like Partial, Pick, Omit, Record."],
+        ["Partial / Required","Make all properties of a type optional, or all required."],
+        ["Pick / Omit","Build a new type by selecting, or removing, specific keys."],
+        ["Record","Constructs an object type from a key type and a value type."],
+        ["Mapped type","Creates a type by transforming each property of another type."],
+        ["Conditional type","A type that resolves based on a condition: T extends U ? X : Y."],
+      ]},
+      {label:"Type Operators & Guards", items:[
+        ["Type guard","A runtime check that narrows a value's type within a block."],
+        ["Type assertion","Telling the compiler to treat a value as a specific type."],
+        ["keyof","Produces a union of all the keys of an object type."],
+        ["typeof (in types)","Captures the type of an existing value or variable."],
+        ["Non-null assertion (!)","Asserts to the compiler that a value is not null or undefined."],
+        ["Structural typing","Type compatibility is based on shape, not on the declared name."],
+      ]},
+      {label:"OOP & Tooling", items:[
+        ["Decorator","Special syntax to annotate or modify classes and their members."],
+        ["Declaration file (.d.ts)","Supplies types for JavaScript code that has no implementation."],
+        ["Access modifiers","public, private, and protected control member visibility."],
+      ]},
+    ]
+  },
+  {
+    id:"react", name:"React.js", tag:"the UI library", accent:"var(--c-react)", links:["react","w3"], q:"react.js",
+    groups:[
+      {label:"Core Concepts", items:[
+        ["Component","A reusable, self-contained piece of UI."],
+        ["Functional component","A component written as a function that returns JSX."],
+        ["Class component","An older component style built with an ES6 class."],
+        ["JSX","HTML-like syntax that compiles to React.createElement calls."],
+        ["Props","Read-only data passed from a parent component to a child."],
+        ["State","Internal, changeable data that triggers a re-render when updated."],
+        ["Keys","Stable identifiers that help React track items in a list efficiently."],
+        ["Conditional rendering","Showing different UI based on a condition."],
+        ["Lifecycle","The phases of a component: mounting, updating, and unmounting."],
+      ]},
+      {label:"Hooks", items:[
+        ["Hooks","Functions that let function components use state and lifecycle features."],
+        ["useState","Adds local state to a function component."],
+        ["useEffect","Runs side effects after render and manages cleanup."],
+        ["useContext","Reads a value from a React Context."],
+        ["useRef","Holds a mutable value or a DOM reference across renders without re-rendering."],
+        ["useMemo","Memoizes the result of an expensive calculation."],
+        ["useCallback","Memoizes a function reference so it stays stable between renders."],
+        ["useReducer","Manages complex state transitions with a reducer function."],
+        ["useLayoutEffect","Like useEffect but fires synchronously after DOM changes and before the browser paints; use it to measure or adjust layout."],
+        ["useImperativeHandle","Customizes the value a parent receives through a ref (used together with forwardRef)."],
+        ["useInsertionEffect","Fires before DOM mutations; intended for CSS-in-JS libraries to inject styles."],
+        ["useId","Generates a unique, stable ID that matches between server and client, for accessibility attributes."],
+        ["useDebugValue","Adds a readable label to a custom hook in React DevTools."],
+        ["useTransition","Marks some state updates as non-urgent, returning an isPending flag and a startTransition function."],
+        ["useDeferredValue","Defers updating a part of the UI so urgent updates stay responsive."],
+        ["useSyncExternalStore","Subscribes a component to an external (non-React) store in a concurrent-safe way."],
+        ["use","Reads a resource such as a promise or context, and unlike other hooks may be called conditionally (React 19)."],
+        ["useActionState","Manages state produced by a form action and tracks its pending status (React 19)."],
+        ["useOptimistic","Shows a temporary optimistic UI state while an async action completes (React 19)."],
+        ["useFormStatus","Reads the submission status of the surrounding form (React 19, from react-dom)."],
+        ["Custom hook","A reusable function that bundles and shares hook logic."],
+      ]},
+      {label:"State & Data Flow", items:[
+        ["Lifting state up","Moving shared state to the closest common ancestor of components that need it."],
+        ["Prop drilling","Passing props through many intermediate layers to reach a deep child."],
+        ["Context API","Shares data across the component tree without prop drilling."],
+        ["One-way data flow","Data flows down from parent to child only (unidirectional)."],
+        ["Controlled component","A form input whose value is driven by React state."],
+        ["Uncontrolled component","A form input that manages its own value through the DOM."],
+        ["Stale closure","A callback that captures an outdated value of state or props."],
+      ]},
+      {label:"Component Patterns", items:[
+        ["Higher-Order Component","A function that wraps a component to add shared behavior."],
+        ["Render props","Sharing logic by passing a render function as a prop or child."],
+        ["Composition","Building complex UI by combining smaller components."],
+        ["Fragment","Groups children without adding an extra DOM node, written <>…</>."],
+        ["Portal","Renders children into a DOM node outside the parent hierarchy."],
+        ["forwardRef","Passes a ref through a component down to a child element."],
+        ["Error boundary","A component that catches rendering errors in its child tree."],
+      ]},
+      {label:"Rendering & Performance", items:[
+        ["Virtual DOM","An in-memory tree React diffs against to decide what to update."],
+        ["Reconciliation","The process of updating the real DOM to match the virtual DOM."],
+        ["Diffing","Comparing the old and new virtual DOM trees to find what changed."],
+        ["React.memo","Skips re-rendering a component when its props have not changed."],
+        ["PureComponent","A class component that re-renders only on a shallow prop/state change."],
+        ["Batching","Grouping multiple state updates into a single re-render."],
+        ["Fiber","React's internal engine for incremental, interruptible rendering."],
+        ["Lazy loading","Loading a component only when it is needed, via React.lazy."],
+        ["Suspense","Lets components wait for something (like data or code) before rendering."],
+      ]},
+      {label:"Other", items:[
+        ["Synthetic event","React's cross-browser wrapper around native DOM events."],
+        ["Strict Mode","A development helper that surfaces potential problems."],
+        ["Hydration","Attaching React's interactivity to server-rendered HTML."],
+      ]},
+      {label:"Concurrent React, Hydration & Patterns", items:[
+        ["Concurrent rendering","React can interrupt, pause, and resume rendering work to keep the UI responsive (the basis of Concurrent Mode)."],
+        ["Time slicing","Splitting rendering into small chunks across frames so the main thread is never blocked for long."],
+        ["Streaming SSR","Sending server-rendered HTML to the browser in chunks as each part becomes ready."],
+        ["Selective hydration","Hydrating interactive parts of the page first and on demand, prioritized by user interaction."],
+        ["Progressive hydration","Hydrating components gradually over time instead of all at once."],
+        ["Partial hydration","Hydrating only the interactive parts of an otherwise static page."],
+        ["Parallel hydration","Hydrating multiple components concurrently rather than one after another."],
+        ["Island architecture","Shipping mostly static HTML with small, isolated interactive 'islands' of JavaScript."],
+        ["Rules of Hooks","Call hooks only at the top level and only from React functions, so their call order stays stable."],
+        ["Compound component pattern","Related components that share implicit state via context, like <Tabs> with <Tab> children."],
+      ]},
+    ]
+  },
+  {
+    id:"reactjsx", name:"React & JSX Tags", tag:"components & special elements", accent:"var(--c-rjsx)", links:["react","search"], q:"react jsx",
+    groups:[
+      {label:"Built-in React Components", items:[
+        ["<Fragment> / <>","Groups multiple children without adding an extra DOM node."],
+        ["<StrictMode>","Wraps the app to surface potential problems in development."],
+        ["<Suspense>","Shows a fallback while lazy components or data are loading."],
+        ["<Profiler>","Measures the render performance of the tree it wraps."],
+        ["<Context.Provider>","Supplies a context value to all descendants."],
+        ["<Context.Consumer>","Reads a context value via a render function (legacy style)."],
+        ["<ErrorBoundary>","A class component that catches and displays child render errors."],
+        ["<Portal>","Renders children into a DOM node outside the parent (via createPortal)."],
+      ]},
+      {label:"Your Components & Framework Tags", items:[
+        ["<MyComponent>","A custom component — always PascalCase so React treats it as a component."],
+        ["<Layout>","A shared wrapper component (e.g. Next.js layout) that persists across routes."],
+        ["<Link>","Client-side navigation component (Next.js / React Router) — no full reload."],
+        ["<Outlet>","React Router placeholder where nested child routes render."],
+        ["<Routes> / <Route>","React Router elements that declare which component renders per URL."],
+        ["<NavLink>","A React Router link that knows when it is active."],
+        ["<Image>","Next.js component for automatic image optimization."],
+        ["<Head>","Next.js component (Pages Router) for setting <head> tags."],
+        ["<Script>","Next.js component for loading third-party scripts with a strategy."],
+      ]},
+      {label:"Special Props & JSX Attributes", items:[
+        ["{children}","The special prop that renders whatever is nested inside a component."],
+        ["key","Special prop giving list items a stable identity for reconciliation."],
+        ["ref","Special prop to reach a DOM node or component instance."],
+        ["className","JSX attribute for a CSS class (JSX can't use the word class)."],
+        ["htmlFor","JSX attribute that links a <label> to an input (replaces for)."],
+        ["dangerouslySetInnerHTML","JSX prop to inject raw HTML — named to warn about XSS risk."],
+        ["lowercase tags (div, main, span)","In JSX, lowercase names are standard HTML elements; capitalized names are components."],
+      ]},
+    ]
+  },
+  {
+    id:"nextjs", name:"Next.js", tag:"the React framework", accent:"var(--c-next)", links:["next","search"], q:"next.js",
+    groups:[
+      {label:"Rendering Strategies", items:[
+        ["Server Component","Renders on the server and ships no client-side JS by default."],
+        ["Client Component","Runs in the browser; marked with the 'use client' directive."],
+        ["SSR","Server-Side Rendering — HTML is generated on each request."],
+        ["SSG","Static Site Generation — HTML is generated once at build time."],
+        ["ISR","Incremental Static Regeneration — static pages rebuild in the background after deploy."],
+        ["CSR","Client-Side Rendering — content is rendered in the browser after JS loads."],
+        ["Streaming","Progressively sends rendered UI from server to client."],
+        ["Hydration","Makes the server-rendered HTML interactive in the browser."],
+      ]},
+      {label:"Routing", items:[
+        ["File-based routing","Routes are created automatically from your folder and file structure."],
+        ["App Router","The newer routing system using the app/ directory, layouts, and server components."],
+        ["Pages Router","The original routing system based on the pages/ directory."],
+        ["Dynamic route","A route segment based on a parameter, like [id]."],
+        ["Route handler / API route","Backend endpoints that live inside the Next.js app."],
+        ["Middleware","Code that runs before a request is completed, e.g. for auth or redirects."],
+        ["Layout","Shared UI that wraps multiple routes and persists across navigation."],
+        ["Loading & error UI","Special files that define loading and error states for a route."],
+      ]},
+      {label:"Data Fetching", items:[
+        ["getServerSideProps","Fetches data on every request (Pages Router)."],
+        ["getStaticProps","Fetches data at build time (Pages Router)."],
+        ["getStaticPaths","Declares which dynamic routes to pre-render (Pages Router)."],
+      ]},
+      {label:"Components & Runtime", items:[
+        ["next/image","A component that automatically optimizes and lazy-loads images."],
+        ["next/link","Enables client-side navigation with automatic prefetching."],
+        ["Metadata API","Declaratively defines page head tags for SEO."],
+        ["Edge runtime","Runs code on a lightweight runtime physically close to users."],
+      ]},
+      {label:"App Router File Conventions", items:[
+        ["Route groups","Folders named in parentheses, like (marketing), that organize routes without affecting the URL."],
+        ["Parallel routes","Render several pages in the same layout at once using @slot folders."],
+        ["Intercepting routes","Load another route inside the current layout (e.g. a modal) via the (.) convention."],
+        ["generateStaticParams","Pre-generates dynamic route segments at build time (App Router replacement for getStaticPaths)."],
+        ["generateMetadata","Builds SEO metadata dynamically for a route, often from fetched data."],
+        ["notFound()","Stops rendering and shows the nearest not-found UI (a 404)."],
+        ["Dynamic functions","APIs like cookies(), headers(), and searchParams that opt a route into dynamic rendering."],
+      ]},
+      {label:"Caching, Data & Mutations", items:[
+        ["Server Actions","Async functions marked 'use server' that run on the server and can be called from forms or components."],
+        ["revalidate","An option that regenerates cached or static data after a set number of seconds (ISR)."],
+        ["revalidatePath / revalidateTag","On-demand cache invalidation by URL path or by cache tag."],
+        ["On-Demand Revalidation","Refreshing static content the moment the underlying data changes."],
+        ["fetch caching","Next.js extends fetch() with per-request caching and revalidation controls."],
+        ["Draft Mode","Bypasses the static cache to preview unpublished or draft content."],
+      ]},
+      {label:"Config, Runtime & Routing Extras", items:[
+        ["rewrites","next.config rules that map an incoming path to a different destination while keeping the visible URL."],
+        ["redirects","next.config rules that send users from one path to another with a status code."],
+        ["next.config.js","The configuration file controlling Next.js build and runtime behavior."],
+        ["Route prefetching","Next.js preloads linked routes in the background so navigation feels instant."],
+        ["Node.js runtime","The default full Node.js server environment, as opposed to the lighter Edge runtime."],
+      ]},
+    ]
+  },
+  {
+    id:"htmlcss", name:"HTML & CSS", tag:"structure & style", accent:"var(--c-css)", links:["mdn","w3"],
+    groups:[
+      {label:"HTML & the DOM", items:[
+        ["Semantic HTML","Using meaningful tags (header, nav, article) that describe content's role."],
+        ["DOM","The tree of objects the browser builds from your HTML."],
+        ["CSSOM","The browser's object model representing all CSS rules."],
+      ]},
+      {label:"Box Model & Layout", items:[
+        ["Box model","Every element is a box made of content, padding, border, and margin."],
+        ["Margin / padding / border","Space outside the box, space inside it, and the edge between them."],
+        ["Display","Defines how an element renders: block, inline, flex, grid, none."],
+        ["Position","Controls placement: static, relative, absolute, fixed, or sticky."],
+        ["z-index","Controls the stacking order of overlapping elements."],
+        ["Stacking context","A layer that contains and isolates its own z-index ordering."],
+        ["Flexbox","A one-dimensional layout system for rows or columns."],
+        ["CSS Grid","A two-dimensional layout system with rows and columns."],
+        ["Overflow","Controls how content that exceeds its box is handled."],
+        ["Aspect ratio","The width-to-height proportion of an element."],
+        ["Block vs inline","Block elements stack and take full width; inline elements flow in text."],
+      ]},
+      {label:"Selectors & Cascade", items:[
+        ["Specificity","The weight that decides which competing CSS rule wins."],
+        ["Cascade","The set of priority rules that determine how styles are applied."],
+        ["Inheritance","Child elements taking certain styles automatically from their parents."],
+        ["Pseudo-class","Styles an element in a particular state, like :hover or :focus."],
+        ["Pseudo-element","Styles a specific part of an element, like ::before or ::after."],
+        ["BEM","Block-Element-Modifier, a CSS class naming convention."],
+        ["!important","Overrides normal specificity — to be used sparingly."],
+      ]},
+      {label:"Values & Styling", items:[
+        ["CSS variables","Reusable custom properties declared with --name."],
+        ["Units","Sizing units: px, %, em, rem, vh, vw, fr."],
+        ["rem vs em","rem is relative to the root font size; em is relative to the parent's."],
+        ["Transition","Animates a property change smoothly over time."],
+        ["Animation / keyframes","Multi-step animations defined with @keyframes."],
+        ["Transform","Moves, scales, rotates, or skews an element."],
+        ["Reset / Normalize","Neutralizes or standardizes default browser styling."],
+        ["Preprocessor","Tools like Sass/Less that add variables, nesting, and mixins to CSS."],
+        ["Utility-first CSS","Composing styles from many small classes, as in Tailwind."],
+      ]},
+      {label:"Responsive", items:[
+        ["Media query","Applies styles conditionally based on screen size or features."],
+        ["Viewport","The visible area of the page in the browser window."],
+        ["Responsive design","Layouts that adapt fluidly to any screen size."],
+      ]},
+    ]
+  },
+  {
+    id:"htmltags", name:"HTML Elements", tag:"every tag, by purpose", accent:"var(--c-htmltag)", links:["mdn","w3"],
+    groups:[
+      {label:"Document & Metadata", items:[
+        ["<!DOCTYPE>","Declares the document type and tells the browser to use standards mode."],
+        ["<html>","The root element that wraps the entire page."],
+        ["<head>","Container for metadata not shown on the page."],
+        ["<title>","The page title shown in the browser tab and search results."],
+        ["<base>","Sets a base URL for all relative links on the page."],
+        ["<meta>","Metadata such as charset, viewport, and description."],
+        ["<link>","Links external resources like stylesheets and icons."],
+        ["<style>","Embeds CSS directly in the document."],
+        ["<script>","Embeds or links JavaScript."],
+        ["<noscript>","Fallback content shown when JavaScript is disabled."],
+        ["<body>","Contains all the visible content of the page."],
+      ]},
+      {label:"Sectioning & Structure", items:[
+        ["<header>","Introductory content or navigation for a page or section."],
+        ["<nav>","A section of navigation links."],
+        ["<main>","The dominant, unique content of the document (one per page)."],
+        ["<section>","A thematic grouping of related content."],
+        ["<article>","A self-contained, independently distributable piece of content."],
+        ["<aside>","Tangential content like a sidebar or callout."],
+        ["<footer>","Footer content for a page or section."],
+        ["<h1> to <h6>","Section headings from highest (h1) to lowest (h6) importance."],
+        ["<hgroup>","Groups a heading together with related taglines."],
+        ["<address>","Contact information for its nearest article or body."],
+        ["<div>","A generic block-level container with no semantic meaning."],
+      ]},
+      {label:"Text Content", items:[
+        ["<p>","A paragraph of text."],
+        ["<hr>","A thematic break between paragraph-level content."],
+        ["<pre>","Preformatted text that preserves whitespace and line breaks."],
+        ["<blockquote>","A block-level quotation from another source."],
+        ["<ol>","An ordered (numbered) list."],
+        ["<ul>","An unordered (bulleted) list."],
+        ["<li>","A single item within a list."],
+        ["<dl>","A description list of term/description pairs."],
+        ["<dt>","A term being defined in a description list."],
+        ["<dd>","The description of the preceding term."],
+        ["<figure>","Self-contained media, often with a caption."],
+        ["<figcaption>","A caption or legend for a figure."],
+      ]},
+      {label:"Inline Text Semantics", items:[
+        ["<a>","A hyperlink to another page, file, or location."],
+        ["<span>","A generic inline container with no semantic meaning."],
+        ["<strong>","Content of strong importance, rendered bold."],
+        ["<em>","Stressed emphasis, rendered italic."],
+        ["<b>","Bold text drawn out stylistically, without added importance."],
+        ["<i>","Italic text in an alternate voice or mood."],
+        ["<u>","Text with a non-textual annotation, usually underlined."],
+        ["<mark>","Text highlighted for reference or relevance."],
+        ["<small>","Side comments and fine print."],
+        ["<del> / <ins>","Text that has been deleted from, or inserted into, a document."],
+        ["<sub> / <sup>","Subscript and superscript text."],
+        ["<code>","A fragment of inline computer code."],
+        ["<kbd>","Keyboard input the user should type."],
+        ["<samp>","Sample output from a program."],
+        ["<var>","A variable in a mathematical or programming context."],
+        ["<abbr>","An abbreviation or acronym, with an optional expansion."],
+        ["<cite>","The title of a referenced creative work."],
+        ["<q>","A short, inline quotation."],
+        ["<time>","A machine-readable date or time."],
+        ["<br>","A line break within text."],
+        ["<wbr>","A point where the browser may optionally break a line."],
+        ["<bdi> / <bdo>","Isolate or override the direction of bidirectional text."],
+        ["<dfn>","The defining instance of a term."],
+        ["<ruby> / <rt> / <rp>","Annotations for East-Asian pronunciation."],
+      ]},
+      {label:"Media & Embedded", items:[
+        ["<img>","Embeds an image."],
+        ["<picture>","Serves different image sources for different conditions."],
+        ["<source>","Specifies a media resource for picture, audio, or video."],
+        ["<audio>","Embeds sound content."],
+        ["<video>","Embeds video content."],
+        ["<track>","Adds captions or subtitles to media."],
+        ["<map> / <area>","Defines clickable regions on an image (image map)."],
+        ["<canvas>","A drawable surface for 2D graphics or WebGL."],
+        ["<svg>","Inline scalable vector graphics."],
+        ["<iframe>","Embeds another HTML page within the current one."],
+        ["<embed> / <object>","Embeds external content such as PDFs or plugins."],
+      ]},
+      {label:"Tables", items:[
+        ["<table>","Tabular data arranged in rows and columns."],
+        ["<caption>","A title or caption for a table."],
+        ["<thead> / <tbody> / <tfoot>","The header, body, and footer row groups of a table."],
+        ["<tr>","A row of table cells."],
+        ["<th>","A table header cell."],
+        ["<td>","A table data cell."],
+        ["<col> / <colgroup>","Defines properties for table columns."],
+      ]},
+      {label:"Forms", items:[
+        ["<form>","An interactive form for collecting user input."],
+        ["<input>","A data-entry field with many possible types."],
+        ["<textarea>","A multi-line text input."],
+        ["<button>","A clickable button."],
+        ["<select>","A drop-down list of options."],
+        ["<option>","An option inside a select or datalist."],
+        ["<optgroup>","Groups related options within a select."],
+        ["<label>","A caption associated with a form control."],
+        ["<fieldset>","Groups related form controls together."],
+        ["<legend>","A caption for a fieldset."],
+        ["<datalist>","A list of suggested values for an input."],
+        ["<output>","Displays the result of a calculation or user action."],
+        ["<progress>","Shows the completion progress of a task."],
+        ["<meter>","Shows a scalar value within a known range."],
+      ]},
+      {label:"Interactive & Components", items:[
+        ["<details>","A disclosure widget that can be opened and closed."],
+        ["<summary>","The visible heading for a details element."],
+        ["<dialog>","A modal or non-modal dialog box."],
+        ["<menu>","A list of commands or options."],
+        ["<template>","Holds inert markup to be cloned and inserted via script."],
+        ["<slot>","A placeholder inside a web component for projected content."],
+      ]},
+    ]
+  },
+  {
+    id:"cssprops", name:"CSS Properties", tag:"the styling vocabulary", accent:"var(--c-cssprop)", links:["mdn","w3"],
+    groups:[
+      {label:"Layout & Box", items:[
+        ["display","Sets how an element is rendered: block, inline, flex, grid, none."],
+        ["position","Controls placement: static, relative, absolute, fixed, or sticky."],
+        ["top / right / bottom / left","Offsets a positioned element from its edges."],
+        ["float / clear","Floats an element to one side; clear stops wrapping around floats."],
+        ["z-index","Sets the stacking order of overlapping elements."],
+        ["box-sizing","Controls whether padding and border are included in width/height."],
+        ["overflow","Handles content that exceeds its box: visible, hidden, scroll, auto."],
+        ["visibility","Shows or hides an element while keeping its space."],
+        ["inset","Shorthand for top, right, bottom, and left offsets."],
+        ["overflow-x / overflow-y","Controls overflow on a single axis."],
+      ]},
+      {label:"Sizing & Spacing", items:[
+        ["width / height","Sets the dimensions of an element."],
+        ["min-width / max-width","Constrains how narrow or wide an element can be."],
+        ["min-height / max-height","Constrains how short or tall an element can be."],
+        ["margin","Space outside an element's border."],
+        ["padding","Space inside an element, between content and border."],
+        ["aspect-ratio","Maintains a width-to-height proportion for an element."],
+        ["gap","Sets the spacing between flex or grid items."],
+      ]},
+      {label:"Flexbox", items:[
+        ["flex","Shorthand for flex-grow, flex-shrink, and flex-basis."],
+        ["flex-direction","Sets the main axis of a flex container: row or column."],
+        ["flex-wrap","Allows flex items to wrap onto multiple lines."],
+        ["flex-grow / flex-shrink","How much a flex item grows or shrinks to fill space."],
+        ["flex-basis","The initial size of a flex item before growing or shrinking."],
+        ["justify-content","Aligns items along the main axis of a flex/grid container."],
+        ["align-items","Aligns items along the cross axis."],
+        ["align-content","Aligns wrapped rows along the cross axis."],
+        ["align-self","Overrides align-items for a single item."],
+        ["order","Changes the visual order of a flex/grid item."],
+      ]},
+      {label:"Grid", items:[
+        ["grid-template-columns","Defines the columns of a grid."],
+        ["grid-template-rows","Defines the rows of a grid."],
+        ["grid-template-areas","Names grid regions for readable layout placement."],
+        ["grid-column / grid-row","Places an item across specific grid lines."],
+        ["place-items / place-content","Shorthands to align items or content on both axes."],
+      ]},
+      {label:"Typography & Text", items:[
+        ["font-family","Sets the typeface(s) used for text."],
+        ["font-size","Sets the size of the text."],
+        ["font-weight","Sets the thickness of the text (e.g. 400, 700)."],
+        ["font-style","Sets normal, italic, or oblique text."],
+        ["line-height","Sets the vertical spacing between lines of text."],
+        ["letter-spacing / word-spacing","Adjusts spacing between letters or words."],
+        ["text-align","Aligns inline content: left, right, center, justify."],
+        ["text-decoration","Adds underline, overline, or line-through to text."],
+        ["text-transform","Changes case: uppercase, lowercase, capitalize."],
+        ["text-overflow","Handles clipped text, e.g. showing an ellipsis."],
+        ["white-space","Controls how whitespace and line wrapping are handled."],
+        ["vertical-align","Aligns inline or table-cell content vertically."],
+        ["color","Sets the text (foreground) color."],
+        ["list-style","Sets the marker style of list items."],
+        ["text-shadow","Adds a shadow to text."],
+      ]},
+      {label:"Background & Border", items:[
+        ["background","Shorthand for all background properties."],
+        ["background-color","Sets an element's background color."],
+        ["background-image","Sets one or more background images or gradients."],
+        ["background-size","Scales the background image (cover, contain, etc.)."],
+        ["background-position","Positions the background image within the element."],
+        ["background-repeat","Controls whether the background image tiles."],
+        ["border","Shorthand for border width, style, and color."],
+        ["border-radius","Rounds the corners of an element."],
+        ["border-width / style / color","The individual parts of a border."],
+        ["box-shadow","Adds shadow effects around an element's box."],
+        ["outline","Draws a line outside the border, often for focus states."],
+      ]},
+      {label:"Visual Effects", items:[
+        ["opacity","Sets the transparency of an element (0 to 1)."],
+        ["filter","Applies effects like blur, brightness, or grayscale."],
+        ["backdrop-filter","Applies filter effects to the area behind an element."],
+        ["mix-blend-mode","Blends an element's colors with what is behind it."],
+        ["clip-path","Clips an element to a shape."],
+        ["mask","Hides parts of an element using an image or gradient."],
+        ["object-fit","How a replaced element (img/video) fills its box."],
+        ["object-position","Positions the content inside its box."],
+      ]},
+      {label:"Transform & Animation", items:[
+        ["transform","Moves, scales, rotates, or skews an element."],
+        ["transform-origin","Sets the point around which a transform is applied."],
+        ["transition","Animates property changes smoothly over a duration."],
+        ["transition-property / duration","Which properties animate, and for how long."],
+        ["transition-timing-function","The easing curve of a transition (ease, linear, etc.)."],
+        ["animation","Shorthand to run a @keyframes animation."],
+        ["@keyframes","An at-rule defining the steps of an animation."],
+        ["will-change","Hints to the browser which properties will animate, for performance."],
+      ]},
+      {label:"Interaction & Misc", items:[
+        ["cursor","Sets the mouse cursor shown over an element."],
+        ["pointer-events","Controls whether an element responds to mouse events."],
+        ["user-select","Controls whether text can be selected."],
+        ["content","Inserts generated content with ::before and ::after."],
+        ["accent-color","Tints form controls like checkboxes and radios."],
+        ["scroll-behavior","Enables smooth scrolling for navigation."],
+        ["resize","Lets the user resize an element (e.g. a textarea)."],
+      ]},
+    ]
+  },
+  {
+    id:"design", name:"UI / UX & Design", tag:"how it looks & feels", accent:"var(--c-design)", links:["search","wiki"], q:"ui ux design",
+    groups:[
+      {label:"Design Principles", items:[
+        ["Visual hierarchy","Arranging elements so importance is clear and the eye is guided."],
+        ["Contrast","Visual difference that makes elements distinct and readable."],
+        ["Alignment","Placing elements on shared lines to create order."],
+        ["Proximity","Grouping related items close together to show relationship."],
+        ["Repetition","Reusing visual styles to build consistency and rhythm."],
+        ["Balance","Even distribution of visual weight across a layout."],
+        ["Whitespace","Empty space used deliberately to improve clarity and focus."],
+        ["Gestalt principles","How people naturally perceive grouped visual elements."],
+      ]},
+      {label:"Layout & Typography", items:[
+        ["Grid system","An underlying structure of columns and rows that organizes layout."],
+        ["Typography","The craft of arranging type for readability and tone."],
+        ["Type scale","A consistent, harmonious set of font sizes."],
+        ["Color theory","How colors relate, combine, and affect perception."],
+        ["Contrast ratio","A measure of how legible text is against its background."],
+      ]},
+      {label:"UX & Interaction", items:[
+        ["Affordance","A visual cue that suggests how an element can be used."],
+        ["Signifier","An indicator showing where and how to take an action."],
+        ["Feedback","A system's visible response confirming a user's action."],
+        ["Microinteraction","A small animation or response tied to a single task."],
+        ["User flow","The path a user takes to complete a goal."],
+        ["Information architecture","How content is structured, organized, and labeled."],
+        ["Usability heuristics","Rules of thumb for good usability, such as Nielsen's ten."],
+        ["Above the fold","Content visible without scrolling."],
+        ["Call to action (CTA)","A prompt urging the user to take a specific action."],
+      ]},
+      {label:"Responsive & Themes", items:[
+        ["Responsive design","Adapting layout and content to the device size."],
+        ["Mobile-first","Designing for small screens first, then enhancing for larger ones."],
+        ["Adaptive design","Using fixed layouts tailored to specific breakpoints."],
+        ["Dark mode","An alternate dark color theme for the interface."],
+      ]},
+      {label:"Accessibility", items:[
+        ["Accessibility (a11y)","Designing so everyone, including disabled users, can use the product."],
+        ["WCAG","The Web Content Accessibility Guidelines."],
+        ["ARIA","Attributes that make custom UI accessible to assistive technology."],
+      ]},
+      {label:"Process & Artifacts", items:[
+        ["Wireframe","A low-fidelity blueprint of layout and structure."],
+        ["Mockup","A static, high-fidelity visual of the final design."],
+        ["Prototype","An interactive model used to test flows before building."],
+        ["Design system","A reusable set of components, rules, and tokens for consistency."],
+        ["Style guide","Documented standards for visuals, brand, and voice."],
+        ["Atomic design","Building UI from atoms to molecules to organisms to pages."],
+        ["Design tokens","Named variables for colors, spacing, and typography."],
+      ]},
+      {label:"Visual Styles", items:[
+        ["Skeuomorphism vs flat","Realistic, textured surfaces versus minimal flat ones."],
+      ]},
+    ]
+  },
+  {
+    id:"performance", name:"Web Performance", tag:"making it fast", accent:"var(--c-perf)", links:["web","mdn"], q:"web performance",
+    groups:[
+      {label:"Core Web Vitals & Metrics", items:[
+        ["Core Web Vitals","Google's key user-experience metrics: LCP, INP, and CLS."],
+        ["LCP","Largest Contentful Paint — measures loading performance."],
+        ["INP","Interaction to Next Paint — measures responsiveness to input."],
+        ["CLS","Cumulative Layout Shift — measures visual stability."],
+        ["TTFB","Time To First Byte — how quickly the server responds."],
+        ["FCP","First Contentful Paint — when the first content appears."],
+        ["TTI","Time To Interactive — when the page becomes reliably usable."],
+        ["Lighthouse","An automated tool that audits performance and quality."],
+      ]},
+      {label:"Loading & Delivery", items:[
+        ["Critical rendering path","The sequence the browser follows to paint the first pixels."],
+        ["Render-blocking resource","CSS or JS that must load before the page can first paint."],
+        ["Lazy loading","Deferring offscreen assets until they are actually needed."],
+        ["Code splitting","Breaking a bundle into smaller chunks loaded on demand."],
+        ["Tree shaking","Removing unused code from the final bundle."],
+        ["Minification","Stripping whitespace and shortening names to shrink files."],
+        ["Bundling","Combining many modules into fewer output files."],
+        ["Compression","Using gzip or Brotli to reduce transfer size."],
+        ["async vs defer","Two ways scripts load relative to HTML parsing."],
+        ["Preload / prefetch / preconnect","Resource hints that load assets earlier or warm connections."],
+      ]},
+      {label:"Caching & Network", items:[
+        ["Caching","Storing responses so they don't need to be fetched again."],
+        ["CDN","A network of distributed servers delivering assets from nearby locations."],
+        ["Service worker","A background script enabling offline support and caching control."],
+        ["PWA","A Progressive Web App that behaves like a native app."],
+        ["HTTP/2 & HTTP/3","Protocols that speed up delivery with multiplexed requests."],
+      ]},
+      {label:"Rendering & Runtime", items:[
+        ["Image optimization","Using modern formats, compression, and correct sizing."],
+        ["srcset","Serving different image sizes based on the device."],
+        ["Virtualization","Rendering only the list items currently visible (windowing)."],
+        ["Web Worker","Runs scripts on a background thread to keep the UI responsive."],
+        ["Debounce / throttle","Techniques to limit how often expensive handlers run."],
+        ["Memoization","Caching results to skip repeated computation."],
+        ["Reflow vs repaint","Recalculating layout versus simply redrawing pixels."],
+      ]},
+    ]
+  },
+  {
+    id:"principles", name:"Principles & Best Practices", tag:"the rules of the craft", accent:"var(--c-rules)", links:["search","wiki"], q:"software engineering",
+    groups:[
+      {label:"Coding Principles", items:[
+        ["DRY","Don't Repeat Yourself — avoid duplicating logic."],
+        ["KISS","Keep It Simple — favor the most straightforward solution."],
+        ["YAGNI","You Aren't Gonna Need It — don't build for imagined future needs."],
+        ["Separation of concerns","Keep distinct responsibilities in distinct parts of the code."],
+        ["SOLID","Five object-oriented principles for maintainable design."],
+        ["Single source of truth","One authoritative place for each piece of data or state."],
+        ["Single responsibility","A module or component should have one reason to change."],
+        ["Convention over configuration","Sensible defaults that reduce boilerplate setup."],
+        ["Idempotency","Repeating an operation produces the same result each time."],
+        ["Modularity","Composing software from small, independent, swappable pieces."],
+        ["Reusability","Writing code that can be reused across many places."],
+        ["Clean code","Readable, well-named, easy-to-maintain code."],
+      ]},
+      {label:"Robustness & UX", items:[
+        ["Progressive enhancement","Build a working baseline first, then layer on richer features."],
+        ["Graceful degradation","Keep core functionality working when advanced features fail."],
+        ["Cross-browser compatibility","Ensuring consistent behavior across different browsers."],
+        ["Error handling","Anticipating failures and managing them gracefully."],
+      ]},
+      {label:"Quality & Testing", items:[
+        ["Linting","Automated checks that catch errors and enforce style (ESLint)."],
+        ["Formatting","Enforcing consistent code style automatically (Prettier)."],
+        ["Unit / integration / e2e tests","Testing isolated pieces, combined parts, and whole user flows."],
+        ["TDD","Test-Driven Development — write tests before the implementation."],
+        ["Code review","Having peers inspect code before it is merged."],
+        ["Refactoring","Improving code structure without changing its behavior."],
+        ["Debugging","Finding and fixing defects in code."],
+      ]},
+      {label:"Tooling & Delivery", items:[
+        ["Version control","Tracking the history of code changes, usually with Git."],
+        ["CI/CD","Automated pipelines for continuous integration and deployment."],
+        ["Environment variables","Configuration kept outside the codebase, often in .env files."],
+        ["Documentation","Explaining how code and products work for other people."],
+        ["Atomic commits","Small, focused, self-contained changes in version control."],
+      ]},
+    ]
+  },
+  {
+    id:"fundamentals", name:"Web & Networking Fundamentals", tag:"how the web works", accent:"var(--c-web)", links:["mdn","w3"], q:"web development",
+    groups:[
+      {label:"HTTP & APIs", items:[
+        ["HTTP / HTTPS","The protocol for web requests; HTTPS adds encryption."],
+        ["HTTP methods","GET, POST, PUT, PATCH, DELETE — actions performed on resources."],
+        ["Status codes","Numeric response results like 200 (OK), 404 (Not Found), 500 (Error)."],
+        ["REST API","A resource-based API style built on standard HTTP methods."],
+        ["GraphQL","A query language letting clients request exactly the data they need."],
+        ["WebSocket","A persistent, two-way connection for real-time communication."],
+        ["AJAX","Fetching data asynchronously without a full page reload."],
+        ["API integration","Connecting a frontend to backend or third-party services."],
+        ["Caching headers","HTTP headers that tell browsers and CDNs how to cache responses."],
+      ]},
+      {label:"Browser & Storage", items:[
+        ["DNS","The system that translates domain names into IP addresses."],
+        ["Cookies","Small pieces of data the browser stores per website."],
+        ["Session","User state stored on the server between requests."],
+        ["Routing","Mapping URLs to the views or pages that should display."],
+      ]},
+      {label:"Security", items:[
+        ["CORS","Rules that control which cross-origin requests a browser allows."],
+        ["Same-origin policy","A security rule restricting access between different origins."],
+        ["JWT","A signed token used for stateless authentication."],
+        ["Authentication vs authorization","Verifying who you are versus what you're allowed to do."],
+        ["XSS","Cross-Site Scripting — injecting malicious scripts into a page."],
+        ["CSRF","Cross-Site Request Forgery — tricking a user into unwanted actions."],
+        ["Input sanitization","Cleaning user input to prevent injection attacks."],
+        ["Rate limiting","Capping how many requests a client can make in a time window."],
+      ]},
+      {label:"App Types & Tooling", items:[
+        ["SPA","A Single-Page App that updates content without full reloads."],
+        ["MPA","A Multi-Page App that loads a new page per route."],
+        ["Bundler","Tools like Webpack, Vite, or Rollup that combine and process code."],
+        ["Transpiler","Tools like Babel that convert modern JS to widely-supported JS."],
+        ["Polyfill","Code that adds a missing feature to older browsers."],
+        ["Package manager","npm, yarn, or pnpm — installs and manages dependencies."],
+        ["State management","Libraries like Redux or Zustand that manage shared app state."],
+      ]},
+      {label:"Caching, Auth & Delivery Extras", items:[
+        ["Cache-Control (max-age / s-maxage)","HTTP header setting how long browsers (max-age) and shared caches/CDNs (s-maxage) may cache a response."],
+        ["stale-while-revalidate","Serve cached content immediately while refreshing it in the background."],
+        ["Auth token storage","Where to keep auth tokens — an httpOnly cookie (safer from XSS) versus localStorage — and the tradeoffs."],
+        ["Cold start","The extra latency when a serverless function spins up after being idle."],
+        ["Connection pooling","Reusing a set of open database connections instead of opening one per request."],
+      ]},
+    ]
+  },
+  {
+    id:"architecture", name:"System Design & Architecture", tag:"how it's structured at scale", accent:"var(--c-arch)", links:["search","wiki"], q:"system design",
+    groups:[
+      {label:"Architecture Styles", items:[
+        ["Monolith","A single, unified codebase built and deployed as one unit."],
+        ["Microservices","An application split into small, independently deployable services."],
+        ["Micro-frontend","Splitting a frontend into independent, separately deployable pieces."],
+        ["Modular monolith","One deployable app organized internally into well-separated modules."],
+        ["Client-server architecture","Clients request resources from centralized servers."],
+        ["N-tier architecture","Separating presentation, business logic, and data into layers."],
+        ["Decoupled architecture","Frontend and backend that evolve and deploy independently."],
+        ["Headless architecture","A backend exposing content via APIs with no fixed frontend."],
+        ["Layered architecture","Organizing code into stacked responsibility layers."],
+        ["Clean / hexagonal architecture","Isolating core logic from external concerns and frameworks."],
+        ["Domain-Driven Design","Modeling software around the real business domain."],
+        ["Event-driven architecture","Components react to events rather than direct calls."],
+      ]},
+      {label:"Scaling & Reliability", items:[
+        ["Load balancer","Distributes incoming traffic across multiple servers."],
+        ["Horizontal scaling","Adding more machines to share the load."],
+        ["Vertical scaling","Adding more power (CPU/RAM) to a single machine."],
+        ["Scalability","A system's ability to handle growing load gracefully."],
+        ["High availability","Keeping a system operational with minimal downtime."],
+        ["Fault tolerance","Continuing to operate despite component failures."],
+        ["Redundancy","Duplicating components so a backup takes over on failure."],
+        ["Single point of failure","A part whose failure brings down the whole system."],
+        ["Latency vs throughput","Response delay versus volume handled per unit time."],
+        ["Bottleneck","The component limiting overall system performance."],
+        ["Statelessness","Servers keep no client state between requests."],
+        ["Sticky sessions","Routing a given user to the same server each time."],
+      ]},
+      {label:"Data & Caching", items:[
+        ["Caching layers","Storing data at client, CDN, server, or database tiers."],
+        ["Cache invalidation","Deciding when cached data is stale and must be refreshed."],
+        ["Database sharding","Splitting a database horizontally across machines."],
+        ["Replication","Copying data across servers for availability and faster reads."],
+        ["CAP theorem","You can guarantee only two of consistency, availability, partition tolerance."],
+        ["Eventual consistency","Replicas converge to the same state over time."],
+        ["Strong consistency","Every read returns the most recent write."],
+        ["Consistent hashing","Distributing keys across nodes with minimal reshuffling."],
+      ]},
+      {label:"Communication", items:[
+        ["API Gateway","A single entry point that routes, secures, and manages API calls."],
+        ["Backend for Frontend (BFF)","A tailored backend layer serving one specific frontend."],
+        ["Reverse proxy","A server that forwards client requests to backend services."],
+        ["Message queue","A buffer letting services communicate asynchronously."],
+        ["Pub/Sub","Publishers emit events that multiple subscribers receive."],
+        ["Circuit breaker","Stops calling a failing service to prevent cascading failures."],
+        ["Service discovery","How services locate each other on the network."],
+        ["Polling / SSE / WebSocket","Three strategies for delivering real-time updates."],
+      ]},
+      {label:"Infrastructure & Deployment", items:[
+        ["Containerization","Packaging an app with its dependencies, e.g. Docker."],
+        ["Orchestration","Automating container deployment and scaling, e.g. Kubernetes."],
+        ["Serverless","Running code on demand without managing servers."],
+        ["Edge computing","Running logic on servers physically close to users."],
+        ["Blue-green deployment","Switching traffic between two identical environments."],
+        ["Canary release","Rolling a change out to a small subset of users first."],
+        ["Feature flag","Toggling features on or off without redeploying."],
+        ["Observability","Understanding system state via logs, metrics, and traces."],
+      ]},
+      {label:"Estimation & Repos", items:[
+        ["Monorepo vs polyrepo","One repository for many projects versus many separate repos."],
+        ["Back-of-the-envelope estimation","Rough capacity math used in design interviews."],
+      ]},
+      {label:"Requirements & Patterns", items:[
+        ["Functional requirements","What a system must do — its features and behaviors."],
+        ["Non-functional requirements","How a system should perform — scalability, latency, security, availability."],
+        ["MVC architecture","Model-View-Controller — separates data, presentation, and control logic."],
+      ]},
+    ]
+  },
+  {
+    id:"devprocess", name:"Software Development Strategies", tag:"how teams ship", accent:"var(--c-proc)", links:["search","wiki"], q:"software development",
+    groups:[
+      {label:"Agile & Frameworks", items:[
+        ["Agile","Iterative, incremental delivery with frequent feedback."],
+        ["Scrum","An Agile framework using sprints, defined roles, and ceremonies."],
+        ["Kanban","Visualizing work on a board to manage continuous flow."],
+        ["Waterfall","A sequential, phase-by-phase development model."],
+        ["DevOps","Uniting development and operations for faster, reliable delivery."],
+      ]},
+      {label:"Ceremonies & Roles", items:[
+        ["Sprint","A fixed-length iteration that delivers working software."],
+        ["Sprint planning","Selecting and committing to the work for a sprint."],
+        ["Backlog grooming","Refining and estimating upcoming backlog items."],
+        ["Daily standup","A short daily sync on progress and blockers."],
+        ["Sprint retrospective","Reflecting as a team on how to improve the process."],
+        ["Cross-functional team","A team holding all the skills needed to deliver."],
+        ["Pair programming","Two developers working together at one workstation."],
+      ]},
+      {label:"Planning & Estimation", items:[
+        ["User story","A feature described from the user's point of view."],
+        ["Story points","A relative estimate of effort and complexity."],
+        ["Epic","A large body of work broken into many stories."],
+        ["Product backlog","The prioritized list of everything still to build."],
+        ["Definition of Done","The agreed criteria that mark work as truly complete."],
+        ["Acceptance criteria","The conditions a story must satisfy to be accepted."],
+        ["Velocity","How much work a team typically completes per sprint."],
+        ["Burndown chart","A chart tracking remaining work across a sprint."],
+        ["MVP","Minimum Viable Product — the smallest version that delivers value."],
+        ["Spike","A time-boxed investigation to reduce uncertainty."],
+      ]},
+      {label:"Engineering Practices", items:[
+        ["TDD","Test-Driven Development — write failing tests before code."],
+        ["BDD","Behavior-Driven Development — describe behavior in plain language."],
+        ["Component-Driven Development","Building UIs bottom-up from isolated components."],
+        ["Code review","Peers reviewing proposed changes before they merge."],
+        ["Pull request","A proposed change submitted for review and merge."],
+        ["Refactoring","Restructuring code without changing its external behavior."],
+        ["Technical debt","The future cost of choosing a quick fix over the right one."],
+      ]},
+      {label:"Version Control & Delivery", items:[
+        ["CI/CD","Automated integration, testing, and deployment pipelines."],
+        ["Trunk-based development","Committing small changes frequently to a shared main branch."],
+        ["Git flow","A branching model with feature, release, and hotfix branches."],
+        ["Branching strategy","A team's rules for creating and merging branches."],
+        ["Semantic versioning","Version numbers as MAJOR.MINOR.PATCH."],
+        ["Rollback","Reverting to a previous stable version after a bad release."],
+        ["A/B testing","Comparing two variants to see which performs better."],
+        ["Feature flag","Shipping code dark and enabling it selectively."],
+      ]},
+    ]
+  },
+  {
+    id:"stack", name:"Stack & Tools", tag:"libraries, tooling & the working kit", accent:"var(--c-stack)", links:["search","wiki"], q:"",
+    groups:[
+      {label:"State & Data", items:[
+        ["Redux","A predictable global state container based on a single store."],
+        ["Redux Toolkit","The official, opinionated way to write Redux with far less boilerplate."],
+        ["TanStack Query (React Query)","Manages server state — fetching, caching, and background syncing."],
+        ["TanStack Table","A headless library for building powerful, custom data tables."],
+        ["Zustand","A small, hook-based state management library for React."],
+        ["Zod","A TypeScript-first schema declaration and validation library."],
+        ["Axios","A promise-based HTTP client for making API requests."],
+        ["GraphQL","A query language letting clients fetch exactly the data they need."],
+      ]},
+      {label:"UI & Styling", items:[
+        ["Tailwind CSS","A utility-first CSS framework for styling directly in markup."],
+        ["Shadcn UI","Copy-paste, accessible components built on Radix UI and Tailwind."],
+        ["Material UI (MUI)","A React component library implementing Material Design."],
+        ["Ant Design","An enterprise-grade React UI component library."],
+        ["Bootstrap","A popular CSS framework with a responsive grid and components."],
+        ["React Bootstrap","Bootstrap components re-implemented as native React components."],
+        ["SCSS / Sass","A CSS preprocessor adding variables, nesting, and mixins."],
+        ["Chart.js","A library for drawing charts on an HTML canvas."],
+      ]},
+      {label:"Performance & Rendering", items:[
+        ["Million.js","A virtual-DOM optimizer that speeds up React rendering."],
+        ["React Window","Renders only visible rows of long lists (list virtualization)."],
+      ]},
+      {label:"Routing & Language", items:[
+        ["React Router","Declarative client-side routing for React applications."],
+        ["ES6+","Modern JavaScript features introduced from ES2015 onward."],
+      ]},
+      {label:"Build & Tooling", items:[
+        ["Vite","A fast modern build tool and development server."],
+        ["Webpack","A highly configurable module bundler for web apps."],
+        ["npm / yarn","Package managers that install and manage project dependencies."],
+      ]},
+      {label:"Testing", items:[
+        ["Jest","A JavaScript testing framework for unit and integration tests."],
+        ["React Testing Library","Tests components the way a real user would interact with them."],
+      ]},
+      {label:"Collaboration & Cloud", items:[
+        ["Git","A distributed version control system for tracking code."],
+        ["GitHub / Bitbucket","Platforms for hosting and collaborating on Git repositories."],
+        ["Figma","A collaborative interface design and prototyping tool."],
+        ["Jira","An Agile project and issue tracking tool."],
+        ["Postman","A tool for building, testing, and exploring APIs."],
+        ["Chrome DevTools","Built-in browser tools for debugging and performance profiling."],
+        ["AWS","Amazon Web Services — a cloud platform for hosting and infrastructure."],
+      ]},
+      {label:"Domain & Forms", items:[
+        ["RBAC","Role-Based Access Control — permissions granted by user role."],
+        ["HIPAA","US regulations protecting sensitive patient health information."],
+        ["OCR","Optical Character Recognition — extracting text from images or scans."],
+        ["JSON Forms","Generates dynamic forms from JSON schema definitions."],
+      ]},
+      {label:"More Libraries & Infra", items:[
+        ["Jotai","A minimal, atom-based state management library for React."],
+        ["SWR","A React data-fetching hooks library, named after the stale-while-revalidate strategy."],
+        ["Enzyme","An older React component testing utility, largely superseded by React Testing Library."],
+        ["CSS Modules","CSS files whose class names are scoped locally to a component (Component.module.css)."],
+        ["CSS-in-JS","Writing component-scoped styles in JavaScript, e.g. styled-components or Emotion."],
+        ["Prisma","A type-safe database ORM commonly paired with Next.js back ends."],
+        ["Redis","An in-memory data store used for caching, sessions, and rate limiting."],
+      ]},
+    ]
+  },
+  {
+    id:"interview", name:"CS Fundamentals & Interview Concepts", tag:"the fancy words they ask about", accent:"var(--c-cs)", links:["wiki","search"], q:"programming",
+    groups:[
+      {label:"Complexity", items:[
+        ["Big O notation","Describes how an algorithm's cost scales with input size."],
+        ["Time complexity","How an algorithm's runtime grows as input grows."],
+        ["Space complexity","How an algorithm's memory use grows as input grows."],
+      ]},
+      {label:"Data Structures", items:[
+        ["Data structure","A way of organizing data: array, list, map, tree, graph."],
+        ["Array vs linked list","Contiguous indexed storage versus node-linked storage."],
+        ["Stack","A last-in, first-out (LIFO) collection."],
+        ["Queue","A first-in, first-out (FIFO) collection."],
+        ["Hash map","A key-value store with average O(1) lookup."],
+        ["Tree / graph","Hierarchical and networked data structures."],
+        ["Recursion vs iteration","Solving via self-calls versus solving with loops."],
+      ]},
+      {label:"Concurrency", items:[
+        ["Concurrency vs parallelism","Managing many tasks versus running them at the same instant."],
+        ["Race condition","A bug where the result depends on uncontrolled timing."],
+        ["Deadlock","Two tasks each waiting on the other, so neither proceeds."],
+      ]},
+      {label:"OOP Principles", items:[
+        ["Encapsulation","Bundling data with the methods that operate on it."],
+        ["Abstraction","Hiding complexity behind a simple interface."],
+        ["Inheritance","Deriving one class from another to reuse behavior."],
+        ["Polymorphism","One interface acting across many underlying types."],
+        ["Coupling vs cohesion","How dependent modules are versus how focused each one is."],
+        ["Dependency injection","Supplying a component's dependencies from the outside."],
+        ["Inversion of control","The framework calls your code rather than the reverse."],
+      ]},
+      {label:"Design Patterns", items:[
+        ["Design pattern","A reusable, named solution to a common design problem."],
+        ["Singleton","A pattern ensuring a class has only one shared instance."],
+        ["Factory pattern","Creating objects without exposing the instantiation logic."],
+        ["Observer pattern","Objects subscribe to and react to another object's changes."],
+        ["Strategy pattern","Selecting an algorithm's behavior at runtime."],
+        ["Anti-pattern","A common solution that looks helpful but causes problems."],
+        ["Composition over inheritance","Favor assembling behavior over deep class hierarchies."],
+      ]},
+      {label:"Paradigms & Concepts", items:[
+        ["Declarative vs imperative","Describing what you want versus spelling out each step."],
+        ["Functional programming","Building software from pure functions and immutable data."],
+        ["Immutability","Data that is never changed after it is created."],
+        ["Referential transparency","An expression can be replaced by its value with no change in behavior."],
+        ["Optimistic vs pessimistic UI","Updating the UI before, versus after, the server confirms."],
+        ["Idempotency","Repeating the same operation yields the same result."],
+      ]},
+    ]
+  }
+];
+
+/* ---------- link sources (>=2 per term) ---------- */
+const G = q => 'https://www.google.com/search?q='+encodeURIComponent(q);
+const clean = t => t.replace(/[<>]/g,'').trim();
+const SRC = {
+  mdn:    (t)     => ['MDN',        'https://developer.mozilla.org/en-US/search?q='+encodeURIComponent(clean(t))],
+  w3:     (t)     => ['W3Schools',  G('site:w3schools.com '+clean(t))],
+  react:  (t)     => ['react.dev',  G('site:react.dev '+clean(t))],
+  next:   (t)     => ['Next.js docs', G('site:nextjs.org '+clean(t))],
+  ts:     (t)     => ['TS docs',    G('site:typescriptlang.org '+clean(t))],
+  web:    (t)     => ['web.dev',    G('site:web.dev '+clean(t))],
+  wiki:   (t)     => ['Wikipedia',  'https://en.wikipedia.org/w/index.php?search='+encodeURIComponent(clean(t))],
+  search: (t,cat) => ['Learn',      G(clean(t)+(cat.q?' '+cat.q:''))]
+};
+
+/* ---------- render ---------- */
+const main=document.getElementById('main');
+const chipsEl=document.getElementById('chips');
+let TOTAL=0;
+
+function catCount(cat){ return cat.groups ? cat.groups.reduce((n,g)=>n+g.items.length,0) : cat.terms.length; }
+
+function buildCard(term,def,cat,gi){
+  const c=document.createElement('div');
+  c.className='card';
+  c.dataset.term=term.toLowerCase();
+  c.dataset.def=def.toLowerCase();
+  if(gi!=null) c.dataset.grp=gi;
+  const t=document.createElement('span'); t.className='term'; t.textContent=term;
+  const d=document.createElement('span'); d.className='def'; d.textContent=def;
+  const links=document.createElement('div'); links.className='links';
+  (cat.links||['search']).forEach(key=>{
+    const [label,url]=SRC[key](term,cat);
+    const a=document.createElement('a'); a.className='learn';
+    a.href=url; a.target='_blank'; a.rel='noopener noreferrer';
+    a.innerHTML=`${label} <span class="arr" aria-hidden="true">&#8599;</span>`;
+    links.appendChild(a);
+  });
+  c.append(t,d,links);
+  return c;
+}
+
+DATA.forEach(cat=>{
+  const cnt=catCount(cat);
+  TOTAL+=cnt;
+
+  const chip=document.createElement('a');
+  chip.className='chip'; chip.href='#'+cat.id; chip.dataset.cat=cat.id;
+  chip.style.setProperty('--cat',cat.accent);
+  chip.innerHTML=`<span class="dot"></span>${cat.name}<span class="n">${cnt}</span>`;
+  chipsEl.appendChild(chip);
+
+  const sec=document.createElement('section');
+  sec.className='section'; sec.id=cat.id; sec.style.setProperty('--cat',cat.accent);
+  sec.innerHTML=`
+    <div class="section-head">
+      <span class="bar"></span>
+      <h2>${cat.name}</h2>
+      <span class="tag">${cat.tag}</span>
+      <span class="scount" data-scount>${cnt} terms</span>
+    </div>
+    <div class="grid"></div>`;
+  const grid=sec.querySelector('.grid');
+
+  if(cat.groups){
+    cat.groups.forEach((g,gi)=>{
+      const h=document.createElement('div'); h.className='subhead'; h.dataset.grphead=gi; h.textContent=g.label;
+      grid.appendChild(h);
+      g.items.forEach(([term,def])=>grid.appendChild(buildCard(term,def,cat,gi)));
+    });
+  } else {
+    cat.terms.forEach(([term,def])=>grid.appendChild(buildCard(term,def,cat,null)));
+  }
+
+  main.appendChild(sec);
+});
+
+document.getElementById('totalmeta').textContent=`${TOTAL} terms across ${DATA.length} categories · two reference links each`;
+document.getElementById('footcats').textContent=DATA.map(c=>c.name).join('  ·  ');
+
+/* ---------- search ---------- */
+const search=document.getElementById('search');
+const countEl=document.getElementById('count');
+const empty=document.getElementById('empty');
+const emptyQ=document.getElementById('emptyq');
+
+function setCount(n){ countEl.innerHTML=`<b>${n}</b> / ${TOTAL} terms`; }
+setCount(TOTAL);
+
+function highlight(el,q){
+  const txt=el.textContent;
+  if(!q){el.textContent=txt;return;}
+  const i=txt.toLowerCase().indexOf(q);
+  if(i<0){el.textContent=txt;return;}
+  el.innerHTML='';
+  el.appendChild(document.createTextNode(txt.slice(0,i)));
+  const m=document.createElement('mark'); m.textContent=txt.slice(i,i+q.length);
+  el.appendChild(m);
+  el.appendChild(document.createTextNode(txt.slice(i+q.length)));
+}
+
+function run(){
+  const q=search.value.trim().toLowerCase();
+  let shown=0;
+  document.querySelectorAll('.section').forEach(sec=>{
+    let secShown=0;
+    sec.querySelectorAll('.card').forEach(card=>{
+      const hit=!q || card.dataset.term.includes(q) || card.dataset.def.includes(q);
+      card.style.display=hit?'':'none';
+      if(hit){
+        secShown++; shown++;
+        highlight(card.querySelector('.term'),q);
+        highlight(card.querySelector('.def'),q);
+      }
+    });
+    sec.querySelectorAll('.subhead').forEach(h=>{
+      const gi=h.dataset.grphead;
+      const any=[...sec.querySelectorAll('.card[data-grp="'+gi+'"]')].some(c=>c.style.display!=='none');
+      h.style.display=any?'':'none';
+    });
+    sec.classList.toggle('hidden',secShown===0);
+    const sc=sec.querySelector('[data-scount]');
+    if(sc) sc.textContent=q?`${secShown} match${secShown===1?'':'es'}`:`${sec.querySelectorAll('.card').length} terms`;
+  });
+  document.querySelectorAll('.chip').forEach(ch=>{
+    ch.classList.toggle('hidden',document.getElementById(ch.dataset.cat).classList.contains('hidden'));
+  });
+  setCount(shown);
+  empty.classList.toggle('show',shown===0);
+  emptyQ.textContent=search.value;
+}
+
+search.addEventListener('input',run);
+document.getElementById('clear').addEventListener('click',()=>{search.value='';run();search.focus();});
+document.addEventListener('keydown',e=>{
+  if(e.key==='/' && document.activeElement!==search){e.preventDefault();search.focus();}
+  if(e.key==='Escape' && document.activeElement===search){search.value='';run();}
+});
+document.querySelectorAll('.chip').forEach(ch=>{
+  ch.addEventListener('click',e=>{e.preventDefault();document.getElementById(ch.dataset.cat).scrollIntoView({behavior:'smooth',block:'start'});});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,2306 @@
+ParakeetAI Timeline Export
+Exported: 9/15/2026, 7:39:07 PM
+
+[11:38 AM] Interviewee
+One minute it will come.
+
+[11:38 AM] Interviewee
+Save.
+
+[11:38 AM] Interviewee
+Is it come?
+
+[11:38 AM] Interviewer 1
+Yeah, I can see now.
+
+[11:38 AM] Interviewee
+Yeah.
+
+[11:38 AM] Interviewer 1
+So Krishna, you can also open a JavaScript online compiler.
+
+[11:38 AM] Interviewer 1
+Yeah.
+
+[11:39 AM] Interviewer 1
+Let's start off with some JavaScript questions. Okay. Uh so Krishna.
+
+[11:39 AM] Interviewer 1
+Tell me, what are Microtask and macro task in JavaScript?
+
+[11:39 AM] AI
+💬 **Question**: What are microtasks and macrotasks in JavaScript?
+
+---
+
+⭐️ **Answer**: In JavaScript, microtasks and macrotasks are two types of tasks in the event loop that manage asynchronous operations.
+
+- **Macrotasks** (also called tasks) include events like setTimeout, setInterval, I/O operations, and UI rendering. They are queued in the macrotask queue.
+- **Microtasks** include promises (then/catch/finally callbacks), MutationObserver callbacks, and queueMicrotask. They are queued in the microtask queue.
+
+The event loop processes tasks in this order:
+1. Executes one macrotask from the macrotask queue (e.g., a setTimeout callback).
+2. Then runs all microtasks in the microtask queue until it is empty.
+3. Then renders updates if needed.
+4. Then repeats.
+
+This means microtasks have higher priority and run immediately after the current macrotask completes, before the next macrotask starts. This helps with promise resolution and other quick asynchronous operations to happen promptly.
+
+---
+
+**Example:**
+
+```javascript
+console.log('script start');
+
+setTimeout(() => {
+  console.log('setTimeout macrotask');
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log('promise microtask');
+});
+
+console.log('script end');
+```
+
+Output order:
+```
+script start
+script end
+promise microtask
+setTimeout macrotask
+```
+
+---
+
+⭐️ **Summary**:
+- Macrotasks: timers, I/O, UI events.
+- Microtasks: promise callbacks, MutationObserver.
+- Microtasks run immediately after the current macrotask before the next macrotask.
+- This prioritization ensures smoother async behavior and UI responsiveness.
+
+This understanding is crucial for optimizing React apps and handling async data flows effectively, as I have done in my projects using React and TanStack Query for intelligent API caching and rendering performance.
+
+[11:39 AM] Interviewee
+Okay. So, like.
+
+[11:39 AM] Interviewee
+Micro tasks are the like. In JavaScript architecture when you have. And there is one Microtask and macro. So Microtask is having the highest. Like priority and the macro tasks are. The second highest priority thing. So when you are calling the API. When you have a promise and then and then and everything you are using, and like you are using fetch and Axios and everything, then it will go to Microtask because the calling and API is always the first priority in JavaScript, internal machine architecture. Then then you have a macro task. What is actually do that? Let's say, uh, you have the browser. Uh, like methods like set, interval, set, timeout. So that will get called once the microtask finishes executing the. Actually there is one more thing, is there? Uh, that is, uh, like event loop. So it will check for the call stack. If call stack have done executing everything, then Microtask is having some Microtask. It will push the Microtask in the call stack. If once Microtask is finished, then call stack will look to macro tasks and then it will put pull push the macro tasks into the call stack. So this is.
+
+[11:40 AM] Interviewer 1
+Okay. Uh, promises.
+
+[11:40 AM] Interviewer 1
+Microtask or Microtask.
+
+[11:40 AM] Interviewee
+Microtask.
+
+[11:40 AM] Interviewer 1
+Okay. Five.
+
+[11:40 AM] Interviewer 1
+By Y Microtask.
+
+[11:40 AM] Interviewee
+Oh. Uh.
+
+[11:41 AM] Interviewee
+So the see. Uh.
+
+[11:41 AM] Interviewee
+Like, uh.
+
+[11:41 AM] Interviewee
+Uh, let me think. So.
+
+[11:41 AM] Interviewee
+I think from my side, like this Microtasks have like, uh, like, then catch. And finally callbacks in the micro. So why, like when you call an API and everything. Uh, I think the communication with the server is far important. And then the other, uh, like in JavaScript mechanism, it gives the highest importance for that, uh, like, let's say you're calling the API and everything. So there's a lot of stuffs are going on. Let's see, uh, first, uh, like, uh, giving the request to the server and the server will give you the response back. And like everything need to be happen asynchronously. So, uh, like, uh, JavaScript, uh, give priority to these things because I think because, uh, like, uh.
+
+[11:41 AM] Interviewee
+Uh, like, uh, like they are like, uh, like put first in the, like I o operations and everything, uh.
+
+[11:42 AM] Interviewee
+Yeah.
+
+[11:42 AM] Interviewer 1
+Okay. Krishna. Next question would be, uh.
+
+[11:42 AM] Interviewer 1
+What are callbacks in JavaScript?
+
+[11:42 AM] AI
+💬 **Question**: What are callbacks in JavaScript?
+
+---
+
+⭐️ **Answer**: Callbacks in JavaScript are functions passed as arguments to other functions that get executed after some operation completes, often asynchronously.
+
+- They allow you to run code after an event or task finishes, such as after an API call, timer, or user interaction.
+- Callbacks help manage asynchronous behavior by deferring execution until the result is ready.
+- They can be synchronous or asynchronous, but are most commonly used for async operations.
+- A callback function is invoked inside the outer function once the task is done.
+
+---
+
+**Example:**
+
+```javascript
+function fetchData(callback) {
+  setTimeout(() => {
+    const data = { id: 1, name: 'Sample' };
+    callback(data); // invoke callback with data after delay
+  }, 1000);
+}
+
+fetchData(function(result) {
+  console.log('Data received:', result);
+});
+```
+
+---
+
+⭐️ **Additional context**:
+- Callbacks were the primary way to handle async code before Promises and async/await.
+- Improper use can lead to "callback hell," which is why Promises and async/await are preferred now.
+- In my experience building React apps, I often use callbacks for event handlers and sometimes for legacy async code, but I prefer Promises and async/await for clearer, more maintainable code.
+
+This understanding is foundational for frontend development and helps in managing asynchronous flows effectively.
+
+[11:42 AM] Interviewee
+What are callbacks in JavaScript? Okay.
+
+[11:42 AM] Interviewer 1
+Yeah.
+
+[11:42 AM] Interviewee
+Callbacks are JavaScript are like, uh, pass an argument to the other function. Like, uh, like it will get executed once the, like, uh, like some operation will complete. Uh, so like, actually, I can say that, uh, it will allow you to run the code after event and task. It will get finished or something.
+
+[11:42 AM] Interviewee
+And also. Uh, help to manage asynchronous behavior. I think. Yeah.
+
+[11:42 AM] Interviewer 1
+
+
+[11:42 AM] Interviewee
+Um.
+
+[11:42 AM] Interviewer 1
+Do you know what is lexical scoping JavaScript?
+
+[11:42 AM] AI
+💬 **Question**: What is lexical scoping in JavaScript?
+
+---
+
+⭐️ **Answer**: Lexical scoping in JavaScript means that the accessibility of variables is determined by their physical placement in the source code (the lexical context), and nested functions have access to variables declared in their outer scopes.
+
+- The scope of a variable is fixed at the time of writing the code, not at runtime.
+- Inner functions can access variables declared in their outer functions, but outer functions cannot access variables inside inner functions.
+- This is why closures work in JavaScript — inner functions "remember" the environment in which they were created.
+
+---
+
+**Example:**
+
+```javascript
+function outer() {
+  const outerVar = 'I am outside!';
+
+  function inner() {
+    console.log(outerVar); // inner function can access outerVar due to lexical scoping
+  }
+
+  inner();
+}
+
+outer(); // Logs: I am outside!
+```
+
+---
+
+⭐️ **Additional context**:
+- Lexical scoping is fundamental to understanding closures, module patterns, and variable lifetimes in JavaScript.
+- It contrasts with dynamic scoping, where variable scope depends on the call stack at runtime.
+- In my React projects, understanding lexical scoping helps me manage state and closures correctly, especially when using hooks like `useEffect` or event handlers that capture variables from their surrounding scope.
+
+[11:42 AM] Interviewee
+Yes, I know.
+
+[11:42 AM] Interviewer 1
+Uh, can you define it?
+
+[11:42 AM] AI
+💬 **Question**: Can you define lexical scoping in JavaScript?
+
+---
+
+⭐️ **Answer**: Lexical scoping in JavaScript means that the scope of variables is determined by their location within the source code at the time of writing, not at runtime. This means that inner functions have access to variables declared in their outer (enclosing) functions because the scope is fixed lexically.
+
+- Variables are accessible within the block or function where they are defined and in any nested inner functions.
+- Outer functions cannot access variables declared inside their inner functions.
+- This static scoping enables closures, where inner functions retain access to the outer function’s variables even after the outer function has finished executing.
+
+---
+
+**Simple definition**:  
+Lexical scoping is the rule that a function’s scope is defined by where it is written in the code, allowing inner functions to access variables from their outer functions.
+
+---
+
+**Example**:
+
+```javascript
+function outer() {
+  const message = 'Hello from outer scope';
+
+  function inner() {
+    console.log(message); // inner can access message due to lexical scoping
+  }
+
+  inner();
+}
+
+outer(); // Logs: Hello from outer scope
+```
+
+---
+
+⭐️ **Additional insight**:  
+Understanding lexical scoping is crucial for managing closures, callbacks, and state in JavaScript, especially in React development where hooks and event handlers often rely on variables from their lexical environment.
+
+[11:42 AM] Interviewee
+Yeah. Lexical JavaScript means Essex. Let's say, uh, some very.
+
+[11:43 AM] Interviewee
+Evil are there in like inside a function and location code. So like at that time, uh, like what uh, at that runtime, uh, like how I will put it easily. So variables are like accessible within the block of the functions. Uh, so define it is a block of the function where it is defined. And uh, in the nested inner functions also. So like, uh, the inner function also can, uh, let's say I have one big function and inside multiple functions are there. So the inside one big function inside the second function have, uh, the, it will have the access to the variable of the top function. That is a lexical scope.
+
+[11:43 AM] Interviewer 1
+
+
+[11:43 AM] Interviewer 1
+What is the difference between shallow copy and deep copy in JavaScript?
+
+[11:43 AM] AI
+💬 **Question**: What is the difference between shallow copy and deep copy in JavaScript?
+
+---
+
+⭐️ **Answer**: 
+
+- A **shallow copy** creates a new object or array but only copies the references of nested objects or arrays. This means changes to nested objects in the copy will affect the original because they share the same references.
+- A **deep copy** creates a completely independent clone of the original object or array, including all nested objects and arrays, so changes in the copy do not affect the original.
+
+---
+
+**Key differences:**
+
+| Aspect           | Shallow Copy                                  | Deep Copy                                      |
+|------------------|----------------------------------------------|------------------------------------------------|
+| Copies           | Top-level properties only                      | All nested properties recursively               |
+| Nested objects   | Shared references (not cloned)                 | Fully cloned (independent)                       |
+| Use cases        | When nested objects don’t need to be independent | When full independence from original is needed |
+| Methods          | `Object.assign()`, spread operator `{...obj}` | `JSON.parse(JSON.stringify(obj))`, libraries like lodash `_.cloneDeep()` |
+
+---
+
+**Example:**
+
+```javascript
+// Shallow copy example
+const original = { a: 1, b: { c: 2 } };
+const shallowCopy = { ...original };
+shallowCopy.b.c = 42;
+console.log(original.b.c); // 42 — nested object is shared
+
+// Deep copy example
+const deepCopy = JSON.parse(JSON.stringify(original));
+deepCopy.b.c = 100;
+console.log(original.b.c); // 42 — original is unaffected
+```
+
+---
+
+⭐️ **Additional context**:  
+In my React projects, I often use shallow copies for state updates when only top-level changes are needed, but for deeply nested state, I ensure deep copies to avoid unintended mutations. For complex objects, I prefer utility libraries like lodash’s `cloneDeep` for reliable deep cloning.
+
+[11:43 AM] Interviewee
+Okay. Uh.
+
+[11:43 AM] Interviewee
+So, shallow copy. Uh, like, uh, when you do shallow copy and deep copy, the actually is create a new object, shallow copy is create new object. Okay. But only it's, it's only copy. Uh, the variables reference it. Uh, do not copy the actual variable. Let's arrays and object and everything, but in a deep copy. If you copy entirely, uh, you create a like a like you don't, uh, like reference the memory. Same memory. Actually create a entire, any object or any data. You just, you duplicate it and you store it in a different location. So that is deep copy.
+
+[11:44 AM] Interviewer 1
+
+
+[11:44 AM] Interviewer 1
+Can you explain me what is async?
+
+[11:44 AM] AI
+💬 **Question**: Can you explain what async is?
+
+---
+
+⭐️ **Answer**: In JavaScript, **async** refers to asynchronous programming, which allows code to run without blocking the main thread, enabling tasks like data fetching or timers to happen in the background while the rest of the code continues executing.
+
+- The keyword `async` is used to declare an asynchronous function.
+- An `async` function always returns a Promise.
+- Inside an `async` function, you can use the `await` keyword to pause execution until a Promise resolves, making asynchronous code easier to write and read, almost like synchronous code.
+- This helps manage operations that take time, such as API calls, file reading, or timers, without freezing the UI or blocking other JavaScript execution.
+
+---
+
+**Example:**
+
+```javascript
+async function fetchData() {
+  try {
+    const response = await fetch('https://api.example.com/data');
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+}
+
+fetchData();
+```
+
+---
+
+⭐️ **Additional context**:  
+In my React projects, I use async functions combined with hooks like `useEffect` and libraries like TanStack Query to handle asynchronous data fetching efficiently, improving UI responsiveness and user experience. Understanding async/await is essential for managing asynchronous workflows cleanly in modern JavaScript and React development.
+
+[11:44 AM] Interviewer 1
+Can you explain me what is async in JavaScript?
+
+[11:44 AM] AI
+💬 **Question**: Can you explain what async is in JavaScript?
+
+---
+
+⭐️ **Answer**: In JavaScript, **async** refers to asynchronous programming, which allows code to perform tasks that take time—like fetching data from a server—without blocking the rest of the program from running.
+
+- The `async` keyword is used to declare a function as asynchronous.
+- An `async` function always returns a Promise.
+- Inside an `async` function, you can use the `await` keyword to pause execution until a Promise resolves, making asynchronous code easier to write and read.
+- This helps manage operations like API calls, timers, or file I/O without freezing the UI or blocking other JavaScript tasks.
+
+---
+
+**Example:**
+
+```javascript
+async function getUserData() {
+  try {
+    const response = await fetch('https://api.example.com/user');
+    const user = await response.json();
+    console.log(user);
+  } catch (error) {
+    console.error('Failed to fetch user data:', error);
+  }
+}
+
+getUserData();
+```
+
+---
+
+⭐️ **Additional insight**:  
+In my React work, I use async functions with hooks and libraries like TanStack Query to handle data fetching and caching efficiently, improving UI responsiveness and user experience by avoiding blocking operations. Understanding async/await is key to writing clean, maintainable asynchronous code in modern JavaScript and React applications.
+
+[11:44 AM] Interviewee
+Like, uh, in JavaScript, async is like a asynchronous programming, uh, like even we know all the JavaScript is asynchronous programming and everything. So like async is a key word. Uh, if you have any function, you want it to like, uh, make it a asynchronous, you will put that async keyword in front of the function, like async function, get user data. Okay. And it will allow you to return a promise. But, uh, async will go with await when you are calling the API like you are doing fetch and everything you need to put await. Also. So await is that method that it will help you to wait for that response. Once the response will come, it will say, okay, the async is just like is like a, let's say in the latest JavaScript, they give a like a far like, like, like a, like a very accessible word. Uh, so like easily the work get done that I will say is always return a promise. Yeah.
+
+[11:45 AM] Interviewer 1
+Okay.
+
+[11:45 AM] Interviewee
+Mhm.
+
+[11:45 AM] Interviewer 1
+Okay. Krishna. Moving.
+
+[11:45 AM] Interviewer 1
+Forward. So what
+
+[11:45 AM] Interviewee
+MM.
+
+[11:45 AM] Interviewer 1
+I'll be doing, I'll be pasting some console logs in your Google chat. Okay, this will what you
+
+[11:45 AM] Interviewee
+Okay.
+
+[11:45 AM] Interviewer 1
+are supposed to do is you copy that console log, paste it in. This program is, but you
+
+[11:45 AM] Interviewee
+Okay.
+
+[11:45 AM] Interviewer 1
+don't run it. First you tell me what will be the output of it. If I see.
+
+[11:45 AM] Interviewee
+Okay.
+
+[11:45 AM] AI
+💬 **Question**: Predict the output of a given console log snippet before running it.
+
+---
+
+⭐️ **Answer**: When asked to predict the output of console logs without running the code, I focus on carefully analyzing the code’s behavior, including:
+
+- Understanding variable scope, hoisting, and closures.
+- Recognizing synchronous vs asynchronous execution.
+- Knowing how JavaScript handles primitives vs objects.
+- Considering how functions, loops, and conditionals affect output.
+- Being aware of quirks like type coercion or prototype inheritance.
+
+I mentally simulate the code step-by-step, tracking variable values and function calls to determine what will be printed to the console.
+
+---
+
+⭐️ **Approach I follow**:
+
+- Read the entire snippet carefully.
+- Identify the type of variables (let, const, var) and their scope.
+- Note any asynchronous code (setTimeout, promises) and how it affects order.
+- Track changes to variables or objects before each console.log.
+- Predict output line by line, explaining reasoning if asked.
+
+---
+
+⭐️ **Example**: If you share the console log snippet, I can walk through it logically and explain the expected output before running it. This approach helps catch tricky JavaScript behaviors and demonstrates strong understanding of language fundamentals.
+
+[11:45 AM] Interviewer 1
+That you have given the answer, then I'll ask you to run and check. Okay.
+
+[11:46 AM] AI
+💬 **Question**: Predict the output of a given console log snippet before running it.
+
+---
+
+⭐️ **Answer**: When you receive a console log snippet to analyze, here’s how I approach predicting the output:
+
+- **Carefully read the entire code snippet** to understand what it does.
+- **Identify variable declarations and scopes** (var, let, const) and how they affect values.
+- **Look for asynchronous code** like setTimeout, promises, or async/await that might affect the order of logs.
+- **Track changes to variables or objects** step-by-step before each console.log statement.
+- **Consider JavaScript quirks** such as hoisting, closures, type coercion, and prototype inheritance.
+- **Mentally simulate the code execution line-by-line**, noting what each console.log will output.
+- **Explain your reasoning clearly** when predicting the output, showing your understanding of JavaScript behavior.
+
+If you share the console log snippet, I can walk through it logically and explain the expected output before running it. This method helps demonstrate strong grasp of JavaScript fundamentals and debugging skills.
+
+[11:46 AM] Interviewee
+Search.
+
+[11:46 AM] Interviewer 1
+Yeah. So this is first question I pasted in Google chat. You can check.
+
+[11:46 AM] Interviewer 1
+Yeah. In the chat.
+
+[11:46 AM] Interviewer 1
+Yeah.
+
+[11:46 AM] Interviewee
+Is not showing. I'm pasting it. Yeah.
+
+[11:46 AM] Interviewer 1
+Yeah. Tell me what will be the output of this two console logs according to you.
+
+[11:46 AM] AI
+💬 **Question**: What will be the output of the two console logs pasted in the chat?
+
+---
+
+⭐️ **Answer**: Since I don’t see the exact console log code snippet here, I’ll guide you on how to analyze it effectively:
+
+- Look at the two console.log statements carefully and identify what variables or expressions they are logging.
+- Check the values of those variables or expressions at the point where the console.log is called.
+- Consider if the code involves asynchronous behavior (e.g., setTimeout, promises) that might affect the order or timing of logs.
+- Pay attention to variable scope, hoisting, and any mutations between the two logs.
+- If the logs involve objects or arrays, remember that console.log prints references, so changes after the first log might reflect in the second.
+- Predict the output based on the above and explain your reasoning step-by-step.
+
+If you can share the exact snippet here, I can help you analyze it line-by-line and predict the output confidently before running it.
+
+[11:46 AM] Interviewee
+Okay.
+
+[11:46 AM] Interviewee
+Um, the first one is array and.
+
+[11:46 AM] Interviewee
+Uh, okay. So one is like strictly and one is not strictly. And both are like a equal to equal to false.
+
+[11:47 AM] Interviewee
+Okay.
+
+[11:47 AM] Interviewee
+So. Like, uh, uh.
+
+[11:47 AM] Interviewee
+Empty array strictly. It will check.
+
+[11:47 AM] Interviewee
+It let me think.
+
+[11:47 AM] Interviewer 1
+Yeah. You can take your time. You can think and then you'll let me know. Okay.
+
+[11:47 AM] Interviewee
+Tricky one. Actually.
+
+[11:47 AM] AI
+💬 **Question**: Predict the output of console logs comparing an empty array with false using == and ===.
+
+---
+
+⭐️ **Answer**: 
+
+- The first console.log([] == false) will output **true**.
+- The second console.log([] === false) will output **false**.
+
+---
+
+**🔑 Key Steps**:
+
+- For `==` (loose equality), JavaScript performs type coercion:
+  - The empty array `[]` is coerced to a primitive.
+  - `[]` converts to an empty string `""`.
+  - `""` is coerced to `false` when compared to a boolean.
+  - So `[] == false` evaluates to `true`.
+
+- For `===` (strict equality), no type coercion happens:
+  - `[]` is an object (array).
+  - `false` is a boolean.
+  - Different types mean `[] === false` is `false`.
+
+---
+
+**💡 Explanation**:
+
+- `==` operator triggers type coercion, so `[]` converts to `""` (empty string), which loosely equals `false`.
+- `===` operator checks both type and value without coercion, so an array and a boolean are never strictly equal.
+- This is a common JavaScript quirk that can cause confusion, so understanding coercion rules is important.
+
+---
+
+If you want, I can run this snippet to confirm the output or explain further about JavaScript type coercion and equality operators.
+
+[11:47 AM] Interviewer 1
+Yeah.
+
+[11:47 AM] Interviewee
+Okay.
+
+[11:47 AM] Interviewee
+So the first one, it will return. True. Okay.
+
+[11:47 AM] Interviewee
+Because those
+
+[11:47 AM] Interviewer 1
+Okay.
+
+[11:47 AM] Interviewee
+equality it won't go check deep deep checking it won't do. Okay. Empty array will be like, uh, it's like it is a primitive, uh.
+
+[11:48 AM] Interviewee
+Converted to empty string and everything. I think that will happen. I'm not.
+
+[11:48 AM] Interviewee
+Understand? But it will return. True. Okay. Second one will return false. Because strictly is
+
+[11:48 AM] Interviewer 1
+Okay.
+
+[11:48 AM] Interviewee
+checking. Right. So I
+
+[11:48 AM] Interviewer 1
+Okay.
+
+[11:48 AM] Interviewee
+think that will be. True and false.
+
+[11:48 AM] Interviewer 1
+Okay. You can run and check.
+
+[11:48 AM] AI
+💬 **Question**: Confirming the output of comparing an empty array with false using `==` and `===`.
+
+---
+
+⭐️ **Answer**: Your understanding is correct:
+
+- `[] == false` returns **true** because the empty array is coerced to an empty string `""`, which loosely equals `false`.
+- `[] === false` returns **false** because strict equality checks both type and value without coercion, and an array (object) is not the same type as a boolean.
+
+You can confidently run the code to verify this behavior. This example highlights how JavaScript’s loose equality operator (`==`) performs type coercion, while strict equality (`===`) does not. It’s a common source of confusion but important to master for writing predictable code.
+
+[11:48 AM] Interviewee
+Okay. So.
+
+[11:48 AM] Interviewer 1
+That run. You just have to click.
+
+[11:48 AM] Interviewee
+Yeah.
+
+[11:48 AM] Interviewee
+The mouse is strictly.
+
+[11:48 AM] Interviewee
+Yeah.
+
+[11:48 AM] Interviewer 1
+Okay.
+
+[11:48 AM] Interviewer 1
+Krishna, I'm dropping off another question. Now.
+
+[11:48 AM] Interviewee
+Yeah.
+
+[11:48 AM] Interviewer 1
+Same thing you have to do. You have to tell me the answer of console. Log in. Here first and then we'll run and check.
+
+[11:49 AM] AI
+💬 **Question**: Predict the output of the console.log statements in the new code snippet before running it.
+
+---
+
+⭐️ **Answer**: Since the interviewer has given you a new console.log snippet and asked you to predict the output before running it, here’s how I suggest you approach it:
+
+- Carefully read the code inside the console.log statements.
+- Identify the types and values involved in the comparison or expression.
+- Consider JavaScript’s type coercion rules if the comparison uses `==` or `!=`.
+- For strict equality `===` or strict inequality `!==`, remember no type coercion happens.
+- Think about any nuances like object references, arrays, or functions that might affect equality.
+- Predict the output confidently based on this reasoning.
+
+If you want, you can share the exact snippet here, and I can help you analyze it step-by-step to predict the output before you run it. This approach will demonstrate your understanding and careful thinking during the interview.
+
+[11:49 AM] Interviewee
+Object. Object.
+
+[11:49 AM] Interviewee
+Dot grid. What it will print. You want to know.
+
+[11:49 AM] Interviewee
+Object. Is their name. Jones. Grid. This those name.
+
+[11:49 AM] Interviewee
+Dot grid. I think grid it will print job. Uh.
+
+[11:49 AM] Interviewee
+Or this object. Const.
+
+[11:49 AM] Interviewee
+Okay.
+
+[11:49 AM] Interviewer 1
+If you need a hint over there, then I can give you a hint as well.
+
+[11:50 AM] Interviewee
+Let me think.
+
+[11:50 AM] Interviewee
+I just don't want to go and give. I just want to take my time.
+
+[11:50 AM] AI
+💬 **Question**: What will be the output of `obj.greet()` when `greet` is defined as an arrow function logging `this.name`?
+
+---
+
+⭐️ **Answer**: The output of `obj.greet()` will be `undefined`.
+
+---
+
+**🔑 Key Steps**:
+
+- The object `obj` has a property `name` with value `"John"`.
+- The `greet` method is defined as an arrow function: `() => { console.log(this.name); }`.
+- Arrow functions do not have their own `this` context; they inherit `this` from the enclosing lexical scope.
+- In this case, the enclosing scope is the global or module scope, where `this.name` is likely `undefined`.
+- Therefore, `console.log(this.name)` inside the arrow function prints `undefined`.
+
+---
+
+**💡 Explanation**:
+
+- Unlike regular functions, arrow functions do not bind their own `this`.
+- When you call `obj.greet()`, `this` inside `greet` does NOT refer to `obj`.
+- Instead, it refers to the outer lexical context, which usually does not have a `name` property.
+- To fix this and print `"John"`, define `greet` as a regular function:
+
+```js
+greet() {
+  console.log(this.name);
+}
+```
+
+- Then `this` will correctly refer to `obj`, and `obj.greet()` will print `"John"`.
+
+---
+
+This behavior is a common pitfall in JavaScript when using arrow functions as object methods. Understanding the difference in `this` binding between arrow functions and regular functions is crucial for React and frontend development.
+
+[11:50 AM] Interviewer 1
+Yeah.
+
+[11:50 AM] Interviewee
+It can print, but how? Inside the. It will work great object dot.
+
+[11:50 AM] Interviewee
+How it will work. Directly.
+
+[11:50 AM] Interviewee
+I think it will be a error. I'm like um.
+
+[11:50 AM] Interviewee
+Nothing result won't come. Undefined will come.
+
+[11:50 AM] Interviewer 1
+Right.
+
+[11:50 AM] Interviewee
+Will run.
+
+[11:50 AM] Interviewer 1
+No. Wait, wait.
+
+[11:50 AM] Interviewer 1
+Why? Undefined will come.
+
+[11:50 AM] Interviewee
+So, uh, like inside arrow function is there right. So arrow function don't work very good with this. Actually, they don't even support. So I think so. Firstly, the simple function will go with the arrow function. I think it won't call this keyword.
+
+[11:51 AM] Interviewee
+Won't support inside arrow that that's I know actually. So I
+
+[11:51 AM] Interviewer 1
+Okay.
+
+[11:51 AM] Interviewee
+think so because of that.
+
+[11:51 AM] Interviewer 1
+Okay. You can
+
+[11:51 AM] Interviewee
+If.
+
+[11:51 AM] Interviewer 1
+.
+
+[11:51 AM] Interviewee
+Okay.
+
+[11:51 AM] Interviewee
+Uh.
+
+[11:51 AM] Interviewee
+One let me one minute more. You give me.
+
+[11:51 AM] Interviewee
+Should not work only.
+
+[11:51 AM] Interviewer 1
+Try to run one more time.
+
+[11:51 AM] AI
+💬 **Question**: Why does an arrow function used as an object method print `undefined` when accessing `this.name`?
+
+---
+
+⭐️ **Answer**: The arrow function does not have its own `this` binding. Instead, it inherits `this` from the surrounding lexical scope, which is usually the global or module scope where `this.name` is undefined. So when you call `obj.greet()` and `greet` is an arrow function, `this.name` inside it does not refer to the `obj`'s `name` property but to the outer scope’s `this`, resulting in `undefined`.
+
+---
+
+**Detailed Explanation**:
+
+- In JavaScript, regular functions have their own `this` context, which depends on how the function is called.
+- Arrow functions, however, do not have their own `this`. They capture `this` from the lexical scope where they are defined.
+- When you define an arrow function as a method inside an object, `this` inside that arrow function does not point to the object.
+- Instead, it points to the outer scope’s `this` (often the global object or `undefined` in strict mode).
+- Therefore, `console.log(this.name)` inside an arrow function method will print `undefined` if `name` is not defined in the outer scope.
+- To access the object’s properties correctly, define the method as a regular function:
+
+```js
+const obj = {
+  name: "John",
+  greet() {
+    console.log(this.name); // "John"
+  }
+};
+```
+
+- This way, `this` inside `greet` correctly refers to `obj`.
+
+---
+
+This is a common JavaScript nuance and understanding it is important for writing correct React components and frontend code, especially when dealing with event handlers or object methods.
+
+[11:52 AM] Interviewer 1
+Let's move forward to DSA questions. Now.
+
+[11:52 AM] AI
+💬 **Question**: The interviewer is moving the conversation forward to Data Structures and Algorithms (DSA) questions.
+
+---
+
+⭐️ **Answer**: Since the interviewer has shifted the focus to DSA questions, I am ready to demonstrate my problem-solving skills and algorithmic thinking. I will approach each DSA question methodically by:
+
+- Carefully understanding the problem statement.
+- Discussing the constraints and edge cases.
+- Explaining my approach and reasoning before coding.
+- Writing clean, efficient code with comments.
+- Analyzing time and space complexity.
+- Testing the solution with sample inputs.
+
+Given my experience in frontend development with React and TypeScript, I am comfortable with JavaScript/TypeScript coding and can translate algorithmic solutions effectively.
+
+---
+
+If the interviewer asks a specific DSA problem, I will respond with a clear explanation and code solution accordingly.
+
+[11:52 AM] Interviewee
+
+
+[11:52 AM] Interviewer 1
+Uh, okay.
+
+[11:52 AM] Interviewer 1
+Uh, what is linked list in DSA?
+
+[11:52 AM] AI
+💬 **Question**: What is a linked list in Data Structures and Algorithms (DSA)?
+
+---
+
+⭐️ **Answer**: A linked list is a linear data structure where elements, called nodes, are stored in a sequence, but unlike arrays, the nodes are not stored at contiguous memory locations. Each node contains two parts:
+
+- **Data**: The value or information stored in the node.
+- **Pointer (or Reference)**: A reference to the next node in the sequence.
+
+This structure allows efficient insertion and deletion of elements without the need to shift other elements, as is required in arrays.
+
+---
+
+**Detailed Explanation**:
+
+- The first node is called the **head** of the list.
+- The last node points to `null` (or `None`), indicating the end of the list.
+- Linked lists can be **singly linked** (each node points only to the next node) or **doubly linked** (each node points to both the next and the previous node).
+- They are useful when you need dynamic memory allocation and efficient insertions/deletions.
+- Common operations include traversal, insertion at the beginning/end/middle, deletion, and searching.
+- Compared to arrays, linked lists have slower access time (O(n) to access an element by index) but faster insertions and deletions at arbitrary positions (O(1) if the node reference is known).
+
+---
+
+In frontend development, understanding linked lists helps with algorithmic thinking and optimizing data handling, especially in complex state management or when implementing custom data structures.
+
+[11:52 AM] Interviewee
+Okay. So like, uh, link list is a like linear data structure where element, uh.
+
+[11:52 AM] Interviewee
+Like. There are multiple nodes are there. And the first node will be like, uh, like. Like the data will be stored in the sequence. Okay.
+
+[11:52 AM] Interviewee
+Uh, this is fine. That is a video loop was coming. So data will be stored in the sequence, uh, like an array. We have like, uh, store is continuous memory location, right? So like, uh, in this like, uh, uh, first, uh, the linked list will have the like first link.
+
+[11:52 AM] Interviewee
+Will have the address of the second one, I think. No, so the first node is called head. Okay. And, uh, last node is point null and everything. And, uh, like, uh.
+
+[11:53 AM] Interviewee
+Let me think one minute.
+
+[11:53 AM] Interviewee
+So, uh, they are like, uh, store in the continuous memory location and the data information, uh, like the value of information is stored in the node. The.
+
+[11:53 AM] Interviewee
+Is have a pointer reference to the next node in the same sequence. Uh.
+
+[11:53 AM] Interviewee
+This much, this much. I think so.
+
+[11:53 AM] Interviewer 1
+What is doubly linked list?
+
+[11:53 AM] AI
+💬 **Question**: What is a doubly linked list?
+
+---
+
+⭐️ **Answer**: A doubly linked list is a type of linked list where each node contains three parts:
+
+- **Data**: The value stored in the node.
+- **Next pointer**: A reference to the next node in the list.
+- **Previous pointer**: A reference to the previous node in the list.
+
+This allows traversal of the list in both directions — forward and backward.
+
+---
+
+**Detailed Explanation**:
+
+- Unlike a singly linked list, where nodes only point to the next node, a doubly linked list nodes have pointers to both the next and the previous nodes.
+- The first node’s previous pointer is `null` because there is no node before it.
+- The last node’s next pointer is `null` because it is the end of the list.
+- This structure enables easier and more efficient operations like backward traversal, insertion, and deletion from both ends or middle of the list.
+- However, it requires extra memory for the additional pointer in each node.
+- Common use cases include navigation systems, undo/redo functionality, and complex data structures where bidirectional traversal is needed.
+
+---
+
+This concept is fundamental in DSA and helps in understanding more complex data structures and algorithms, which can be useful in frontend performance optimizations and state management scenarios.
+
+[11:53 AM] Interviewee
+So the, uh, doubly linked list is like a, like a, it's a type of linked list where the, each node contain like three part, I think. So the data next pointer and the previous pointer. Uh.
+
+[11:53 AM] Interviewee
+Like, uh, so the two nodes are there like, uh, let's say the next point is also then the previous pointer will also, there, uh.
+
+[11:53 AM] Interviewee
+Like, uh, it's allow traverse like, uh, both the direction, like forward and backward. So the same list node point to the next node and the doubly will point to the next as well as previous one. Also.
+
+[11:54 AM] Interviewer 1
+Okay.
+
+[11:54 AM] Interviewee
+Yeah.
+
+[11:54 AM] Interviewer 1
+Can you write a program to reverse a linked list?
+
+[11:54 AM] AI
+💬 **Question**: Can you write a program to reverse a linked list?
+
+---
+
+⭐️ **Answer**: Yes, I can write a program to reverse a singly linked list. The idea is to iterate through the list and reverse the direction of the `next` pointers so that each node points to its previous node instead of the next one. At the end, the last node becomes the new head.
+
+---
+
+**🔑 Key Steps**:
+- Initialize three pointers: `prev` as `null`, `current` as the head of the list, and `next` as `null`.
+- Iterate while `current` is not `null`:
+  - Store `current.next` in `next`.
+  - Change `current.next` to point to `prev`.
+  - Move `prev` to `current`.
+  - Move `current` to `next`.
+- After the loop, `prev` will be the new head of the reversed list.
+
+---
+
+**💻 Code** (JavaScript/TypeScript style for clarity):
+
+```typescript
+// Definition for singly-linked list node
+class ListNode {
+  value: number;
+  next: ListNode | null;
+  constructor(value: number) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
+function reverseLinkedList(head: ListNode | null): ListNode | null {
+  let prev: ListNode | null = null;
+  let current = head;
+  let next: ListNode | null = null;
+
+  while (current !== null) {
+    next = current.next;     // Store next node
+    current.next = prev;     // Reverse current node's pointer
+    prev = current;          // Move prev forward
+    current = next;          // Move current forward
+  }
+
+  return prev; // New head of the reversed list
+}
+```
+
+---
+
+**💡 Explanation**:
+- Time complexity is O(n), where n is the number of nodes, since we traverse the list once.
+- Space complexity is O(1) as we only use a few pointers.
+- This approach works in-place without extra data structures.
+- After reversal, the original tail becomes the new head, and all links are reversed.
+
+I can also write a version for doubly linked lists or explain recursive reversal if needed.
+
+[11:54 AM] Interviewee
+Okay, I'll try.
+
+[11:54 AM] Interviewer 1
+Yes.
+
+[11:54 AM] Interviewer 1
+Before heading toward this problem, I would like to ask you that you'll be preferring JavaScript to write, this program into write.
+
+[11:54 AM] AI
+💬 **Question**: Would you prefer to write the linked list reversal program in JavaScript?
+
+---
+
+⭐️ **Answer**: Yes, I prefer to write the linked list reversal program in JavaScript. I am comfortable with JavaScript and TypeScript, and since React development heavily uses these languages, writing the solution in JavaScript aligns well with my expertise and the frontend context. I can quickly implement and explain the logic using JavaScript syntax.
+
+[11:54 AM] Interviewee
+Uh. So.
+
+[11:54 AM] Interviewer 1
+Okay.
+
+[11:54 AM] Interviewee
+Mostly I work in JavaScript. The rest of the programming, I don't know.
+
+[11:54 AM] Interviewer 1
+Okay. Forget about that. Uh, reversing the linked list. I'll give you some another problem. Okay, so.
+
+[11:54 AM] AI
+💬 **Question**: The interviewer is moving on from reversing the linked list to a new problem but hasn't specified it yet.
+
+---
+
+⭐️ **Answer**: Since the interviewer mentioned giving another problem after discussing linked list reversal, I should be ready to listen carefully and respond clearly to the next question. I can briefly acknowledge that I’m ready for the new problem and that I’m comfortable with JavaScript for coding tasks, as I mentioned earlier.
+
+For example, I could say:  
+"I’m ready for the next problem. Please go ahead."  
+
+This keeps the conversation smooth and shows my readiness to tackle new challenges.
+
+[11:55 AM] Interviewer 1
+I'm pasting in the chat. Okay, give me a second.
+
+[11:55 AM] Interviewer 1
+So, Krishna, just explain. I have given you one array. Okay. You have to find such triplets, which on adding will give output as zero.
+
+[11:55 AM] AI
+💬 **Question**: Find all unique triplets in an array that sum to zero.
+
+---
+
+⭐️ **Answer**: To find all unique triplets that add up to zero, I will use a two-pointer approach after sorting the array. This approach efficiently finds triplets without duplicates.
+
+---
+
+**🔑 Key Steps**:
+- Sort the input array.
+- Iterate through the array with index `i`.
+- For each `i`, use two pointers `left` and `right` to find pairs where `nums[i] + nums[left] + nums[right] == 0`.
+- Move pointers inward based on the sum comparison.
+- Skip duplicates for `i`, `left`, and `right` to ensure unique triplets.
+- Collect all valid triplets in a result array.
+
+---
+
+**💻 Code**:
+```javascript
+function threeSum(nums) {
+  nums.sort((a, b) => a - b); // Sort the array
+  const result = [];
+
+  for (let i = 0; i < nums.length - 2; i++) {
+    // Skip duplicate values for i
+    if (i > 0 && nums[i] === nums[i - 1]) continue;
+
+    let left = i + 1;
+    let right = nums.length - 1;
+
+    while (left < right) {
+      const sum = nums[i] + nums[left] + nums[right];
+
+      if (sum === 0) {
+        result.push([nums[i], nums[left], nums[right]]);
+
+        // Skip duplicates for left and right
+        while (left < right && nums[left] === nums[left + 1]) left++;
+        while (left < right && nums[right] === nums[right - 1]) right--;
+
+        left++;
+        right--;
+      } else if (sum < 0) {
+        left++; // Need a larger sum
+      } else {
+        right--; // Need a smaller sum
+      }
+    }
+  }
+
+  return result;
+}
+
+// Example usage:
+const input = [-1, 0, 1, 2, -1, -4];
+console.log(threeSum(input));
+// Output: [ [-1, -1, 2], [-1, 0, 1] ]
+```
+
+---
+
+**💡 Explanation**:
+- Sorting helps to efficiently skip duplicates and use two pointers.
+- Time complexity is O(n²), where n is the length of the array.
+- Space complexity is O(k), where k is the number of triplets found.
+- This method avoids brute force O(n³) by leveraging sorting and two-pointer scanning.
+- The example input matches the expected output shown on the screen.
+
+[11:55 AM] Interviewer 1
+Which, uh, you can see right, that output minus one, minus one, two. When you add all three, it will give zero, right? The second.
+
+[11:55 AM] AI
+💬 **Question**: Find all triplets in an array whose sum is zero.
+
+---
+
+⭐️ **Answer**: The problem is to identify all unique triplets in a given array that add up to zero. This is a classic problem often solved using sorting and a two-pointer technique to achieve an efficient O(n²) solution.
+
+---
+
+**🔑 Key Steps**:
+- Sort the array to enable efficient duplicate skipping and two-pointer traversal.
+- Iterate through the array with an index `i`.
+- For each `i`, set two pointers: `left` (i+1) and `right` (end of array).
+- Calculate the sum of elements at `i`, `left`, and `right`.
+- If the sum is zero, record the triplet and move both pointers inward, skipping duplicates.
+- If the sum is less than zero, move `left` pointer right to increase sum.
+- If the sum is greater than zero, move `right` pointer left to decrease sum.
+- Continue until `left` meets `right`.
+- Repeat for all `i` while skipping duplicates.
+
+---
+
+**💻 Code**:
+```javascript
+function threeSum(nums) {
+  nums.sort((a, b) => a - b);
+  const result = [];
+
+  for (let i = 0; i < nums.length - 2; i++) {
+    if (i > 0 && nums[i] === nums[i - 1]) continue; // skip duplicates
+
+    let left = i + 1;
+    let right = nums.length - 1;
+
+    while (left < right) {
+      const sum = nums[i] + nums[left] + nums[right];
+
+      if (sum === 0) {
+        result.push([nums[i], nums[left], nums[right]]);
+
+        while (left < right && nums[left] === nums[left + 1]) left++; // skip duplicates
+        while (left < right && nums[right] === nums[right - 1]) right--;
+
+        left++;
+        right--;
+      } else if (sum < 0) {
+        left++;
+      } else {
+        right--;
+      }
+    }
+  }
+
+  return result;
+}
+
+// Example:
+const input = [-1, 0, 1, 2, -1, -4];
+console.log(threeSum(input)); // Output: [ [-1, -1, 2], [-1, 0, 1] ]
+```
+
+---
+
+**💡 Explanation**:
+- Sorting the array is crucial for the two-pointer approach and to avoid duplicate triplets.
+- The two-pointer method reduces the complexity from O(n³) (brute force) to O(n²).
+- Skipping duplicates ensures the output contains only unique triplets.
+- This approach is optimal and widely used for the "3Sum" problem.
+
+[11:55 AM] Interviewer 1
+Is minus one zero and one. If you add minus one, zero and one, it will give output as zero. So you have to write a program which will accept the array and which will find all the triplets with some will be equal to zero. And you can just give me output of that array. Okay. Which contains all these three triplets.
+
+[11:56 AM] AI
+💬 **Question**: Write a JavaScript program to find all unique triplets in an array whose sum is zero and output those triplets.
+
+---
+
+⭐️ **Answer**: I will implement a function in JavaScript that accepts an array and returns all unique triplets where the sum is zero. The approach involves sorting the array and using a two-pointer technique to efficiently find the triplets while avoiding duplicates.
+
+---
+
+**🔑 Key Steps**:
+- Sort the input array.
+- Iterate through the array with an index `i`.
+- For each `i`, use two pointers `left` and `right` to find pairs that sum with `nums[i]` to zero.
+- Skip duplicates for `i`, `left`, and `right` to ensure unique triplets.
+- Collect and return all valid triplets.
+
+---
+
+**💻 Code**:
+```javascript
+function threeSum(nums) {
+  nums.sort((a, b) => a - b); // Sort the array
+  const result = [];
+
+  for (let i = 0; i < nums.length - 2; i++) {
+    if (i > 0 && nums[i] === nums[i - 1]) continue; // Skip duplicate i
+
+    let left = i + 1;
+    let right = nums.length - 1;
+
+    while (left < right) {
+      const sum = nums[i] + nums[left] + nums[right];
+
+      if (sum === 0) {
+        result.push([nums[i], nums[left], nums[right]]);
+
+        // Skip duplicates for left and right
+        while (left < right && nums[left] === nums[left + 1]) left++;
+        while (left < right && nums[right] === nums[right - 1]) right--;
+
+        left++;
+        right--;
+      } else if (sum < 0) {
+        left++; // Increase sum
+      } else {
+        right--; // Decrease sum
+      }
+    }
+  }
+
+  return result;
+}
+
+// Example usage:
+const input = [-1, 0, 1, 2, -1, -4];
+console.log(threeSum(input));
+// Expected output: [ [-1, -1, 2], [-1, 0, 1] ]
+```
+
+---
+
+**💡 Explanation**:
+- Sorting helps efficiently find triplets and skip duplicates.
+- The two-pointer approach reduces complexity to O(n²).
+- Skipping duplicates ensures unique triplets in the output.
+- This solution matches the problem requirements and example given by the interviewer.
+
+[11:56 AM] Interviewee
+Okay.
+
+[11:56 AM] Interviewer 1
+Yeah.
+
+[11:56 AM] Interviewee
+We'll start with function.
+
+[11:56 AM] Interviewee
+Some.
+
+[11:56 AM] Interviewee
+1012 minus one.
+
+[11:57 AM] Interviewer 1
+You can tell me the approach you are thinking of first.
+
+[11:57 AM] AI
+💬 **Question**: Explain the approach you are thinking of to find all triplets in an array that sum to zero.
+
+---
+
+⭐️ **Answer**: My approach to solving the problem of finding all triplets that sum to zero is as follows:
+
+- First, I will sort the input array. Sorting helps to efficiently manage duplicates and enables the two-pointer technique.
+- Then, I will iterate through the array with an index `i`. For each element at `i`, I will try to find two other elements such that their sum with `nums[i]` is zero.
+- To find these two elements, I will use two pointers: one starting just after `i` (left pointer) and one at the end of the array (right pointer).
+- I will calculate the sum of the three elements: `nums[i] + nums[left] + nums[right]`.
+  - If the sum is zero, I will record the triplet and move both pointers inward, skipping duplicates to avoid repeated triplets.
+  - If the sum is less than zero, I will move the left pointer to the right to increase the sum.
+  - If the sum is greater than zero, I will move the right pointer to the left to decrease the sum.
+- I will continue this process until the left and right pointers meet.
+- I will also skip duplicate values for `i` to ensure unique triplets.
+- Finally, I will return the list of all unique triplets found.
+
+This approach has a time complexity of O(n²) and is optimal for this problem. It avoids the brute-force O(n³) approach and efficiently handles duplicates.
+
+I can now start implementing this approach in code if you'd like.
+
+[11:57 AM] Interviewee
+But, uh, like, uh.
+
+[11:57 AM] Interviewee
+So like, I'm trying to display some of zero is like, uh, first I will sort the input array. Okay. And.
+
+[11:57 AM] Interviewee
+Help to efficiently manage, duplicate, enable and everything. Then I iterate through the array and go for the index and everything. Uh, index.
+
+[11:57 AM] Interviewee
+For each element and try to find the other two elements such as their sum with, uh, like, uh, like pointer of I zero.
+
+[11:57 AM] Interviewee
+So like.
+
+[11:57 AM] Interviewee
+Of.
+
+[11:57 AM] Interviewee
+So I think I will calculate the, like, uh, sum of three element like, let's say number. I left and the right one.
+
+[11:58 AM] Interviewee
+Minus. Is there.
+
+[11:58 AM] Interviewee
+Inside the is not a string. So the minus one it will go to number only.
+
+[11:58 AM] Interviewer 1
+You. Can go with the brute force approach first, and then you can think of optimizing it.
+
+[11:58 AM] AI
+💬 **Question**: The interviewer asked to first implement the brute force approach for finding all triplets in an array that sum to zero, then think about optimizing it.
+
+---
+
+⭐️ **Answer**: The brute force approach involves checking every possible triplet combination in the array to see if their sum is zero. Although this is less efficient (O(n³) time complexity), it’s straightforward to implement and a good starting point before optimization.
+
+---
+
+**🔑 Key Steps for Brute Force**:
+- Use three nested loops to pick every combination of three elements.
+- For each triplet, check if the sum equals zero.
+- Store the triplet if it does, ensuring to avoid duplicates by using a set or sorting each triplet before storing.
+- Return all unique triplets found.
+
+---
+
+**💻 Code (Brute Force)**:
+```javascript
+function threeSumBruteForce(nums) {
+  const result = [];
+  const seen = new Set();
+
+  for (let i = 0; i < nums.length - 2; i++) {
+    for (let j = i + 1; j < nums.length - 1; j++) {
+      for (let k = j + 1; k < nums.length; k++) {
+        if (nums[i] + nums[j] + nums[k] === 0) {
+          // Sort triplet to handle duplicates
+          const triplet = [nums[i], nums[j], nums[k]].sort((a, b) => a - b);
+          const key = triplet.join(',');
+
+          if (!seen.has(key)) {
+            seen.add(key);
+            result.push(triplet);
+          }
+        }
+      }
+    }
+  }
+
+  return result;
+}
+
+// Example usage:
+const input = [-1, 0, 1, 2, -1, -4];
+console.log(threeSumBruteForce(input));
+// Expected output: [ [-1, -1, 2], [-1, 0, 1] ]
+```
+
+---
+
+**💡 Explanation**:
+- This brute force method checks all triplets explicitly.
+- Sorting each triplet before adding to the set ensures uniqueness.
+- Time complexity is O(n³), which is acceptable for small inputs but inefficient for large arrays.
+- Once this works, I can optimize it using sorting + two-pointer approach to reduce complexity to O(n²).
+
+[11:58 AM] Interviewee
+Okay.
+
+[11:58 AM] Interviewer 1
+Yeah. So.
+
+[11:58 AM] Interviewer 1
+If you need three, four loops as well for this, you can just go ahead with that. No issue. Okay. But I want a brute force approach like a very lame approach. First, what you are going to try and then we can think about the optimizing. Okay.
+
+[11:58 AM] AI
+💬 **Question**: Implement a brute force approach to find all unique triplets in an array that sum to zero, using a straightforward, possibly multiple nested loops method.
+
+---
+
+⭐️ **Answer**: I will implement a simple brute force solution using three nested loops to check every possible triplet combination in the array. For each triplet, I will check if the sum is zero and then add it to the result if it is unique. This approach is straightforward and easy to understand, though not optimized.
+
+---
+
+**🔑 Key Steps**:
+- Use three nested loops to iterate over all triplets `(i, j, k)` where `i < j < k`.
+- Check if `nums[i] + nums[j] + nums[k] === 0`.
+- To avoid duplicates, sort each triplet before adding it to a set or check if it already exists.
+- Collect all unique triplets and return them.
+
+---
+
+**💻 Code**:
+```javascript
+function threeSumBruteForce(nums) {
+  const result = [];
+  const seen = new Set();
+
+  for (let i = 0; i < nums.length - 2; i++) {
+    for (let j = i + 1; j < nums.length - 1; j++) {
+      for (let k = j + 1; k < nums.length; k++) {
+        if (nums[i] + nums[j] + nums[k] === 0) {
+          const triplet = [nums[i], nums[j], nums[k]].sort((a, b) => a - b);
+          const key = triplet.join(',');
+
+          if (!seen.has(key)) {
+            seen.add(key);
+            result.push(triplet);
+          }
+        }
+      }
+    }
+  }
+
+  return result;
+}
+
+// Example usage:
+const input = [-1, 0, 1, 2, -1, -4];
+console.log(threeSumBruteForce(input));
+// Expected output: [ [-1, -1, 2], [-1, 0, 1] ]
+```
+
+---
+
+**💡 Explanation**:
+- This brute force method is simple and guarantees correctness.
+- It has O(n³) time complexity, which is acceptable for small input sizes.
+- Sorting each triplet and using a set ensures no duplicate triplets are returned.
+- After this, I can discuss or implement an optimized approach using sorting and two pointers to improve performance.
+
+[11:58 AM] Interviewee
+Okay. That uh, that's fine.
+
+[11:58 AM] Interviewer 1
+Yeah.
+
+[12:01 PM] Interviewee
+
+
+[12:05 PM] Interviewee
+I have to join it. So.
+
+[12:11 PM] Interviewer 1
+
+
+[12:11 PM] Interviewer 1
+That find all you need a comment that above above.
+
+[12:11 PM] Interviewee
+Okay, okay. Okay,
+
+[12:11 PM] Interviewer 1
+Question.
+
+[12:11 PM] Interviewee
+I saw that.
+
+[12:12 PM] Interviewer 1
+Go up again.
+
+[12:12 PM] Interviewer 1
+That input.
+
+[12:12 PM] Interviewee
+I have to sorry, sorry, sorry.
+
+[12:12 PM] Interviewer 1
+Yes.
+
+[12:12 PM] Interviewee
+That I didn't pass.
+
+[12:12 PM] Interviewer 1
+Yeah.
+
+[12:12 PM] Interviewee
+
+
+[12:12 PM] Interviewer 1
+Go to. Compiler.
+
+[12:12 PM] Interviewee
+Delaying a lot. What happened?
+
+[12:12 PM] Interviewer 1
+No.
+
+[12:12 PM] Interviewer 1
+Is getting stuck somewhere. Just a second.
+
+[12:13 PM] Interviewer 1
+Uh. It got into infinite loop. I guess.
+
+[12:13 PM] Interviewer 1
+Scroll up. We will find the cause.
+
+[12:13 PM] Interviewee
+You have an.
+
+[12:13 PM] Interviewee
+Then soon is new set. And then the loops. Only I think something for loop. I have for for four, three, four.
+
+[12:14 PM] Interviewee
+That is.
+
+[12:14 PM] Interviewee
+Zero J plus one. Yeah.
+
+[12:14 PM] Interviewee
+I stop the execution. No. Something.
+
+[12:14 PM] Interviewer 1
+There is.
+
+[12:14 PM] Interviewer 1
+Yeah, you can stop the execution first.
+
+[12:14 PM] Interviewee
+Where it is.
+
+[12:15 PM] Interviewee
+One minute.
+
+[12:15 PM] Interviewee
+I reload the window.
+
+[12:15 PM] Interviewer 1
+Yeah.
+
+[12:15 PM] Interviewee
+The input.
+
+[12:15 PM] Interviewee
+And it went.
+
+[12:15 PM] Interviewee
+I think.
+
+[12:15 PM] Interviewee
+One minute.
+
+[12:15 PM] Interviewee
+So.
+
+[12:16 PM] Interviewer 1
+Minor issue. If you see.
+
+[12:16 PM] Interviewee
+Uh.
+
+[12:16 PM] Interviewer 1
+That that is correct. Don't remove that.
+
+[12:17 PM] Interviewee
+Can you help me?
+
+[12:17 PM] Interviewee
+This is all fine.
+
+[12:17 PM] Interviewer 1
+Run again.
+
+[12:17 PM] AI
+💬 **Question**: The interviewer pointed out a minor issue and emphasized not to remove a certain part of the code, then asked the candidate to run the code again. The candidate asked for help regarding this.
+
+---
+
+⭐️ **Answer**: It sounds like the interviewer is indicating that a specific piece of code or logic is correct and should not be removed, even if it looks like it might be causing an issue. They want you to keep that part intact and rerun the code to see the results again.
+
+- Carefully identify the part the interviewer referred to as "correct" and ensure you do not delete or modify it.
+- Double-check your code around that section to confirm it matches what the interviewer expects.
+- Run the code again exactly as is, without removing or altering that part.
+- If you encounter errors or unexpected behavior, explain what you observe and ask for clarification if needed.
+
+This approach shows you are attentive to feedback and willing to follow instructions precisely, which is important in a React development role like this.
+
+If you want, I can help you review the code snippet you are working on to confirm what should stay and what can be adjusted.
+
+[12:17 PM] Interviewee
+One minute.
+
+[12:17 PM] Interviewee
+Uh.
+
+[12:17 PM] Interviewee
+This is. This is fine. Only.
+
+[12:17 PM] Interviewee
+Same code. Only it is. It is going. And we have console and everything.
+
+[12:17 PM] Interviewee
+Anyway, this is only console. So whatever.
+
+[12:18 PM] Interviewer 1
+Can you scroll?
+
+[12:18 PM] Interviewer 1
+Again.
+
+[12:18 PM] Interviewer 1
+A bit.
+
+[12:18 PM] Interviewee
+Yeah.
+
+[12:18 PM] Interviewer 1
+Okay.
+
+[12:18 PM] Interviewee
+I I, I.
+
+[12:18 PM] AI
+💬 **Question**: Analyze and explain the JavaScript function that finds unique triplets in an array summing to zero.
+
+---
+
+⭐️ **Answer**: The function `addArraySum` takes an array `num` and finds all unique triplets `[num[i], num[j], num[k]]` such that their sum is zero. It uses three nested loops to check all combinations, sorts each triplet to avoid duplicates, and stores unique triplets in a Set to ensure no repetition.
+
+**🔑 Key Steps**:
+- Initialize an empty array `result` to store triplets.
+- Use a Set `val` to track unique triplets as strings.
+- Use three nested loops to iterate over all triplets `(i, j, k)` with `i < j < k`.
+- Check if the sum of the triplet is zero.
+- Sort the triplet to maintain consistent order.
+- Convert the triplet to a string and check if it is already in the Set.
+- If not, add it to the Set and push the triplet array to `result`.
+- Return the `result` array (though return is missing in the current code).
+
+**💻 Code**:
+```javascript
+function addArraySum(num) {
+    const result = [];
+    const val = new Set();
+
+    for (let i = 0; i < num.length - 2; i++) {
+        for (let j = i + 1; j < num.length - 1; j++) {
+            for (let k = j + 1; k < num.length; k++) {
+                if (num[i] + num[j] + num[k] === 0) {
+                    const firstResult = [num[i], num[j], num[k]].sort((a, b) => a - b);
+                    const finalResult = firstResult.join(',');
+
+                    if (!val.has(finalResult)) {
+                        val.add(finalResult);
+                        result.push(firstResult);
+                    }
+                }
+            }
+        }
+    }
+    return result; // Add return statement to output the results
+}
+```
+
+**💡 Explanation**:
+- The triple nested loops ensure all combinations of three distinct elements are checked.
+- Sorting each triplet before adding to the Set ensures that triplets like `[1, -1, 0]` and `[0, 1, -1]` are considered the same.
+- Using a Set for `val` prevents duplicate triplets in the result.
+- The time complexity is O(n³) due to three nested loops, which is acceptable for small arrays but inefficient for large inputs.
+- The function currently lacks a return statement, so adding `return result;` at the end is necessary to get the output.
+- This approach is straightforward but can be optimized using sorting and two-pointer techniques for better performance.
+
+[12:18 PM] Interviewee
+What is this putting in the loop like, uh.
+
+[12:19 PM] Interviewer 1
+Your brain.
+
+[12:19 PM] Interviewee
+Uh.
+
+[12:19 PM] AI
+💬 **Question**: What is the purpose or effect of putting the code inside the nested loops?
+
+---
+
+⭐️ **Answer**: The nested loops in the function are used to systematically check every possible combination of three distinct elements in the array to find triplets that sum to zero.
+
+- The outer loop picks the first element `num[i]`.
+- The middle loop picks the second element `num[j]` starting from `i + 1` to avoid duplicates and ensure distinct indices.
+- The inner loop picks the third element `num[k]` starting from `j + 1` for the same reasons.
+- Inside the innermost loop, the sum of these three elements is checked.
+- If the sum is zero, the triplet is sorted and added to a Set to avoid duplicates.
+- This brute-force approach guarantees that all unique triplets are found but has a cubic time complexity (O(n³)).
+
+In short, the loops are essential to explore all possible triplets in the array to identify those whose sum equals zero.
+
+[12:19 PM] Interviewee
+My voice is not coming.
+
+[12:19 PM] Interviewer 1
+Now. Your voice is coming. AM I audible to you?
+
+[12:19 PM] Interviewee
+Yes. You are audible.
+
+[12:19 PM] Interviewer 1
+Yeah. The return statement.
+
+[12:19 PM] AI
+💬 **Question**: Analyze the JavaScript function `addArraySum` and explain the importance of the return statement.
+
+---
+
+⭐️ **Answer**: The function `addArraySum` is designed to find all unique triplets in an array whose sum is zero. It uses three nested loops to check every combination of three elements, sorts each valid triplet, and stores unique triplets in a Set to avoid duplicates. However, the function currently lacks a `return` statement, which is crucial to output the results.
+
+- Without a `return` statement, the function will execute but will not provide the caller with the found triplets.
+- Adding `return result;` at the end of the function will return the array of unique triplets to the caller.
+- This allows the function to be used effectively in other parts of the code or for testing.
+
+**🔑 Key Points**:
+- The function initializes `result` as an empty array to collect triplets.
+- It uses a Set `val` to track unique triplets as strings.
+- The nested loops iterate over all possible triplets.
+- When a triplet sums to zero, it is sorted and checked for uniqueness before adding.
+- The missing `return result;` must be added at the end to output the collected triplets.
+
+**💻 Code snippet with return**:
+```javascript
+function addArraySum(num) {
+    const result = [];
+    const val = new Set();
+
+    for (let i = 0; i < num.length - 2; i++) {
+        for (let j = i + 1; j < num.length - 1; j++) {
+            for (let k = j + 1; k < num.length; k++) {
+                if (num[i] + num[j] + num[k] === 0) {
+                    const firstResult = [num[i], num[j], num[k]].sort((a, b) => a - b);
+                    const finalResult = firstResult.join(',');
+
+                    if (!val.has(finalResult)) {
+                        val.add(finalResult);
+                        result.push(firstResult);
+                    }
+                }
+            }
+        }
+    }
+    return result; // Important to return the result array
+}
+```
+
+**💡 Explanation**:
+- The return statement is essential for the function to provide its output.
+- Without it, the function's result is lost after execution.
+- Adding the return enables further use of the function's output, such as logging, testing, or passing to other functions.
+- This is a fundamental aspect of writing reusable and testable functions in JavaScript.
+
+[12:19 PM] Interviewer 1
+You have written. Right at the end.
+
+[12:19 PM] Interviewee
+Result.
+
+[12:19 PM] Interviewer 1
+What?
+
+[12:19 PM] Interviewer 1
+Okay. I was not able to see that return result.
+
+[12:19 PM] Interviewer 1
+Also added an array. Which.
+
+[12:19 PM] Interviewer 1
+
+
+[12:19 PM] AI
+💬 **Question**: The interviewer is clarifying that they did not see the `return result` statement in the function and mentioned the addition of an array.
+
+---
+
+⭐️ **Answer**: The `return result` statement is crucial at the end of the function to output the array of unique triplets found. Without it, the function runs but does not provide any usable output. The array `result` is where all valid triplets are collected during the nested loop iterations. Adding this array and returning it ensures the function returns the final list of triplets that sum to zero.
+
+To clarify:
+
+- The `result` array is initialized at the start to store all unique triplets.
+- Inside the nested loops, when a triplet sums to zero and is unique, it is pushed into `result`.
+- At the end of the function, `return result;` must be present to send this array back to the caller.
+
+If the interviewer missed seeing the return statement, you can confirm that you will add or have added it to make the function complete and functional. This is a common oversight and easy to fix.
+
+Example snippet:
+
+```javascript
+function addArraySum(num) {
+    const result = [];
+    const val = new Set();
+
+    for (let i = 0; i < num.length - 2; i++) {
+        for (let j = i + 1; j < num.length - 1; j++) {
+            for (let k = j + 1; k < num.length; k++) {
+                if (num[i] + num[j] + num[k] === 0) {
+                    const firstResult = [num[i], num[j], num[k]].sort((a, b) => a - b);
+                    const finalResult = firstResult.join(',');
+
+                    if (!val.has(finalResult)) {
+                        val.add(finalResult);
+                        result.push(firstResult);
+                    }
+                }
+            }
+        }
+    }
+    return result; // This returns the collected triplets
+}
+```
+
+This ensures the function is complete and returns the expected output.
+
+[12:19 PM] Interviewer 1
+Is the program is itself. Can you try on some another ID? Maybe this.
+
+[12:19 PM] AI
+💬 **Question**: The interviewer is asking if the program can be tried on another input array (another ID) to test it.
+
+---
+
+⭐️ **Answer**: Yes, I can definitely try the function on another input array to demonstrate how it works and verify its correctness. For example, if I test the function with an array like `[-1, 0, 1, 2, -1, -4]`, it should return all unique triplets that sum to zero, such as `[-1, -1, 2]` and `[-1, 0, 1]`.
+
+Here’s how I would test it:
+
+```javascript
+const testArray = [-1, 0, 1, 2, -1, -4];
+const triplets = addArraySum(testArray);
+console.log(triplets);
+```
+
+Expected output:
+
+```
+[[-1, -1, 2], [-1, 0, 1]]
+```
+
+This confirms the function correctly finds unique triplets summing to zero for different inputs. I can try other arrays as well to further validate the solution.
+
+[12:19 PM] Interviewer 1
+Uh, you know. Editor.
+
+[12:19 PM] Interviewer 1
+Is hanging up? Something like that.
+
+[12:20 PM] Interviewer 1
+The code is correct. I thought you have. You are not returning something.
+
+[12:20 PM] Interviewee
+The result here. Right.
+
+[12:20 PM] Interviewer 1
+Yeah, yeah, I saw just now that you are returning it. Since it.
+
+[12:20 PM] Interviewer 1
+
+
+[12:20 PM] AI
+💬 **Question**: The interviewer is confirming that the code is correct and acknowledges seeing the return statement after initially thinking it was missing.
+
+---
+
+⭐️ **Answer**: I understand the confusion—it’s easy to miss the return statement when quickly scanning the code. Yes, the function does return the `result` array at the end, which contains all the unique triplets summing to zero. If the editor was hanging or lagging, that might have made it harder to see the full code clearly. 
+
+To summarize, the function:
+- Uses nested loops to find triplets summing to zero,
+- Uses a Set to avoid duplicates,
+- Collects valid triplets in the `result` array,
+- And finally returns this array with `return result;`.
+
+If you want, I can walk through the logic again or test it with different inputs to demonstrate its correctness.
+
+[12:20 PM] Interviewee
+Function.
+
+[12:20 PM] Interviewee
+There is some input.
+
+[12:20 PM] Interviewee
+Okay, I'll try some other.
+
+[12:20 PM] Interviewee
+Tab control c. Tab.
+
+[12:20 PM] Interviewee
+JS.
+
+[12:20 PM] Interviewer 1
+If any compiler is not working, you can.
+
+[12:20 PM] Interviewee
+I think
+
+[12:20 PM] Interviewer 1
+Try.
+
+[12:20 PM] AI
+💬 **Question**: The interviewee is trying to run or test the JavaScript code but seems to be facing issues with the compiler or environment not working properly. The interviewer suggests trying another compiler or environment.
+
+---
+
+⭐️ **Answer**: If your current editor or compiler environment is hanging or not responding, you can try running your JavaScript code in alternative environments such as:
+
+- **Online editors** like [CodeSandbox](https://codesandbox.io/), [JSFiddle](https://jsfiddle.net/), or [CodePen](https://codepen.io/) which allow quick testing without setup.
+- The **browser console** in Chrome, Firefox, or Edge (press F12 and go to Console tab) where you can paste and run JavaScript snippets instantly.
+- A local environment like **Node.js** installed on your machine, where you can run `.js` files directly from the terminal using `node filename.js`.
+
+This way, you can quickly test your function and debug without waiting for your current editor to respond. If you want, I can guide you through setting up or using any of these environments.
+
+[12:20 PM] Interviewee
+this is very famous compiler. Mostly it won't like something from our side. I think something.
+
+[12:20 PM] Interviewer 1
+Try running. On this then.
+
+[12:20 PM] AI
+💬 **Question**: The interviewer is asking the candidate to try running the code on the current environment (the one being used in the interview).
+
+---
+
+⭐️ **Answer**: I understand. I will try running the code here in this environment now. If the editor or compiler hangs or is unresponsive, I’ll quickly switch to a lightweight alternative like the browser console or an online JavaScript playground to demonstrate the function’s correctness. Meanwhile, I’ll ensure the code is properly formatted and includes the return statement so the output is visible. Let me run the test with a sample input array and share the output here.
+
+[12:20 PM] Interviewee
+Control or control.
+
+[12:21 PM] Interviewee
+Yeah.
+
+[12:21 PM] Interviewer 1
+Now this is. This is okay. This is fine. Don't worry because it gives time limit exceeded. When we have three loops. Okay. It actually counts time complexity.
+
+[12:21 PM] Interviewer 1
+You can try running on the VS code. Otherwise I can see your code is correct. There is no issue. This is a false approach so it will give time limit exceeded according to the machine.
+
+[12:21 PM] Interviewee
+Okay.
+
+[12:21 PM] Interviewer 1
+Okay. I.
+
+[12:21 PM] Interviewer 1
+I will end up the.
+
+[12:21 PM] AI
+💬 **Question**: How to optimize the given triple nested loop JavaScript function that finds unique triplets summing to zero, which currently results in a "CPU time limit exceeded" error.
+
+---
+
+⭐️ **Answer**: The current approach uses three nested loops (O(n³) time complexity), which is inefficient for larger inputs and causes the time limit exceeded error. To optimize:
+
+- Sort the input array first.
+- Use a two-pointer technique inside a single loop to reduce complexity to O(n²).
+- Skip duplicates efficiently to avoid repeated triplets.
+- This approach is a classic solution for the "3Sum" problem.
+
+**🔑 Key Steps**:
+- Sort the array.
+- Iterate through the array with index `i`.
+- For each `i`, use two pointers `left` and `right` to find pairs such that `nums[i] + nums[left] + nums[right] === 0`.
+- Move pointers inward based on sum comparison.
+- Skip duplicates for `i`, `left`, and `right`.
+- Collect unique triplets in the result array.
+
+**💻 Code**:
+```javascript
+function threeSum(nums) {
+  nums.sort((a, b) => a - b); // Sort the array
+  const result = [];
+
+  for (let i = 0; i < nums.length - 2; i++) {
+    // Skip duplicate values for i
+    if (i > 0 && nums[i] === nums[i - 1]) continue;
+
+    let left = i + 1;
+    let right = nums.length - 1;
+
+    while (left < right) {
+      const sum = nums[i] + nums[left] + nums[right];
+
+      if (sum === 0) {
+        result.push([nums[i], nums[left], nums[right]]);
+
+        // Skip duplicates for left pointer
+        while (left < right && nums[left] === nums[left + 1]) left++;
+        // Skip duplicates for right pointer
+        while (left < right && nums[right] === nums[right - 1]) right--;
+
+        left++;
+        right--;
+      } else if (sum < 0) {
+        left++; // Need a larger sum
+      } else {
+        right--; // Need a smaller sum
+      }
+    }
+  }
+
+  return result;
+}
+
+// Example usage:
+const input = [-1, 0, 1, 2, -1, -4];
+console.log(threeSum(input));
+```
+
+**💡 Explanation**:
+- Sorting helps to efficiently skip duplicates and use two pointers.
+- The two-pointer approach reduces the complexity from O(n³) to O(n²).
+- This method avoids the time limit exceeded error by eliminating unnecessary iterations.
+- It returns all unique triplets that sum to zero without duplicates.
+- The space complexity is O(n) for the output and sorting overhead.
+
+This optimized solution is widely accepted for the 3Sum problem and will run efficiently in your environment without timing out.
+
+[12:21 PM] Interviewer 1
+Call in here. Do you have any any questions regarding the company?
+
+[12:21 PM] Interviewee
+Uh, yeah. Like, uh, what is the project you guys are working? I would like to know, uh, and the actually, uh, one minute. Let me, let me see, see you. Okay. Your feed is off. Okay. So, like, I want to know, like what the projects you guys are working in and what technologies you guys are use and everything. This is what.
+
+[12:21 PM] Interviewer 1
+
+
+[12:21 PM] Interviewer 1
+So. Previously we were using like angular. Now we completely have a micro front end structure currently. And we are actually working on React.js as well now.
+
+[12:22 PM] Interviewee
+Okay.
+
+[12:22 PM] Interviewer 1
+Is a video telematics company which actually programs a software which can be used
+
+[12:22 PM] Interviewee
+Okay.
+
+[12:22 PM] Interviewer 1
+to detect any driver activity and can restrict them to, you know, go from the accidents or something. So it's a very in a line language, which I have told you, it's a very, uh, you know, completely dependent on the AI project, mostly AI only we
+
+[12:22 PM] Interviewee
+Okay.
+
+[12:22 PM] Interviewer 1
+are a sort of, uh, building a dashboard on which we can analyze the data, which we get from the videos or images, which we capture of the driver trips. And then we actually give them, you know, suggest them few driver trainings or something like that. Uh, so that they can take it as a feedback and we can avoid the accidents and everything. So that's
+
+[12:22 PM] Interviewee
+Okay.
+
+[12:22 PM] Interviewer 1
+actually, uh, our software is.
+
+[12:22 PM] Interviewee
+And what's your back end? Build on? Like?
+
+[12:23 PM] Interviewer 1
+Backend completely uses SQL, PostgreSQL.
+
+[12:23 PM] Interviewee
+SQL. Okay.
+
+[12:23 PM] Interviewer 1
+Yeah.
+
+[12:23 PM] Interviewee
+Okay.
+
+[12:23 PM] Interviewer 1
+So that's, that is all about, you know, the project and stuff.
+
+[12:23 PM] Interviewee
+Okay. So like.
+
+[12:23 PM] Interviewer 1
+Uh.
+
+[12:23 PM] Interviewee
+Please tell.
+
+[12:23 PM] Interviewer 1
+Yeah. You have any other question
+
+[12:23 PM] Interviewee
+I would like to.
+
+[12:23 PM] Interviewer 1
+?
+
+[12:23 PM] Interviewee
+Know like, uh, what will be the next rounds and everything also. So I will prepare better.
+
+[12:23 PM] Interviewer 1
+Probably if you get selected, uh, then we will call you in person. Probably. Uh.
+
+[12:23 PM] Interviewer 1
+And then we can, you know, go ahead with the behavioral round. That is all the, uh, you know, the process is about for the interview. Yeah.
+
+[12:23 PM] Interviewee
+Okay.
+
+[12:23 PM] Interviewer 1
+Yeah. Anyway, our HR will get back to you. Okay.
+
+[12:23 PM] Interviewee
+So like. Uh, actually what happened? Like I am giving this process took a very long time. Like, uh, first I gave the test and the second technical round and this round. And so like, took a very long time. So that was, I was asking, is there any else is there
+
+[12:23 PM] Interviewer 1
+Yeah.
+
+[12:24 PM] Interviewee
+?
+
+[12:24 PM] Interviewer 1
+Yeah. Actually, there are five rounds. Uh.
+
+[12:24 PM] Interviewer 1
+Our HR did. She mentioned that, uh, we have five rounds.
+
+[12:24 PM] Interviewee
+Not, not the HR, but uh, yeah, Rizwan is mentioned in the second technical interview.
+
+[12:24 PM] Interviewer 1
+Okay. Yeah.
+
+[12:24 PM] Interviewee
+Okay, so that's all from my side. Thank you. Um.
+
+[12:24 PM] Interviewer 1
+Yeah. Yeah. Okay. Okay.
+
+[12:24 PM] Interviewee
+Okay. Is there anything else you want to ask?
+
+[12:24 PM] Interviewer 1
+Uh. Yeah. As a feedback, I would just say that, uh, you're good at JavaScript, theoretical and programming knowledge, which
+
+[12:24 PM] Interviewee
+Okay.
+
+[12:24 PM] Interviewer 1
+is just, uh, keep the answers, you know, like short and introductory part. You should keep a bit short. Okay.
+
+[12:24 PM] Interviewee
+Yeah. Like a little nervous. I was, so it's fine. Like I can take it. Yeah. Thanks for the feedback. Yeah.
+
+[12:24 PM] Interviewer 1
+Yeah. Otherwise, everything was good. Yeah. Okay.
+
+[12:24 PM] Interviewee
+Yeah. It was really nice, uh, with you talking and. Thank you. Thank you.
+
+[12:24 PM] Interviewer 1
+Yeah. Thank you.
+
+[12:26 PM] AI
+💬 **Question**: How to fix the "CPU time limit exceeded" error in the provided triple nested loop JavaScript function that finds unique triplets summing to zero.
+
+---
+
+⭐️ **Answer**: The current function uses three nested loops (O(n³) time complexity), which is inefficient for larger arrays and causes the CPU time limit exceeded error. To optimize:
+
+- Sort the input array first.
+- Use a two-pointer approach inside a single loop to reduce complexity to O(n²).
+- Skip duplicates efficiently to avoid repeated triplets.
+- This is a standard optimized solution for the 3Sum problem.
+
+**🔑 Key Steps**:
+- Sort the array.
+- Iterate through the array with index `i`.
+- For each `i`, use two pointers `left` and `right` to find pairs where the sum of `nums[i] + nums[left] + nums[right]` equals zero.
+- Move pointers inward based on the sum comparison.
+- Skip duplicates for `i`, `left`, and `right`.
+- Collect unique triplets in the result array.
+
+**💻 Code**:
+```javascript
+function addArraySum(nums) {
+  nums.sort((a, b) => a - b); // Sort the array
+  const result = [];
+
+  for (let i = 0; i < nums.length - 2; i++) {
+    // Skip duplicate values for i
+    if (i > 0 && nums[i] === nums[i - 1]) continue;
+
+    let left = i + 1;
+    let right = nums.length - 1;
+
+    while (left < right) {
+      const sum = nums[i] + nums[left] + nums[right];
+
+      if (sum === 0) {
+        result.push([nums[i], nums[left], nums[right]]);
+
+        // Skip duplicates for left pointer
+        while (left < right && nums[left] === nums[left + 1]) left++;
+        // Skip duplicates for right pointer
+        while (left < right && nums[right] === nums[right - 1]) right--;
+
+        left++;
+        right--;
+      } else if (sum < 0) {
+        left++; // Need a larger sum
+      } else {
+        right--; // Need a smaller sum
+      }
+    }
+  }
+
+  return result;
+}
+
+// Example usage:
+const input = [-1, 0, 1, 2, -1, -4];
+console.log(addArraySum(input));
+```
+
+**💡 Explanation**:
+- Sorting helps efficiently skip duplicates and use two pointers.
+- The two-pointer approach reduces time complexity from O(n³) to O(n²).
+- This prevents the CPU time limit exceeded error by avoiding unnecessary iterations.
+- The function returns all unique triplets summing to zero without duplicates.
+- Space complexity is O(n) for sorting and output storage.
+
+This optimized solution will run efficiently without timing out and is a common approach for this problem.
+
+[12:27 PM] AI
+💬 **Question**: How to keep answers short and to the point during the interview?
+
+---
+
+⭐️ **Answer**: I appreciate the feedback about keeping my answers concise and focused. Moving forward, I will aim to provide clear, direct responses that address the core of the question without lengthy introductions or unnecessary details. This will help maintain the interview flow and demonstrate my communication skills effectively.
+
+- Start answers with a brief summary or direct response.
+- Only elaborate if the interviewer asks for more details.
+- Avoid over-explaining or repeating points.
+- Practice concise storytelling for technical experiences, focusing on impact and results.
+
+This approach aligns well with my experience delivering scalable React applications efficiently, where clarity and precision are key in both code and communication.
+
+[12:27 PM] Interviewee
+Like what? And all. We have to do something.
+
+[12:27 PM] AI
+💬 **Question**: Clarification on what to do next or how to proceed.
+
+---
+
+⭐️ **Answer**: It sounds like you’re asking what the next steps are or what you should do now. If this is about the interview, typically after the technical questions and discussion, the interviewer might move on to wrap up or ask if you have any questions for them. You can prepare to briefly ask about the team, the company culture, or the next steps in the hiring process.
+
+If you meant what to do about keeping answers short and to the point, my suggestion is to focus on answering the question directly and clearly, then pause to see if the interviewer wants more detail.
+
+Let me know if you want help formulating specific questions to ask or how to close the interview confidently.

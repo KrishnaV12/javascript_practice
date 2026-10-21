@@ -1,0 +1,463 @@
+ParakeetAI Timeline Export
+Exported: 9/15/2026, 7:38:49 PM
+
+[06:09 PM] Interviewee
+Renew my entire.
+
+[06:09 PM] Interviewee
+Screen. Yeah.
+
+[06:09 PM] Interviewer 1
+Okay, so you need to write an example for Debounce function. For that either you can use JavaScript or react, whichever you are comfortable with.
+
+[06:09 PM] Interviewee
+Okay. I'll.
+
+[06:09 PM] Interviewer 1
+So we just need the basic output. Okay, just the logic.
+
+[06:09 PM] AI
+💬 **Question**: Write a basic debounce function example in JavaScript or React.
+
+---
+
+⭐️ **Answer**: Here is a simple debounce function implemented in JavaScript, along with a React example showing how to use it to limit how often a function (like an API call or input handler) is triggered.
+
+**🔑 Key Steps**:
+- Create a debounce function that delays invoking the callback until after a specified wait time has elapsed since the last call.
+- Use `setTimeout` to schedule the callback and `clearTimeout` to reset the timer if the function is called again within the wait period.
+- In React, use `useCallback` and `useRef` to create a stable debounced function that persists across renders.
+
+**💻 Code**:
+
+```javascript
+// Basic debounce function in JavaScript
+function debounce(func, wait) {
+  let timeout;
+  return function(...args) {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      func.apply(this, args);
+    }, wait);
+  };
+}
+
+// Example usage in React
+import React, { useState, useCallback, useRef } from 'react';
+
+function SearchInput() {
+  const [query, setQuery] = useState('');
+
+  // useRef to hold the timeout ID
+  const timeoutRef = useRef(null);
+
+  // Debounced handler
+  const handleChange = useCallback((event) => {
+    const value = event.target.value;
+
+    // Clear previous timeout
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    // Set new timeout
+    timeoutRef.current = setTimeout(() => {
+      setQuery(value);
+      // Here you can trigger API calls or other side effects
+      console.log('Debounced input:', value);
+    }, 500); // 500ms debounce delay
+  }, []);
+
+  return (
+    <input
+      type="text"
+      placeholder="Search..."
+      onChange={handleChange}
+    />
+  );
+}
+```
+
+**💡 Explanation**:
+- The debounce function ensures that the wrapped function (`func`) is only called after the user stops triggering the event for the specified `wait` time.
+- This is useful to reduce excessive calls, such as API requests on every keystroke.
+- In React, using `useRef` to store the timeout ID prevents losing the timeout between renders.
+- `useCallback` memoizes the debounced function to avoid recreating it on every render, improving performance.
+
+This approach aligns well with my experience optimizing React apps for performance and responsiveness, as I have done in my recent projects.
+
+[06:10 PM] Interviewee
+Debounce function. So.
+
+[06:10 PM] Interviewee
+Set. DeLay.
+
+[06:11 PM] Interviewee
+Time.
+
+[06:11 PM] Interviewee
+Set. Set. Time. Set. Timeout.
+
+[06:12 PM] Interviewee
+So. This is like a.
+
+[06:12 PM] Interviewee
+Function for a D bounce.
+
+[06:12 PM] Interviewer 1
+Okay. Can you please copy paste this in the chat box?
+
+[06:12 PM] Interviewee
+Chatbot. Okay.
+
+[06:12 PM] Interviewer 1
+In the Google Meet?
+
+[06:12 PM] Interviewee
+Okay.
+
+[06:12 PM] Interviewee
+This.
+
+[06:12 PM] Interviewee
+Is this. Chat.
+
+[06:12 PM] Interviewee
+Sorry.
+
+[06:12 PM] Interviewer 1
+Another question.
+
+[06:12 PM] Interviewee
+
+
+[06:12 PM] Interviewer 1
+Tell me what happens when we run this function.
+
+[06:12 PM] AI
+💬 **Question**: Explain what happens when a debounce function runs.
+
+---
+
+⭐️ **Answer**: When a debounce function runs, it delays the execution of the given callback function until after a specified wait time has passed since the last time the debounce function was invoked. Here is what happens step-by-step:
+
+- When the debounce function is called, it clears any existing timer that was set from a previous call.
+- It then sets a new timer (using `setTimeout`) to run the callback function after the specified delay.
+- If the debounce function is called again before the timer expires, the previous timer is cleared and a new timer is set.
+- This cycle continues until the function stops being called for the full delay period, at which point the callback finally executes.
+- This mechanism effectively "bounces" the callback execution to only happen once after rapid or repeated calls stop.
+
+In practical terms, this is useful for scenarios like handling user input events (e.g., typing in a search box) where you want to avoid triggering expensive operations (like API calls) on every keystroke and instead wait until the user pauses typing.
+
+This behavior ensures that the callback function runs only once per burst of rapid events, improving performance and user experience.
+
+If you want, I can also share the exact code snippet for this debounce function again in the chat.
+
+[06:12 PM] Interviewee
+Okay.
+
+[06:13 PM] Interviewee
+What happened when you write? Set. Timeout function. Oh.
+
+[06:13 PM] Interviewee
+So, like you are not giving any delay. Uh, like the function will run immediately. So the delay is not there. Like the timing is like zero.
+
+[06:13 PM] Interviewer 1
+Got it. How to adjust overflowing elements in a flex layout.
+
+[06:13 PM] AI
+💬 **Question**: How to adjust overflowing elements in a flex layout?
+
+---
+
+⭐️ **Answer**: To handle overflowing elements in a flex layout, you can use several CSS techniques to ensure the layout remains clean and responsive:
+
+- **Use `flex-wrap: wrap`** on the flex container to allow flex items to wrap onto multiple lines instead of overflowing horizontally.
+- **Set `min-width` or `max-width` on flex items** to control their size and prevent them from growing too large.
+- **Use `overflow` properties** (`overflow: hidden`, `overflow: auto`, or `overflow-x: scroll`) on the container or flex items to manage content that exceeds the available space.
+- **Apply `flex-shrink` and `flex-grow` properties** to control how flex items shrink or grow relative to each other, preventing unwanted overflow.
+- **Use `box-sizing: border-box`** to include padding and borders in the element’s total width, avoiding unexpected overflow.
+- For text or content inside flex items, use CSS properties like `word-wrap: break-word` or `text-overflow: ellipsis` with `white-space: nowrap` to handle overflow gracefully.
+
+Example:
+
+```css
+.flex-container {
+  display: flex;
+  flex-wrap: wrap; /* allows items to wrap instead of overflowing */
+  gap: 10px; /* optional spacing */
+}
+
+.flex-item {
+  flex: 1 1 200px; /* grow and shrink with a base width */
+  min-width: 150px; /* prevent shrinking too small */
+  overflow: hidden; /* hide overflow content */
+  box-sizing: border-box;
+}
+```
+
+This approach ensures that flex items adjust their size and wrap as needed, preventing overflow issues in responsive layouts.
+
+If you want, I can also share how I have handled similar flex overflow challenges in my projects, such as building responsive dashboards and e-commerce UIs using Tailwind CSS and custom flexbox utilities.
+
+[06:13 PM] Interviewee
+Oh. Flex wrap
+
+[06:13 PM] Interviewer 1
+How can.
+
+[06:13 PM] Interviewee
+.
+
+[06:13 PM] Interviewer 1
+Okay.
+
+[06:13 PM] Interviewer 1
+And paste.
+
+[06:13 PM] Interviewee
+Flex. And also you can use flex. Grow is also one property. But flex app is like far better.
+
+[06:13 PM] Interviewer 1
+The wise mutating state directly dangerous in react. Not advisable.
+
+[06:14 PM] Interviewee
+Can you like mutating?
+
+[06:14 PM] Interviewee
+State.
+
+[06:14 PM] Interviewer 1
+Yeah.
+
+[06:14 PM] Interviewee
+And detecting state in. Dangerous. In. React.
+
+[06:14 PM] Interviewee
+Can you repeat like. Refresh it like.
+
+[06:14 PM] Interviewer 1
+Why is mutating state directly dangerous in react?
+
+[06:14 PM] AI
+💬 **Question**: Why is mutating state directly dangerous in React?
+
+---
+
+⭐️ **Answer**: Mutating state directly in React is dangerous because it breaks React’s state management principles and can lead to unpredictable UI behavior and bugs. Here’s why:
+
+- **React relies on immutability**: React detects changes in state by comparing previous and new state objects. If you mutate state directly (e.g., modifying an object or array in place), React may not detect the change because the reference remains the same.
+- **No re-render trigger**: Direct mutation does not trigger React’s re-render cycle, so the UI will not update to reflect the new state.
+- **Leads to bugs and inconsistent UI**: Since React’s virtual DOM diffing depends on immutable updates, direct mutation can cause stale or incorrect UI rendering.
+- **Breaks predictable state flow**: Immutable updates ensure that state changes are explicit and traceable, which is crucial for debugging and maintaining code.
+- **Can cause issues with lifecycle methods and hooks**: React hooks like `useEffect` depend on state changes to trigger effects. Direct mutation can prevent these from running correctly.
+
+Instead, always create new state objects or arrays when updating state, for example using spread syntax or methods like `concat`, `slice`, or `map` that return new copies.
+
+Example:
+
+```js
+// Wrong: mutating state directly
+state.items.push(newItem);
+setState(state); // React may not detect change
+
+// Correct: creating new state
+setState(prevState => ({
+  items: [...prevState.items, newItem]
+}));
+```
+
+This approach ensures React properly detects state changes and updates the UI accordingly.
+
+In my projects, I consistently follow immutable state updates, especially when managing complex state with Redux or React’s `useState` and `useReducer`, to maintain predictable and performant UI behavior.
+
+[06:14 PM] Interviewee
+So like.
+
+[06:14 PM] Interviewee
+Uh.
+
+[06:14 PM] Interviewee
+Let me think.
+
+[06:14 PM] Interviewee
+Mutating is dangerous because it will break react. State management like unpredictable like UI behavior. You will get. So, uh, so like, uh, there is a term like immutability. Uh, it will cause that, uh, like, you know, dom tree and everything. Like it render once, once, like, uh.
+
+[06:15 PM] Interviewee
+Like, uh.
+
+[06:15 PM] Interviewee
+No. Rerender trigger will happen. Also. So that is also can be a issue and lifecycle method. Cause problem can become, uh, and.
+
+[06:15 PM] Interviewer 1
+Okay. Pasting another.
+
+[06:15 PM] Interviewer 1
+
+
+[06:15 PM] Interviewee
+Okay.
+
+[06:15 PM] Interviewer 1
+What is the difference between script in head versus script? At the end of the body?
+
+[06:15 PM] AI
+💬 **Question**: What is the difference between placing a `<script>` tag in the `<head>` versus at the end of the `<body>`?
+
+---
+
+⭐️ **Answer**: The main difference between placing a `<script>` tag in the `<head>` versus at the end of the `<body>` relates to how and when the browser loads and executes the JavaScript, which impacts page rendering and performance:
+
+- **Scripts in the `<head>`**:
+  - The browser loads and executes the script before parsing the rest of the HTML body.
+  - This can block the rendering of the page because the browser waits for the script to download and run before continuing.
+  - It may cause slower page load times and delay the display of content to the user.
+  - Useful when the script is critical for the initial page setup or needs to run before the DOM is constructed.
+
+- **Scripts at the end of the `<body>`**:
+  - The browser parses and renders the entire HTML content first.
+  - The script loads and executes after the page content is available.
+  - This improves perceived page load speed and user experience because the visible content appears faster.
+  - Common practice for scripts that manipulate DOM elements or add interactivity after the page loads.
+
+Additional notes:
+- Using the `defer` or `async` attributes on `<script>` tags in the `<head>` can also help control script loading behavior without blocking rendering.
+- In modern React apps, scripts are often bundled and loaded asynchronously to optimize performance.
+
+In my experience building React and Next.js applications, I ensure scripts are loaded efficiently to optimize Largest Contentful Paint (LCP) and overall Core Web Vitals, often placing scripts or bundles to avoid blocking the initial render.
+
+[06:15 PM] Interviewee
+Okay. So like script tag head versus like in body, like, uh, okay. So script consist like if you have any coding and everything and body have body will be having like their like, uh, rendered HTML, uh, like content first and everything, uh, script load like, uh, execute after page content is like available and, body script head and head will have like, uh, like your neighbors navigation titles and everything, which is on top of the viewport. Uh, if I go in the detail, the browser. Uh, like, uh.
+
+[06:16 PM] Interviewee
+Uh, yeah. Like, script tag head and the body are related. Uh, how when the browser load execute JavaScript, everything.
+
+[06:16 PM] Interviewer 1
+What is the difference between deep copy and shallow copy?
+
+[06:16 PM] AI
+💬 **Question**: What is the difference between deep copy and shallow copy?
+
+---
+
+⭐️ **Answer**: The difference between deep copy and shallow copy lies in how they duplicate objects, especially nested objects or references:
+
+- **Shallow Copy**:
+  - Creates a new object and copies the values of the original object's properties.
+  - For primitive values (numbers, strings, booleans), the values are copied directly.
+  - For reference types (objects, arrays), only the reference is copied, not the actual nested object.
+  - This means changes to nested objects in the copied object will affect the original object because they share the same reference.
+  - Common shallow copy methods: `Object.assign({}, obj)`, spread operator `{ ...obj }`, or array methods like `slice()`.
+
+- **Deep Copy**:
+  - Creates a new object and recursively copies all nested objects and arrays, so no references are shared.
+  - Changes to any nested property in the copied object do not affect the original object.
+  - Deep copying is more expensive in terms of performance compared to shallow copying.
+  - Common deep copy methods: using `JSON.parse(JSON.stringify(obj))` (with limitations), or utility libraries like Lodash’s `_.cloneDeep()`.
+
+Example:
+
+```js
+const original = { a: 1, b: { c: 2 } };
+
+// Shallow copy
+const shallowCopy = { ...original };
+shallowCopy.b.c = 3;
+console.log(original.b.c); // Outputs 3 — nested object shared
+
+// Deep copy
+const deepCopy = JSON.parse(JSON.stringify(original));
+deepCopy.b.c = 4;
+console.log(original.b.c); // Outputs 3 — original unaffected
+```
+
+In my React projects, I use deep copies when updating deeply nested state to avoid unintended mutations and ensure React detects state changes properly, especially when working with complex objects or arrays. For simpler cases, shallow copies suffice and are more performant.
+
+[06:16 PM] Interviewee
+Yeah. So deep copy when you are doing a deep copy, you are copying, uh, like you are not like you are making a copy and you are storing a different location in the memory. Uh, like in shallow copy is like you are copying the reference of the like, uh, object and everything. Like if you have array and if you object. So what you will do, like in shallow copy, uh, if, if any change, you will do the main, uh, data will affect it, but in deep copy, it won't be affected. So, uh, there is, if you are doing like a big projects and everything. So there is a library called Lodash. You can use that. They came in the deep load as deep, uh, copy functions. So it will create a new data store in a different memory location and also in one cache. Is there in react when you are like updating a state and state consist of array of data. So you should always like create a clone and like not the shallow copy deep copy and then manipulate that data and then update the state. So this is the shallow copy and deep copy.
+
+[06:17 PM] Interviewer 1
+Why is meta
+
+[06:17 PM] Interviewee
+Why is meta.
+
+[06:17 PM] Interviewer 1
+viewport needed for mobile?
+
+[06:17 PM] AI
+💬 **Question**: Why is the meta viewport tag needed for mobile?
+
+---
+
+⭐️ **Answer**: The meta viewport tag is essential for mobile because it controls how a web page is displayed and scaled on different screen sizes, especially on smartphones and tablets.
+
+- Mobile browsers by default render pages with a virtual viewport much wider than the device screen (usually around 980px) to display desktop sites properly.
+- Without the meta viewport tag, the page will be zoomed out and appear very small on mobile devices, requiring users to pinch-zoom to read content.
+- The meta viewport tag tells the browser to set the viewport width to the device’s actual screen width, enabling responsive layouts to work correctly.
+- It also allows control over initial zoom level, scaling, and user zooming behavior.
+
+A typical meta viewport tag looks like this:
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+```
+
+- `width=device-width` sets the viewport width to the device’s screen width.
+- `initial-scale=1` sets the initial zoom level to 100%.
+
+In my experience building responsive React and Next.js apps, including this tag is critical to ensure the UI adapts fluidly to mobile screens, improving usability and user experience. Without it, CSS media queries and responsive designs won’t behave as expected on mobile devices.
+
+[06:17 PM] Interviewee
+Uh, for, uh, like, uh, meta viewport. I think, uh, this is for like,
+
+[06:17 PM] Interviewee
+default render page, virtual viewport. So like, let me think.
+
+[06:17 PM] Interviewee
+Okay. So without meta viewport, like page will be zoom out. Uh, appear very small in mobile screen. So like, for like, uh, giving the zoom pinch and the X screen. Accessibility, keeping it like correct for that. We use that. So, uh, you can pass like content width device with our initial scales. Uh, I think. Yeah. For that purpose, it get used it, tell the browser viewport width and browser viewport width of the device and screen width. So for the responsive purpose, like if you have a device and you wanted to create a responsive, and you can use this.
+
+[06:18 PM] Interviewer 1
+Okay, what is the difference between inline line block and block?
+
+[06:18 PM] AI
+💬 **Question**: What is the difference between inline, inline-block, and block elements?
+
+---
+
+⭐️ **Answer**: The difference between inline, inline-block, and block elements lies in how they behave in the layout flow and how they handle width, height, and box model properties:
+
+- **Block elements**:
+  - Take up the full width available by default (100% width of their container).
+  - Always start on a new line, stacking vertically.
+  - You can set width, height, margin, and padding, and these properties affect layout as expected.
+  - Examples: `<div>`, `<p>`, `<h1>`, `<section>`.
+  
+- **Inline elements**:
+  - Take up only as much width as their content requires.
+  - Do not start on a new line; they flow horizontally alongside other inline elements.
+  - Width and height properties generally do not apply; margin and padding affect only horizontally (left/right), not vertically (top/bottom).
+  - Examples: `<span>`, `<a>`, `<strong>`, `<em>`.
+
+- **Inline-block elements**:
+  - Behave like inline elements in that they flow horizontally and do not force a line break.
+  - But behave like block elements in that you can set width, height, margin, and padding, and these properties are respected.
+  - Useful for creating horizontally aligned blocks that still respect box model properties.
+  - Example: `<img>` is inline-block by default.
+
+In React or any frontend development, understanding these differences helps in structuring layouts and styling components effectively, especially when building reusable UI components or responsive designs. For example, I often use `inline-block` to align buttons or icons horizontally while controlling their size precisely.
+
+[06:18 PM] Interviewee
+Inline for the flex property, you are asking.
+
+[06:18 PM] Interviewer 1
+No, it's in CSS.
+
+[06:18 PM] Interviewee
+Ah, so like inline is like you have like, uh, like, uh, span a tag strong and the block property, we have div, which is maximally used and paragraph and h1 and sections. So inline property in the viewport, it goes straight like a next element. Next element is element is always go to the front of the element like next to the element where the uh, like block.
+
+[06:19 PM] Interviewee
+Element is break, uh, the element and it, uh, like render go down. Uh, it don't go like the elements should not be follow the next to the element. It should follow the, uh, next line like so span is the very basic example for the inline. And the div is a very big sample for the block.
+
+[06:19 PM] Interviewer 1
+It was my last question. I do not have any other question. Do you have anything for me?

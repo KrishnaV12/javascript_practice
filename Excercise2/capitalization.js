@@ -12,4 +12,4 @@ function capitalization(str) {
   }
   return [strVal1, strVal2];
 }
-console.log(capitalization("KRISHNA"));
+console.log(capitalization("krishna"));

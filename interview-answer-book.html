@@ -1,0 +1,3544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interview Answer Book — React &amp; JavaScript</title>
+<style>
+:root{
+  --paper:#EDF0F6;
+  --surface:#FFFFFF;
+  --ink:#16233A;
+  --ink-soft:#57678A;
+  --rule:#D2DAE8;
+  --accent:#2B4C9B;
+  --accent-soft:#E4EBF9;
+  --run:#0E6B50;
+  --run-soft:#E1F1EB;
+  --warn:#8A4B12;
+  --code-bg:#1B2233;
+  --code-ink:#DCE4F2;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:16px;
+  line-height:1.65;
+  -webkit-font-smoothing:antialiased;
+}
+h1,h2,h3,h4{font-family:Georgia,"Iowan Old Style","Times New Roman",serif;font-weight:600;line-height:1.25;margin:0}
+a{color:var(--accent)}
+
+/* ---------- masthead ---------- */
+.masthead{
+  background:var(--surface);
+  border-bottom:1px solid var(--rule);
+  padding:44px 24px 34px;
+}
+.masthead-inner{max-width:1180px;margin:0 auto}
+.masthead h1{font-size:2.6rem;letter-spacing:-.015em;max-width:16ch}
+.masthead p.lede{
+  margin:14px 0 0;max-width:62ch;color:var(--ink-soft);font-size:1.05rem;
+}
+.stats{display:flex;flex-wrap:wrap;gap:26px;margin-top:22px;padding-top:20px;border-top:1px solid var(--rule)}
+.stat b{display:block;font-family:Georgia,serif;font-size:1.5rem;line-height:1.1}
+.stat span{font-size:.82rem;color:var(--ink-soft)}
+
+/* ---------- layout ---------- */
+.shell{max-width:1180px;margin:0 auto;padding:0 24px 90px;display:grid;grid-template-columns:232px minmax(0,1fr);gap:48px;align-items:start}
+.rail{position:sticky;top:18px;padding-top:28px}
+.rail h4{font-size:.78rem;color:var(--ink-soft);font-family:inherit;font-weight:600;margin-bottom:10px;letter-spacing:.02em}
+#search{
+  width:100%;padding:9px 11px;border:1px solid var(--rule);border-radius:7px;
+  background:var(--surface);font:inherit;font-size:.9rem;color:var(--ink);
+}
+#search:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+.rail nav{margin-top:20px;display:flex;flex-direction:column;gap:1px}
+.rail nav a{
+  display:flex;justify-content:space-between;gap:8px;align-items:baseline;
+  padding:7px 10px;border-radius:6px;text-decoration:none;color:var(--ink);
+  font-size:.9rem;border-left:2px solid transparent;
+}
+.rail nav a:hover{background:var(--accent-soft)}
+.rail nav a em{font-style:normal;color:var(--ink-soft);font-size:.78rem}
+.searchnote{margin-top:16px;font-size:.8rem;color:var(--ink-soft)}
+
+main{padding-top:28px;min-width:0}
+
+/* ---------- sections ---------- */
+section{margin-bottom:64px;scroll-margin-top:16px}
+.sec-head{border-bottom:2px solid var(--ink);padding-bottom:10px;margin-bottom:8px}
+.sec-head h2{font-size:1.75rem;letter-spacing:-.01em}
+.sec-head p{margin:6px 0 0;color:var(--ink-soft);font-size:.95rem;max-width:64ch}
+
+/* ---------- question card ---------- */
+article.q{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:10px;
+  padding:26px 28px;
+  margin-top:20px;
+  scroll-margin-top:16px;
+}
+article.q > h3{
+  font-size:1.22rem;line-height:1.4;display:flex;gap:12px;align-items:flex-start;
+  padding-bottom:14px;border-bottom:1px solid var(--rule);margin-bottom:18px;
+}
+.qnum{
+  flex:none;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:.72rem;font-weight:700;color:var(--accent);background:var(--accent-soft);
+  padding:4px 7px;border-radius:5px;margin-top:4px;letter-spacing:.02em;
+}
+article.q p{margin:0 0 14px}
+article.q ul,article.q ol{margin:0 0 16px;padding-left:22px}
+article.q li{margin-bottom:8px}
+article.q li::marker{color:var(--ink-soft)}
+article.q h4{font-size:1rem;margin:22px 0 10px;font-family:inherit;font-weight:700}
+strong{font-weight:650}
+code:not(pre code){
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:.875em;background:#EBEFF7;padding:1.5px 5px;border-radius:4px;color:#22365F;
+}
+.aside{
+  border-left:3px solid var(--accent);background:var(--accent-soft);
+  padding:13px 16px;border-radius:0 7px 7px 0;margin:16px 0;font-size:.94rem;
+}
+.aside.say{border-left-color:var(--run);background:var(--run-soft)}
+.aside p:last-child{margin-bottom:0}
+.aside b.tag{display:block;font-size:.76rem;color:var(--ink-soft);margin-bottom:3px}
+
+table{border-collapse:collapse;width:100%;margin:8px 0 18px;font-size:.92rem}
+th,td{border:1px solid var(--rule);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:#F4F6FB;font-weight:650}
+
+/* ---------- code ---------- */
+.code{margin:16px 0}
+.code-bar{
+  display:flex;align-items:center;gap:8px;
+  background:#131A29;border-radius:8px 8px 0 0;padding:7px 10px;
+}
+.code-bar .lang{
+  font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.72rem;color:#8fa1c4;margin-right:auto;
+}
+.code-bar button{
+  font:inherit;font-size:.78rem;font-weight:600;border:1px solid #33405C;background:#232D45;
+  color:#D5DEF0;padding:4px 11px;border-radius:5px;cursor:pointer;
+}
+.code-bar button:hover{background:#2E3A56}
+.code-bar button.run{background:var(--run);border-color:var(--run);color:#fff}
+.code-bar button.run:hover{background:#0B5C44}
+.code pre,.code textarea{
+  margin:0;background:var(--code-bg);color:var(--code-ink);
+  font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  font-size:.83rem;line-height:1.62;padding:16px 18px;
+  border:0;border-radius:0 0 8px 8px;width:100%;display:block;
+  overflow-x:auto;tab-size:2;white-space:pre;
+}
+.code textarea{resize:vertical;min-height:80px;overflow-y:hidden}
+.code textarea:focus{outline:2px solid var(--accent);outline-offset:-2px}
+.code.has-out pre,.code.has-out textarea{border-radius:0}
+.out{
+  background:#0E141F;border-top:1px solid #2A3550;border-radius:0 0 8px 8px;
+  padding:12px 18px;font-family:ui-monospace,Menlo,Consolas,monospace;
+  font-size:.82rem;line-height:1.6;color:#A8E4C8;white-space:pre-wrap;word-break:break-word;
+}
+.out .lbl{color:#6D7E9E;display:block;margin-bottom:5px;font-size:.72rem}
+.out .err{color:#FF9B8A}
+.out .muted{color:#6D7E9E}
+
+.pill{display:inline-block;font-size:.72rem;background:#EBEFF7;color:var(--ink-soft);padding:2px 8px;border-radius:20px;margin-right:6px}
+.hidden{display:none !important}
+.nores{padding:40px;text-align:center;color:var(--ink-soft);background:var(--surface);border:1px dashed var(--rule);border-radius:10px}
+
+footer{border-top:1px solid var(--rule);background:var(--surface);padding:30px 24px;color:var(--ink-soft);font-size:.88rem}
+footer div{max-width:1180px;margin:0 auto}
+
+@media (max-width:900px){
+  .shell{grid-template-columns:1fr;gap:0}
+  .rail{position:static;padding-top:22px;border-bottom:1px solid var(--rule);padding-bottom:20px}
+  .rail nav{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:2px}
+  .masthead h1{font-size:2rem}
+  article.q{padding:20px 17px}
+}
+@media print{
+  .rail,.code-bar{display:none}
+  body{background:#fff}
+  article.q{break-inside:avoid;border-color:#bbb}
+}
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <h1>Interview Answer Book</h1>
+    <p class="lede">Every question from your 11 interview transcripts, answered properly — with the reasoning spelled out and working code you can edit and run right here on the page.</p>
+    <div class="stats">
+      <div class="stat"><b id="stat-q">—</b><span>questions answered</span></div>
+      <div class="stat"><b id="stat-r">—</b><span>runnable examples</span></div>
+      <div class="stat"><b>7</b><span>topic areas</span></div>
+    </div>
+  </div>
+</header>
+
+<div class="shell">
+  <aside class="rail">
+    <h4>Find a question</h4>
+    <input id="search" type="search" placeholder="e.g. hoisting, debounce, virtual" autocomplete="off">
+    <nav id="toc"></nav>
+    <p class="searchnote">Code blocks marked <strong>Run</strong> are live. Edit them, press Run, and the output appears underneath.</p>
+  </aside>
+
+  <main id="main">
+<section id="js" data-title="JavaScript core">
+  <div class="sec-head">
+    <h2>JavaScript core concepts</h2>
+    <p>The theory questions that came up again and again: hoisting, scope, the event loop, equality, <code>this</code>, copying, debouncing.</p>
+  </div>
+
+  <article class="q" id="q1">
+    <h3><span class="qnum">Q1</span> What is hoisting in JavaScript?</h3>
+    <p>Before your code runs, JavaScript does a quick pass over each scope and sets aside memory for every declaration it finds. That preparation step is what people call <strong>hoisting</strong>. Nothing physically moves in your file — it just means the engine already knows a name exists before the line that declares it is reached.</p>
+    <p>The catch is that the three declaration keywords get prepared differently:</p>
+    <table>
+      <tr><th>Declared with</th><th>Name registered?</th><th>Value before the declaration line</th></tr>
+      <tr><td><code>var</code></td><td>Yes</td><td><code>undefined</code> — usable, but meaningless</td></tr>
+      <tr><td><code>let</code> / <code>const</code></td><td>Yes</td><td>Unusable. Touching it throws a <code>ReferenceError</code></td></tr>
+      <tr><td><code>function</code> declaration</td><td>Yes</td><td>The whole function — you can call it early</td></tr>
+    </table>
+    <p>So a function declaration is genuinely usable before its definition, <code>var</code> gives you a useless <code>undefined</code>, and <code>let</code>/<code>const</code> protect you by throwing.</p>
+    <div class="code" data-run><script type="text/plain">
+// 1. var — the name exists, the value does not yet
+console.log(counter);   // undefined  (NOT an error)
+var counter = 10;
+console.log(counter);   // 10
+
+// 2. function declaration — fully available before its line
+console.log(add(2, 3)); // 5
+function add(a, b) { return a + b; }
+
+// 3. function EXPRESSION stored in var — only the variable is hoisted
+try {
+  multiply(2, 3);
+} catch (e) {
+  console.log("Error:", e.message); // multiply is not a function
+}
+var multiply = function (a, b) { return a * b; };
+
+// 4. let — the name is reserved but locked
+try {
+  console.log(total);
+} catch (e) {
+  console.log("Error:", e.message); // Cannot access 'total' before initialization
+}
+let total = 99;
+</script></div>
+    <div class="aside say"><b class="tag">Say this in the interview</b><p>"Hoisting is the engine registering declarations in memory before execution. <code>var</code> is initialised to <code>undefined</code>, function declarations are fully available, and <code>let</code>/<code>const</code> are registered but sit in the Temporal Dead Zone until their line executes."</p></div>
+  </article>
+
+  <article class="q" id="q2">
+    <h3><span class="qnum">Q2</span> What happens when a <code>let</code> variable is hoisted? Is that the Temporal Dead Zone?</h3>
+    <p>Yes. <code>let</code> and <code>const</code> <em>are</em> hoisted — the engine knows the name exists from the moment the block starts. But the binding has no value attached to it, and the engine deliberately refuses to let you read it. That gap between the top of the block and the declaration line is the <strong>Temporal Dead Zone (TDZ)</strong>.</p>
+    <p>The proof that it really is hoisted is in the error message. If the variable weren't registered at all, you would get <code>x is not defined</code>. Instead you get <code>Cannot access 'x' before initialization</code> — the engine clearly knows about it, it just won't hand it over.</p>
+    <div class="code" data-run><script type="text/plain">
+let name = "outer";
+
+{
+  // We are now inside a new block. The inner `name` is already registered here,
+  // so it shadows the outer one — and it is in the TDZ.
+  try {
+    console.log(name);
+  } catch (e) {
+    console.log("TDZ error:", e.message);
+  }
+
+  let name = "inner";
+  console.log("after declaration:", name); // inner
+}
+
+// Compare with a name that genuinely does not exist anywhere:
+try {
+  console.log(neverDeclared);
+} catch (e) {
+  console.log("Different error:", e.message); // neverDeclared is not defined
+}
+</script></div>
+    <p>Why does this exist? It turns a silent bug into a loud one. With <code>var</code>, reading a variable too early quietly gives you <code>undefined</code> and the bug surfaces three functions later. The TDZ stops you at the exact line where the mistake is.</p>
+  </article>
+
+  <article class="q" id="q3">
+    <h3><span class="qnum">Q3</span> What is lexical scoping?</h3>
+    <p>Lexical scoping means a function's access to variables is decided by <strong>where you wrote it in the source file</strong>, not by where it is called from. "Lexical" literally refers to the text of the program.</p>
+    <p>When a function looks up a variable, it checks its own scope first, then the scope it was written inside, then the one outside that, all the way up to global. That chain is fixed the moment you write the code — moving the function call somewhere else does not change it.</p>
+    <div class="code" data-run><script type="text/plain">
+const level = "global";
+
+function outer() {
+  const level = "outer";
+
+  function inner() {
+    // `inner` was WRITTEN inside `outer`, so it sees outer's `level`
+    console.log("inner sees:", level);
+  }
+
+  return inner;
+}
+
+const fn = outer();
+
+function somewhereElse() {
+  const level = "somewhereElse";
+  fn(); // still prints "outer" — calling location is irrelevant
+}
+
+somewhereElse();
+</script></div>
+    <div class="aside"><b class="tag">Follow-up they usually ask</b><p>This is exactly what makes <strong>closures</strong> possible. <code>inner</code> kept access to <code>outer</code>'s variables after <code>outer</code> finished, because the scope chain was baked in at authoring time. A closure is just a function plus the lexical environment it remembers.</p></div>
+  </article>
+
+  <article class="q" id="q4">
+    <h3><span class="qnum">Q4</span> What are callbacks in JavaScript?</h3>
+    <p>A callback is simply a function you hand to another function, so that the other function can call it back later. Functions are values in JavaScript, so you can pass them around like numbers or strings.</p>
+    <p>Two kinds worth separating, because interviewers like the distinction:</p>
+    <ul>
+      <li><strong>Synchronous callbacks</strong> run immediately, inside the current call — <code>map</code>, <code>filter</code>, <code>forEach</code>, <code>sort</code>.</li>
+      <li><strong>Asynchronous callbacks</strong> are stored and invoked later when something finishes — timers, event listeners, network responses.</li>
+    </ul>
+    <div class="code" data-run><script type="text/plain">
+// Synchronous: map calls our function once per item, right now
+const doubled = [1, 2, 3].map(function (n) { return n * 2; });
+console.log("sync result:", doubled);
+
+// Asynchronous: setTimeout stores our function and calls it later
+function fetchUser(id, callback) {
+  setTimeout(() => {
+    callback(null, { id, name: "Krishna" });   // Node style: (error, data)
+  }, 300);
+}
+
+fetchUser(7, (err, user) => {
+  if (err) return console.log("failed");
+  console.log("async result:", user);
+});
+
+console.log("this line runs before the user arrives");
+</script></div>
+    <h4>Callback hell, and why promises replaced it</h4>
+    <p>When one async step depends on the previous one, callbacks nest sideways and error handling has to be repeated at every level. Promises flatten that into a chain, and <code>async/await</code> flattens it further into code that reads top to bottom.</p>
+    <div class="code" data-run><script type="text/plain">
+const delay = (ms, value) => new Promise(res => setTimeout(() => res(value), ms));
+
+// Nested callbacks — the "pyramid"
+delay(100, "A").then(a => {
+  delay(100, "B").then(b => {
+    delay(100, "C").then(c => {
+      console.log("nested:", a, b, c);
+    });
+  });
+});
+
+// Same thing with async/await — flat and readable
+async function run() {
+  const a = await delay(100, "A");
+  const b = await delay(100, "B");
+  const c = await delay(100, "C");
+  console.log("await:", a, b, c);
+}
+run();
+</script></div>
+  </article>
+
+  <article class="q" id="q5">
+    <h3><span class="qnum">Q5</span> Can you explain what "async" is in JavaScript?</h3>
+    <p>JavaScript runs your code on a single thread. If a task takes 2 seconds and blocks that thread, the whole page freezes — no clicks, no scrolling, no rendering. Async is how JavaScript avoids that: slow work is handed off to the browser or the OS, and your function returns immediately. When the work finishes, a callback is queued and run later.</p>
+    <p>Marking a function <code>async</code> does two concrete things:</p>
+    <ul>
+      <li>It makes the function <strong>always return a Promise</strong>, whatever you return inside it.</li>
+      <li>It lets you use <code>await</code> inside, which pauses <em>that function only</em> — the rest of the app keeps running.</li>
+    </ul>
+    <div class="code" data-run><script type="text/plain">
+async function getNumber() {
+  return 42;            // not a number to the caller...
+}
+console.log("returns:", getNumber());       // Promise { 42 }
+getNumber().then(v => console.log("resolved to:", v));
+
+// await pauses only this function
+const wait = ms => new Promise(r => setTimeout(r, ms));
+
+async function loadDashboard() {
+  console.log("1. start loading");
+  await wait(200);
+  console.log("3. data arrived");
+}
+
+loadDashboard();
+console.log("2. app is still responsive while loading");
+</script></div>
+    <h4>Always handle errors</h4>
+    <p>A rejected promise inside an <code>async</code> function behaves like a thrown exception, so <code>try/catch</code> works normally. Interviewers check for this.</p>
+    <div class="code" data-run><script type="text/plain">
+async function fetchUser() {
+  throw new Error("Network request failed");
+}
+
+async function main() {
+  try {
+    await fetchUser();
+  } catch (err) {
+    console.log("caught properly:", err.message);
+  } finally {
+    console.log("runs either way — good place to stop a loading spinner");
+  }
+}
+main();
+
+// Independent requests should run in parallel, not one after another:
+const wait = (ms, v) => new Promise(r => setTimeout(() => r(v), ms));
+async function parallel() {
+  const [users, orders] = await Promise.all([wait(100, "users"), wait(100, "orders")]);
+  console.log("both done together:", users, orders);
+}
+parallel();
+</script></div>
+  </article>
+
+  <article class="q" id="q6">
+    <h3><span class="qnum">Q6</span> What are microtasks and macrotasks? What goes into each queue?</h3>
+    <p>When an async task finishes, its callback does not run instantly — it waits in a queue. There are two queues, and the <strong>microtask queue always wins</strong>.</p>
+    <table>
+      <tr><th>Microtask queue (high priority)</th><th>Macrotask queue (a.k.a. task queue)</th></tr>
+      <tr>
+        <td><code>.then()</code> / <code>.catch()</code> / <code>.finally()</code><br>everything after an <code>await</code><br><code>queueMicrotask()</code><br><code>MutationObserver</code> callbacks</td>
+        <td><code>setTimeout</code> / <code>setInterval</code><br><code>setImmediate</code> (Node)<br>DOM events: click, scroll, input<br>I/O and network completion callbacks</td>
+      </tr>
+    </table>
+    <p>The event loop's rule is strict: when the call stack empties, it drains the <strong>entire</strong> microtask queue — including any new microtasks added while draining — and only then takes <strong>one</strong> macrotask. Then it repeats.</p>
+    <div class="code" data-run><script type="text/plain">
+console.log("1 — synchronous");
+
+setTimeout(() => console.log("5 — macrotask (setTimeout 0)"), 0);
+
+Promise.resolve().then(() => {
+  console.log("3 — microtask");
+  // A microtask queued from inside a microtask still jumps ahead of setTimeout
+  Promise.resolve().then(() => console.log("4 — microtask added during drain"));
+});
+
+console.log("2 — synchronous");
+</script></div>
+    <div class="aside"><b class="tag">The trap to mention</b><p>An endless stream of microtasks can starve the macrotask queue completely — the browser never gets to repaint and the tab locks up. That is why a recursive <code>Promise.resolve().then(...)</code> loop freezes a page, while a recursive <code>setTimeout</code> loop does not.</p></div>
+  </article>
+
+  <article class="q" id="q7">
+    <h3><span class="qnum">Q7</span> Output question: what does this print, and in what order?</h3>
+    <p>This was pasted into your chat and you got it right — <code>1, 4, 3, 2</code>. Here is the reasoning to say out loud.</p>
+    <div class="code" data-run><script type="text/plain">
+console.log("1");
+
+setTimeout(() => console.log("2"), 0);
+
+Promise.resolve().then(() => console.log("3"));
+
+console.log("4");
+
+// Output: 1, 4, 3, 2
+</script></div>
+    <ol>
+      <li><code>"1"</code> is plain synchronous code — prints immediately.</li>
+      <li><code>setTimeout</code> hands its callback to the browser's timer API. Even with <code>0</code> ms, the callback goes to the <strong>macrotask</strong> queue.</li>
+      <li>The promise is already resolved, so <code>.then</code> goes to the <strong>microtask</strong> queue.</li>
+      <li><code>"4"</code> is still synchronous — prints immediately.</li>
+      <li>Call stack is now empty. Microtasks drain first → <code>"3"</code>.</li>
+      <li>Finally one macrotask runs → <code>"2"</code>.</li>
+    </ol>
+    <div class="aside"><b class="tag">The variant they also showed you</b><p>In one transcript the last line was <code>console.log(count)</code> where <code>count</code> was declared with <code>let</code> further down. That throws a <code>ReferenceError</code> from the TDZ during synchronous execution, so the script dies right there — <code>"2"</code> and <code>"3"</code> never print at all. Read the last line before answering.</p></div>
+    <div class="code" data-run><script type="text/plain">
+// The TDZ variant — try running it
+console.log("1");
+setTimeout(() => console.log("2"), 0);
+Promise.resolve().then(() => console.log("3"));
+console.log(count);        // ReferenceError — script stops here
+let count = 5;
+</script></div>
+  </article>
+
+  <article class="q" id="q8">
+    <h3><span class="qnum">Q8</span> Output question: <code>[] == false</code> vs <code>[] === false</code></h3>
+    <p>Answer: <code>true</code> then <code>false</code>. You got this right in the interview — here is the exact coercion path so you can explain it confidently.</p>
+    <div class="code" data-run><script type="text/plain">
+console.log([] == false);    // true
+console.log([] === false);   // false
+</script></div>
+    <h4>Why <code>[] == false</code> is true</h4>
+    <p><code>==</code> converts both sides until the types match. Step by step:</p>
+    <ol>
+      <li>One side is an object, the other a boolean. <strong>Booleans are converted to numbers first</strong>, so <code>false</code> becomes <code>0</code>. Now it is <code>[] == 0</code>.</li>
+      <li>An object compared to a number is converted to a primitive: <code>[].toString()</code> gives the empty string <code>""</code>. Now it is <code>"" == 0</code>.</li>
+      <li>A string compared to a number becomes <code>Number("")</code>, which is <code>0</code>. Now it is <code>0 == 0</code> → <strong>true</strong>.</li>
+    </ol>
+    <div class="code" data-run><script type="text/plain">
+console.log(Number(false));      // 0
+console.log([].toString());      // "" (empty string)
+console.log(Number(""));         // 0
+console.log(0 == 0);             // true  <- the final comparison
+</script></div>
+    <h4>Why <code>[] === false</code> is false</h4>
+    <p><code>===</code> does no conversion at all. It compares the type first: an array is an object, <code>false</code> is a boolean. Different types, so it stops immediately and returns <code>false</code>.</p>
+    <h4>The genuinely confusing part</h4>
+    <p>An empty array is <em>truthy</em> in an <code>if</code>, yet it is loosely equal to <code>false</code>. Those are two separate rule sets — <code>if</code> uses <code>Boolean()</code>, while <code>==</code> uses the numeric coercion path above.</p>
+    <div class="code" data-run><script type="text/plain">
+if ([]) console.log("empty array is truthy in an if");
+console.log([] == false);    // ...yet loosely equal to false
+console.log(Boolean([]));    // true
+
+// A few more that come up in interviews
+console.log([] == ![]);      // true   (![] is false, so it's [] == false again)
+console.log(null == undefined);   // true
+console.log(null === undefined);  // false
+console.log(NaN == NaN);     // false — NaN is not equal to anything
+console.log("0" == 0);       // true
+console.log("0" == false);   // true
+</script></div>
+    <div class="aside say"><b class="tag">The one-liner</b><p>"Always use <code>===</code>. The only reasonable exception is <code>x == null</code>, which conveniently catches both <code>null</code> and <code>undefined</code> in one check."</p></div>
+  </article>
+
+  <article class="q" id="q9">
+    <h3><span class="qnum">Q9</span> Output question: why does an arrow function method print <code>undefined</code> for <code>this.name</code>?</h3>
+    <p>You answered <code>undefined</code> correctly, but your explanation wobbled — you said arrow functions "don't support <code>this</code>". Here is the precise version.</p>
+    <div class="code" data-run><script type="text/plain">
+const obj = {
+  name: "John",
+  greet: () => {
+    console.log(this.name);   // undefined
+  }
+};
+
+obj.greet();
+</script></div>
+    <p>Arrow functions <strong>do not create their own <code>this</code></strong>. They inherit it from the scope where they were written. And here is the key point: <strong>an object literal does not create a scope.</strong> Writing <code>{ name: "John", greet: ... }</code> does not put you "inside" the object. So the arrow function's <code>this</code> comes from whatever surrounds the object — module scope or global scope — where there is no <code>name</code>, giving <code>undefined</code>.</p>
+    <p>A regular function is different: its <code>this</code> is decided <em>at call time</em> by what sits to the left of the dot. In <code>obj.greet()</code>, that is <code>obj</code>.</p>
+    <div class="code" data-run><script type="text/plain">
+const obj = {
+  name: "John",
+  arrow:   () => console.log("arrow  :", this?.name),
+  regular: function () { console.log("regular:", this.name); },
+  shorthand() { console.log("short  :", this.name); }
+};
+
+obj.arrow();      // undefined — `this` came from outside the object
+obj.regular();    // John
+obj.shorthand();  // John
+
+// Proof that it is the call site, not the definition, for regular functions:
+const detached = obj.regular;
+try { detached(); } catch (e) { console.log("detached:", e.message); }
+console.log("rebound:", obj.regular.call({ name: "Rebound" }) );
+</script></div>
+    <h4>So when ARE arrow functions the right choice?</h4>
+    <p>Exactly when you <em>want</em> to inherit <code>this</code> from outside — which is why they are perfect inside class methods, callbacks and React handlers.</p>
+    <div class="code" data-run><script type="text/plain">
+class Timer {
+  constructor() { this.seconds = 0; }
+
+  startBroken() {
+    setInterval(function () {
+      this.seconds++;          // `this` is NOT the Timer here
+    }, 1000);
+  }
+
+  startFixed() {
+    // arrow inherits `this` from startFixed -> the instance
+    this.id = setInterval(() => {
+      this.seconds++;
+      console.log("tick", this.seconds);
+    }, 200);
+  }
+
+  stop() { clearInterval(this.id); }
+}
+
+const t = new Timer();
+t.startFixed();
+
+setTimeout(() => {
+  t.stop();
+  console.log("final:", t.seconds);
+}, 700);
+</script></div>
+    <div class="aside say"><b class="tag">Say this</b><p>"Arrow functions have no own <code>this</code> binding — they close over <code>this</code> lexically. An object literal isn't a scope, so the arrow picks up the surrounding module/global <code>this</code>, and <code>this.name</code> is undefined. Use a method shorthand when you need <code>this</code> to be the object."</p></div>
+  </article>
+
+  <article class="q" id="q10">
+    <h3><span class="qnum">Q10</span> Difference between shallow copy and deep copy</h3>
+    <p>Objects and arrays are stored by <strong>reference</strong>. A variable holds a pointer, not the data. Copying decides how far down that pointer-following goes.</p>
+    <ul>
+      <li><strong>Shallow copy</strong> — new top-level container, but nested objects are still the <em>same</em> objects. One level deep.</li>
+      <li><strong>Deep copy</strong> — everything is recreated all the way down. Completely independent.</li>
+    </ul>
+    <div class="code" data-run><script type="text/plain">
+const original = {
+  name: "Krishna",
+  address: { city: "Bengaluru", pin: 560001 },
+  skills: ["React", "JS"]
+};
+
+// --- SHALLOW ---
+const shallow = { ...original };          // same as Object.assign({}, original)
+
+shallow.name = "Changed";                 // top level: safe
+shallow.address.city = "Mumbai";          // nested: LEAKS back to the original
+
+console.log("original.name  :", original.name);          // Krishna  (safe)
+console.log("original.city  :", original.address.city);  // Mumbai   (mutated!)
+console.log("same reference?:", original.address === shallow.address); // true
+</script></div>
+    <h4>Three ways to deep copy</h4>
+    <div class="code" data-run><script type="text/plain">
+const original = {
+  name: "Krishna",
+  address: { city: "Bengaluru" },
+  joined: new Date("2024-01-15"),
+  tags: undefined
+};
+
+// 1. structuredClone — modern, built in, handles Date/Map/Set/circular refs
+const deep1 = structuredClone(original);
+deep1.address.city = "Mumbai";
+console.log("structuredClone -> original still:", original.address.city);
+console.log("Date survived?:", deep1.joined instanceof Date);
+
+// 2. JSON round-trip — quick, but lossy
+const deep2 = JSON.parse(JSON.stringify(original));
+console.log("JSON -> Date became:", typeof deep2.joined);  // string, not Date
+console.log("JSON -> undefined key kept?:", "tags" in deep2); // false
+
+// 3. Manual / recursive — full control
+function deepCopy(value) {
+  if (value === null || typeof value !== "object") return value;
+  if (Array.isArray(value)) return value.map(deepCopy);
+  return Object.fromEntries(
+    Object.entries(value).map(([k, v]) => [k, deepCopy(v)])
+  );
+}
+const deep3 = deepCopy(original);
+deep3.address.city = "Pune";
+console.log("manual -> original still:", original.address.city);
+</script></div>
+    <table>
+      <tr><th>Method</th><th>Depth</th><th>Watch out for</th></tr>
+      <tr><td><code>{...obj}</code>, <code>Object.assign</code>, <code>slice()</code>, <code>Array.from</code></td><td>Shallow</td><td>Nested objects shared</td></tr>
+      <tr><td><code>structuredClone(obj)</code></td><td>Deep</td><td>Cannot clone functions or DOM nodes</td></tr>
+      <tr><td><code>JSON.parse(JSON.stringify(obj))</code></td><td>Deep</td><td>Kills <code>Date</code>, <code>undefined</code>, <code>Map</code>, <code>Set</code>, functions; throws on circular refs</td></tr>
+      <tr><td><code>_.cloneDeep(obj)</code> (lodash)</td><td>Deep</td><td>Extra dependency</td></tr>
+    </table>
+    <div class="aside"><b class="tag">Why this matters in React</b><p>This is the single most common cause of "my state changed but the component didn't re-render". You spread the top level, mutate something nested, and React's <code>Object.is</code> check sees the same nested reference — so it skips the render. Copy every level you touch.</p></div>
+  </article>
+
+  <article class="q" id="q11">
+    <h3><span class="qnum">Q11</span> What is object destructuring?</h3>
+    <p>Destructuring is a shorthand for pulling values out of objects and arrays into variables. It reads the source and never modifies it.</p>
+    <div class="code" data-run><script type="text/plain">
+const user = {
+  name: "Aman",
+  age: 28,
+  address: { city: "Ahmedabad", pin: "380015" }
+};
+
+// Basic
+const { name, age } = user;
+console.log(name, age);
+
+// Rename while extracting
+const { name: userName } = user;
+console.log("renamed:", userName);
+
+// Nested
+const { address: { city } } = user;
+console.log("city:", city);
+
+// Default value for a key that is missing
+const { country = "India" } = user;
+console.log("default:", country);
+
+// Safe nested destructuring — without the `= {}` this throws if address is missing
+const emptyUser = {};
+const { address: { city: c2 } = {} } = emptyUser;
+console.log("safe nested:", c2);   // undefined, no crash
+
+// Rest — grab the leftovers
+const { name: n, ...everythingElse } = user;
+console.log("rest:", everythingElse);
+
+// In function parameters, with defaults — very common in React props
+function Card({ title, variant = "primary" }) {
+  console.log(`Card: ${title} / ${variant}`);
+}
+Card({ title: "Sale" });
+</script></div>
+    <div class="aside"><b class="tag">Interview detail</b><p>Destructuring is itself a shallow operation. <code>const { address } = user</code> gives you a reference to the same nested object — mutating <code>address.city</code> still changes <code>user</code>.</p></div>
+  </article>
+
+  <article class="q" id="q12">
+    <h3><span class="qnum">Q12</span> What is debouncing? Implement a debounce function.</h3>
+    <p>Debouncing delays running a function until the activity has <strong>stopped</strong> for a set period. Every new call cancels the pending one and restarts the timer. The classic use is a search box: you only want to hit the API when the user pauses typing, not on every keystroke.</p>
+    <div class="code" data-run><script type="text/plain">
+function debounce(fn, delay) {
+  let timerId;                       // survives between calls via closure
+
+  return function (...args) {
+    clearTimeout(timerId);           // cancel the previous pending call
+    timerId = setTimeout(() => {
+      fn.apply(this, args);          // .apply keeps `this` and passes the args through
+    }, delay);
+  };
+}
+
+// --- try it ---
+const search = debounce((query) => {
+  console.log("API CALL for:", query);
+}, 300);
+
+search("d");
+search("da");
+search("dat");
+search("data 1");
+search("data 2");
+search("data 3");   // only THIS one fires, 300ms after the last call
+
+console.log("6 calls made, watch how many API calls appear...");
+</script></div>
+    <div class="aside"><b class="tag">"Why weren't data one and two printed?"</b><p>This was asked in your transcript. Because each call ran <code>clearTimeout</code> on the previous timer before it could fire. Only the final call's timer survives the 300&nbsp;ms of silence. That is the whole point — intermediate keystrokes are intentionally thrown away.</p><p>And the follow-up, "will data one print if two and three are commented out?" — yes. If it is the last call, nothing cancels it.</p></div>
+    <h4>Production-grade version</h4>
+    <p>Add a cancel method (needed for React cleanup) and an optional leading-edge call.</p>
+    <div class="code" data-run><script type="text/plain">
+function debounce(fn, delay = 300, { leading = false } = {}) {
+  let timerId = null;
+
+  function debounced(...args) {
+    const callNow = leading && timerId === null;
+    clearTimeout(timerId);
+
+    timerId = setTimeout(() => {
+      timerId = null;
+      if (!leading) fn.apply(this, args);
+    }, delay);
+
+    if (callNow) fn.apply(this, args);
+  }
+
+  debounced.cancel = () => { clearTimeout(timerId); timerId = null; };
+  return debounced;
+}
+
+const log = debounce(q => console.log("trailing fired:", q), 200);
+log("a"); log("b"); log("c");
+
+const logNow = debounce(q => console.log("leading fired:", q), 200, { leading: true });
+logNow("x"); logNow("y"); logNow("z");
+</script></div>
+    <h4>Using it in React</h4>
+    <div class="code" data-lang="jsx"><script type="text/plain">
+import { useState, useMemo, useEffect } from "react";
+
+function SearchBox() {
+  const [term, setTerm] = useState("");
+
+  // useMemo keeps ONE debounced instance across renders.
+  // Without it, every render creates a new timer and nothing is ever cancelled.
+  const debouncedSearch = useMemo(
+    () => debounce((q) => fetch(`/api/search?q=${q}`), 400),
+    []
+  );
+
+  // Always cancel on unmount, or the callback fires after the component is gone
+  useEffect(() => () => debouncedSearch.cancel(), [debouncedSearch]);
+
+  return (
+    <input
+      value={term}
+      onChange={(e) => {
+        setTerm(e.target.value);       // keep the input responsive
+        debouncedSearch(e.target.value); // delay only the expensive part
+      }}
+    />
+  );
+}
+</script></div>
+  </article>
+
+  <article class="q" id="q13">
+    <h3><span class="qnum">Q13</span> Debounce vs throttle — when do you use which?</h3>
+    <p>Both limit how often a function runs, but the question they answer is different.</p>
+    <table>
+      <tr><th></th><th>Debounce</th><th>Throttle</th></tr>
+      <tr><td>Rule</td><td>Run once, after the noise stops</td><td>Run at most once every N ms, while the noise continues</td></tr>
+      <tr><td>During a 5s burst at 100ms delay</td><td>Fires <strong>once</strong>, at the end</td><td>Fires <strong>~50 times</strong>, evenly spaced</td></tr>
+      <tr><td>Use for</td><td>Search input, autosave, resize-end, validation</td><td>Scroll position, mousemove, infinite scroll, drag, rate-limited APIs</td></tr>
+    </table>
+    <div class="code" data-run><script type="text/plain">
+function throttle(fn, limit) {
+  let lastCall = 0;
+  return function (...args) {
+    const now = Date.now();
+    if (now - lastCall < limit) return;   // too soon — ignore this call
+    lastCall = now;
+    fn.apply(this, args);
+  };
+}
+
+const onScroll = throttle(() => console.log("scroll handled at", Date.now() % 10000), 100);
+
+// Simulate 20 rapid scroll events over ~400ms
+let i = 0;
+const id = setInterval(() => {
+  onScroll();
+  if (++i >= 20) clearInterval(id);
+}, 20);
+
+console.log("firing 20 events, 20ms apart — expect roughly 4-5 to get through");
+</script></div>
+    <div class="aside"><b class="tag">Rule of thumb to say</b><p>"Debounce when only the final state matters. Throttle when you need regular updates during the action but not every single one."</p></div>
+  </article>
+
+  <article class="q" id="q14">
+    <h3><span class="qnum">Q14</span> What is a <code>MutationObserver</code>, and where would you use it?</h3>
+    <p>A <code>MutationObserver</code> watches a DOM node and tells you when its children, attributes, or text change. The browser batches the changes and delivers them as an array — asynchronously, on the <strong>microtask</strong> queue — so it does not block rendering the way the old <code>DOMSubtreeModified</code> events did.</p>
+    <div class="code" data-lang="javascript"><script type="text/plain">
+const target = document.getElementById("chat-list");
+
+const observer = new MutationObserver((mutations) => {
+  for (const m of mutations) {
+    if (m.type === "childList" && m.addedNodes.length) {
+      console.log(m.addedNodes.length, "nodes added");
+    }
+    if (m.type === "attributes") {
+      console.log(m.attributeName, "changed on", m.target);
+    }
+  }
+});
+
+observer.observe(target, {
+  childList: true,      // direct children added/removed
+  subtree: true,        // ...and all descendants
+  attributes: true,     // attribute changes
+  attributeFilter: ["class", "data-status"],  // only these, for performance
+  characterData: true   // text node content
+});
+
+// Always disconnect — an observer keeps its target alive in memory
+observer.disconnect();
+</script></div>
+    <h4>Honest answers for "where would you use it"</h4>
+    <ul>
+      <li><strong>Third-party or legacy DOM you don't control</strong> — a payment iframe wrapper, a chat widget, or an old jQuery module injected into a React page. You cannot add a callback to their code, so you watch the DOM instead.</li>
+      <li><strong>Auto-scrolling a chat or log panel</strong> when new messages are appended by something outside React.</li>
+      <li><strong>Accessibility</strong> — announcing dynamically injected content to screen readers.</li>
+      <li><strong>Browser extensions and analytics scripts</strong>, which by definition run on pages they didn't build.</li>
+    </ul>
+    <div class="aside say"><b class="tag">If you haven't used it at work</b><p>Say so plainly, then show you know the boundary: "I haven't needed it in production — inside React the state is the source of truth, so watching the DOM would be working against the framework. I'd reach for it when integrating a third-party widget whose DOM I don't control."  That is a stronger answer than inventing an example.</p></div>
+  </article>
+</section>
+<section id="practical" data-title="Object practicals">
+  <div class="sec-head">
+    <h2>Object transformation practicals</h2>
+    <p>The live-coding round where you were given an object and asked to reshape or flatten it. This is the section you struggled with most, so it is worked through in small steps.</p>
+  </div>
+
+  <article class="q" id="q15">
+    <h3><span class="qnum">Q15</span> Transform the nested user object into the given flat shape</h3>
+    <p>Input and expected output from the interview:</p>
+    <div class="code" data-run><script type="text/plain">
+const input = {
+  user: {
+    name: "Aman",
+    address: { city: "Ahmedabad" }
+  }
+};
+
+const expected = {
+  "user.name": "Aman",
+  "user.address.city": "Ahmedabad"
+};
+console.log(expected);
+</script></div>
+    <p>Your first instinct in the interview was <code>map</code>. That was the wrong tool — <code>map</code> is an <strong>array</strong> method, and this is a single object. Saying that out loud ("this isn't an array so map doesn't apply, I need <code>Object.entries</code>") would have scored well.</p>
+    <h4>Step 1 — the hardcoded version (get something working first)</h4>
+    <div class="code" data-run><script type="text/plain">
+const input = { user: { name: "Aman", address: { city: "Ahmedabad" } } };
+
+function transform(data) {
+  return {
+    "user.name": data.user?.name,
+    "user.address.city": data.user?.address?.city
+  };
+}
+
+console.log(transform(input));
+</script></div>
+    <p>This produces the right answer but only for this exact shape. In a real interview, write this, say <em>"that satisfies the example, but it's not general — let me write the recursive version"</em>, and then do it. Showing the progression is worth more than jumping straight to recursion and getting stuck.</p>
+    <h4>Step 2 — the three tools you need</h4>
+    <div class="code" data-run><script type="text/plain">
+const obj = { a: 1, b: { c: 2 } };
+
+console.log(Object.keys(obj));     // [ 'a', 'b' ]        — just the keys
+console.log(Object.values(obj));   // [ 1, { c: 2 } ]     — just the values
+console.log(Object.entries(obj));  // [ ['a',1], ['b',{c:2}] ]  — pairs
+
+// Object.entries is what lets you loop over an object like an array:
+Object.entries(obj).forEach(([key, value]) => {
+  console.log(key, "->", value);
+});
+
+// And fromEntries turns pairs back into an object
+console.log(Object.fromEntries([["x", 1], ["y", 2]]));
+</script></div>
+  </article>
+
+  <article class="q" id="q16">
+    <h3><span class="qnum">Q16</span> Write a generic function that flattens any nested object into dot-separated keys</h3>
+    <p>This is the real question. Build it up in plain language first:</p>
+    <ol>
+      <li>Walk every key/value pair of the object.</li>
+      <li>Build the current path — parent path plus a dot plus this key (no dot if there is no parent).</li>
+      <li>If the value is a plain object, <strong>call the same function again</strong> with that value and the path so far.</li>
+      <li>If it is anything else (string, number, boolean, null, array), we have hit the bottom: store <code>result[path] = value</code>.</li>
+    </ol>
+    <div class="code" data-run><script type="text/plain">
+function flatten(obj, prefix = "", result = {}) {
+  for (const [key, value] of Object.entries(obj)) {
+
+    // Build the full path for this key
+    const path = prefix ? `${prefix}.${key}` : key;
+
+    // Is this a plain object worth going deeper into?
+    const isPlainObject =
+      value !== null && typeof value === "object" && !Array.isArray(value);
+
+    if (isPlainObject) {
+      flatten(value, path, result);   // recurse, carrying the path along
+    } else {
+      result[path] = value;           // leaf node — record it
+    }
+  }
+  return result;
+}
+
+// --- test with the interview input ---
+console.log(flatten({ user: { name: "Aman", address: { city: "Ahmedabad" } } }));
+
+// --- test with something deeper and messier ---
+console.log(flatten({
+  id: 1,
+  profile: {
+    name: "Krishna",
+    contact: { email: "k@x.com", phone: { home: "111", work: "222" } }
+  },
+  tags: ["react", "js"],
+  active: true,
+  meta: null
+}));
+</script></div>
+    <h4>Why <code>value !== null</code> comes first</h4>
+    <div class="code" data-run><script type="text/plain">
+console.log(typeof null);   // "object"  <- a famous JavaScript bug, kept for compatibility
+
+// Without the null guard, flatten would try to recurse into null and crash.
+// Object.entries(null) throws:
+try { Object.entries(null); } catch (e) { console.log("Crash:", e.message); }
+</script></div>
+    <h4>Handling arrays with indexed keys</h4>
+    <p>The version above keeps arrays whole. If the interviewer wants <code>items.0.name</code> style keys, one small change does it:</p>
+    <div class="code" data-run><script type="text/plain">
+function flattenAll(obj, prefix = "", result = {}) {
+  for (const [key, value] of Object.entries(obj)) {
+    const path = prefix ? `${prefix}.${key}` : key;
+
+    // Now arrays are treated as objects too (their keys are "0", "1", ...)
+    if (value !== null && typeof value === "object") {
+      // an empty object/array has no entries, so record it as-is
+      if (Object.keys(value).length === 0) result[path] = value;
+      else flattenAll(value, path, result);
+    } else {
+      result[path] = value;
+    }
+  }
+  return result;
+}
+
+console.log(flattenAll({
+  order: {
+    id: 9,
+    items: [{ name: "Book", qty: 2 }, { name: "Shirt", qty: 1 }],
+    coupons: []
+  }
+}));
+</script></div>
+    <h4>The reverse — unflatten</h4>
+    <p>A likely follow-up. Split each key on the dots and build the nesting back up.</p>
+    <div class="code" data-run><script type="text/plain">
+function unflatten(flat) {
+  const result = {};
+
+  for (const [path, value] of Object.entries(flat)) {
+    const parts = path.split(".");
+    let node = result;
+
+    parts.forEach((part, i) => {
+      if (i === parts.length - 1) {
+        node[part] = value;              // last part — assign the value
+      } else {
+        node[part] = node[part] || {};   // middle part — make sure the level exists
+        node = node[part];               // walk down into it
+      }
+    });
+  }
+  return result;
+}
+
+console.log(JSON.stringify(
+  unflatten({ "user.name": "Aman", "user.address.city": "Ahmedabad" }),
+  null, 2
+));
+</script></div>
+    <div class="aside"><b class="tag">Complexity to quote</b><p>Time <strong>O(n)</strong> where n is the total number of properties — each is visited once. Space <strong>O(n)</strong> for the result, plus <strong>O(d)</strong> call-stack depth where d is the deepest nesting level.</p></div>
+  </article>
+
+  <article class="q" id="q17">
+    <h3><span class="qnum">Q17</span> Transform an array of objects — <code>for</code> loop or <code>map</code>?</h3>
+    <p>When the input <em>is</em> an array, <code>map</code> is the right answer, and you should be able to justify it: it returns a new array, doesn't mutate the source, and expresses intent in one line. Use a <code>for</code> loop only when you need to break early or skip items.</p>
+    <div class="code" data-run><script type="text/plain">
+const users = [
+  { username: "Aman",    address: { city: "Ahmedabad" }, age: 28 },
+  { username: "Krishna", address: { city: "Bengaluru" }, age: 30 },
+  { username: "Riya",    address: null,                  age: 25 }
+];
+
+// map — one output for every input
+const summary = users.map(user => ({
+  name: user.username,
+  city: user.address?.city ?? "Unknown"   // optional chaining + nullish fallback
+}));
+console.log(summary);
+
+// filter + map — fewer outputs than inputs
+const adultsInBengaluru = users
+  .filter(u => u.address?.city === "Bengaluru")
+  .map(u => u.username);
+console.log(adultsInBengaluru);
+
+// reduce — turn the array into a lookup object keyed by name
+const byName = users.reduce((acc, u) => {
+  acc[u.username] = u.age;
+  return acc;
+}, {});
+console.log(byName);
+</script></div>
+    <div class="aside"><b class="tag">The trap</b><p>Using <code>map</code> when you are not building a new array. If you just want side effects, use <code>forEach</code> or <code>for...of</code> — a <code>map</code> whose return value is thrown away tells the reader something that isn't true.</p></div>
+  </article>
+</section>
+
+<section id="dsa" data-title="DSA problems">
+  <div class="sec-head">
+    <h2>Data structures &amp; algorithms</h2>
+    <p>Linked lists, the three-sum problem that hit a CPU time limit, and the palindrome question you spent 20 minutes debugging.</p>
+  </div>
+
+  <article class="q" id="q18">
+    <h3><span class="qnum">Q18</span> What is a linked list? What is a doubly linked list?</h3>
+    <p>A linked list is a chain of nodes. Each node holds a value and a pointer to the next node. Unlike an array, the nodes are not stored side by side in memory — the pointers are what hold the sequence together.</p>
+    <ul>
+      <li><strong>Singly linked list</strong> — each node points forward only. You can only traverse in one direction.</li>
+      <li><strong>Doubly linked list</strong> — each node has <code>next</code> and <code>prev</code>. You can walk both ways and delete a node in O(1) if you already hold a reference to it, at the cost of one extra pointer per node.</li>
+      <li><strong>Circular</strong> — the last node points back to the head instead of <code>null</code>.</li>
+    </ul>
+    <table>
+      <tr><th>Operation</th><th>Array</th><th>Linked list</th></tr>
+      <tr><td>Access by index</td><td>O(1)</td><td>O(n) — must walk from the head</td></tr>
+      <tr><td>Insert / delete at the front</td><td>O(n) — everything shifts</td><td>O(1)</td></tr>
+      <tr><td>Insert / delete in the middle (node known)</td><td>O(n)</td><td>O(1)</td></tr>
+      <tr><td>Memory</td><td>Contiguous, cache-friendly</td><td>Scattered, plus pointer overhead</td></tr>
+    </table>
+    <div class="code" data-run><script type="text/plain">
+class Node {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
+class LinkedList {
+  constructor() { this.head = null; this.size = 0; }
+
+  push(value) {                    // add to the end — O(n)
+    const node = new Node(value);
+    if (!this.head) { this.head = node; }
+    else {
+      let curr = this.head;
+      while (curr.next) curr = curr.next;
+      curr.next = node;
+    }
+    this.size++;
+    return this;
+  }
+
+  unshift(value) {                 // add to the front — O(1)
+    const node = new Node(value);
+    node.next = this.head;
+    this.head = node;
+    this.size++;
+    return this;
+  }
+
+  toArray() {
+    const out = [];
+    let curr = this.head;
+    while (curr) { out.push(curr.value); curr = curr.next; }
+    return out;
+  }
+}
+
+const list = new LinkedList();
+list.push(10).push(20).push(30).unshift(5);
+console.log(list.toArray(), "size:", list.size);
+</script></div>
+    <h4>Doubly linked list</h4>
+    <div class="code" data-run><script type="text/plain">
+class DNode {
+  constructor(value) { this.value = value; this.prev = null; this.next = null; }
+}
+
+class DoublyLinkedList {
+  constructor() { this.head = null; this.tail = null; }
+
+  push(value) {                     // O(1) because we keep a tail pointer
+    const node = new DNode(value);
+    if (!this.head) { this.head = this.tail = node; }
+    else { node.prev = this.tail; this.tail.next = node; this.tail = node; }
+    return this;
+  }
+
+  remove(node) {                    // O(1) — no traversal needed
+    if (node.prev) node.prev.next = node.next; else this.head = node.next;
+    if (node.next) node.next.prev = node.prev; else this.tail = node.prev;
+  }
+
+  forwards()  { const o = []; let c = this.head; while (c) { o.push(c.value); c = c.next; } return o; }
+  backwards() { const o = []; let c = this.tail; while (c) { o.push(c.value); c = c.prev; } return o; }
+}
+
+const d = new DoublyLinkedList();
+d.push("A").push("B").push("C");
+console.log("forwards :", d.forwards());
+console.log("backwards:", d.backwards());
+d.remove(d.head.next);              // remove B in O(1)
+console.log("after removing B:", d.forwards());
+</script></div>
+    <div class="aside"><b class="tag">Real-world hook</b><p>Browser history (back/forward), an LRU cache, and undo/redo stacks are all doubly linked lists. Mentioning one makes the answer concrete.</p></div>
+  </article>
+
+  <article class="q" id="q19">
+    <h3><span class="qnum">Q19</span> Write a program to reverse a linked list</h3>
+    <p>The iterative version is the one to write in an interview: O(n) time, O(1) space. You need three pointers and you flip one arrow per step.</p>
+    <div class="code" data-run><script type="text/plain">
+class Node {
+  constructor(value) { this.value = value; this.next = null; }
+}
+
+function reverse(head) {
+  let prev = null;      // the part already reversed
+  let curr = head;      // the node we are flipping now
+
+  while (curr !== null) {
+    const next = curr.next;   // 1. remember where we were going
+    curr.next = prev;         // 2. flip the arrow backwards
+    prev = curr;              // 3. move prev forward
+    curr = next;              // 4. move curr forward
+  }
+
+  return prev;                // prev is now the new head
+}
+
+// --- build 1 -> 2 -> 3 -> 4 ---
+function build(arr) {
+  let head = null;
+  for (let i = arr.length - 1; i >= 0; i--) {
+    const n = new Node(arr[i]);
+    n.next = head;
+    head = n;
+  }
+  return head;
+}
+function toArray(head) {
+  const out = []; let c = head;
+  while (c) { out.push(c.value); c = c.next; }
+  return out;
+}
+
+const list = build([1, 2, 3, 4]);
+console.log("before:", toArray(list));
+console.log("after :", toArray(reverse(list)));
+
+// Edge cases the interviewer will check
+console.log("empty :", toArray(reverse(null)));
+console.log("single:", toArray(reverse(build([7]))));
+</script></div>
+    <h4>Dry run — say this while you code</h4>
+    <table>
+      <tr><th>Step</th><th>prev</th><th>curr</th><th>List state</th></tr>
+      <tr><td>start</td><td>null</td><td>1</td><td>1→2→3→4</td></tr>
+      <tr><td>after 1</td><td>1</td><td>2</td><td>null←1 &nbsp; 2→3→4</td></tr>
+      <tr><td>after 2</td><td>2</td><td>3</td><td>null←1←2 &nbsp; 3→4</td></tr>
+      <tr><td>after 3</td><td>3</td><td>4</td><td>null←1←2←3 &nbsp; 4</td></tr>
+      <tr><td>after 4</td><td>4</td><td>null</td><td>null←1←2←3←4 — loop ends, return prev</td></tr>
+    </table>
+    <h4>Recursive version (mention it, then write the iterative one)</h4>
+    <div class="code" data-run><script type="text/plain">
+class Node { constructor(v) { this.value = v; this.next = null; } }
+
+function reverseRecursive(head) {
+  // Base case: empty list, or we reached the last node (the new head)
+  if (head === null || head.next === null) return head;
+
+  const newHead = reverseRecursive(head.next); // reverse everything after me
+  head.next.next = head;   // make the node after me point back at me
+  head.next = null;        // and cut my own forward link
+  return newHead;
+}
+
+function build(a){let h=null;for(let i=a.length-1;i>=0;i--){const n=new Node(a[i]);n.next=h;h=n;}return h;}
+function toArray(h){const o=[];while(h){o.push(h.value);h=h.next;}return o;}
+
+console.log(toArray(reverseRecursive(build([1,2,3,4,5]))));
+// Note: O(n) call-stack space — a long list can blow the stack.
+</script></div>
+  </article>
+
+  <article class="q" id="q20">
+    <h3><span class="qnum">Q20</span> Find all unique triplets in an array that sum to zero (3Sum)</h3>
+    <p>The interviewer explicitly asked for brute force first, then optimisation. That is the right order — but you must be the one to say "this is O(n³), let me improve it" rather than waiting to be told.</p>
+    <h4>Step 1 — brute force, O(n³)</h4>
+    <div class="code" data-run><script type="text/plain">
+function threeSumBrute(nums) {
+  const result = [];
+  const seen = new Set();                 // to skip duplicate triplets
+
+  for (let i = 0; i < nums.length - 2; i++) {
+    for (let j = i + 1; j < nums.length - 1; j++) {
+      for (let k = j + 1; k < nums.length; k++) {
+        if (nums[i] + nums[j] + nums[k] === 0) {
+          const triplet = [nums[i], nums[j], nums[k]].sort((a, b) => a - b);
+          const key = triplet.join(",");
+          if (!seen.has(key)) {           // sorting makes duplicates identical strings
+            seen.add(key);
+            result.push(triplet);
+          }
+        }
+      }
+    }
+  }
+  return result;                          // <-- the return you forgot in the interview
+}
+
+console.log(threeSumBrute([-1, 0, 1, 2, -1, -4]));
+console.log(threeSumBrute([0, 0, 0, 0]));
+console.log(threeSumBrute([1, 2, 3]));     // no triplets
+</script></div>
+    <div class="aside"><b class="tag">Two things that cost you marks here</b><p><strong>1. The missing <code>return result</code>.</strong> The interviewer asked about it twice. A function that builds an array and never returns it produces <code>undefined</code> — always trace your function to its last line before compiling.</p><p><strong>2. "CPU time limit exceeded".</strong> That is not a broken compiler. Three nested loops over 1,000 elements is a billion iterations. The error message <em>was</em> the feedback: the algorithm is too slow.</p></div>
+    <h4>Step 2 — sort + two pointers, O(n²)</h4>
+    <p>Sorting first unlocks everything. Fix the first number, then walk two pointers inwards from both ends of the remaining subarray. If the sum is too small, move <code>left</code> right to increase it; if too big, move <code>right</code> left to decrease it. No hash set needed — sorted order makes duplicate-skipping trivial.</p>
+    <div class="code" data-run><script type="text/plain">
+function threeSum(nums) {
+  const result = [];
+  nums.sort((a, b) => a - b);          // numeric sort — NOT nums.sort()
+
+  for (let i = 0; i < nums.length - 2; i++) {
+    // Optimisation: array is sorted, so if the smallest number is > 0, no triplet can reach 0
+    if (nums[i] > 0) break;
+
+    // Skip a duplicate first number
+    if (i > 0 && nums[i] === nums[i - 1]) continue;
+
+    let left = i + 1;
+    let right = nums.length - 1;
+
+    while (left < right) {
+      const sum = nums[i] + nums[left] + nums[right];
+
+      if (sum === 0) {
+        result.push([nums[i], nums[left], nums[right]]);
+
+        // Move past duplicates on both sides
+        while (left < right && nums[left]  === nums[left + 1])  left++;
+        while (left < right && nums[right] === nums[right - 1]) right--;
+
+        left++;
+        right--;
+      } else if (sum < 0) {
+        left++;        // need a bigger sum
+      } else {
+        right--;       // need a smaller sum
+      }
+    }
+  }
+  return result;
+}
+
+console.log(threeSum([-1, 0, 1, 2, -1, -4]));        // [[-1,-1,2], [-1,0,1]]
+console.log(threeSum([0, 0, 0, 0]));                 // [[0,0,0]]
+console.log(threeSum([-2, 0, 1, 1, 2]));             // [[-2,0,2], [-2,1,1]]
+console.log(threeSum([]));                           // []
+</script></div>
+    <h4>Proof that it is faster — run this</h4>
+    <div class="code" data-run><script type="text/plain">
+// Build a random array of 600 numbers
+const big = Array.from({ length: 600 }, () => Math.floor(Math.random() * 200) - 100);
+
+function brute(nums){const r=[],s=new Set();for(let i=0;i<nums.length-2;i++)for(let j=i+1;j<nums.length-1;j++)for(let k=j+1;k<nums.length;k++)if(nums[i]+nums[j]+nums[k]===0){const t=[nums[i],nums[j],nums[k]].sort((a,b)=>a-b),key=t.join();if(!s.has(key)){s.add(key);r.push(t);}}return r;}
+function fast(nums){const r=[];nums=[...nums].sort((a,b)=>a-b);for(let i=0;i<nums.length-2;i++){if(nums[i]>0)break;if(i>0&&nums[i]===nums[i-1])continue;let l=i+1,h=nums.length-1;while(l<h){const s=nums[i]+nums[l]+nums[h];if(s===0){r.push([nums[i],nums[l],nums[h]]);while(l<h&&nums[l]===nums[l+1])l++;while(l<h&&nums[h]===nums[h-1])h--;l++;h--;}else if(s<0)l++;else h--;}}return r;}
+
+let t0 = performance.now();
+const a = brute(big);
+const bruteTime = performance.now() - t0;
+
+t0 = performance.now();
+const b = fast(big);
+const fastTime = performance.now() - t0;
+
+console.log("brute force O(n^3):", bruteTime.toFixed(1), "ms ->", a.length, "triplets");
+console.log("two pointers O(n^2):", fastTime.toFixed(1), "ms ->", b.length, "triplets");
+console.log("speed-up:", (bruteTime / fastTime).toFixed(1) + "x");
+</script></div>
+    <div class="aside say"><b class="tag">How to narrate it</b><p>"Brute force is three nested loops, O(n³), which times out past a few hundred elements. If I sort the array first — O(n log n) — I can fix the first element and use two pointers on the rest, which brings each inner search down to O(n). Total O(n²), constant extra space besides the output. Sorting also lets me skip duplicates by comparing neighbours instead of using a Set."</p></div>
+  </article>
+
+  <article class="q" id="q21">
+    <h3><span class="qnum">Q21</span> Palindrome check, and "can it become a palindrome by removing at most one character?"</h3>
+    <p>This appeared in three separate interviews and cost you a lot of time because of typos — <code>lenght</code> instead of <code>length</code>, and calling the helper with the wrong number of arguments. The logic itself was right. Here is the clean version.</p>
+    <h4>Part 1 — is it a palindrome?</h4>
+    <div class="code" data-run><script type="text/plain">
+function isPalindrome(s) {
+  // Normalise: lowercase, strip everything that isn't a letter or digit
+  const str = s.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+  let left = 0;
+  let right = str.length - 1;          // note: length, not lenght
+
+  while (left < right) {
+    if (str[left] !== str[right]) return false;
+    left++;
+    right--;
+  }
+  return true;
+}
+
+console.log(isPalindrome("race car"));                          // true
+console.log(isPalindrome("A man, a plan, a canal: Panama"));     // true
+console.log(isPalindrome("hello"));                              // false
+console.log(isPalindrome(""));                                   // true
+console.log(isPalindrome("a"));                                  // true
+</script></div>
+    <h4>Part 2 — allow removing one character</h4>
+    <p>Walk inwards as normal. The moment you hit a mismatch, you have exactly one removal to spend, and only two ways to spend it: drop the left character, or drop the right one. Check whether <em>either</em> remaining range is a clean palindrome.</p>
+    <div class="code" data-run><script type="text/plain">
+// Helper takes the string explicitly — three arguments, always.
+// This is exactly what broke in the interview.
+function checkRange(str, left, right) {
+  while (left < right) {
+    if (str[left] !== str[right]) return false;
+    left++;
+    right--;
+  }
+  return true;
+}
+
+function canBePalindromeByRemovingOne(s) {
+  const str = s.toLowerCase().replace(/[^a-z0-9]/g, "");
+
+  let left = 0;
+  let right = str.length - 1;
+
+  while (left < right) {
+    if (str[left] !== str[right]) {
+      // Spend the single removal: skip left, OR skip right
+      return checkRange(str, left + 1, right) || checkRange(str, left, right - 1);
+    }
+    left++;
+    right--;
+  }
+
+  return true;   // already a palindrome — removing zero characters is "at most one"
+}
+
+// --- the test suite from the interview ---
+const tests = [
+  ["race car", true],
+  ["abca",     true],    // remove 'b' (or 'c')
+  ["abc",      false],
+  ["deeee",    true],    // remove 'd'
+  ["",         true],
+  ["a",        true],
+  ["ab",       true],    // remove either one
+  ["abcdef",   false]
+];
+
+tests.forEach(([input, expected]) => {
+  const got = canBePalindromeByRemovingOne(input);
+  console.log(`${got === expected ? "PASS" : "FAIL"}  "${input}" -> ${got} (expected ${expected})`);
+});
+</script></div>
+    <h4>Walk through "abca"</h4>
+    <ol>
+      <li><code>left=0 ('a')</code>, <code>right=3 ('a')</code> — match, move in.</li>
+      <li><code>left=1 ('b')</code>, <code>right=2 ('c')</code> — mismatch. Spend the removal.</li>
+      <li>Skip left: is <code>"c"</code> (range 2..2) a palindrome? <code>left &lt; right</code> is false, so yes → <code>true</code>.</li>
+      <li>The <code>||</code> short-circuits, so we never even test the other branch. Return <code>true</code>.</li>
+    </ol>
+    <div class="aside"><b class="tag">Why the helper must take the string</b><p>You originally wrote <code>const checkPalindrome = (low, high) =&gt; ...</code> reading <code>minimalStr</code> from the outer scope, then later called it as <code>checkPalindrome(minimalStr, left+1, right)</code> — three arguments into a two-parameter function. <code>minimalStr</code> landed in <code>low</code>, <code>left+1</code> landed in <code>high</code>, and the third was dropped silently. JavaScript does not warn you about this. Define the helper outside with explicit parameters and the mismatch becomes impossible.</p></div>
+    <p><strong>Complexity:</strong> O(n) time — one pass, plus at most one more partial pass after a mismatch. O(n) space for the cleaned string, or O(1) if you skip non-alphanumerics inline instead of building a new string.</p>
+  </article>
+
+  <article class="q" id="q22">
+    <h3><span class="qnum">Q22</span> The <code>addArraySum</code> question — why does the <code>return</code> statement matter so much?</h3>
+    <p>The interviewer stopped and asked about this specifically. A JavaScript function with no <code>return</code> returns <code>undefined</code>. It does not throw, it does not warn — the caller just silently gets nothing, and the bug appears somewhere else entirely.</p>
+    <div class="code" data-run><script type="text/plain">
+function noReturn(arr) {
+  const result = [];
+  arr.forEach(n => result.push(n * 2));
+  // forgot the return
+}
+
+function withReturn(arr) {
+  const result = [];
+  arr.forEach(n => result.push(n * 2));
+  return result;
+}
+
+console.log("no return  :", noReturn([1, 2, 3]));     // undefined
+console.log("with return:", withReturn([1, 2, 3]));   // [2,4,6]
+
+// The bug surfaces LATER, far from the cause:
+try {
+  noReturn([1, 2, 3]).length;
+} catch (e) {
+  console.log("Crash:", e.message);   // Cannot read properties of undefined
+}
+</script></div>
+    <h4>The arrow-function trap that causes it</h4>
+    <div class="code" data-run><script type="text/plain">
+// Curly braces = a function BODY. You must return explicitly.
+const withBraces = n => { n * 2; };
+console.log("braces:", withBraces(5));    // undefined
+
+// No braces = an implicit return of the expression.
+const noBraces = n => n * 2;
+console.log("no braces:", noBraces(5));   // 10
+
+// Returning an object literal needs parentheses, or the braces
+// are read as a function body:
+const broken = id => { id: id };          // parsed as a body with a label
+const fixed   = id => ({ id: id });
+console.log("broken:", broken(1));        // undefined
+console.log("fixed :", fixed(1));         // { id: 1 }
+</script></div>
+    <div class="aside"><b class="tag">Habit to build</b><p>Before you hit Compile, read your function bottom-up and ask one question: what does the last executed line hand back to the caller? It takes three seconds and would have saved you two rounds of interviewer prompting.</p></div>
+  </article>
+</section>
+<section id="react" data-title="React">
+  <div class="sec-head">
+    <h2>React</h2>
+    <p>State mutation, performance diagnosis, virtualization, the infinite-scroll task, and the sale-discount machine task with Redux.</p>
+  </div>
+
+  <article class="q" id="q23">
+    <h3><span class="qnum">Q23</span> Why is mutating state directly dangerous in React?</h3>
+    <p>React decides whether to re-render by comparing the <em>reference</em> of the old state to the new one (<code>Object.is</code>). If you mutate the existing object, the reference is unchanged, so React concludes nothing happened and skips the render — even though your data is different.</p>
+    <div class="code" data-run><script type="text/plain">
+const state = { count: 1, user: { name: "A" } };
+
+// MUTATION — same object, same reference
+const mutated = state;
+mutated.count = 2;
+console.log("after mutation, is it a new object?", state !== mutated);  // false -> React sees no change
+
+// CORRECT — a new object
+const updated = { ...state, count: 2 };
+console.log("after spread, is it a new object?", state !== updated);    // true -> React re-renders
+</script></div>
+    <p>Three more consequences worth mentioning:</p>
+    <ul>
+      <li><strong>Lost updates.</strong> With batching and Concurrent features, React may render the same component twice with different state versions. Mutation makes the result depend on timing.</li>
+      <li><strong>Broken optimisations.</strong> <code>React.memo</code>, <code>useMemo</code> and <code>useEffect</code> dependencies all rely on reference comparison. Mutation silently defeats all of them.</li>
+      <li><strong>No time travel.</strong> Redux DevTools, undo/redo and optimistic-update rollback all need the previous state to still exist. Mutation destroys it.</li>
+    </ul>
+    <h4>The correct update patterns</h4>
+    <div class="code" data-lang="jsx"><script type="text/plain">
+// --- Objects ---
+setUser({ ...user, name: "New" });                       // replace one field
+
+// --- Nested objects: copy EVERY level you touch ---
+setUser({
+  ...user,
+  address: { ...user.address, city: "Mumbai" }
+});
+
+// --- Arrays: use the non-mutating methods ---
+setItems([...items, newItem]);                           // add
+setItems(items.filter(i => i.id !== id));                // remove
+setItems(items.map(i => i.id === id ? { ...i, done: true } : i));  // update one
+
+// --- Sorting: slice() first, because sort() mutates in place ---
+setItems([...items].sort((a, b) => a.price - b.price));
+
+// --- Use the updater form when the new value depends on the old one ---
+setCount(prev => prev + 1);   // safe inside loops, timers and batched updates
+</script></div>
+    <div class="code" data-run><script type="text/plain">
+// Which array methods mutate? Worth memorising.
+const arr = [3, 1, 2];
+
+const copy1 = [...arr];
+copy1.sort();       console.log("sort mutates its own array:", copy1);
+console.log("original untouched because we copied first:", arr);
+
+console.log("MUTATING : push, pop, shift, unshift, splice, sort, reverse, fill");
+console.log("SAFE     : map, filter, slice, concat, [...spread], toSorted, toReversed");
+
+// Modern non-mutating versions (ES2023)
+console.log("toSorted:", arr.toSorted(), "original still:", arr);
+</script></div>
+    <div class="aside say"><b class="tag">Say this</b><p>"React uses <code>Object.is</code> on the state reference to decide whether to re-render. Mutating keeps the same reference, so the render is skipped and the UI goes stale. It also breaks <code>memo</code>, dependency arrays, and DevTools time travel. So I always produce a new object at every level I modify — or use Immer, which lets me write mutable-looking code and produces an immutable result."</p></div>
+  </article>
+
+  <article class="q" id="q24">
+    <h3><span class="qnum">Q24</span> A React dashboard feels slow and unresponsive. What is your first step?</h3>
+    <p>The answer the interviewer wants is <strong>measure before you change anything</strong>. Never open with "I'd add <code>useMemo</code>" — that is guessing.</p>
+    <ol>
+      <li><strong>Reproduce and characterise it.</strong> Slow on first load, or slow on interaction? Slow always, or only after a few minutes of use? Each points at a different cause: bundle size, re-renders, or a memory leak.</li>
+      <li><strong>React DevTools Profiler.</strong> Record the interaction. The flamegraph shows which components re-rendered, how long each took, and — most useful — <em>why</em> each one rendered (props changed, hooks changed, parent rendered).</li>
+      <li><strong>Chrome Performance tab.</strong> Record with 4× CPU throttling. Look for long tasks over 50&nbsp;ms blocking the main thread, and layout thrashing (repeated style recalculation).</li>
+      <li><strong>Network tab.</strong> Oversized payloads, request waterfalls where calls should be parallel, missing pagination, no caching.</li>
+      <li><strong>Memory tab.</strong> If it degrades over time, take two heap snapshots a few minutes apart and compare. Detached DOM nodes and uncleaned subscriptions are the usual culprits.</li>
+      <li><strong>Lighthouse.</strong> For load performance, gives you LCP / INP / CLS and specific bundle advice.</li>
+    </ol>
+    <h4>Only then, fix — matched to the diagnosis</h4>
+    <table>
+      <tr><th>What the profiler shows</th><th>The fix</th></tr>
+      <tr><td>Every row re-renders when one changes</td><td><code>React.memo</code> on the row + stable <code>useCallback</code> handlers</td></tr>
+      <tr><td>A single component takes 200&nbsp;ms to render</td><td><code>useMemo</code> around the expensive calculation</td></tr>
+      <tr><td>Thousands of DOM nodes in a list</td><td>Virtualization (TanStack Virtual / react-window)</td></tr>
+      <tr><td>Everything re-renders on any context change</td><td>Split the context, or move to a selector-based store (Zustand, Redux)</td></tr>
+      <tr><td>Huge initial bundle</td><td><code>React.lazy</code> + <code>Suspense</code>, route-level code splitting</td></tr>
+      <tr><td>Typing in a filter lags</td><td>Debounce the input, or <code>useDeferredValue</code> for the expensive list</td></tr>
+      <tr><td>Same data fetched repeatedly</td><td>TanStack Query with sensible <code>staleTime</code></td></tr>
+      <tr><td>Slows down the longer it runs</td><td>Missing cleanup in <code>useEffect</code> — listeners, intervals, subscriptions</td></tr>
+    </table>
+    <div class="code" data-lang="jsx"><script type="text/plain">
+// The leak that causes "gets slower over time"
+useEffect(() => {
+  const id = setInterval(poll, 1000);
+  window.addEventListener("resize", onResize);
+  const sub = socket.subscribe(onMessage);
+
+  return () => {                 // this cleanup is not optional
+    clearInterval(id);
+    window.removeEventListener("resize", onResize);
+    sub.unsubscribe();
+  };
+}, []);
+</script></div>
+    <div class="aside say"><b class="tag">Opening line</b><p>"First I'd profile rather than guess. I'd record the slow interaction in the React Profiler to see which components re-render and why, and cross-check with the Chrome Performance tab for long tasks. That tells me whether it's a re-render problem, a payload problem, or a memory leak — and each has a completely different fix."</p></div>
+  </article>
+
+  <article class="q" id="q25">
+    <h3><span class="qnum">Q25</span> How do you decide which parts of a dashboard to virtualize?</h3>
+    <p>Virtualization means only rendering the rows currently visible in the viewport, plus a small overscan buffer. It is a real cost — you lose native Ctrl+F, you have to manage row heights, and accessibility needs care — so it should be a decision, not a default.</p>
+    <p>Four signals that make it worth it:</p>
+    <ul>
+      <li><strong>DOM node count.</strong> Roughly 1,000+ nodes in one list. A 500-row table where each row has 8 cells is already 4,000 nodes.</li>
+      <li><strong>Complexity per row.</strong> Plain text rows survive a few hundred fine. Rows containing dropdowns, badges, charts or action menus start janking at 50–100.</li>
+      <li><strong>Measured frame cost.</strong> If scrolling or filtering pushes render passes over 16&nbsp;ms, frames are being dropped. That is the objective threshold.</li>
+      <li><strong>Is pagination acceptable instead?</strong> If the product is fine with 25 rows per page, paginate — it is simpler and more accessible. Virtualize when users genuinely need to scroll a continuous dataset.</li>
+    </ul>
+    <p>Also check fixed vs dynamic row heights. Fixed heights are trivial to virtualize. Dynamic heights (expandable rows, wrapping text) need a library that measures and caches, or you get scrollbar jumping.</p>
+    <div class="code" data-lang="jsx"><script type="text/plain">
+import { useVirtualizer } from "@tanstack/react-virtual";
+import { useRef } from "react";
+
+function PatientList({ patients }) {
+  const parentRef = useRef(null);
+
+  const virtualizer = useVirtualizer({
+    count: patients.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 56,   // row height in px
+    overscan: 8               // render a few extra above/below to hide scroll gaps
+  });
+
+  return (
+    <div ref={parentRef} style={{ height: 600, overflow: "auto" }}>
+      {/* Spacer div gives the scrollbar the correct total height */}
+      <div style={{ height: virtualizer.getTotalSize(), position: "relative" }}>
+        {virtualizer.getVirtualItems().map(virtualRow => (
+          <div
+            key={patients[virtualRow.index].id}
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: virtualRow.size,
+              transform: `translateY(${virtualRow.start}px)`
+            }}
+          >
+            <PatientRow patient={patients[virtualRow.index]} />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+</script></div>
+    <div class="code" data-run><script type="text/plain">
+// The maths that justifies the decision
+const rows = 5000, cellsPerRow = 8;
+console.log("Without virtualization:", rows * cellsPerRow, "DOM nodes");
+
+const visible = Math.ceil(600 / 56), overscan = 8;
+console.log("With virtualization   :", (visible + overscan * 2) * cellsPerRow, "DOM nodes");
+console.log("Reduction:", (100 - ((visible + overscan * 2) / rows) * 100).toFixed(1) + "%");
+</script></div>
+  </article>
+
+  <article class="q" id="q26">
+    <h3><span class="qnum">Q26</span> How do you handle sorting and filtering in a virtualized table with a very large dataset?</h3>
+    <p>The key insight: <strong>virtualization only solves rendering. It does nothing for data processing.</strong> Sorting 100,000 rows on the client still blocks the main thread whether or not you virtualize.</p>
+    <h4>1. Push sorting, filtering and pagination to the server</h4>
+    <div class="code" data-lang="jsx"><script type="text/plain">
+const { data, isFetching } = useQuery({
+  queryKey: ["patients", { sortBy, sortDir, filters, page }],  // params IN the key
+  queryFn: () => api.getPatients({ sortBy, sortDir, ...filters, page }),
+  placeholderData: keepPreviousData   // keeps old rows visible while refetching — no flicker
+});
+</script></div>
+    <p>Because the sort and filter values are part of the query key, TanStack Query caches each combination and refetches automatically when any of them change. Going back to a previous sort is instant.</p>
+    <h4>2. Bind the virtualizer to the <em>processed</em> array</h4>
+    <p>A classic bug: virtualizing over <code>allRows</code> while displaying <code>filteredRows</code>. The indices no longer line up and rows render in the wrong slots. Always point <code>count</code> at the same array you index into.</p>
+    <h4>3. Reset scroll when the result set changes</h4>
+    <div class="code" data-lang="jsx"><script type="text/plain">
+useEffect(() => {
+  virtualizer.scrollToIndex(0);     // otherwise you are scrolled to row 4000 of 12
+}, [sortBy, sortDir, filters]);
+</script></div>
+    <h4>4. Debounce text filters, and keep the input uncontrolled by the slow path</h4>
+    <div class="code" data-lang="jsx"><script type="text/plain">
+const [text, setText] = useState("");          // updates instantly — input stays responsive
+const deferredText = useDeferredValue(text);   // lags behind — drives the expensive list
+
+const rows = useMemo(
+  () => allRows.filter(r => r.name.includes(deferredText)),
+  [allRows, deferredText]
+);
+</script></div>
+    <h4>5. For client-side sorting that you cannot avoid</h4>
+    <p>Memoise it so it runs only when the data or the sort key actually changes, and consider a Web Worker above ~50,000 rows so the main thread stays free.</p>
+    <div class="code" data-run><script type="text/plain">
+const rows = Array.from({ length: 200000 }, (_, i) => ({ id: i, v: Math.random() }));
+
+let t = performance.now();
+const sorted = [...rows].sort((a, b) => a.v - b.v);
+console.log("sorting 200k rows blocked the thread for", (performance.now() - t).toFixed(0), "ms");
+console.log("A frame budget is 16ms — anything above that drops frames.");
+console.log("This is why sorting belongs on the server or in a Worker.");
+</script></div>
+    <h4>6. Selection state must survive</h4>
+    <p>Store selected row <strong>ids in a Set</strong>, never indices. Indices become meaningless the moment the sort order changes.</p>
+  </article>
+
+  <article class="q" id="q27">
+    <h3><span class="qnum">Q27</span> Build a React app that fetches random dog images and stacks them on scroll, throttled</h3>
+    <p>Your starting snippet had one bug worth naming: <code>setImageData(res)</code> stores the whole Axios response object, not the image URL. The URL lives at <code>res.data.message</code>.</p>
+    <div class="code" data-lang="jsx"><script type="text/plain">
+import { useState, useEffect, useCallback, useRef } from "react";
+import axios from "axios";
+
+function throttle(fn, limit) {
+  let lastCall = 0;
+  return (...args) => {
+    const now = Date.now();
+    if (now - lastCall < limit) return;
+    lastCall = now;
+    fn(...args);
+  };
+}
+
+export default function DogFeed() {
+  const [images, setImages] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const loadingRef = useRef(false);   // a ref, because the throttled closure would capture stale state
+
+  const fetchImage = useCallback(async () => {
+    if (loadingRef.current) return;   // guard against overlapping requests
+    loadingRef.current = true;
+    setLoading(true);
+
+    try {
+      const res = await axios.get("https://dog.ceo/api/breeds/image/random");
+      // res.data.message is the URL — this was the bug in the original snippet
+      setImages(prev => [...prev, res.data.message]);
+    } catch (err) {
+      console.error("Failed to load dog:", err);
+    } finally {
+      loadingRef.current = false;
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => { fetchImage(); }, [fetchImage]);   // first image on mount
+
+  useEffect(() => {
+    const handleScroll = throttle(() => {
+      const nearBottom =
+        window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 300;
+      if (nearBottom) fetchImage();
+    }, 500);
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [fetchImage]);
+
+  return (
+    <div style={{ maxWidth: 560, margin: "0 auto", padding: 16 }}>
+      {images.map((src, i) => (
+        <img
+          key={`${src}-${i}`}
+          src={src}
+          alt="Random dog"
+          loading="lazy"
+          style={{ width: "100%", marginBottom: 16, borderRadius: 8, display: "block" }}
+        />
+      ))}
+      {loading && <p style={{ textAlign: "center" }}>Loading…</p>}
+    </div>
+  );
+}
+</script></div>
+    <h4>The better answer: IntersectionObserver instead of scroll</h4>
+    <p>Mention this and you separate yourself from other candidates. Scroll listeners fire constantly and force you to read layout properties, which triggers reflow. <code>IntersectionObserver</code> lets the browser tell you when a sentinel element becomes visible — no throttling needed, no layout reads.</p>
+    <div class="code" data-lang="jsx"><script type="text/plain">
+function DogFeed() {
+  const [images, setImages] = useState([]);
+  const sentinelRef = useRef(null);
+  const loadingRef = useRef(false);
+
+  const fetchImage = useCallback(async () => {
+    if (loadingRef.current) return;
+    loadingRef.current = true;
+    const res = await axios.get("https://dog.ceo/api/breeds/image/random");
+    setImages(prev => [...prev, res.data.message]);
+    loadingRef.current = false;
+  }, []);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) fetchImage(); },
+      { rootMargin: "300px" }   // start loading 300px before the sentinel is visible
+    );
+
+    if (sentinelRef.current) observer.observe(sentinelRef.current);
+    return () => observer.disconnect();
+  }, [fetchImage]);
+
+  return (
+    <div>
+      {images.map((src, i) => <img key={i} src={src} alt="" loading="lazy" />)}
+      <div ref={sentinelRef} style={{ height: 1 }} />
+    </div>
+  );
+}
+</script></div>
+    <div class="code" data-run><script type="text/plain">
+// The throttle + guard logic on its own, so you can watch it work
+function throttle(fn, limit) {
+  let last = 0;
+  return (...a) => { const n = Date.now(); if (n - last < limit) return; last = n; fn(...a); };
+}
+
+let inFlight = false, fetched = 0;
+const fetchImage = throttle(() => {
+  if (inFlight) { console.log("  skipped — request already in flight"); return; }
+  inFlight = true;
+  console.log("FETCH #" + (++fetched));
+  setTimeout(() => { inFlight = false; }, 250);
+}, 300);
+
+// Simulate 30 scroll events, 50ms apart
+let i = 0;
+const id = setInterval(() => { fetchImage(); if (++i >= 30) clearInterval(id); }, 50);
+console.log("30 scroll events over 1.5s — throttle should allow ~5 fetches");
+</script></div>
+  </article>
+
+  <article class="q" id="q28">
+    <h3><span class="qnum">Q28</span> How do you handle role-based access control on the frontend?</h3>
+    <p>Open with the honest framing, because it is what a senior interviewer is listening for: <strong>frontend RBAC is user experience, not security.</strong> Anyone can edit JavaScript in DevTools. The server must enforce every rule independently. The frontend's job is to avoid showing people things they cannot use.</p>
+    <h4>1. Route protection</h4>
+    <div class="code" data-lang="jsx"><script type="text/plain">
+function ProtectedRoute({ allowedRoles, children }) {
+  const { user, isLoading } = useAuth();
+
+  if (isLoading) return <FullPageSpinner />;
+  if (!user) return <Navigate to="/login" replace />;
+  if (!allowedRoles.includes(user.role)) return <Navigate to="/403" replace />;
+
+  return children;
+}
+
+<Route
+  path="/admin/*"
+  element={
+    <ProtectedRoute allowedRoles={["admin"]}>
+      <AdminDashboard />
+    </ProtectedRoute>
+  }
+/>
+</script></div>
+    <h4>2. A permission hook for element-level control</h4>
+    <p>Prefer checking <em>permissions</em> over <em>roles</em>. Roles change ("we're adding a nurse-practitioner role"), permissions are stable, and scattering <code>user.role === "admin"</code> through the codebase makes that change expensive.</p>
+    <div class="code" data-lang="jsx"><script type="text/plain">
+function usePermission() {
+  const { user } = useAuth();
+  return useCallback(
+    (permission) => user?.permissions?.includes(permission) ?? false,
+    [user]
+  );
+}
+
+function PatientActions({ patient }) {
+  const can = usePermission();
+  return (
+    <>
+      {can("patient:edit")   && <EditButton patient={patient} />}
+      {can("patient:delete") && <DeleteButton patient={patient} />}
+      {can("billing:view")   && <BillingPanel patientId={patient.id} />}
+    </>
+  );
+}
+</script></div>
+    <h4>3. Global 401/403 handling</h4>
+    <div class="code" data-lang="javascript"><script type="text/plain">
+axios.interceptors.response.use(
+  res => res,
+  error => {
+    const status = error.response?.status;
+
+    if (status === 401) {
+      // Session expired or invalid — clear everything and send them to login
+      queryClient.clear();
+      authStore.logout();
+      window.location.href = "/login";
+    }
+
+    if (status === 403) {
+      // Authenticated but not allowed — do not log them out
+      toast.error("You don't have access to this.");
+    }
+
+    return Promise.reject(error);
+  }
+);
+</script></div>
+    <h4>4. Clear the cache on user switch</h4>
+    <p>In a shared clinical workstation, if a doctor logs out and an admin logs in, any cached query data from the previous session must be dropped. <code>queryClient.clear()</code> on logout, and include the user id in query keys.</p>
+    <div class="aside say"><b class="tag">Say this first</b><p>"I treat frontend RBAC as UX, not enforcement — the API has to validate every request independently, because the client is fully editable. On the client I guard routes, gate components through a permissions hook, handle 401 and 403 globally in an interceptor, and clear all cached data on logout."</p></div>
+  </article>
+
+  <article class="q" id="q29">
+    <h3><span class="qnum">Q29</span> Build a sale feature: category-based discounts applied dynamically from a backend flag</h3>
+    <p>This was the longest practical in your transcripts and the one where the interviewer pushed back the most. Three specific pieces of feedback came up:</p>
+    <ul>
+      <li>"Why add a button? It can be handled in local state." — they wanted the sale to be <strong>data-driven from the API</strong>, not user-toggled.</li>
+      <li>"Where are you applying the 10% for Books and 20% for Clothing?" — you displayed a <code>salePrice</code> from JSON instead of <strong>calculating</strong> it from a category rate.</li>
+      <li>"Why a separate state instead of Redux?" — you had duplicated state.</li>
+    </ul>
+    <h4>The shape of the data</h4>
+    <div class="code" data-run><script type="text/plain">
+// Comes from the products endpoint — note: NO salePrice field.
+// The frontend derives it, so a pricing change is one backend value, not a data migration.
+const products = [
+  { id: 1, name: "Atomic Habits", category: "Books",    price: 500 },
+  { id: 2, name: "Denim Jacket",  category: "Clothing", price: 2000 },
+  { id: 3, name: "Table Lamp",    category: "Home",     price: 1200 },
+  { id: 4, name: "Novel",         category: "Books",    price: 300 }
+];
+
+// Comes from a config/sale endpoint — the backend owns whether the sale is live
+const saleConfig = {
+  isLive: true,
+  discounts: { Books: 10, Clothing: 20 }   // percentages; Home has no discount
+};
+console.log(saleConfig);
+</script></div>
+    <h4>The core calculation — this is what they were asking for</h4>
+    <div class="code" data-run><script type="text/plain">
+const products = [
+  { id: 1, name: "Atomic Habits", category: "Books",    price: 500 },
+  { id: 2, name: "Denim Jacket",  category: "Clothing", price: 2000 },
+  { id: 3, name: "Table Lamp",    category: "Home",     price: 1200 },
+  { id: 4, name: "Novel",         category: "Books",    price: 300 }
+];
+const saleConfig = { isLive: true, discounts: { Books: 10, Clothing: 20 } };
+
+function applyDiscounts(items, { isLive, discounts }) {
+  return items.map(item => {
+    const percent = isLive ? (discounts[item.category] ?? 0) : 0;
+
+    if (percent === 0) {
+      return { ...item, onSale: false, discountPercent: 0, finalPrice: item.price };
+    }
+
+    const finalPrice = Math.round(item.price * (1 - percent / 100));
+
+    return {
+      ...item,                 // never mutate the source array
+      onSale: true,
+      discountPercent: percent,
+      finalPrice,
+      saved: item.price - finalPrice
+    };
+  });
+}
+
+console.table(applyDiscounts(products, saleConfig));
+
+// Flip the flag and everything recalculates — no button, no duplicated state
+console.log("--- sale switched off by the backend ---");
+console.table(applyDiscounts(products, { ...saleConfig, isLive: false }));
+</script></div>
+    <div class="aside"><b class="tag">Why <code>?? 0</code> and not <code>|| 0</code></b><p><code>??</code> only falls back on <code>null</code>/<code>undefined</code>. <code>||</code> would also swallow a legitimate <code>0</code> — which matters the day someone configures a 0% promotional category.</p></div>
+    <h4>The component</h4>
+    <div class="code" data-lang="jsx"><script type="text/plain">
+function ProductCard({ product }) {
+  const { name, price, finalPrice, onSale, discountPercent } = product;
+
+  return (
+    <div className="card">
+      <h3>{name}</h3>
+
+      {onSale ? (
+        <p className="price">
+          <span className="struck">₹{price}</span>
+          <span className="sale">₹{finalPrice}</span>
+          <span className="badge">{discountPercent}% off</span>
+        </p>
+      ) : (
+        <p className="price">₹{price}</p>
+      )}
+    </div>
+  );
+}
+
+function ProductList() {
+  const { data: products = [] } = useQuery({ queryKey: ["products"], queryFn: getProducts });
+  const { data: saleConfig }     = useQuery({ queryKey: ["sale"],     queryFn: getSaleConfig });
+
+  // Derived state — recomputed only when inputs change, never stored in useState
+  const priced = useMemo(
+    () => (saleConfig ? applyDiscounts(products, saleConfig) : products),
+    [products, saleConfig]
+  );
+
+  return <div className="grid">{priced.map(p => <ProductCard key={p.id} product={p} />)}</div>;
+}
+</script></div>
+    <div class="aside say"><b class="tag">The principle to state out loud</b><p>"The discounted price is <strong>derived state</strong> — it's a pure function of the product list and the sale config. So I compute it during render inside a <code>useMemo</code> rather than storing it in <code>useState</code>. Storing it would mean two sources of truth that can drift apart. And because the flag comes from the API, no button is needed — the backend turns the sale on and the UI follows."</p></div>
+  </article>
+
+  <article class="q" id="q30">
+    <h3><span class="qnum">Q30</span> Fixing "saleToggle is not defined" and the Unexpected token error in the Redux slice</h3>
+    <p>Both errors came from the same root cause: the reducer was written incorrectly, so <code>createSlice</code> never generated the action creator, so importing it gave <code>undefined</code>.</p>
+    <h4>The broken version</h4>
+    <div class="code" data-lang="jsx"><script type="text/plain">
+// filtersSlice.jsx — WRONG
+const filtersSlice = createSlice({
+  name: "filters",
+  initialState: { showSaleOnly: false },
+  reducers: {
+    saleToggle: (state) => {
+      state.showSaleOnly = !state.showSaleOnly
+    }          // <- missing comma / stray brace territory = "Unexpected token"
+  }
+});
+
+export default filtersSlice.reducer;
+// ...and no named export of the action -> "saleToggle is not defined" in Header.jsx
+</script></div>
+    <h4>The correct slice</h4>
+    <div class="code" data-lang="jsx"><script type="text/plain">
+// src/features/filters/filtersSlice.js
+import { createSlice } from "@reduxjs/toolkit";
+
+const filtersSlice = createSlice({
+  name: "filters",
+  initialState: {
+    showSaleOnly: false,
+    category: "all"
+  },
+  reducers: {
+    // createSlice generates an action creator for EVERY key in this object
+    saleToggle: (state) => {
+      // Immer makes this "mutation" safe — it produces a new state behind the scenes
+      state.showSaleOnly = !state.showSaleOnly;
+    },
+    setCategory: (state, action) => {
+      state.category = action.payload;
+    },
+    resetFilters: () => ({ showSaleOnly: false, category: "all" })
+  }
+});
+
+// TWO exports are required, and people forget the first one:
+export const { saleToggle, setCategory, resetFilters } = filtersSlice.actions;  // named
+export default filtersSlice.reducer;                                            // default
+</script></div>
+    <h4>Using it in the Header</h4>
+    <div class="code" data-lang="jsx"><script type="text/plain">
+// src/components/Header.jsx
+import { useDispatch, useSelector } from "react-redux";
+import { saleToggle } from "../features/filters/filtersSlice";   // named import, braces required
+
+export default function Header() {
+  const dispatch = useDispatch();
+  const showSaleOnly = useSelector(state => state.filters.showSaleOnly);
+
+  return (
+    <button onClick={() => dispatch(saleToggle())}>
+      {showSaleOnly ? "Show all products" : "Show sale items only"}
+    </button>
+  );
+}
+</script></div>
+    <table>
+      <tr><th>Symptom</th><th>Cause</th><th>Fix</th></tr>
+      <tr><td><code>saleToggle is not defined</code></td><td>Action never exported, or imported as a default</td><td><code>export const { saleToggle } = slice.actions</code> and import with braces</td></tr>
+      <tr><td><code>Unexpected token</code></td><td>Missing comma between reducers, or an unbalanced brace</td><td>Check every reducer ends with <code>},</code></td></tr>
+      <tr><td><code>dispatch is not a function</code></td><td>Called <code>useDispatch</code> without invoking it</td><td><code>const dispatch = useDispatch()</code> — note the parentheses</td></tr>
+      <tr><td>Toggle dispatches but nothing changes</td><td>Slice not registered in the store</td><td>Add <code>filters: filtersReducer</code> to <code>configureStore</code></td></tr>
+      <tr><td><code>Cannot read property 'showSaleOnly' of undefined</code></td><td>Selector path doesn't match the store key</td><td>The key in <code>configureStore</code> must match <code>state.filters</code></td></tr>
+    </table>
+    <div class="code" data-lang="jsx"><script type="text/plain">
+// src/app/store.js — the piece that is easy to forget
+import { configureStore } from "@reduxjs/toolkit";
+import filtersReducer from "../features/filters/filtersSlice";
+
+export const store = configureStore({
+  reducer: {
+    filters: filtersReducer    // this key is what state.filters refers to
+  }
+});
+</script></div>
+  </article>
+
+  <article class="q" id="q31">
+    <h3><span class="qnum">Q31</span> Filter the product list by the Redux <code>showSaleOnly</code> state — and why not a separate local state?</h3>
+    <p>The interviewer asked why you kept a local <code>useState</code> for the toggle when the value was already in Redux. The answer is <strong>single source of truth</strong>: two copies of the same fact will eventually disagree, and then you are debugging why the header says "sale on" while the grid shows everything.</p>
+    <div class="code" data-lang="jsx"><script type="text/plain">
+function ProductList() {
+  // Read the flag from Redux — do NOT mirror it into local state
+  const showSaleOnly = useSelector(state => state.filters.showSaleOnly);
+  const { data: products = [] }   = useQuery({ queryKey: ["products"], queryFn: getProducts });
+  const { data: saleConfig }      = useQuery({ queryKey: ["sale"],     queryFn: getSaleConfig });
+
+  const visible = useMemo(() => {
+    const priced = saleConfig ? applyDiscounts(products, saleConfig) : products;
+    return showSaleOnly ? priced.filter(p => p.onSale) : priced;
+  }, [products, saleConfig, showSaleOnly]);
+
+  if (visible.length === 0) {
+    return <p>No products match this filter.</p>;   // always handle the empty case
+  }
+
+  return <div className="grid">{visible.map(p => <ProductCard key={p.id} product={p} />)}</div>;
+}
+</script></div>
+    <div class="code" data-run><script type="text/plain">
+// The filter chain on its own, runnable
+const products = [
+  { id: 1, name: "Atomic Habits", category: "Books",    price: 500 },
+  { id: 2, name: "Denim Jacket",  category: "Clothing", price: 2000 },
+  { id: 3, name: "Table Lamp",    category: "Home",     price: 1200 }
+];
+const saleConfig = { isLive: true, discounts: { Books: 10, Clothing: 20 } };
+
+function applyDiscounts(items, { isLive, discounts }) {
+  return items.map(i => {
+    const pct = isLive ? (discounts[i.category] ?? 0) : 0;
+    return { ...i, onSale: pct > 0, discountPercent: pct,
+             finalPrice: Math.round(i.price * (1 - pct / 100)) };
+  });
+}
+
+const priced = applyDiscounts(products, saleConfig);
+
+console.log("showSaleOnly = false ->", priced.map(p => p.name));
+console.log("showSaleOnly = true  ->", priced.filter(p => p.onSale).map(p => p.name));
+</script></div>
+    <h4>Where each kind of state belongs</h4>
+    <table>
+      <tr><th>Kind of state</th><th>Where it goes</th><th>Example here</th></tr>
+      <tr><td>Server data</td><td>TanStack Query / RTK Query</td><td>products, sale config</td></tr>
+      <tr><td>Shared UI state</td><td>Redux</td><td><code>showSaleOnly</code>, active category</td></tr>
+      <tr><td>Local UI state</td><td><code>useState</code></td><td>is this card's dropdown open</td></tr>
+      <tr><td>Derived state</td><td><code>useMemo</code> — never stored</td><td>discounted price, filtered list</td></tr>
+      <tr><td>Shareable state</td><td>URL search params</td><td><code>?sale=true</code> so the filter survives a refresh</td></tr>
+    </table>
+    <div class="aside say"><b class="tag">Answering "why Redux and not local state"</b><p>"The header dispatches the toggle and the product grid reads it — they're in different branches of the tree, so the state has to live above both. Duplicating it into local state would give me two sources of truth that can drift. In a real app I'd actually consider the URL, so the filtered view is shareable and survives a refresh."</p></div>
+  </article>
+</section>
+<section id="css" data-title="HTML &amp; CSS">
+  <div class="sec-head">
+    <h2>HTML &amp; CSS</h2>
+    <p>Display types, script placement, the viewport meta tag, flex overflow, text truncation, and responsive debugging.</p>
+  </div>
+
+  <article class="q" id="q32">
+    <h3><span class="qnum">Q32</span> Difference between <code>inline</code>, <code>inline-block</code> and <code>block</code></h3>
+    <table>
+      <tr><th></th><th>block</th><th>inline</th><th>inline-block</th></tr>
+      <tr><td>Starts a new line</td><td>Yes</td><td>No</td><td>No</td></tr>
+      <tr><td>Default width</td><td>Fills the parent</td><td>Fits the content</td><td>Fits the content</td></tr>
+      <tr><td><code>width</code> / <code>height</code></td><td>Respected</td><td><strong>Ignored</strong></td><td>Respected</td></tr>
+      <tr><td>Top / bottom margin</td><td>Respected</td><td><strong>Ignored</strong></td><td>Respected</td></tr>
+      <tr><td>Left / right margin</td><td>Respected</td><td>Respected</td><td>Respected</td></tr>
+      <tr><td>Vertical padding</td><td>Pushes siblings</td><td>Paints, but doesn't push siblings</td><td>Pushes siblings</td></tr>
+      <tr><td>Examples</td><td><code>div</code>, <code>p</code>, <code>h1</code>, <code>section</code></td><td><code>span</code>, <code>a</code>, <code>em</code>, <code>strong</code></td><td><code>button</code>, <code>input</code>, <code>select</code>, <code>img</code></td></tr>
+    </table>
+    <p>The subtle one interviewers probe: vertical padding on an <code>inline</code> element <em>is</em> painted — you see the background colour extend — but it does not affect layout, so it overlaps the lines above and below.</p>
+    <div class="code" data-lang="html"><script type="text/plain">
+<!-- Paste this into a file and open it to see the difference -->
+<style>
+  span, div { background: #cfe0ff; border: 1px solid #2B4C9B; }
+
+  .inline       { display: inline;       width: 300px; height: 100px; padding: 20px; }
+  .inline-block { display: inline-block; width: 300px; height: 100px; padding: 20px; }
+  .block        { display: block;        width: 300px; height: 100px; padding: 20px; }
+</style>
+
+<p>Text before <span class="inline">inline: width and height are ignored</span> text after.</p>
+<p>Text before <span class="inline-block">inline-block: sized, but still flows inline</span> after.</p>
+<div class="block">block: sized, and takes its own line</div>
+</script></div>
+    <div class="aside"><b class="tag">The gap nobody expects</b><p><code>inline-block</code> elements are affected by whitespace in your HTML — a newline between two of them renders as a real space, typically 4px. That is one reason flexbox largely replaced <code>inline-block</code> for layout: <code>display: flex</code> ignores whitespace between children entirely.</p></div>
+  </article>
+
+  <article class="q" id="q33">
+    <h3><span class="qnum">Q33</span> <code>&lt;script&gt;</code> in the <code>&lt;head&gt;</code> versus at the end of <code>&lt;body&gt;</code></h3>
+    <p>HTML parsing is single-threaded. A plain <code>&lt;script&gt;</code> in the head <strong>blocks the parser</strong>: the browser stops building the DOM, downloads the file, executes it, and only then continues. The user stares at a blank page for the duration.</p>
+    <p>Put the script at the end of the body and the entire DOM is parsed and painted first. The script also gets to see all the elements, so <code>document.getElementById</code> works.</p>
+    <div class="code" data-lang="html"><script type="text/plain">
+<!-- 1. Blocking. Parsing stops. Also: the DOM doesn't exist yet. -->
+<head>
+  <script src="app.js"><\/script>
+</head>
+
+<!-- 2. End of body. Non-blocking in practice, DOM is ready. The old standard. -->
+<body>
+  <div id="root"></div>
+  <script src="app.js"><\/script>
+</body>
+
+<!-- 3. defer — the modern answer. Downloads in PARALLEL with parsing,
+        executes after the DOM is complete, and multiple defer scripts
+        keep their document order. -->
+<head>
+  <script src="app.js" defer><\/script>
+</head>
+
+<!-- 4. async — downloads in parallel, executes THE MOMENT it arrives,
+        interrupting parsing. Order is not guaranteed. Only use for
+        independent scripts like analytics. -->
+<head>
+  <script src="analytics.js" async><\/script>
+</head>
+
+<!-- 5. ES modules are deferred automatically -->
+<script type="module" src="main.js"><\/script>
+</script></div>
+    <table>
+      <tr><th>Attribute</th><th>Download</th><th>Execution</th><th>Order preserved</th><th>Use for</th></tr>
+      <tr><td>none (head)</td><td>Blocks parsing</td><td>Immediately</td><td>Yes</td><td>Almost nothing</td></tr>
+      <tr><td>none (body end)</td><td>After parsing</td><td>Immediately</td><td>Yes</td><td>Legacy pages</td></tr>
+      <tr><td><code>defer</code></td><td>Parallel</td><td>After DOM is parsed</td><td><strong>Yes</strong></td><td>App code</td></tr>
+      <tr><td><code>async</code></td><td>Parallel</td><td>As soon as it lands</td><td>No</td><td>Analytics, ads</td></tr>
+    </table>
+    <div class="aside say"><b class="tag">Say this</b><p>"Historically you put scripts at the end of the body so they wouldn't block parsing. Today I use <code>defer</code> in the head instead — the download starts earlier, in parallel with parsing, and execution still waits for the DOM. <code>async</code> only for genuinely independent scripts like analytics, since its execution order isn't guaranteed."</p></div>
+  </article>
+
+  <article class="q" id="q34">
+    <h3><span class="qnum">Q34</span> Why is the meta viewport tag needed on mobile?</h3>
+    <div class="code" data-lang="html"><script type="text/plain">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</script></div>
+    <p>Mobile browsers were built when every site was a desktop site. To avoid showing a broken 320px-wide slice of a 980px layout, they pretend the viewport is about 980 CSS pixels wide and then zoom the whole page out to fit the screen.</p>
+    <p>The result without the tag: your responsive design never triggers, because <code>@media (max-width: 768px)</code> is comparing against 980, not 375. The user gets a tiny, zoomed-out desktop layout and has to pinch to read anything.</p>
+    <ul>
+      <li><code>width=device-width</code> — make the viewport match the real device width, so media queries work against the true value.</li>
+      <li><code>initial-scale=1</code> — start at 100% zoom, one CSS pixel to one device-independent pixel.</li>
+    </ul>
+    <div class="aside"><b class="tag">Accessibility trap</b><p>Do <strong>not</strong> add <code>user-scalable=no</code> or <code>maximum-scale=1</code>. They block pinch-zoom, which fails WCAG 1.4.4 and makes the site unusable for people with low vision. iOS Safari ignores them anyway.</p></div>
+  </article>
+
+  <article class="q" id="q35">
+    <h3><span class="qnum">Q35</span> How do you fix an element overflowing its flex container?</h3>
+    <p>The cause is almost always the same, and knowing it by name is a strong signal: <strong>flex items have <code>min-width: auto</code> by default</strong>, which means they refuse to shrink below their content's intrinsic size. A long unbroken string or a nested overflow container will then push straight out of the box.</p>
+    <div class="code" data-lang="css"><script type="text/plain">
+/* THE FIX — one line, solves the majority of flex overflow bugs */
+.flex-item {
+  min-width: 0;           /* allow shrinking below intrinsic content width */
+}
+
+/* In a column-direction flex container, it's min-height instead */
+.flex-column-item {
+  min-height: 0;
+}
+
+/* Long words and URLs that won't wrap */
+.text {
+  overflow-wrap: break-word;   /* break only when a word can't fit */
+  /* word-break: break-all;    -- harsher: breaks mid-word always */
+}
+
+/* Let items wrap onto a new line instead of squeezing */
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* Understand the flex shorthand */
+.item {
+  flex: 1 1 0;        /* grow, shrink, basis 0 -> equal columns regardless of content */
+  /* flex: 0 0 auto;     don't grow, don't shrink — a common cause of overflow */
+  /* flex: 1;            shorthand for 1 1 0% */
+}
+</script></div>
+    <div class="code" data-lang="html"><script type="text/plain">
+<!-- Save and open this to see the bug and the fix side by side -->
+<style>
+  .row { display: flex; gap: 8px; border: 2px solid #2B4C9B; padding: 8px; margin-bottom: 16px; width: 320px; }
+  .cell { background: #E4EBF9; padding: 8px; }
+  .broken .cell { /* min-width defaults to auto -> overflows */ }
+  .fixed  .cell { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+</style>
+
+<div class="row broken">
+  <div class="cell">supercalifragilisticexpialidocious-filename-v2-final.pdf</div>
+  <div class="cell">Open</div>
+</div>
+
+<div class="row fixed">
+  <div class="cell">supercalifragilisticexpialidocious-filename-v2-final.pdf</div>
+  <div class="cell">Open</div>
+</div>
+</script></div>
+    <h4>Debugging checklist</h4>
+    <ol>
+      <li>In DevTools, add <code>* { outline: 1px solid red }</code> to see which element is actually too wide.</li>
+      <li>Check for <code>min-width: auto</code> on flex items — add <code>min-width: 0</code>.</li>
+      <li>Check for a fixed <code>width</code> or <code>flex-basis</code> that cannot shrink.</li>
+      <li>Check <code>box-sizing</code>. Without <code>border-box</code>, padding is added on top of the declared width.</li>
+      <li>Check for long unbroken text and add <code>overflow-wrap: break-word</code>.</li>
+      <li>Check whether the container needs <code>flex-wrap: wrap</code>.</li>
+    </ol>
+  </article>
+
+  <article class="q" id="q36">
+    <h3><span class="qnum">Q36</span> How do you truncate overflowing text with a cut-off mark (the "Sale" label question)?</h3>
+    <p>Single-line truncation needs three properties together — miss any one and it will not work.</p>
+    <div class="code" data-lang="css"><script type="text/plain">
+.truncate {
+  white-space: nowrap;      /* 1. stop it wrapping to a second line */
+  overflow: hidden;         /* 2. clip whatever doesn't fit */
+  text-overflow: ellipsis;  /* 3. draw the … at the cut */
+}
+
+/* Inside a flex item, you ALSO need this or it won't shrink enough to clip */
+.flex-child.truncate {
+  min-width: 0;
+}
+
+/* Inside a table cell, you also need a fixed table layout */
+.table { table-layout: fixed; width: 100%; }
+</script></div>
+    <h4>Multi-line truncation</h4>
+    <div class="code" data-lang="css"><script type="text/plain">
+/* Clamp to N lines — supported everywhere now */
+.clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* The modern standard property (use alongside the above for coverage) */
+.clamp-2-modern {
+  line-clamp: 2;
+}
+</script></div>
+    <div class="aside"><b class="tag">Always keep the full text available</b><p>Truncated text is invisible to the user but must stay readable to a screen reader and on hover. Add <code>title={fullText}</code> or a tooltip — otherwise you have hidden information, not just shortened it.</p></div>
+    <div class="code" data-lang="jsx"><script type="text/plain">
+<span className="truncate" title={product.name}>
+  {product.name}
+</span>
+</script></div>
+  </article>
+
+  <article class="q" id="q37">
+    <h3><span class="qnum">Q37</span> A CSS Grid/Flexbox dashboard breaks on older tablets and high-DPI phones. How do you diagnose it?</h3>
+    <p>Structure the answer as reproduce → isolate → fix → prevent. The interviewer is testing method, not CSS trivia.</p>
+    <h4>1. Reproduce on the real thing</h4>
+    <p>DevTools device emulation resizes the viewport but still runs your desktop browser's engine, so it will never reproduce an engine bug. Use BrowserStack or a real device, and get the specifics: exact device, OS version, browser version, orientation, and whether the user has increased their system font size.</p>
+    <h4>2. Isolate: is it a compatibility issue or a logic issue?</h4>
+    <table>
+      <tr><th>Evidence</th><th>Points to</th></tr>
+      <tr><td>Breaks on one browser/version, fine everywhere else</td><td>Compatibility — check caniuse for the properties involved</td></tr>
+      <tr><td>Breaks at one width on <em>every</em> browser</td><td>Your CSS logic — a breakpoint gap or a fixed width</td></tr>
+      <tr><td>Fine at 1×, breaks at 2×/3× DPR</td><td>Density: raster assets, hairline borders, <code>vh</code> units</td></tr>
+      <tr><td>Reducing to a minimal HTML file still breaks</td><td>The property itself; if it stops breaking, it's your cascade</td></tr>
+    </table>
+    <p>The decisive technique: strip the page down to a 20-line reproduction with only the grid and two boxes. If it still breaks, it is the browser. If it does not, add your CSS back one rule at a time.</p>
+    <h4>3. The usual suspects on older tablets and high-DPI phones</h4>
+    <ul>
+      <li><strong>Gap in flexbox</strong> — supported only from Safari 14.1. On an older iPad, all your <code>gap</code> spacing silently vanishes. Fall back to margins.</li>
+      <li><strong><code>100vh</code> on mobile</strong> — includes the area under the collapsing browser toolbar, so content is cut off. Use <code>100dvh</code> with a <code>100vh</code> fallback.</li>
+      <li><strong>Sub-pixel borders</strong> — <code>1px</code> at 3× DPR renders inconsistently. Use <code>transform: scaleY(0.5)</code> tricks or accept the rounding.</li>
+      <li><strong>Raster images</strong> — a 1× PNG looks soft on a 3× screen. Ship <code>srcset</code> or SVG.</li>
+      <li><strong>Missing breakpoint</strong> — 768px tablets falling into a gap between a 767px max-width and a 769px min-width query.</li>
+      <li><strong><code>subgrid</code>, <code>:has()</code>, container queries</strong> — all recent. Check support before relying on them.</li>
+    </ul>
+    <h4>4. Prevent it recurring</h4>
+    <ul>
+      <li>Agree an explicit browser support matrix with the team, and configure Browserslist so Autoprefixer and your bundler target it.</li>
+      <li>Use <code>@supports</code> for progressive enhancement rather than assuming.</li>
+      <li>Add visual regression tests (Percy, Chromatic) across a device matrix in CI.</li>
+      <li>Add the failing device to a manual smoke-test list before each release.</li>
+    </ul>
+    <div class="code" data-lang="css"><script type="text/plain">
+/* Progressive enhancement rather than guessing */
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -8px;              /* fallback spacing for old Safari */
+}
+.grid > * { margin: 8px; }
+
+@supports (gap: 16px) {
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; margin: 0; }
+  .grid > * { margin: 0; }
+}
+
+/* Mobile viewport height that accounts for the collapsing toolbar */
+.full-height {
+  height: 100vh;             /* fallback for older browsers */
+  height: 100dvh;            /* dynamic viewport height where supported */
+}
+</script></div>
+  </article>
+
+  <article class="q" id="q38">
+    <h3><span class="qnum">Q38</span> How do you keep a marketing page accessible when it's full of banners and videos?</h3>
+    <p>Frame it as "accessible and exciting are not in tension — you just have to decide early." Retrofitting accessibility is what makes it expensive.</p>
+    <table>
+      <tr><th>The exciting thing</th><th>What it breaks</th><th>What you do</th></tr>
+      <tr><td>Autoplaying hero video</td><td>Vestibular disorders, data cost, focus stealing</td><td><code>muted</code>, <code>playsinline</code>, visible pause control, honour <code>prefers-reduced-motion</code>, use a poster image on slow connections</td></tr>
+      <tr><td>Carousel / banner rotator</td><td>Screen readers announce changing content; users can't read fast enough</td><td>Pause on hover and focus, real prev/next buttons, <code>aria-live="polite"</code>, never auto-advance faster than 5s</td></tr>
+      <tr><td>Text over imagery</td><td>Contrast drops below 4.5:1 on parts of the image</td><td>Scrim overlay or a solid text panel; verify with a contrast checker at the worst point</td></tr>
+      <tr><td>Scroll-triggered animations</td><td>Motion sickness; content invisible if JS fails</td><td><code>@media (prefers-reduced-motion: reduce)</code>, and content visible by default with animation as enhancement</td></tr>
+      <tr><td>Custom-styled buttons made from <code>div</code>s</td><td>Not focusable, not announced, no Enter/Space</td><td>Use a real <code>&lt;button&gt;</code>. This single habit removes most issues</td></tr>
+      <tr><td>Decorative icon-only links</td><td>Announced as "link"</td><td><code>aria-label</code>, or visually hidden text</td></tr>
+    </table>
+    <div class="code" data-lang="css"><script type="text/plain">
+/* Respect the OS-level reduced motion setting — one block, huge impact */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Never remove focus outlines. Restyle them instead. */
+:focus-visible {
+  outline: 3px solid #2B4C9B;
+  outline-offset: 2px;
+}
+
+/* Screen-reader-only text that stays available to assistive tech */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+</script></div>
+    <h4>Process, not just code</h4>
+    <ul>
+      <li><strong>axe DevTools in CI</strong> — catches roughly 30–40% of issues automatically, and catches regressions for free.</li>
+      <li><strong>Keyboard-only pass</strong> — tab through the whole page. If you can't reach or operate something, neither can a screen reader user. Takes two minutes.</li>
+      <li><strong>One screen reader pass</strong> — VoiceOver on Mac, NVDA on Windows. Finds the things automation can't.</li>
+      <li><strong>Design review</strong> — flag contrast and focus states while it is still a Figma file, not after it ships.</li>
+    </ul>
+  </article>
+</section>
+<section id="system" data-title="System design">
+  <div class="sec-head">
+    <h2>System design</h2>
+    <p>The live driver-tracking round that ran for over an hour: transport choice, scaling to 10,000 devices, geofencing, guaranteed notifications, and the parking lot LLD.</p>
+  </div>
+
+  <article class="q" id="q39">
+    <h3><span class="qnum">Q39</span> Design a system to capture driver latitude/longitude and show live location on a dashboard</h3>
+    <p>The interviewer asked you three times to "note it down in points", which means they wanted a <strong>structured flow</strong>, not prose. Use this skeleton and walk it top to bottom.</p>
+    <h4>The five stages</h4>
+    <ol>
+      <li><strong>Capture</strong> — the driver's mobile app reads GPS via <code>navigator.geolocation.watchPosition</code> (web) or the native location service. Sample every 5–10 seconds, or on significant movement rather than on a fixed timer, to save battery.</li>
+      <li><strong>Transmit</strong> — batch a few points and send over a persistent connection (WebSocket or MQTT). Buffer locally when offline and flush on reconnect, so a tunnel doesn't create a gap in the trail.</li>
+      <li><strong>Ingest</strong> — a gateway authenticates the driver, validates the payload, and publishes to a message broker (Kafka / Kinesis). The broker decouples ingestion from processing so a slow consumer never blocks drivers.</li>
+      <li><strong>Store</strong> — two different stores for two different jobs:
+        <ul>
+          <li><em>Latest position</em> → Redis, one key per driver, with a geospatial index. This is what the dashboard reads, and it must be fast.</li>
+          <li><em>Historical trail</em> → a time-series or columnar store (Cassandra, TimescaleDB, S3) for replay, billing disputes and analytics.</li>
+        </ul>
+      </li>
+      <li><strong>Deliver to the frontend</strong> — the dashboard subscribes to the drivers currently in its map viewport and renders markers, interpolating between updates so movement looks smooth.</li>
+    </ol>
+    <div class="code" data-lang="javascript"><script type="text/plain">
+// Driver app — capture and batch
+const buffer = [];
+
+navigator.geolocation.watchPosition(
+  (pos) => {
+    buffer.push({
+      driverId,
+      lat: pos.coords.latitude,
+      lng: pos.coords.longitude,
+      accuracy: pos.coords.accuracy,
+      heading: pos.coords.heading,
+      speed: pos.coords.speed,
+      timestamp: pos.timestamp          // device time — server also stamps on arrival
+    });
+  },
+  (err) => console.error(err),
+  { enableHighAccuracy: true, maximumAge: 5000, timeout: 10000 }
+);
+
+// Flush every 5 seconds — far fewer round trips than one send per fix
+setInterval(() => {
+  if (!buffer.length) return;
+  socket.send(JSON.stringify({ type: "locations", points: buffer.splice(0) }));
+}, 5000);
+</script></div>
+    <h4>The frontend side</h4>
+    <ul>
+      <li>Subscribe only to drivers inside the current map bounds, and resubscribe on pan/zoom. A dispatcher looking at one neighbourhood does not need all 10,000.</li>
+      <li>Render markers on a canvas or WebGL layer (Mapbox GL, deck.gl) rather than as DOM nodes — 1,000 DOM markers will not hold 60fps.</li>
+      <li>Keep marker positions in a <code>ref</code>, not React state. A state update per position update per driver is thousands of renders per second. Update the map layer imperatively and let React own the surrounding UI only.</li>
+      <li>Interpolate between the last two known points over the update interval so markers glide instead of teleporting.</li>
+      <li>Show the last-updated age; a stale marker that looks live is worse than one marked "no signal, 2m ago".</li>
+    </ul>
+    <div class="aside say"><b class="tag">Opening line for any system design round</b><p>"Before I design, can I confirm the scale and the constraints? How many drivers, how many concurrent dashboard viewers, what update frequency do we need, and how stale can a position be before it's useless?" Interviewers score this. You jumped straight into the solution in the transcript.</p></div>
+  </article>
+
+  <article class="q" id="q40">
+    <h3><span class="qnum">Q40</span> "Why do we need WebSocket here?" — and what are the alternatives?</h3>
+    <p>The interviewer pushed back on WebSocket twice, which usually means they want to hear you compare options rather than default to one. The honest answer is that the two directions have different requirements.</p>
+    <table>
+      <tr><th>Transport</th><th>Direction</th><th>Good for</th><th>Cost / limits</th></tr>
+      <tr><td><strong>Short polling</strong></td><td>Client pulls</td><td>Simple, works everywhere, fine at low frequency</td><td>Wasteful — most responses are "nothing changed". 10k devices × 1s = 10k req/s of mostly noise</td></tr>
+      <tr><td><strong>Long polling</strong></td><td>Client pulls, server holds</td><td>Near-real-time on old infrastructure</td><td>Holds a connection per client anyway, with reconnect overhead on every message</td></tr>
+      <tr><td><strong>SSE</strong></td><td>Server → client only</td><td>Dashboards. Plain HTTP, auto-reconnect built in, works through proxies, supports <code>Last-Event-ID</code> for resume</td><td>One-way. HTTP/1.1 has a ~6-connection-per-domain limit (not an issue over HTTP/2)</td></tr>
+      <tr><td><strong>WebSocket</strong></td><td>Full duplex</td><td>Driver app sending a continuous stream upward</td><td>Stateful — complicates load balancing, scaling and auth refresh. Needs your own reconnect and heartbeat logic</td></tr>
+      <tr><td><strong>MQTT</strong></td><td>Full duplex, pub/sub</td><td>What real fleet systems use. Tiny packets, QoS levels, last-will messages for disconnect detection</td><td>Extra broker to operate</td></tr>
+    </table>
+    <div class="aside say"><b class="tag">The answer that would have landed</b><p>"They're different problems. Drivers are <em>writing</em> a continuous stream, so a persistent duplex connection — WebSocket or MQTT — makes sense there, and MQTT is what fleet telematics actually uses because of its small packets and QoS. But the <em>dashboard</em> only receives; it never pushes. So SSE is the better fit: plain HTTP, automatic reconnection, resumable with Last-Event-ID, and no sticky-session problem at the load balancer. I'd only use WebSocket on the dashboard if it needed to send commands back to drivers."</p></div>
+    <div class="code" data-lang="javascript"><script type="text/plain">
+// SSE on the dashboard — notice how little code reconnection takes
+const stream = new EventSource(`/api/drivers/stream?bounds=${bbox}`);
+
+stream.addEventListener("location", (e) => {
+  const { driverId, lat, lng } = JSON.parse(e.data);
+  updateMarker(driverId, lat, lng);
+});
+
+stream.onerror = () => {
+  // The browser retries automatically and replays from Last-Event-ID.
+  // With WebSocket you would write backoff, heartbeat and resume logic yourself.
+};
+</script></div>
+  </article>
+
+  <article class="q" id="q41">
+    <h3><span class="qnum">Q41</span> Can the system handle 10,000 devices? How do you optimise for that scale?</h3>
+    <p>Start by doing the arithmetic out loud — it immediately shows the problem is about volume, not about whether a technology "can handle it".</p>
+    <div class="code" data-run><script type="text/plain">
+const devices = 10000;
+
+console.log("Naive: every device posts every second");
+console.log("  ", devices, "writes/sec =", (devices * 86400 / 1e6).toFixed(0), "million/day");
+console.log("  at ~100 bytes each:", (devices * 100 * 86400 / 1e9).toFixed(1), "GB/day raw");
+
+console.log("");
+console.log("Optimised: 5s interval, batched 5 points per message, only on movement");
+const moving = 0.6;                       // ~60% of a fleet is actually moving
+const msgPerSec = devices * moving / 25;  // 5s interval, 5 points batched
+console.log("  ", msgPerSec.toFixed(0), "messages/sec — a single broker node handles this");
+
+console.log("");
+console.log("Fan-out is the real risk:");
+console.log("  100 dashboards x 10,000 drivers =", (100 * devices).toLocaleString(), "updates/sec");
+console.log("  Viewport filtering: 100 dashboards x ~50 visible drivers =", (100 * 50).toLocaleString(), "updates/sec");
+console.log("  -> 200x reduction, and it is the single highest-leverage optimisation");
+</script></div>
+    <h4>The optimisations, in order of impact</h4>
+    <ol>
+      <li><strong>Viewport-scoped subscriptions.</strong> Push only the drivers inside the client's current map bounds. This is the big one — it decouples client load from fleet size entirely.</li>
+      <li><strong>Adaptive sampling.</strong> A stationary driver needs one update a minute; one moving at 60 km/h needs one every few seconds. Send on significant change in position or heading, not on a fixed clock.</li>
+      <li><strong>Batching.</strong> One message carrying five points costs far less than five messages, in both network overhead and broker throughput.</li>
+      <li><strong>Server-side aggregation.</strong> Collect updates for 500&nbsp;ms and send one combined frame per client instead of one message per driver per update.</li>
+      <li><strong>Clustering at low zoom.</strong> Zoomed out, send cluster counts ("47 drivers here"), not 47 individual coordinates. Send precise positions only as the user zooms in.</li>
+      <li><strong>Compact payloads.</strong> Drop to 5 decimal places (≈1 m precision), use short field names or a binary format like Protobuf. Roughly halves the bytes.</li>
+      <li><strong>Horizontal scaling with sharding.</strong> Partition by geographic region or by driver id hash, so each gateway node owns a slice of the fleet.</li>
+    </ol>
+    <h4>Where the data lives</h4>
+    <table>
+      <tr><th>Store</th><th>Holds</th><th>Why</th></tr>
+      <tr><td>Redis (GEO commands)</td><td>Current position per driver</td><td>Sub-millisecond reads, and <code>GEOSEARCH</code> answers "who is within 5 km" natively</td></tr>
+      <tr><td>Kafka</td><td>The raw event stream</td><td>Decouples producers from consumers, replayable, absorbs traffic spikes</td></tr>
+      <tr><td>Cassandra / TimescaleDB</td><td>Historical trails</td><td>Write-optimised, partitioned by driver and day</td></tr>
+      <tr><td>PostgreSQL</td><td>Driver profiles, geofence definitions, assignments</td><td>Relational data that needs transactions</td></tr>
+      <tr><td>S3 + Parquet</td><td>Cold archive</td><td>Cheap long-term storage for analytics</td></tr>
+    </table>
+    <div class="code" data-lang="javascript"><script type="text/plain">
+// Redis geospatial — one command answers the whole "who's nearby" question
+await redis.geoAdd("drivers:live", { longitude: 77.5946, latitude: 12.9716, member: "driver:123" });
+
+// Everyone within 5km of a point, nearest first
+const nearby = await redis.geoSearch(
+  "drivers:live",
+  { longitude: 77.5946, latitude: 12.9716 },
+  { radius: 5, unit: "km" },
+  { SORT: "ASC", COUNT: 50 }
+);
+
+// Expire stale entries so offline drivers drop off the map automatically
+await redis.expire("driver:123:meta", 120);
+</script></div>
+  </article>
+
+  <article class="q" id="q42">
+    <h3><span class="qnum">Q42</span> Trigger an action when a driver comes within 5&nbsp;km of a location (geofencing)</h3>
+    <p>The naive approach — on every update, loop over every geofence and compute the distance — is O(drivers × fences) per tick and collapses quickly. The answer is a <strong>spatial index</strong>.</p>
+    <h4>Approach</h4>
+    <ol>
+      <li><strong>Index the geofences</strong> using geohashes, H3 cells, or S2. Each fence maps to the set of cells it covers.</li>
+      <li><strong>On each location update</strong>, compute the driver's cell — an O(1) hash — and look up only the fences registered in that cell and its neighbours. This turns a full scan into a handful of candidates.</li>
+      <li><strong>Precise check</strong> on those few candidates with the Haversine formula for circles, or a point-in-polygon test for arbitrary shapes.</li>
+      <li><strong>Compare with previous state.</strong> A geofence event is a <em>transition</em>, not a state. Store which fences the driver was inside last tick; fire ENTER only on outside→inside and EXIT only on inside→outside. Without this you fire a notification every few seconds while the driver sits inside the zone.</li>
+      <li><strong>Debounce with hysteresis.</strong> GPS jitters by tens of metres. Require two consecutive readings inside, or use a slightly larger exit radius than entry radius, so a driver parked on the boundary does not flap.</li>
+      <li><strong>Emit the event</strong> to the notification service. Do not send the push directly from the geofence worker — publish and let a dedicated service own delivery, retries and user preferences.</li>
+    </ol>
+    <div class="code" data-run><script type="text/plain">
+// Haversine — distance between two lat/lng points in km
+function distanceKm(lat1, lng1, lat2, lng2) {
+  const R = 6371;                       // Earth's radius in km
+  const toRad = d => d * Math.PI / 180;
+
+  const dLat = toRad(lat2 - lat1);
+  const dLng = toRad(lng2 - lng1);
+
+  const a = Math.sin(dLat / 2) ** 2 +
+            Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) ** 2;
+
+  return 2 * R * Math.asin(Math.sqrt(a));
+}
+
+const customer = { lat: 12.9716, lng: 77.5946 };   // Bengaluru city centre
+console.log("Koramangala  :", distanceKm(customer.lat, customer.lng, 12.9352, 77.6245).toFixed(2), "km");
+console.log("Whitefield   :", distanceKm(customer.lat, customer.lng, 12.9698, 77.7500).toFixed(2), "km");
+console.log("Airport      :", distanceKm(customer.lat, customer.lng, 13.1986, 77.7066).toFixed(2), "km");
+</script></div>
+    <div class="code" data-run><script type="text/plain">
+function distanceKm(a, b, c, d){const R=6371,r=x=>x*Math.PI/180,dLat=r(c-a),dLng=r(d-b);
+  const h=Math.sin(dLat/2)**2+Math.cos(r(a))*Math.cos(r(c))*Math.sin(dLng/2)**2;
+  return 2*R*Math.asin(Math.sqrt(h));}
+
+// Transition detection with hysteresis — the part candidates usually miss
+const ENTER_RADIUS = 5.0;
+const EXIT_RADIUS  = 5.5;        // larger, so a driver on the edge doesn't flap
+
+const previousState = new Map();  // driverId -> was inside?
+
+function checkGeofence(driverId, lat, lng, fence) {
+  const dist = distanceKm(lat, lng, fence.lat, fence.lng);
+  const wasInside = previousState.get(driverId) ?? false;
+
+  // Use the tighter radius to enter, the looser one to leave
+  const isInside = wasInside ? dist <= EXIT_RADIUS : dist <= ENTER_RADIUS;
+
+  previousState.set(driverId, isInside);
+
+  if (!wasInside && isInside) return { event: "ENTER", dist };
+  if (wasInside && !isInside) return { event: "EXIT",  dist };
+  return null;                  // no transition -> no notification
+}
+
+const fence = { lat: 12.9716, lng: 77.5946 };
+const trail = [
+  [12.9200, 77.6400],   // 7.6 km away  -> outside, no event
+  [12.9500, 77.6100],   // 2.9 km       -> crossed in, fires ENTER
+  [12.9690, 77.5980],   // 0.5 km       -> still inside, stays silent
+  [12.9700, 77.5960],   // 0.2 km       -> still inside, stays silent
+  [12.9705, 77.5955],   // 0.2 km       -> still inside, stays silent
+  [12.9200, 77.6400]    // 7.6 km       -> left, fires EXIT
+];
+
+trail.forEach(([lat, lng], i) => {
+  const r = checkGeofence("driver:1", lat, lng, fence);
+  console.log(`tick ${i}: ${r ? r.event + " (" + r.dist.toFixed(2) + " km)" : "— no event"}`);
+});
+</script></div>
+  </article>
+
+  <article class="q" id="q43">
+    <h3><span class="qnum">Q43</span> How do you guarantee a "package delivered" notification reaches the user, even if it's delayed?</h3>
+    <p>This was the hardest follow-up in your transcript. The principle: <strong>a notification is a piece of durable state, not a fire-and-forget message.</strong> If you push and hope, an offline phone means the user never learns their package arrived.</p>
+    <h4>The architecture</h4>
+    <ol>
+      <li><strong>Persist before you deliver.</strong> The event is written to a notifications table with <code>status: pending</code> <em>before</em> any push is attempted. Now it cannot be lost.</li>
+      <li><strong>Queue with retries and backoff.</strong> A worker picks it up and attempts delivery. Failures are retried with exponential backoff (1s, 5s, 30s, 2m, 10m), and after N attempts the message moves to a dead-letter queue for inspection.</li>
+      <li><strong>Multiple channels with escalation.</strong> Try push first. If there's no delivery receipt within a few minutes, fall back to SMS, then email. Users have different devices online at different times.</li>
+      <li><strong>Catch-up on reconnect.</strong> When the app comes back online it calls <code>GET /notifications?since=&lt;lastSeenId&gt;</code> and receives everything it missed. This is the safety net that makes push failure survivable — the push is an optimisation, the pull is the guarantee.</li>
+      <li><strong>Idempotency.</strong> Every notification carries a unique event id. The client deduplicates on it, so a message delivered by both push and catch-up appears once.</li>
+      <li><strong>Acknowledgement.</strong> The client confirms receipt; the server marks it delivered and stops retrying. Without an ack you cannot tell "delivered" from "silently dropped".</li>
+      <li><strong>Relevance window (TTL).</strong> A "driver is 5 minutes away" alert is useless an hour later — expire it rather than deliver it. "Package delivered" has no expiry and should always be delivered. Set the TTL per notification type.</li>
+      <li><strong>Ordering.</strong> Sequence numbers per user, so a late "out for delivery" never renders after "delivered".</li>
+    </ol>
+    <div class="code" data-lang="javascript"><script type="text/plain">
+// 1. Write it down first — this is the durability guarantee
+await db.notifications.insert({
+  id: eventId,                       // idempotency key
+  userId,
+  type: "PACKAGE_DELIVERED",
+  payload: { orderId, deliveredAt },
+  status: "pending",
+  attempts: 0,
+  sequence: await nextSequence(userId),
+  expiresAt: null,                   // critical notification — never expires
+  createdAt: Date.now()
+});
+
+// 2. Then try to deliver
+await queue.publish("notifications", { id: eventId });
+
+// 3. Worker: attempt, back off, escalate
+async function deliver(notification, attempt = 0) {
+  try {
+    await push.send(notification);
+    await db.notifications.update(notification.id, { status: "sent" });
+  } catch (err) {
+    if (attempt >= 5) {
+      await sms.send(notification);              // escalate channel
+      await deadLetterQueue.publish(notification);
+      return;
+    }
+    const backoff = Math.min(2 ** attempt * 1000, 600000);   // cap at 10 min
+    await queue.publishDelayed("notifications", notification, backoff);
+  }
+}
+
+// 4. Catch-up endpoint — the real safety net
+// GET /api/notifications?since=1042
+app.get("/api/notifications", async (req, res) => {
+  const items = await db.notifications.find({
+    userId: req.user.id,
+    sequence: { $gt: Number(req.query.since) },
+    $or: [{ expiresAt: null }, { expiresAt: { $gt: Date.now() } }]
+  }).sort({ sequence: 1 });
+
+  res.json(items);
+});
+</script></div>
+    <div class="code" data-lang="jsx"><script type="text/plain">
+// Client side: reconnect -> fetch what was missed -> dedupe
+useEffect(() => {
+  const onOnline = async () => {
+    const missed = await api.get(`/notifications?since=${lastSeenSequence}`);
+    setNotifications(prev => {
+      const seen = new Set(prev.map(n => n.id));      // idempotency in action
+      return [...prev, ...missed.filter(n => !seen.has(n.id))];
+    });
+  };
+
+  window.addEventListener("online", onOnline);
+  onOnline();                                          // also run on mount
+  return () => window.removeEventListener("online", onOnline);
+}, [lastSeenSequence]);
+</script></div>
+    <div class="aside say"><b class="tag">The sentence that answers the question</b><p>"I treat the notification as durable state rather than a message. It's persisted with a status before any delivery attempt, retried with backoff, escalated across channels, and — most importantly — the client pulls everything it missed on reconnect using a sequence number. Push is the fast path; the catch-up query is the guarantee. Idempotency keys make double delivery harmless, and a TTL per notification type means time-sensitive alerts expire instead of arriving uselessly late."</p></div>
+  </article>
+
+  <article class="q" id="q44">
+    <h3><span class="qnum">Q44</span> Low-level design: a parking lot system</h3>
+    <p>LLD rounds test whether you can identify entities, responsibilities and relationships. Talk through requirements first, then classes.</p>
+    <h4>Requirements to state back</h4>
+    <ul>
+      <li>Multiple floors, multiple spot sizes (motorcycle, compact, large, handicapped, electric).</li>
+      <li>A vehicle gets a ticket on entry and pays on exit; fee depends on spot type and duration.</li>
+      <li>The system tracks availability per floor and shows it on a display board.</li>
+      <li>Multiple entry and exit gates operating concurrently.</li>
+    </ul>
+    <div class="code" data-run><script type="text/plain">
+// ---------- Value types ----------
+const VehicleType = { MOTORCYCLE: "MOTORCYCLE", CAR: "CAR", TRUCK: "TRUCK" };
+const SpotType    = { SMALL: "SMALL", COMPACT: "COMPACT", LARGE: "LARGE" };
+
+// Which spots can hold which vehicles — a small vehicle may use a bigger spot
+const FITS = {
+  [VehicleType.MOTORCYCLE]: [SpotType.SMALL, SpotType.COMPACT, SpotType.LARGE],
+  [VehicleType.CAR]:        [SpotType.COMPACT, SpotType.LARGE],
+  [VehicleType.TRUCK]:      [SpotType.LARGE]
+};
+
+// ---------- Entities ----------
+class Vehicle {
+  constructor(licensePlate, type) {
+    this.licensePlate = licensePlate;
+    this.type = type;
+  }
+}
+
+class ParkingSpot {
+  constructor(id, type, floor) {
+    this.id = id; this.type = type; this.floor = floor;
+    this.vehicle = null;
+  }
+  get isFree() { return this.vehicle === null; }
+  canFit(vehicle) { return this.isFree && FITS[vehicle.type].includes(this.type); }
+  park(vehicle)  { this.vehicle = vehicle; }
+  release()      { this.vehicle = null; }
+}
+
+class Ticket {
+  constructor(id, vehicle, spot) {
+    this.id = id; this.vehicle = vehicle; this.spot = spot;
+    this.entryTime = Date.now();
+    this.exitTime = null;
+  }
+}
+
+// ---------- Strategy pattern: pricing is swappable ----------
+class HourlyRateStrategy {
+  constructor(rates) { this.rates = rates; }   // rate per hour by spot type
+  calculate(ticket) {
+    const ms = (ticket.exitTime ?? Date.now()) - ticket.entryTime;
+    const hours = Math.max(1, Math.ceil(ms / 3600000));   // minimum one hour
+    return hours * this.rates[ticket.spot.type];
+  }
+}
+
+// ---------- Floor owns its spots ----------
+class ParkingFloor {
+  constructor(number, spots) { this.number = number; this.spots = spots; }
+  findSpot(vehicle) { return this.spots.find(s => s.canFit(vehicle)) ?? null; }
+  availability() {
+    return this.spots.reduce((acc, s) => {
+      if (s.isFree) acc[s.type] = (acc[s.type] || 0) + 1;
+      return acc;
+    }, {});
+  }
+}
+
+// ---------- The orchestrator ----------
+class ParkingLot {
+  constructor(floors, pricing) {
+    this.floors = floors;
+    this.pricing = pricing;
+    this.activeTickets = new Map();
+    this.nextTicketId = 1;
+  }
+
+  park(vehicle) {
+    for (const floor of this.floors) {
+      const spot = floor.findSpot(vehicle);
+      if (spot) {
+        spot.park(vehicle);
+        const ticket = new Ticket(`T${this.nextTicketId++}`, vehicle, spot);
+        this.activeTickets.set(ticket.id, ticket);
+        return ticket;
+      }
+    }
+    throw new Error("Parking full for " + vehicle.type);
+  }
+
+  unpark(ticketId) {
+    const ticket = this.activeTickets.get(ticketId);
+    if (!ticket) throw new Error("Invalid ticket");
+
+    ticket.exitTime = Date.now();
+    const fee = this.pricing.calculate(ticket);
+    ticket.spot.release();
+    this.activeTickets.delete(ticketId);
+    return { ticket, fee };
+  }
+
+  displayBoard() {
+    return this.floors.map(f => ({ floor: f.number, free: f.availability() }));
+  }
+}
+
+// ---------- Demo ----------
+const floor1 = new ParkingFloor(1, [
+  new ParkingSpot("1-A1", SpotType.SMALL,   1),
+  new ParkingSpot("1-A2", SpotType.COMPACT, 1),
+  new ParkingSpot("1-A3", SpotType.COMPACT, 1),
+  new ParkingSpot("1-A4", SpotType.LARGE,   1)
+]);
+
+const lot = new ParkingLot(
+  [floor1],
+  new HourlyRateStrategy({ SMALL: 20, COMPACT: 40, LARGE: 80 })
+);
+
+const t1 = lot.park(new Vehicle("KA01AB1234", VehicleType.CAR));
+console.log("parked at:", t1.spot.id, "ticket:", t1.id);
+
+const t2 = lot.park(new Vehicle("KA02XY9999", VehicleType.TRUCK));
+console.log("parked at:", t2.spot.id);
+
+console.log("availability:", JSON.stringify(lot.displayBoard()));
+
+const exit = lot.unpark(t1.id);
+console.log("exit fee:", exit.fee);
+console.log("after exit:", JSON.stringify(lot.displayBoard()));
+
+try { lot.park(new Vehicle("KA03ZZ0000", VehicleType.TRUCK)); }
+catch (e) { console.log("expected:", e.message); }
+</script></div>
+    <h4>Points to raise unprompted — this is what separates senior answers</h4>
+    <ul>
+      <li><strong>Concurrency.</strong> Two gates can allocate the same spot. Needs a per-spot lock or an atomic compare-and-set on the spot's status.</li>
+      <li><strong>Strategy pattern for pricing</strong> so flat-rate, hourly, and day-pass schemes are swappable without touching <code>ParkingLot</code>.</li>
+      <li><strong>Scaling the spot search.</strong> A linear scan is fine for a demo; at real scale keep a free-spot queue per type per floor for O(1) allocation.</li>
+      <li><strong>Lost ticket handling</strong> — flat maximum charge, plate lookup to find the entry time.</li>
+      <li><strong>Extensibility</strong> — electric-charging spots, reservations, monthly passes, number-plate recognition at the gate.</li>
+    </ul>
+  </article>
+
+  <article class="q" id="q45">
+    <h3><span class="qnum">Q45</span> A REST API keeps returning outdated data after an update. How do you investigate?</h3>
+    <p>Work outwards layer by layer. There are five places a stale response can come from, and the browser's Network tab tells you which one within a minute.</p>
+    <ol>
+      <li><strong>Browser cache.</strong> Hard-reload and check the Network tab. If the status says "(from disk cache)" or "(from memory cache)", it never left the machine — look at the <code>Cache-Control</code> response headers.</li>
+      <li><strong>Client-side state cache.</strong> TanStack Query / SWR / Redux may be serving a cached entry. Check whether the mutation invalidates the right query key.</li>
+      <li><strong>CDN or reverse proxy.</strong> Look for <code>X-Cache: HIT</code>, <code>CF-Cache-Status</code>, or an <code>Age</code> header greater than zero. That is a cache between you and the origin.</li>
+      <li><strong>Application-level cache.</strong> Redis or in-process memoisation on the server that the write path never invalidated.</li>
+      <li><strong>Database replication lag.</strong> Writes go to the primary, reads go to a replica that hasn't caught up. Test by reading from the primary directly — if that returns fresh data, it is replication.</li>
+    </ol>
+    <p>The fastest diagnostic: call the endpoint with <code>curl</code>, bypassing the browser entirely. Fresh data means the problem is client-side. Stale data means it is server-side, and the response headers narrow it further.</p>
+    <h4>The fixes</h4>
+    <div class="code" data-lang="javascript"><script type="text/plain">
+// SERVER — mutable data should never be cached blindly
+res.set("Cache-Control", "no-cache, must-revalidate");   // revalidate every time
+res.set("ETag", computeHash(data));                      // 304 when unchanged: fresh AND cheap
+
+// Immutable assets are the opposite — cache them for a year, bust via filename hash
+res.set("Cache-Control", "public, max-age=31536000, immutable");   // app.a1b2c3.js
+</script></div>
+    <div class="code" data-lang="jsx"><script type="text/plain">
+// CLIENT — invalidate on mutation rather than guessing at staleTime
+const mutation = useMutation({
+  mutationFn: updatePatient,
+  onSuccess: (updated) => {
+    queryClient.invalidateQueries({ queryKey: ["patients"] });          // list
+    queryClient.setQueryData(["patient", updated.id], updated);          // detail, instantly
+  }
+});
+</script></div>
+    <ul>
+      <li><strong>CDN:</strong> purge the path on deploy or on write, and make sure your cache key includes anything that varies the response (auth, locale, query params).</li>
+      <li><strong>Redis:</strong> delete or update the key in the same transaction as the write, not in a separate step that can fail independently.</li>
+      <li><strong>Replication lag:</strong> route reads to the primary for a short window after a write ("read your own writes"), or pass the write's LSN so the replica waits.</li>
+    </ul>
+    <div class="aside say"><b class="tag">Say this</b><p>"I'd bisect the layers rather than guess. First <code>curl</code> the endpoint to rule the browser in or out, then read the response headers — <code>Age</code>, <code>X-Cache</code> and <code>Cache-Control</code> tell you immediately whether a CDN is serving it. If the origin itself is stale, I'd check the app cache invalidation on the write path, and finally test a read against the primary to rule out replica lag."</p></div>
+  </article>
+</section>
+<section id="career" data-title="Experience &amp; judgement">
+  <div class="sec-head">
+    <h2>Experience &amp; judgement questions</h2>
+    <p>The questions about what you've worked on and how you make decisions. These are scored on honesty and structure, not on technical depth.</p>
+  </div>
+
+  <article class="q" id="q46">
+    <h3><span class="qnum">Q46</span> "How did you design API responses so a doctor couldn't access admin data?"</h3>
+    <p>You answered this with backend detail, then admitted you were frontend-only — which read as backtracking. Lead with the boundary instead, then show what you do know. That is a stronger position, not a weaker one.</p>
+    <div class="aside say"><b class="tag">How to open</b><p>"I owned the frontend on that project, so I'll describe the architecture as I understood it from working against those APIs and from design discussions — and I'm happy to go deeper on the frontend side, which is where I made the decisions."</p></div>
+    <h4>Then give the architecture at the level you genuinely know it</h4>
+    <ul>
+      <li><strong>Roles come from the token, never the request.</strong> The client sends a signed JWT; the server decodes it and reads roles and permissions from there. Anything role-related in the request body is ignored.</li>
+      <li><strong>Middleware guards run before controller logic.</strong> A doctor's token hitting an <code>/api/admin/*</code> route is rejected with 403 before any handler executes.</li>
+      <li><strong>Field-level filtering on shared endpoints.</strong> <code>/api/users</code> returns different field sets per role — the serializer strips admin-only fields rather than the client hiding them.</li>
+      <li><strong>Row-level scoping.</strong> A doctor requesting a patient id is checked for an active clinical relationship with that patient. This blocks horizontal escalation — doctor A reading doctor B's patients — which pure role checks miss entirely.</li>
+    </ul>
+    <p>Then pivot deliberately: "On the frontend I complement that with route guards, a permissions hook, and global 401/403 interceptors — though I always treat that as UX, since the client is fully editable." (See Q28 for the detail.)</p>
+    <div class="aside"><b class="tag">Why this works</b><p>Interviewers are not testing whether you wrote the middleware. They are testing whether you understand the boundary you work against and whether you'll represent your experience accurately. Claiming backend ownership and then walking it back under questioning costs far more than saying it up front.</p></div>
+  </article>
+
+  <article class="q" id="q47">
+    <h3><span class="qnum">Q47</span> How would you secure patient healthcare data?</h3>
+    <p>Answer in layers, and mention the regulatory frame — HIPAA in the US, DISHA / the DPDP Act in India — because in healthcare interviews that awareness is half the question.</p>
+    <table>
+      <tr><th>Layer</th><th>What you do</th></tr>
+      <tr><td>In transit</td><td>TLS 1.3 everywhere, HSTS, certificate pinning on mobile. No PHI in URLs or query strings — they land in server logs and browser history.</td></tr>
+      <tr><td>At rest</td><td>Database and disk encryption, encrypted backups, field-level encryption for the most sensitive identifiers.</td></tr>
+      <tr><td>Access control</td><td>Least privilege. Role plus relationship — a doctor sees only their own patients, not all patients. Break-glass emergency access that is loudly logged.</td></tr>
+      <tr><td>Audit</td><td>Every read and write of PHI logged with who, what, when, from where. In healthcare, <em>viewing</em> a record is itself an auditable event.</td></tr>
+      <tr><td>Data minimisation</td><td>APIs return only the fields the screen needs. Don't ship a full patient record to render a name badge.</td></tr>
+      <tr><td>Retention</td><td>Defined retention windows, secure deletion, de-identification for analytics.</td></tr>
+    </table>
+    <h4>The frontend-specific parts — where your answer should be most concrete</h4>
+    <ul>
+      <li><strong>Never put PHI in <code>localStorage</code>.</strong> It persists indefinitely and is readable by any script on the origin. Tokens in memory or in <code>httpOnly</code> cookies; PHI stays in the query cache, which is cleared on logout.</li>
+      <li><strong>Clear everything on logout and on user switch.</strong> Shared clinical workstations make this critical — <code>queryClient.clear()</code> plus wiping any store.</li>
+      <li><strong>Idle timeout with auto-logout</strong> and a warning modal. A logged-in workstation left unattended is a real breach vector in hospitals.</li>
+      <li><strong>Screenshot and print considerations</strong> — mask identifiers in demos and print stylesheets.</li>
+      <li><strong>Scrub PHI from error reporting.</strong> Sentry breadcrumbs will capture request bodies by default — configure <code>beforeSend</code> to strip them, or you have exported patient data to a third party.</li>
+      <li><strong>Content Security Policy</strong> to limit which scripts can run, reducing the blast radius of a compromised dependency.</li>
+      <li><strong>No PHI in analytics.</strong> Page-view tracking on <code>/patient/12345/diagnosis</code> sends that URL to your analytics vendor.</li>
+    </ul>
+    <div class="code" data-lang="javascript"><script type="text/plain">
+// Sentry configured for a healthcare app
+Sentry.init({
+  dsn: process.env.SENTRY_DSN,
+  beforeSend(event) {
+    // Strip request bodies and headers that may carry PHI
+    if (event.request) {
+      delete event.request.data;
+      delete event.request.cookies;
+      if (event.request.url) {
+        event.request.url = event.request.url.replace(/\/patient\/\d+/g, "/patient/[id]");
+      }
+    }
+    return event;
+  }
+});
+</script></div>
+  </article>
+
+  <article class="q" id="q48">
+    <h3><span class="qnum">Q48</span> How do you extract data from PDFs that contain images rather than text, and show it in React?</h3>
+    <p>Start by naming the distinction, because it determines the whole approach: a <strong>digital PDF</strong> has a text layer you can read directly; a <strong>scanned PDF</strong> is just images in a wrapper and needs OCR.</p>
+    <h4>Step 1 — detect which kind you have</h4>
+    <div class="code" data-lang="javascript"><script type="text/plain">
+import * as pdfjsLib from "pdfjs-dist";
+
+async function hasTextLayer(file) {
+  const pdf = await pdfjsLib.getDocument(await file.arrayBuffer()).promise;
+  const page = await pdf.getPage(1);
+  const content = await page.getTextContent();
+
+  // Almost no text items on page 1 -> it's a scan, route it to OCR
+  return content.items.length > 10;
+}
+</script></div>
+    <h4>Step 2 — the right tool for each case</h4>
+    <table>
+      <tr><th>Case</th><th>Tool</th><th>Notes</th></tr>
+      <tr><td>Digital PDF</td><td><code>pdf.js</code> <code>getTextContent()</code></td><td>Fast, exact, runs in the browser</td></tr>
+      <tr><td>Scanned, low volume</td><td>Tesseract.js in a Web Worker</td><td>Client-side, no server round trip, but slow and ~5&nbsp;MB of WASM</td></tr>
+      <tr><td>Scanned, production volume</td><td>Server OCR — AWS Textract, Google Document AI, Azure Form Recognizer</td><td>Far better accuracy, understands tables and key-value pairs, returns confidence scores</td></tr>
+      <tr><td>Structured medical forms</td><td>Document AI with a trained schema</td><td>Returns fields, not just a wall of text</td></tr>
+    </table>
+    <div class="aside"><b class="tag">The healthcare-specific point to raise</b><p>For medical documents, OCR output must be treated as a <strong>suggestion, not a fact</strong>. A misread digit in a dosage is a patient-safety issue. Show the confidence score, flag anything below threshold for human review, and display the original image next to the extracted text so a human can verify. Also: if the documents contain PHI, client-side OCR may actually be preferable, because the file never leaves the device.</p></div>
+    <h4>Step 3 — the React side</h4>
+    <div class="code" data-lang="jsx"><script type="text/plain">
+function DocumentExtractor({ file }) {
+  const [status, setStatus] = useState("idle");
+  const [progress, setProgress] = useState(0);
+  const [fields, setFields] = useState([]);
+
+  async function extract() {
+    setStatus("processing");
+
+    // OCR runs in a Worker so the UI stays responsive — this is the key detail
+    const worker = new Worker(new URL("./ocr.worker.js", import.meta.url));
+
+    worker.postMessage({ file });
+    worker.onmessage = (e) => {
+      if (e.data.type === "progress") setProgress(e.data.value);
+      if (e.data.type === "done") { setFields(e.data.fields); setStatus("review"); }
+    };
+  }
+
+  if (status === "review") {
+    return (
+      <div className="split">
+        <PdfPreview file={file} />           {/* original, for verification */}
+        <EditableFieldList
+          fields={fields}
+          onChange={setFields}
+          // Anything the OCR wasn't sure about is highlighted for the user
+          lowConfidenceThreshold={0.85}
+        />
+      </div>
+    );
+  }
+
+  return status === "processing"
+    ? <ProgressBar value={progress} />
+    : <button onClick={extract}>Extract data</button>;
+}
+</script></div>
+  </article>
+
+  <article class="q" id="q49">
+    <h3><span class="qnum">Q49</span> Have you worked with TypeScript? Have you heard of Flow?</h3>
+    <p>Answer honestly about your level, then show you understand what static typing buys you. If you have limited TypeScript experience, say so and describe what you have used — the worst outcome is overclaiming and then failing a follow-up.</p>
+    <h4>What to say about TypeScript</h4>
+    <ul>
+      <li>It catches a whole class of bugs at compile time — undefined property access, wrong argument order, unhandled null.</li>
+      <li>The editor experience is the underrated part: real autocomplete on props and API responses, and safe renames across a large codebase.</li>
+      <li>Types on API responses mean a backend contract change breaks the build instead of breaking production.</li>
+      <li>It is a compile-time tool only. Types are erased at runtime, so you still validate incoming data — with Zod, for example, which gives you runtime validation <em>and</em> infers the type.</li>
+    </ul>
+    <div class="code" data-lang="typescript"><script type="text/plain">
+// Discriminated union — models "loading | error | success" so impossible states can't exist
+type RequestState<T> =
+  | { status: "loading" }
+  | { status: "error"; error: Error }
+  | { status: "success"; data: T };
+
+function render(state: RequestState<Patient[]>) {
+  switch (state.status) {
+    case "loading": return <Spinner />;
+    case "error":   return <ErrorMessage error={state.error} />;
+    case "success": return <List items={state.data} />;
+    // TypeScript proves this switch is exhaustive — add a case to the union
+    // and this function stops compiling until you handle it.
+  }
+}
+
+// Zod: one schema gives you runtime validation AND the static type
+import { z } from "zod";
+
+const PatientSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  dob: z.string().date()
+});
+
+type Patient = z.infer<typeof PatientSchema>;   // no duplicate type definition
+
+const patient = PatientSchema.parse(await res.json());  // throws on a bad payload
+</script></div>
+    <h4>Flow</h4>
+    <p>Flow is Meta's static type checker for JavaScript — same goal as TypeScript, released around the same time. It is still used inside Meta and in older React Native codebases, but the ecosystem consolidated around TypeScript years ago. If you haven't used it, say: "I know of it as Meta's alternative to TypeScript, same problem space, but I've only worked with TypeScript since that's where the ecosystem and type definitions are."</p>
+  </article>
+
+  <article class="q" id="q50">
+    <h3><span class="qnum">Q50</span> Have you worked on CI/CD pipelines? Is there a separate team for it?</h3>
+    <p>"There's a DevOps team" is a fine answer as long as you can describe what happens to your code after you push. Interviewers want to know you understand the path to production, not that you administer Jenkins.</p>
+    <div class="code" data-lang="yaml"><script type="text/plain">
+# A frontend pipeline you should be able to describe
+name: CI
+
+on: [pull_request, push]
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+
+      - run: npm ci                 # ci, not install — respects the lockfile exactly
+      - run: npm run lint
+      - run: npx tsc --noEmit       # type check without emitting output
+      - run: npm test -- --coverage
+      - run: npm run build
+
+      - name: Check bundle size
+        run: npx size-limit          # fails the build if the bundle grew too much
+
+      - name: Deploy preview
+        run: npx vercel --token=${{ secrets.VERCEL_TOKEN }}
+</script></div>
+    <p>Things worth mentioning that show real experience:</p>
+    <ul>
+      <li><strong>Preview deployments per PR</strong> — designers and QA review the actual branch instead of a screenshot.</li>
+      <li><strong>Branch protection</strong> — merge blocked until tests, types, lint and review all pass.</li>
+      <li><strong>Feature flags</strong> — deploy is decoupled from release, so an incomplete feature can ship dark.</li>
+      <li><strong>Staged rollout and a rollback plan</strong> — canary to a small percentage, watch error rates, then go wide.</li>
+      <li><strong>Source maps uploaded to Sentry on build</strong>, so production stack traces are readable.</li>
+    </ul>
+  </article>
+
+  <article class="q" id="q51">
+    <h3><span class="qnum">Q51</span> A third-party UI library ships a breaking change days before a release. Patch, roll back, or hotfix?</h3>
+    <p>Answer with a decision framework, not a single answer — the interviewer wants to see how you reason under pressure.</p>
+    <h4>First, contain</h4>
+    <ol>
+      <li><strong>Pin the working version immediately</strong> and verify the lockfile is committed. Nobody else should hit this while you investigate.</li>
+      <li><strong>Establish the blast radius</strong> — one component or fifty? Visual only, or functional? Does it affect a revenue path or an internal admin screen?</li>
+      <li><strong>Timebox the investigation.</strong> Give yourself two hours to understand it before deciding. Deciding without information is how you end up doing all three.</li>
+    </ol>
+    <h4>Then choose</h4>
+    <table>
+      <tr><th>Option</th><th>Choose when</th><th>Cost</th></tr>
+      <tr><td><strong>Roll back / pin</strong></td><td>Almost always the right first move. The old version works and the release is days away.</td><td>You carry the upgrade as debt — log a ticket immediately or it disappears.</td></tr>
+      <tr><td><strong>Patch (patch-package or a fork)</strong></td><td>The bug is small and isolated, upstream is unresponsive, and you need the new version for something else.</td><td>You now maintain a fork. It must be documented and revisited every upgrade.</td></tr>
+      <tr><td><strong>Migrate properly</strong></td><td>The change is intentional and you have runway. Never days before a release.</td><td>Time — and risk that you find more breakage mid-migration.</td></tr>
+      <tr><td><strong>Ship with the bug behind a flag</strong></td><td>Cosmetic, low-traffic surface, and the release genuinely cannot slip.</td><td>Requires honest agreement with the product owner, not a unilateral call.</td></tr>
+    </table>
+    <div class="aside say"><b class="tag">The framing to use</b><p>"My default is to pin and ship, because a release deadline is not the time to absorb an unplanned migration. But the decision is really about blast radius: if it's cosmetic on an admin screen I'd ship it with a ticket; if it breaks checkout I'd pin and, if pinning isn't possible, patch-package the specific fix. Either way I'd raise it to the product owner the same day rather than decide the scope trade-off alone."</p></div>
+    <h4>Prevention, which they will ask about next</h4>
+    <ul>
+      <li>Exact versions in <code>package.json</code> for critical dependencies — no <code>^</code> on the ones that would hurt.</li>
+      <li>Renovate or Dependabot opening upgrade PRs continuously, so upgrades are small and routine rather than large and urgent.</li>
+      <li>Wrap third-party components in your own thin adapter layer. Then a breaking change touches one file, not two hundred call sites.</li>
+      <li>Visual regression tests in CI, which catch exactly this class of change automatically.</li>
+    </ul>
+  </article>
+
+  <article class="q" id="q52">
+    <h3><span class="qnum">Q52</span> How would you consolidate a fragmented state setup — Redux, Context, and custom hooks all at once?</h3>
+    <h4>1. Audit before you touch anything</h4>
+    <p>Map every piece of state onto a grid: what is it, who writes it, who reads it, and which of the five categories does it belong to? The audit alone usually reveals that most of the "state" is actually cached server data in the wrong place.</p>
+    <table>
+      <tr><th>Category</th><th>Belongs in</th></tr>
+      <tr><td>Server data (fetched, cached, refetched)</td><td>TanStack Query or RTK Query</td></tr>
+      <tr><td>Global client state (auth, theme, feature flags)</td><td>Redux or Zustand</td></tr>
+      <tr><td>Shared-but-local state (a form wizard's steps)</td><td>Context scoped to that subtree</td></tr>
+      <tr><td>Component state</td><td><code>useState</code></td></tr>
+      <tr><td>URL state (filters, tabs, pagination)</td><td>Search params — shareable and refresh-safe</td></tr>
+    </table>
+    <h4>2. The highest-value move is almost always separating server state</h4>
+    <p>Most fragmented Redux stores are 70% cached API responses, hand-managed with loading and error flags. Moving that to a query library typically deletes the majority of the store and removes whole categories of bugs — stale cache, duplicate requests, forgotten loading flags.</p>
+    <h4>3. Migrate incrementally, never in one branch</h4>
+    <ul>
+      <li>Start with one self-contained feature as a proof of concept, and measure: lines removed, bugs closed, render counts.</li>
+      <li>Run old and new side by side. A big-bang rewrite will be abandoned halfway and leave you with three patterns instead of two.</li>
+      <li>Tie migration to work you're doing anyway — when you touch a feature, migrate it.</li>
+      <li>Add an ESLint rule or a CI check that blocks new code in the old pattern, so the problem stops growing while you fix it.</li>
+    </ul>
+    <h4>4. Bringing the team along — the part they asked about separately</h4>
+    <ul>
+      <li><strong>Show, don't mandate.</strong> Bring the proof-of-concept PR with before/after numbers to a team meeting. "This removed 400 lines and fixed the double-fetch bug" persuades; an architecture document does not.</li>
+      <li><strong>Write down the decision rule</strong> — a one-page "where does this state go?" flowchart. Ambiguity is what caused the fragmentation in the first place.</li>
+      <li><strong>Pair on the first few migrations</strong> so people learn the pattern by doing rather than by reading.</li>
+      <li><strong>Make the right thing easy</strong> — ship the shared hooks and templates alongside the guidance.</li>
+      <li><strong>Invite disagreement early.</strong> If a senior engineer has a reason the current setup exists, you want to hear it before the migration, not during.</li>
+    </ul>
+  </article>
+
+  <article class="q" id="q53">
+    <h3><span class="qnum">Q53</span> How would you migrate a legacy ES5 codebase with prototype chains and dynamic properties to ES6+?</h3>
+    <p>The instinct to resist is "rewrite it". Say the opposite: a staged, reversible migration where the app works at every commit.</p>
+    <ol>
+      <li><strong>Get a safety net first.</strong> You cannot safely refactor untested code. Add characterisation tests around the riskiest modules — tests that capture current behaviour, bugs included, so you can tell whether you changed anything.</li>
+      <li><strong>Set up the build to accept both.</strong> Babel plus a bundler, so ES6 modules and ES5 scripts coexist. Nothing else can start until this works.</li>
+      <li><strong>Automate the mechanical parts.</strong> <code>var</code>→<code>let</code>/<code>const</code>, string concatenation → template literals, callbacks → promises. Tools like <code>lebab</code> and codemods handle these, and mechanical changes should not consume human review time.</li>
+      <li><strong>Module system next.</strong> IIFEs and globals → ES modules. This is the change that unlocks tree-shaking, bundle splitting and static analysis, so it pays for itself fastest.</li>
+      <li><strong>Prototype chains → classes, one hierarchy at a time.</strong> <code>class</code> is mostly syntax over prototypes, so the conversion is usually safe — but watch for code that reassigns <code>prototype</code> at runtime or relies on calling a constructor without <code>new</code>. Classes throw in that case.</li>
+      <li><strong>Dynamic property assignment is the genuinely hard part.</strong> Objects built by <code>obj[key] = value</code> at runtime have no static shape. Keep them as plain objects or <code>Map</code>s, and if you later add TypeScript, model them with index signatures rather than pretending they have fixed keys.</li>
+      <li><strong>TypeScript last, in <code>allowJs</code> mode.</strong> Rename files to <code>.ts</code> one at a time, start with <code>strict: false</code>, and tighten the compiler settings gradually.</li>
+    </ol>
+    <div class="code" data-run><script type="text/plain">
+// ES5 prototype pattern
+function Animal(name) { this.name = name; }
+Animal.prototype.speak = function () { return this.name + " makes a sound"; };
+
+function Dog(name) { Animal.call(this, name); }
+Dog.prototype = Object.create(Animal.prototype);
+Dog.prototype.constructor = Dog;
+Dog.prototype.speak = function () { return this.name + " barks"; };
+
+console.log(new Dog("Rex").speak());
+
+// ES6 equivalent
+class Animal2 {
+  constructor(name) { this.name = name; }
+  speak() { return `${this.name} makes a sound`; }
+}
+class Dog2 extends Animal2 {
+  speak() { return `${this.name} barks`; }
+}
+console.log(new Dog2("Rex").speak());
+
+// The behavioural difference that bites during migration:
+try { Animal2("Rex"); }
+catch (e) { console.log("Classes require new:", e.message); }
+console.log("ES5 functions do not:", typeof Animal("Rex"));
+</script></div>
+    <div class="aside"><b class="tag">The line that shows seniority</b><p>"Every commit ships. If the migration stalls halfway — which happens, because priorities change — the codebase should be in a better state than when I started, not a worse one. That rules out a parallel rewrite branch."</p></div>
+  </article>
+
+  <article class="q" id="q54">
+    <h3><span class="qnum">Q54</span> How do you handle disagreement with a designer about breakpoints or layout, under deadline?</h3>
+    <p>Answer this as a collaboration question, because that is what it is. The failure modes they are screening for are "I just build whatever the design says" and "I overrode it because it wasn't technically sensible".</p>
+    <ol>
+      <li><strong>Understand the intent first.</strong> "What's the priority on this screen at mobile width?" A designer who wants the CTA visible without scrolling has a goal, not a pixel preference — and there are usually several ways to hit it.</li>
+      <li><strong>Bring data, not opinion.</strong> "42% of our traffic is 390px wide, and at that width this table needs horizontal scroll" ends an argument that "it'll be cramped" would not.</li>
+      <li><strong>Prototype instead of debating.</strong> Twenty minutes building both versions in a branch settles it faster than an hour in a meeting. Preview deployments per PR exist for this.</li>
+      <li><strong>Name the actual cost.</strong> "That version is two days; this one is four hours and 90% of the effect. With the deadline on Friday, which do you want?" That is a trade-off you present, not a decision you make alone.</li>
+      <li><strong>Escalate to the goal, not up the org chart.</strong> If you genuinely cannot agree, bring in the PM to weigh it against the release, and be willing to lose.</li>
+      <li><strong>Prevent it recurring</strong> with a shared design system: agreed breakpoints, spacing scale and component states, so these debates happen once rather than per feature.</li>
+    </ol>
+    <div class="aside say"><b class="tag">Good closing line</b><p>"I try to disagree about the goal rather than the pixels. Most of these turn out to be the designer and me optimising for different things, and once that's on the table the solution is usually obvious to both of us."</p></div>
+  </article>
+
+  <article class="q" id="q55">
+    <h3><span class="qnum">Q55</span> How do you optimise a heavy dashboard for low-end mobile devices, and what do you degrade?</h3>
+    <h4>Measure on the real thing first</h4>
+    <p>Test with 4× CPU throttling and Slow 4G, or better, a real budget Android device. A dashboard that feels fine on a MacBook can take 12 seconds to become interactive on a phone with a 5-year-old chipset.</p>
+    <h4>Load performance</h4>
+    <ul>
+      <li><strong>Route-level code splitting</strong> — ship only what the current screen needs.</li>
+      <li><strong>Audit the bundle</strong> with <code>source-map-explorer</code>. Moment.js, full lodash, a whole charting library for one sparkline, and duplicated dependencies are the usual findings.</li>
+      <li><strong>Modern image formats</strong> (AVIF/WebP) with <code>srcset</code>, and <code>loading="lazy"</code> below the fold.</li>
+      <li><strong>Self-host fonts</strong>, subset them, and use <code>font-display: swap</code>.</li>
+      <li><strong>Server-render or statically generate</strong> the shell so something meaningful paints before the JS lands.</li>
+    </ul>
+    <h4>Runtime performance</h4>
+    <ul>
+      <li>Virtualize long lists (Q25).</li>
+      <li>Animate only <code>transform</code> and <code>opacity</code> — they run on the compositor and skip layout entirely.</li>
+      <li>Move heavy computation to a Web Worker.</li>
+      <li>Use <code>content-visibility: auto</code> on off-screen sections so the browser skips rendering them.</li>
+    </ul>
+    <h4>What to degrade — and how to decide</h4>
+    <p>The rule: <strong>protect the core job, degrade the enhancements.</strong> On a delivery dashboard the core job is "see where my orders are". Everything else is negotiable.</p>
+    <table>
+      <tr><th>Feature</th><th>Low-end treatment</th></tr>
+      <tr><td>Live-updating charts</td><td>Static snapshot with a "refresh" button</td></tr>
+      <tr><td>Real-time WebSocket feed</td><td>Polling every 30s — far less battery and CPU</td></tr>
+      <tr><td>Animated transitions</td><td>Off. Also honours <code>prefers-reduced-motion</code> for free</td></tr>
+      <tr><td>Map with 500 live markers</td><td>Clustered markers, or a list view</td></tr>
+      <tr><td>Auto-refresh every 5s</td><td>Manual pull-to-refresh</td></tr>
+      <tr><td>High-res imagery</td><td>Lower-resolution variants via <code>srcset</code></td></tr>
+    </table>
+    <div class="code" data-lang="jsx"><script type="text/plain">
+// Adapt to the device rather than guessing — these APIs are free
+function useDeviceCapability() {
+  return useMemo(() => {
+    const cores  = navigator.hardwareConcurrency || 4;
+    const memory = navigator.deviceMemory || 4;               // GB, Chrome only
+    const net    = navigator.connection?.effectiveType || "4g";
+    const saveData = navigator.connection?.saveData || false;
+
+    const isLowEnd = cores <= 4 || memory <= 2 || net === "2g" || net === "3g" || saveData;
+    return { isLowEnd, cores, memory, net };
+  }, []);
+}
+
+function Dashboard() {
+  const { isLowEnd } = useDeviceCapability();
+
+  return (
+    <>
+      <OrderList />                                {/* core — always rendered */}
+      {isLowEnd ? <StaticChart /> : <LiveChart />} {/* enhancement — degraded */}
+      {!isLowEnd && <AnimatedMap />}
+    </>
+  );
+}
+</script></div>
+    <div class="aside say"><b class="tag">The framing that scores</b><p>"I'd separate the core user job from enhancements, and make sure the core path works on the worst device we support. Then I'd degrade enhancements based on actual signals — <code>hardwareConcurrency</code>, <code>deviceMemory</code>, <code>connection.effectiveType</code>, <code>saveData</code> — rather than user-agent sniffing. And I'd give the user the choice too: a 'lite mode' toggle respects that they know their situation better than my heuristic does."</p></div>
+  </article>
+
+  <article class="q" id="q56">
+    <h3><span class="qnum">Q56</span> "Keep your answers shorter and to the point"</h3>
+    <p>This feedback appeared explicitly in one transcript, and the pattern shows up across several: long answers that circle back, restate, and trail off without a conclusion.</p>
+    <h4>A structure that fixes it</h4>
+    <ol>
+      <li><strong>Lead with the answer.</strong> One sentence. "I'd profile before changing anything." Then elaborate. Interviewers are scoring whether you know the answer, and they hear it in the first sentence or they start doubting.</li>
+      <li><strong>Give 2–4 supporting points</strong>, not eight. Depth beats coverage.</li>
+      <li><strong>Stop, and hand it back.</strong> "That's my approach — happy to go deeper on any part." This turns a monologue into a conversation and lets them steer to what they care about.</li>
+    </ol>
+    <h4>Specific habits from your transcripts</h4>
+    <ul>
+      <li><strong>Think out loud, but announce it.</strong> "Let me think through this for a moment" is fine. Long stretches of half-sentences read as not knowing.</li>
+      <li><strong>Say when you don't know, then say what you'd do.</strong> "I haven't implemented that, but my approach would be…" is a complete, strong answer. Bluffing into vagueness is the weakest option available.</li>
+      <li><strong>Read your code before compiling.</strong> Two of your rounds were lost to <code>lenght</code> and a missing <code>return</code>. Thirty seconds of reading top to bottom would have saved twenty minutes of prompting.</li>
+      <li><strong>Narrate the plan before you type.</strong> "Two pointers from both ends; on mismatch I'll try skipping each side." If you then make a typo, the interviewer already knows your logic was right.</li>
+      <li><strong>Ask clarifying questions in system design.</strong> Scale, constraints, and who the users are. You went straight to solutions in the transcripts; the question itself earns marks.</li>
+      <li><strong>Own the boundary of your experience early.</strong> "I owned the frontend, so I'll describe the backend at the level I worked against it" is much stronger said up front than admitted under follow-up.</li>
+    </ul>
+  </article>
+</section>
+    <p class="nores hidden" id="nores">No question matches that search.</p>
+  </main>
+</div>
+
+<footer>
+  <div>Built from 11 ParakeetAI interview transcripts, 15 September 2026. Code blocks run in your browser — nothing is sent anywhere.</div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---------------- build code blocks ---------------- */
+
+  function formatValue(v, depth) {
+    depth = depth || 0;
+    if (v === null) return "null";
+    if (v === undefined) return "undefined";
+    var t = typeof v;
+    if (t === "string") return depth === 0 ? v : '"' + v + '"';
+    if (t === "number" || t === "boolean" || t === "bigint") return String(v);
+    if (t === "function") return "[Function" + (v.name ? ": " + v.name : "") + "]";
+    if (t === "symbol") return v.toString();
+    if (v instanceof Error) return v.name + ": " + v.message;
+    if (v instanceof Date) return v.toISOString();
+    if (v instanceof Map) return "Map(" + v.size + ") " + formatValue(Array.from(v.entries()), depth + 1);
+    if (v instanceof Set) return "Set(" + v.size + ") " + formatValue(Array.from(v), depth + 1);
+    if (depth > 4) return "…";
+    if (Array.isArray(v)) {
+      return "[ " + v.map(function (x) { return formatValue(x, depth + 1); }).join(", ") + " ]";
+    }
+    var keys = Object.keys(v);
+    if (!keys.length) return "{}";
+    return "{ " + keys.map(function (k) {
+      return k + ": " + formatValue(v[k], depth + 1);
+    }).join(", ") + " }";
+  }
+
+  function formatTable(rows) {
+    if (!Array.isArray(rows) || !rows.length) return formatValue(rows);
+    var cols = [];
+    rows.forEach(function (r) {
+      if (r && typeof r === "object") {
+        Object.keys(r).forEach(function (k) { if (cols.indexOf(k) === -1) cols.push(k); });
+      }
+    });
+    if (!cols.length) return formatValue(rows);
+
+    var header = ["idx"].concat(cols);
+    var body = rows.map(function (r, i) {
+      return [String(i)].concat(cols.map(function (c) {
+        return r && r[c] !== undefined ? formatValue(r[c], 1) : "";
+      }));
+    });
+    var widths = header.map(function (h, i) {
+      return Math.max(h.length, Math.max.apply(null, body.map(function (row) { return row[i].length; })));
+    });
+    function line(cells) {
+      return cells.map(function (c, i) { return c + " ".repeat(widths[i] - c.length); }).join("  ");
+    }
+    return [line(header), widths.map(function (w) { return "-".repeat(w); }).join("  ")]
+      .concat(body.map(line)).join("\n");
+  }
+
+  function makeConsole(outEl) {
+    function write(text, cls) {
+      var span = document.createElement("span");
+      if (cls) span.className = cls;
+      span.textContent = text + "\n";
+      outEl.appendChild(span);
+    }
+    function join(args) {
+      return Array.prototype.map.call(args, function (a) { return formatValue(a, 0); }).join(" ");
+    }
+    return {
+      log:   function () { write(join(arguments)); },
+      info:  function () { write(join(arguments)); },
+      debug: function () { write(join(arguments)); },
+      warn:  function () { write(join(arguments), "muted"); },
+      error: function () { write(join(arguments), "err"); },
+      table: function (d) { write(formatTable(d)); },
+      dir:   function (d) { write(formatValue(d, 1)); },
+      group: function () { write(join(arguments)); },
+      groupEnd: function () {},
+      time: function () {}, timeEnd: function () {}, trace: function () {},
+      assert: function (c) { if (!c) write("Assertion failed", "err"); },
+      clear: function () { outEl.textContent = ""; }
+    };
+  }
+
+  function autoSize(ta) {
+    ta.style.height = "auto";
+    ta.style.height = (ta.scrollHeight + 4) + "px";
+  }
+
+  var runnableCount = 0;
+
+  document.querySelectorAll(".code").forEach(function (block) {
+    var srcEl = block.querySelector('script[type="text/plain"]');
+    if (!srcEl) return;
+
+    // "<\/script>" inside samples is written escaped so the HTML parser doesn't choke
+    var raw = srcEl.textContent.split("<\\/").join("</").replace(/^\n+|\s+$/g, "");
+    srcEl.remove();
+
+    var runnable = block.hasAttribute("data-run");
+    var lang = block.getAttribute("data-lang") || (runnable ? "javascript" : "javascript");
+    if (runnable) runnableCount++;
+
+    var bar = document.createElement("div");
+    bar.className = "code-bar";
+
+    var label = document.createElement("span");
+    label.className = "lang";
+    label.textContent = lang;
+    bar.appendChild(label);
+
+    var copyBtn = document.createElement("button");
+    copyBtn.type = "button";
+    copyBtn.textContent = "Copy";
+    bar.appendChild(copyBtn);
+
+    var body, out, resetBtn, runBtn;
+
+    if (runnable) {
+      resetBtn = document.createElement("button");
+      resetBtn.type = "button";
+      resetBtn.textContent = "Reset";
+      bar.appendChild(resetBtn);
+
+      runBtn = document.createElement("button");
+      runBtn.type = "button";
+      runBtn.className = "run";
+      runBtn.textContent = "Run ▶";
+      bar.appendChild(runBtn);
+
+      body = document.createElement("textarea");
+      body.spellcheck = false;
+      body.value = raw;
+      body.setAttribute("aria-label", "Editable code example");
+
+      out = document.createElement("div");
+      out.className = "out hidden";
+    } else {
+      body = document.createElement("pre");
+      var codeEl = document.createElement("code");
+      codeEl.textContent = raw;
+      body.appendChild(codeEl);
+    }
+
+    block.appendChild(bar);
+    block.appendChild(body);
+    if (out) block.appendChild(out);
+
+    if (runnable) {
+      autoSize(body);
+      body.addEventListener("input", function () { autoSize(body); });
+
+      runBtn.addEventListener("click", function () {
+        block.classList.add("has-out");
+        out.classList.remove("hidden");
+        out.textContent = "";
+
+        var lbl = document.createElement("span");
+        lbl.className = "lbl";
+        lbl.textContent = "output";
+        out.appendChild(lbl);
+
+        var fakeConsole = makeConsole(out);
+        try {
+          var fn = new Function("console", body.value);
+          fn(fakeConsole);
+        } catch (err) {
+          fakeConsole.error(err.name + ": " + err.message);
+        }
+
+        if (out.childNodes.length === 1) {
+          var none = document.createElement("span");
+          none.className = "muted";
+          none.textContent = "(no output — add a console.log)";
+          out.appendChild(none);
+        }
+      });
+
+      resetBtn.addEventListener("click", function () {
+        body.value = raw;
+        autoSize(body);
+        out.classList.add("hidden");
+        block.classList.remove("has-out");
+      });
+    }
+
+    copyBtn.addEventListener("click", function () {
+      var text = runnable ? body.value : raw;
+      navigator.clipboard.writeText(text).then(function () {
+        copyBtn.textContent = "Copied";
+        setTimeout(function () { copyBtn.textContent = "Copy"; }, 1400);
+      });
+    });
+  });
+
+  /* ---------------- table of contents ---------------- */
+
+  var toc = document.getElementById("toc");
+  var sections = Array.prototype.slice.call(document.querySelectorAll("main > section"));
+
+  sections.forEach(function (sec) {
+    var a = document.createElement("a");
+    a.href = "#" + sec.id;
+    var count = sec.querySelectorAll("article.q").length;
+    a.innerHTML = "<span>" + sec.getAttribute("data-title") + "</span><em>" + count + "</em>";
+    toc.appendChild(a);
+  });
+
+  var totalQ = document.querySelectorAll("article.q").length;
+  document.getElementById("stat-q").textContent = totalQ;
+  document.getElementById("stat-r").textContent = runnableCount;
+
+  /* ---------------- search ---------------- */
+
+  var search = document.getElementById("search");
+  var nores = document.getElementById("nores");
+  var articles = Array.prototype.slice.call(document.querySelectorAll("article.q"));
+
+  var index = articles.map(function (a) {
+    return { el: a, text: a.textContent.toLowerCase() };
+  });
+
+  var timer;
+  search.addEventListener("input", function () {
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+      var q = search.value.trim().toLowerCase();
+      var shown = 0;
+
+      index.forEach(function (item) {
+        var match = !q || item.text.indexOf(q) !== -1;
+        item.el.classList.toggle("hidden", !match);
+        if (match) shown++;
+      });
+
+      sections.forEach(function (sec) {
+        var any = sec.querySelectorAll("article.q:not(.hidden)").length > 0;
+        sec.classList.toggle("hidden", !!q && !any);
+      });
+
+      nores.classList.toggle("hidden", shown > 0);
+    }, 140);
+  });
+
+  // "/" focuses the search box
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "/" && document.activeElement !== search &&
+        document.activeElement.tagName !== "TEXTAREA") {
+      e.preventDefault();
+      search.focus();
+    }
+  });
+})();
+</script>
+</body>
+</html>

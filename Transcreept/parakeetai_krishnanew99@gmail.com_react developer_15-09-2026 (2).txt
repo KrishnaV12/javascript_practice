@@ -1,0 +1,213 @@
+ParakeetAI Timeline Export
+Exported: 9/15/2026, 7:38:54 PM
+
+[05:29 PM] Interviewer 1
+In those days are also like, those are like images. These are not like normal text. So those are images. So how will you like extract those data from those PDFs and then display in that Reactii.
+
+[05:29 PM] Interviewee
+So OCR. Like. Like how to extract the data from the PDF. Give me time to think.
+
+[05:29 PM] AI
+💬 **Question**: How to extract data from PDFs containing images (not normal text) and display it in a React application?
+
+---
+
+⭐️ **Answer**: To extract data from PDFs that contain images (such as scanned documents or image-based PDFs) and display that data in a React app, you need to use Optical Character Recognition (OCR) technology to convert the images into text. Here’s a detailed approach:
+
+- **Use OCR libraries or services**: Since the PDFs contain images, text extraction requires OCR. Popular options include:
+  - **Tesseract.js**: A pure JavaScript OCR library that can run in the browser or Node.js.
+  - **Third-party OCR APIs**: Such as Google Cloud Vision API, Microsoft Azure OCR, or AWS Textract, which provide more accurate and scalable OCR processing.
+
+- **Workflow**:
+  1. **Extract images from the PDF**: Use a PDF parsing library like `pdf-lib` or `pdfjs-dist` to extract images or pages as canvases.
+  2. **Run OCR on extracted images**: Pass the images to Tesseract.js or send them to a cloud OCR API to get the text content.
+  3. **Process and structure the extracted text**: Clean and format the OCR output as needed.
+  4. **Display in React**: Use React components to render the extracted text or data dynamically.
+
+- **Example integration**:
+  - In your React app, you can upload the PDF file.
+  - Use a backend or client-side library to extract images.
+  - Perform OCR asynchronously.
+  - Show loading states while processing.
+  - Render the extracted text in your UI once ready.
+
+- **Additional considerations**:
+  - OCR accuracy depends on image quality; preprocessing images (e.g., contrast adjustment) can improve results.
+  - For large-scale or sensitive data (like healthcare), consider HIPAA-compliant OCR services.
+  - Cache OCR results to improve performance on repeated views.
+
+Given my experience integrating OCR pipelines in document automation platforms (as at Sapper Software), I would architect a solution combining React frontend with OCR processing either client-side for small files or backend/cloud OCR for heavier workloads, ensuring smooth UI updates and error handling.
+
+---
+
+If you want, I can provide a sample React code snippet demonstrating Tesseract.js integration for OCR on images extracted from PDFs.
+
+[05:29 PM] Interviewee
+Like PDF will contain the images and the text and everything.
+
+[05:29 PM] Interviewee
+So, uh, there I have to go with the library. So there is like Tesseract JS, uh, like OCR libraries there. It will extract and then, uh, third party OCR APIs also like, uh, such as Google Cloud vision, uh, like Microsoft Azure. Also is provide OCR tech. Uh, yeah. So, uh, like AWS, also AWS. Uh, Textract is there, uh, so if you inject a PDF, it will extract the data it will give so that you have to implement, uh, so, uh, what will the workflow for this like you is track the image from the PDF, uh, like you pass the image to the tesseract or it's like you, uh, Tesseract or the AWS Textract or OCR extraction. Then it will like in the front end, you will be showing a skeleton or something. Okay. Let's say it is loading, the API is working in the behind the scene and like, uh, when the, uh, like you will get the OCR extracted, you have to like, uh, catch the data. First. Like, okay, the data will be always will be more OCR data will be more. So you are going to cache it. You are using the react, uh, like Textract query or a like HWR if you are using Next.js. So what this API, uh, data you will take and then again, if the you have you, you have to be manipulating something like, say with the data, I am going to do some like, uh, I have to solve visually, like I have to solve. Okay. Green button is there. This data is like going up. So some graphs is there. So that is you will be working in the front end for the function. So those functions you have to create like a standalone helper functions. You have to create, which is the operate the data in view. And I'll tell you one real time example. When I got the data from this, uh, when we throw the PDF to the, our AI and interacted and gave all the data, the data was very high given. Let me put the charger.
+
+[05:31 PM] Interviewee
+Yeah. So the data was very high. So what I actually do, I use the web workers. So web worker is work. I don't block the main, uh, like, uh, uh, like.
+
+[05:31 PM] Interviewee
+Main, uh, like, uh, like, uh, like what? Uh, main threshold of the like j s it will work standalone. And when the process, like it will process in data, it will give you the result and everything. So web workers also, you can use to like optimizations and everything, uh, in the react app, uh, like, uh.
+
+[05:32 PM] Interviewee
+What else I can do? Like, okay. Uh, back.
+
+[05:32 PM] Interviewee
+End, uh, client direct library. We can have directly, uh, like we can go with the library or we can ask the backend also to do it. Backend also have the, this feature implemented on the back side, like, uh, like AWS and Azure will throw the API will upload the API to the, like, uh, backend where the storage and the backend will take it from there. And then it will do. I'll give you how we used to do, but there is more optimization where I'll tell you. So we have there our front end, which is upload the PDF, we have S3, and then we have our AI. So when you upload the PDF will go to S3. And then S3 will trigger the AI that okay, one new PDF have arrived. And then the extraction will happen. And in there we will run the same API with some, uh, like, uh, throttling, like with some interval to a, in that the response will come processing, processing, processing. In that time, we will showing, okay, it is processing like user will be like having a skeleton view or some loading view. So he can relax, uh, like for some time. And once the process is completed, the API will throw okay, completed and the data will come. Okay. And then that data.
+
+[05:33 PM] Interviewee
+And virtualization. And I have told you so that we will do. Additionally what we can do like OCR, uh.
+
+[05:33 PM] Interviewee
+Uh. Like, uh.
+
+[05:33 PM] Interviewee
+Catching the value. I told you the performance and like, uh, loading. We can saw. And then, uh, large scale, like sensitive data or something is there. So like, like we can like, uh, like secure it. Like why like HIPPA compliant, like we can do. So this is what we can do actually. So there are two processes. Either you can use front end library, you can depend on the backend. Also backend also same, but doing it the back end will give you more security than directly hitting the API from the front end. So backend also can store the data log it. Okay, which uh, user uploaded the which PDF at what time, which date back and also have the record maintained, but front end will not maintain the record. So, uh, best way to do it is having the all the OCR technology implemented in the backend and the backend will give you the API to the front end, and the front end will hit that API whenever it is required to extract the OCR. Yeah.
+
+[05:34 PM] Interviewer 1
+Okay. And have you worked with HR, HR documents also?
+
+[05:34 PM] AI
+💬 **Question**: Have I worked with HR documents?
+
+---
+
+⭐️ **Answer**: Yes, I have experience working with HR documents, particularly in the context of document automation and OCR processing. For example, at Sapper Software, I worked on AI-powered document intake platforms used by financial institutions, which often included handling various types of documents such as insurance forms, financial statements, and HR-related documents. This involved building scalable React SPAs that integrated OCR pipelines to extract and process data from complex documents, including HR forms.
+
+I am familiar with challenges like handling multi-page documents, extracting structured data from unstructured forms, and ensuring data privacy and security—important for sensitive HR information. I have also implemented dynamic UI engines that allow non-engineers to configure new document templates without code changes, which is very useful for adapting to different HR document formats.
+
+If needed, I can elaborate on how I would approach building or improving an HR document processing workflow using OCR and React, including backend integration, caching, and performance optimizations.
+
+[05:34 PM] Interviewee
+Electronical health medical report.
+
+[05:34 PM] Interviewer 1
+Records. Yes.
+
+[05:34 PM] Interviewee
+Yes. Yes, ma'am. I worked.
+
+[05:34 PM] Interviewer 1
+So what. So what, what did you do with those documents? Like what all.
+
+[05:34 PM] AI
+💬 **Question**: What did I do with HR or records documents? What all tasks did I perform with those documents?
+
+---
+
+⭐️ **Answer**: With HR and records documents, my work primarily involved automating the intake, processing, and extraction of data from these documents using OCR and React-based frontend solutions. Specifically:
+
+- I integrated OCR-to-JSON pipelines that converted scanned or uploaded HR documents into structured data, significantly reducing manual data entry and analyst rework.
+- I built scalable React SPAs that handled multi-step workflows for processing thousands of documents, ensuring smooth user experience even with large datasets.
+- I developed dynamic UI engines that allowed non-technical users to configure new document templates, making it easy to adapt to different HR document formats without code changes.
+- I implemented frontend features like skeleton loaders and status indicators to keep users informed during document processing, improving usability.
+- I ensured data security and compliance by working with backend APIs that handled sensitive document storage and processing, maintaining audit logs and access controls.
+- Performance optimizations such as caching and virtualization were applied to handle large volumes of data efficiently.
+
+This end-to-end approach helped streamline HR document workflows, improve accuracy, and reduce processing time.
+
+[05:34 PM] Interviewee
+Like a. So, uh.
+
+[05:34 PM] Interviewee
+Uh.
+
+[05:34 PM] Interviewee
+So OCR and Json, uh, like I explained, you like converted. Uploading documents and everything. I like, uh, like a specifically, can you tell me what you wanted in that? Like I work in the, but what you wanted to know about it.
+
+[05:35 PM] Interviewer 1
+So for the who have performed in those HR documents only like that. Okay.
+
+[05:35 PM] Interviewee
+So like.
+
+[05:35 PM] Interviewer 1
+Okay.
+
+[05:35 PM] Interviewee
+I think we are discussing that only. So.
+
+[05:35 PM] Interviewer 1
+Yes.
+
+[05:35 PM] Interviewer 1
+Okay.
+
+[05:35 PM] Interviewee
+
+
+[05:35 PM] Interviewer 1
+And is.
+
+[05:35 PM] Interviewer 1
+Your app is connected with, like, Cerner or Epic. All those.
+
+[05:35 PM] Interviewee
+Come again ma'am?
+
+[05:35 PM] Interviewer 1
+Side is your app is connected with like Epic or Cerner system. Also.
+
+[05:35 PM] Interviewee
+Uh.
+
+[05:35 PM] Interviewee
+No. Uh, like I'm not getting
+
+[05:35 PM] Interviewer 1
+Okay.
+
+[05:35 PM] Interviewee
+you. Can you like little specifically, can you concern different vocabulary or something? So I'll explain you better.
+
+[05:35 PM] Interviewer 1
+So like for like client data, we use that Cerner Cerner system to store those healthcare data. So like that. So.
+
+[05:35 PM] Interviewee
+Okay. Okay. Okay. So hello. So we are not using that. We are having like our repository
+
+[05:35 PM] Interviewer 1
+Okay.
+
+[05:35 PM] Interviewee
+being created on the Amazon Web services. And we are storing over there. That is also very secure nowadays. Uh, there like for some specific data like you wanted to do some analytics as well. You just don't want to store only you want to perform some actions over there. Like you want to extract data in. So there are better approach. Also, there.
+
+[05:36 PM] Interviewer 1
+Okay. Okay. And how will you secure patient healthcare data?
+
+[05:36 PM] Interviewee
+Patient health care data. Okay.
+
+[05:36 PM] AI
+💬 **Question**: How will I secure patient healthcare data?
+
+---
+
+⭐️ **Answer**: Securing patient healthcare data is critical, especially to comply with regulations like HIPAA. Here is how I approach it:
+
+- **Role-Based Access Control (RBAC):** I implement strict RBAC layers on the frontend and backend to ensure users only access data relevant to their roles (e.g., admin, clinician, coach). This prevents unauthorized data exposure.
+- **Backend API Security:** Sensitive data processing, including OCR and analytics, is done on the backend. The frontend only interacts with secure APIs, never directly accessing raw data stores.
+- **Data Encryption:** Data is encrypted both at rest (e.g., AWS S3 with encryption) and in transit (using HTTPS/TLS) to protect against interception or leaks.
+- **Audit Logging:** Backend systems maintain detailed logs of who accessed or modified patient data and when, supporting traceability and compliance.
+- **Secure Cloud Infrastructure:** Using trusted cloud providers like AWS with HIPAA-compliant services ensures physical and network security, along with regular security audits.
+- **Minimizing Frontend Exposure:** The frontend never stores sensitive data locally beyond what is necessary for the session, and caches are carefully managed or avoided for sensitive info.
+- **Regular Security Reviews:** I collaborate with security teams to conduct code reviews, penetration testing, and vulnerability assessments to identify and fix potential risks.
+
+In my recent project at Resolute.Ai, I designed an enterprise-grade RBAC system securing HIPAA-aligned patient data across multiple user roles, ensuring personalized dashboards without compromising data isolation. This layered approach balances usability with strong security guarantees.
+
+[05:36 PM] Interviewee
+So. Like rollbacks, uh, role based access control. I have to give data encryption. I can do secure cloud infrastructure. We can use like Azure and everything. S3 and if you are using and like backend API security, I have to use token based. I have to do. But the, uh, tokens should not store. I should not use local. Local memory of the browser at all. Everything secure should be take on the secure server side. I have to secure, uh, minimizing front end exposure. I can do, uh, regular security review. I can do like front end, never store should never store the sensitive data. Should be like, uh, like we can access it, but should not store in the front end and the catching also catching. Also, we have to do only those data, which are like, uh, like some, uh, like see in health system users detail his policies and his, all the sensitive information should not be available. And if it is there in the browser, anybody can like see it and everything. So it should having a very. Like less exposure time, let's say the data will expire after a certain time that we can do. But the. Uh, you should, uh, login mechanism need to be very strong role based access should be very strong. Role based access is like two way street go. You will do to the front end, but the front end, how it work is like you will remove some element from the dome, like in the navigation, and you will hide some elements. But the backend should be very, uh, like, uh, it's actually the back responsibility to do give what data actually ask how front end, uh, front end side, the security we can do like not storing the data. Second, we can do like, uh, like minimizing front end structure like.
+
+[05:37 PM] Interviewee
+The regular security, like going for the r XSS security.
+
+[05:38 PM] Interviewee
+Checks and Csrf to like cross site scripting everything like nobody can see our, our data, anything over there. Uh, data encryption is also very important how data encryption we can do, uh, if we can do in the front end level. So let's say if I am going to send my data to the server and the server is going to send data. So we, we can encrypt it and then send or the server directly give us the encrypted data. And we should have a key to decrypt it, which is like JWT token. Everything. And for each API. Also we can encrypt if the very sensitive data is like money involved. So that we can do, uh.
+
+[05:38 PM] Interviewee
+Backend API security, we can do like, uh.

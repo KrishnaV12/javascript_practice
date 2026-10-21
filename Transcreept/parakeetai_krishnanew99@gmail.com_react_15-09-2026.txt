@@ -1,0 +1,104 @@
+ParakeetAI Timeline Export
+Exported: 9/15/2026, 7:39:12 PM
+
+[05:07 PM] You
+useEffect(() => {     axios       .get("https://dog.ceo/api/breeds/image/random")       .then((res) => {         console.log(res);         setImageData(res);       })       .catch((err) => console.log(err));   }, []); , create react app with trottle on scroll image should stact one by one
+
+[05:07 PM] AI
+💬 **Question**: How to create a React app that fetches random dog images and stacks them one by one on scroll with throttling?
+
+---
+
+⭐️ **Answer**: To build a React app that fetches random dog images and stacks them one by one as the user scrolls, with throttling to limit API calls, I would:
+
+- Use the `useEffect` hook to fetch the initial image.
+- Store the images in a state array to render them stacked.
+- Add a scroll event listener to detect when the user scrolls near the bottom.
+- Use a throttle function to limit how often the scroll handler triggers API calls.
+- On scroll, fetch a new random dog image and append it to the images array.
+- Clean up the scroll listener on component unmount.
+
+Here is a sample implementation:
+
+```jsx
+import React, { useState, useEffect, useCallback } from "react";
+import axios from "axios";
+
+// Throttle function to limit how often a function can run
+function throttle(func, delay) {
+  let lastCall = 0;
+  return function (...args) {
+    const now = new Date().getTime();
+    if (now - lastCall < delay) return;
+    lastCall = now;
+    func(...args);
+  };
+}
+
+function DogImageStack() {
+  const [images, setImages] = useState([]);
+
+  // Function to fetch a random dog image and add to state
+  const fetchImage = useCallback(() => {
+    axios
+      .get("https://dog.ceo/api/breeds/image/random")
+      .then((res) => {
+        if (res.data && res.data.message) {
+          setImages((prev) => [...prev, res.data.message]);
+        }
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  useEffect(() => {
+    // Fetch initial image on mount
+    fetchImage();
+
+    // Scroll handler to detect near bottom and fetch new image
+    const handleScroll = throttle(() => {
+      const scrollTop = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const fullHeight = document.documentElement.scrollHeight;
+
+      // If user scrolled near bottom (e.g., within 100px), fetch new image
+      if (scrollTop + windowHeight + 100 >= fullHeight) {
+        fetchImage();
+      }
+    }, 1000); // throttle delay 1 second
+
+    window.addEventListener("scroll", handleScroll);
+
+    // Cleanup listener on unmount
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [fetchImage]);
+
+  return (
+    <div style={{ maxWidth: 600, margin: "auto" }}>
+      {images.map((src, idx) => (
+        <img
+          key={idx}
+          src={src}
+          alt="Random Dog"
+          style={{ width: "100%", marginBottom: 16, borderRadius: 8 }}
+        />
+      ))}
+    </div>
+  );
+}
+
+export default DogImageStack;
+```
+
+**Explanation:**
+
+- I keep an array of image URLs in state to render them stacked vertically.
+- The scroll event triggers a throttled handler that checks if the user is near the bottom of the page.
+- When near bottom, it fetches a new random dog image and appends it to the list.
+- Throttling prevents excessive API calls during fast scrolling.
+- The initial image is fetched on component mount.
+- This approach ensures images load one by one as the user scrolls down, stacking vertically.
+
+This matches my experience building performant React SPAs with efficient data fetching and UI updates.
+
+[05:07 PM] Interviewee
+Go go go go go.

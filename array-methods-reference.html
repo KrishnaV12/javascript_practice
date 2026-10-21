@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>JavaScript Array Methods — JS &amp; React Reference</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#10131a;
+    --panel:#171b24;
+    --panel-code:#0d0f15;
+    --border:#262b3a;
+    --border-soft:#1e2230;
+    --text:#e8e6e3;
+    --text-dim:#a3a7b8;
+    --text-faint:#6b7080;
+    --font-ui:'Space Grotesk', sans-serif;
+    --font-mono:'JetBrains Mono', monospace;
+    --syn-comment:#6b7280;
+    --syn-string:#9fd888;
+    --syn-number:#e0b15c;
+    --syn-keyword:#7aa2e0;
+    --syn-tag:#e07aa0;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-ui);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+
+  /* ---------- hero ---------- */
+  .hero{max-width:880px;margin:0 auto;padding:72px 24px 32px;}
+  .kicker{
+    font-family:var(--font-mono);
+    font-size:13px;
+    color:#a897dd;
+    display:inline-block;
+    padding:4px 10px;
+    border:1px solid #352f4a;
+    border-radius:4px;
+    background:rgba(142,124,195,0.08);
+    margin-bottom:20px;
+  }
+  h1{
+    font-size:clamp(30px,4.6vw,46px);
+    line-height:1.12;
+    margin:0 0 16px;
+    font-weight:600;
+    letter-spacing:-0.01em;
+    max-width:16ch;
+  }
+  .hero p.lead{
+    font-size:17px;
+    color:var(--text-dim);
+    max-width:62ch;
+    margin:0 0 28px;
+  }
+  .search-wrap{position:relative;max-width:420px;margin-bottom:12px;}
+  .search-icon{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--text-faint);pointer-events:none;}
+  input#search{
+    width:100%;
+    padding:12px 16px 12px 40px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:8px;
+    color:var(--text);
+    font-family:var(--font-mono);
+    font-size:14px;
+  }
+  input#search::placeholder{color:var(--text-faint);}
+  input#search:focus-visible{outline:2px solid var(--syn-keyword);outline-offset:2px;}
+  .hero .note{font-size:13px;color:var(--text-faint);max-width:60ch;}
+
+  /* ---------- chip nav ---------- */
+  .chip-nav{
+    display:flex;gap:8px;overflow-x:auto;
+    padding:0 24px 22px;max-width:1040px;margin:0 auto;
+    scrollbar-width:none;
+  }
+  .chip-nav::-webkit-scrollbar{display:none;}
+  .chip{
+    flex:0 0 auto;
+    font-family:var(--font-mono);
+    font-size:13px;
+    padding:8px 14px;
+    border-radius:20px;
+    border:1px solid var(--border);
+    background:var(--panel);
+    color:var(--text-dim);
+    cursor:pointer;
+    white-space:nowrap;
+    transition:border-color .15s, color .15s, background .15s;
+  }
+  .chip:hover{color:var(--text);}
+  .chip:focus-visible{outline:2px solid var(--syn-keyword);outline-offset:2px;}
+
+  .results-count{
+    max-width:1040px;margin:0 auto;padding:0 24px 6px;
+    color:var(--text-faint);font-size:13px;font-family:var(--font-mono);
+  }
+
+  /* ---------- sections & cards ---------- */
+  main{max-width:1040px;margin:0 auto;padding:8px 24px 60px;}
+  .section{margin-top:52px;}
+  .section-head{
+    display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 14px;
+    margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border-soft);
+  }
+  .section-head h2{font-size:21px;margin:0;font-weight:600;}
+  .section-verb{font-family:var(--font-mono);font-size:14px;}
+  .section-count{margin-left:auto;font-size:12px;color:var(--text-faint);font-family:var(--font-mono);}
+
+  .card-grid{display:flex;flex-direction:column;gap:16px;}
+
+  .method-card{
+    border:1px solid var(--border);
+    border-left:3px solid var(--accent);
+    border-radius:6px;
+    background:var(--panel);
+    padding:20px 22px;
+  }
+  .card-head{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-bottom:10px;}
+  .method-name{font-family:var(--font-mono);font-size:18px;font-weight:600;margin:0;color:#fff;}
+  .method-sig{
+    font-family:var(--font-mono);font-size:12.5px;color:var(--text-dim);
+    background:var(--panel-code);padding:3px 8px;border-radius:4px;
+  }
+  .effect-badge{
+    font-size:11px;font-family:var(--font-mono);
+    padding:3px 8px;border-radius:4px;margin-left:auto;white-space:nowrap;
+  }
+  .method-desc{color:var(--text-dim);font-size:14.5px;margin:0 0 16px;max-width:74ch;}
+
+  .code-compare{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+  @media (max-width:700px){.code-compare{grid-template-columns:1fr;}}
+
+  .code-panel{background:var(--panel-code);border:1px solid var(--border-soft);border-radius:6px;overflow:hidden;}
+  .code-panel-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:7px 12px;border-bottom:1px solid var(--border-soft);
+    font-family:var(--font-mono);font-size:11.5px;color:var(--text-faint);
+  }
+  .copy-btn{
+    background:transparent;border:1px solid var(--border);color:var(--text-faint);
+    font-family:var(--font-mono);font-size:11px;padding:3px 8px;border-radius:4px;cursor:pointer;
+  }
+  .copy-btn:hover{color:var(--text);border-color:var(--text-faint);}
+  .copy-btn:focus-visible{outline:2px solid var(--syn-keyword);}
+  pre{margin:0;padding:14px;overflow-x:auto;}
+  code{font-family:var(--font-mono);font-size:12.8px;line-height:1.6;white-space:pre;}
+
+  .tok-comment{color:var(--syn-comment);font-style:italic;}
+  .tok-string{color:var(--syn-string);}
+  .tok-number{color:var(--syn-number);}
+  .tok-keyword{color:var(--syn-keyword);}
+  .tok-tag{color:var(--syn-tag);}
+  .method-card .tok-call{color:var(--accent);font-weight:600;}
+
+  .empty-state{text-align:center;padding:70px 24px;color:var(--text-faint);font-family:var(--font-mono);}
+
+  .to-top{
+    position:fixed;right:20px;bottom:20px;
+    width:40px;height:40px;border-radius:50%;
+    background:var(--panel);border:1px solid var(--border);color:var(--text-dim);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;
+    opacity:0;pointer-events:none;transition:opacity .2s;
+  }
+  .to-top.visible{opacity:1;pointer-events:auto;}
+  .to-top:hover{color:var(--text);}
+  .to-top:focus-visible{outline:2px solid var(--syn-keyword);}
+
+  footer{
+    text-align:center;padding:36px 24px 56px;color:var(--text-faint);
+    font-size:13px;font-family:var(--font-mono);border-top:1px solid var(--border-soft);
+  }
+</style>
+</head>
+<body>
+
+<header class="hero" id="top">
+  <span class="kicker">Array.prototype</span>
+  <h1>Every array method, shown two ways</h1>
+  <p class="lead">A working reference for all 35 JavaScript array methods and properties — what each one does, a plain JavaScript example, and how it looks inside a React component.</p>
+  <div class="search-wrap">
+    <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    <input id="search" type="text" placeholder="Search push, reduce, flat…" autocomplete="off">
+  </div>
+  <p class="note">React snippets assume React and its hooks (useState, useEffect, useMemo) are already imported.</p>
+</header>
+
+<nav class="chip-nav" id="chipNav"></nav>
+<p class="results-count" id="resultsCount"></p>
+
+<main id="app"></main>
+
+<button class="to-top" id="toTop" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="19" x2="12" y2="5"></line><polyline points="5 12 12 5 19 12"></polyline></svg>
+</button>
+
+<footer>Quick reference for the JS Array prototype — search or filter above to jump to a method.</footer>
+
+<script>
+/* =========================================================
+   DATA
+   ========================================================= */
+
+const CATEGORIES = [
+  { id:'creation',        label:'Creating arrays',              verb:'creates()',     color:'#8e7cc3' },
+  { id:'mutators-add',     label:'Adding & removing elements',   verb:'resizes()',     color:'#dc5a4e' },
+  { id:'mutators-reorder', label:'Reordering & filling',         verb:'reshapes()',    color:'#e0954d' },
+  { id:'accessors',        label:'Reading & extracting',         verb:'reads()',       color:'#45a597' },
+  { id:'search',           label:'Searching & testing',          verb:'searches()',    color:'#4c8dc0' },
+  { id:'transform',        label:'Transforming & iterating',     verb:'transforms()',  color:'#6fa86f' },
+  { id:'iterators',        label:'Stepping through with iterators', verb:'steps()',    color:'#d46fa8' },
+  { id:'property',         label:'Properties',                   verb:'describes()',   color:'#8b8fa3' },
+];
+
+const EFFECTS = {
+  mutates:   { label:'mutates the array',    color:'#dc5a4e' },
+  immutable: { label:'original unchanged',   color:'#45a597' },
+  static:    { label:'static Array method',  color:'#8e7cc3' },
+  property:  { label:'property',             color:'#8b8fa3' },
+};
+
+const METHODS = [
+  {
+    id:'array-from', name:'Array.from()', category:'creation', effect:'static',
+    signature:'Array.from(arrayLike, mapFn?)',
+    description:`Builds a brand new array out of something that isn't one yet — an array-like object, a string, a Set, a Map, anything iterable — with an optional mapping function applied on the way in.`,
+    js:`const letters = Array.from('hello');
+console.log(letters); // ['h', 'e', 'l', 'l', 'o']
+
+const doubled = Array.from({ length: 5 }, (_, i) => i * 2);
+console.log(doubled); // [0, 2, 4, 6, 8]`,
+    react:`function StarRating({ max = 5, value }) {
+  const stars = Array.from({ length: max }, (_, i) => i < value);
+  return (
+    <div>
+      {stars.map((filled, i) => (
+        <span key={i}>{filled ? '★' : '☆'}</span>
+      ))}
+    </div>
+  );
+}`
+  },
+  {
+    id:'array-of', name:'Array.of()', category:'creation', effect:'static',
+    signature:'Array.of(...items)',
+    description:`Creates an array from whatever arguments you pass, no matter how many or what type. Unlike new Array(7), which makes an empty array of length 7, Array.of(7) makes a one-item array.`,
+    js:`const a = Array.of(7);
+console.log(a); // [7]
+
+const b = new Array(7);
+console.log(b.length); // 7, but every slot is empty`,
+    react:`function useTags(...initial) {
+  const [tags, setTags] = useState(() => Array.of(...initial));
+  return [tags, setTags];
+}
+// useTags('react', 'hooks') starts state as ['react', 'hooks']`
+  },
+  {
+    id:'array-isarray', name:'Array.isArray()', category:'creation', effect:'static',
+    signature:'Array.isArray(value)',
+    description:`Checks whether a value is genuinely an array. This matters because typeof returns "object" for arrays too, so it can't tell them apart on its own.`,
+    js:`console.log(Array.isArray([1, 2, 3])); // true
+console.log(Array.isArray('1,2,3'));  // false`,
+    react:`function List({ items }) {
+  if (!Array.isArray(items)) return <p>No items to show.</p>;
+  return <ul>{items.map((item, i) => <li key={i}>{item}</li>)}</ul>;
+}`
+  },
+
+  {
+    id:'push', name:'push()', category:'mutators-add', effect:'mutates',
+    signature:'arr.push(item1, ..., itemN)',
+    description:`Adds one or more items to the end of the array and returns the array's new length. It changes the array in place.`,
+    js:`const cart = ['pen', 'notebook'];
+const newLength = cart.push('eraser', 'ruler');
+console.log(cart);      // ['pen', 'notebook', 'eraser', 'ruler']
+console.log(newLength); // 4`,
+    react:`function ShoppingCart() {
+  const [items, setItems] = useState(['pen']);
+  const addItem = (name) => {
+    setItems(prev => {
+      const next = [...prev];
+      next.push(name);
+      return next;
+    });
+  };
+  return <button onClick={() => addItem('notebook')}>Add notebook</button>;
+}`
+  },
+  {
+    id:'pop', name:'pop()', category:'mutators-add', effect:'mutates',
+    signature:'arr.pop()',
+    description:`Removes the last item from the array and hands it back to you. The array's length shrinks by one.`,
+    js:`const queue = ['a', 'b', 'c'];
+const last = queue.pop();
+console.log(last);  // 'c'
+console.log(queue); // ['a', 'b']`,
+    react:`function UndoStack({ history, setHistory }) {
+  const undo = () => {
+    setHistory(prev => {
+      const copy = [...prev];
+      copy.pop();
+      return copy;
+    });
+  };
+  return <button onClick={undo}>Undo last change</button>;
+}`
+  },
+  {
+    id:'shift', name:'shift()', category:'mutators-add', effect:'mutates',
+    signature:'arr.shift()',
+    description:`Removes the first item from the array and returns it, sliding every remaining item down one position.`,
+    js:`const line = ['Amir', 'Bo', 'Cleo'];
+const next = line.shift();
+console.log(next); // 'Amir'
+console.log(line); // ['Bo', 'Cleo']`,
+    react:`function TicketQueue({ queue, setQueue }) {
+  const serveNext = () => {
+    setQueue(prev => {
+      const copy = [...prev];
+      copy.shift();
+      return copy;
+    });
+  };
+  return <button onClick={serveNext}>Serve next customer</button>;
+}`
+  },
+  {
+    id:'unshift', name:'unshift()', category:'mutators-add', effect:'mutates',
+    signature:'arr.unshift(item1, ..., itemN)',
+    description:`Adds one or more items to the front of the array and returns the new length, pushing every existing item to a higher index.`,
+    js:`const steps = ['mix', 'bake'];
+steps.unshift('preheat oven');
+console.log(steps); // ['preheat oven', 'mix', 'bake']`,
+    react:`function ActivityFeed() {
+  const [events, setEvents] = useState(['Signed up']);
+  const logEvent = (msg) => {
+    setEvents(prev => {
+      const next = [...prev];
+      next.unshift(msg);
+      return next;
+    });
+  };
+  return <button onClick={() => logEvent('Logged in')}>Log in</button>;
+}`
+  },
+  {
+    id:'splice', name:'splice()', category:'mutators-add', effect:'mutates',
+    signature:'arr.splice(start, deleteCount, ...items)',
+    description:`The all-purpose editor: removes, replaces, or inserts elements at any position in the array, and returns whatever was removed.`,
+    js:`const todos = ['wash car', 'buy milk', 'call mom'];
+const removed = todos.splice(1, 1, 'buy groceries');
+console.log(todos);   // ['wash car', 'buy groceries', 'call mom']
+console.log(removed); // ['buy milk']`,
+    react:`function TodoList({ todos, setTodos }) {
+  const removeAt = (index) => {
+    setTodos(prev => {
+      const copy = [...prev];
+      copy.splice(index, 1);
+      return copy;
+    });
+  };
+  return todos.map((t, i) => <li key={i} onClick={() => removeAt(i)}>{t}</li>);
+}`
+  },
+
+  {
+    id:'reverse', name:'reverse()', category:'mutators-reorder', effect:'mutates',
+    signature:'arr.reverse()',
+    description:`Flips the order of the array's elements in place, so the last item becomes the first.`,
+    js:`const order = [1, 2, 3];
+order.reverse();
+console.log(order); // [3, 2, 1]`,
+    react:`function RecentSearches({ searches }) {
+  const newestFirst = [...searches].reverse(); // copy first, then reverse
+  return <ul>{newestFirst.map((s, i) => <li key={i}>{s}</li>)}</ul>;
+}`
+  },
+  {
+    id:'sort', name:'sort()', category:'mutators-reorder', effect:'mutates',
+    signature:'arr.sort(compareFn?)',
+    description:`Sorts the elements in place. Without a compare function it sorts elements as strings alphabetically, so numbers almost always need one.`,
+    js:`const scores = [40, 5, 100, 25];
+scores.sort((a, b) => a - b);
+console.log(scores); // [5, 25, 40, 100]`,
+    react:`function Leaderboard({ players }) {
+  const ranked = [...players].sort((a, b) => b.score - a.score);
+  return ranked.map(p => <div key={p.id}>{p.name}: {p.score}</div>);
+}`
+  },
+  {
+    id:'fill', name:'fill()', category:'mutators-reorder', effect:'mutates',
+    signature:"arr.fill(value, start?, end?)",
+    description:`Overwrites a stretch of the array with a fixed value, from a start index up to (but not including) an end index.`,
+    js:`const board = new Array(9).fill(null);
+board.fill('X', 0, 3);
+console.log(board); // ['X','X','X',null,null,null,null,null,null]`,
+    react:`function GridBoard({ size = 9 }) {
+  const [cells, setCells] = useState(() => Array(size).fill(''));
+  const clearBoard = () => setCells(Array(size).fill(''));
+  return <button onClick={clearBoard}>Reset board</button>;
+}`
+  },
+  {
+    id:'copywithin', name:'copyWithin()', category:'mutators-reorder', effect:'mutates',
+    signature:'arr.copyWithin(target, start?, end?)',
+    description:`Copies a slice of the array over another part of the same array, in place, without changing the array's length.`,
+    js:`const seq = ['a', 'b', 'c', 'd', 'e'];
+seq.copyWithin(0, 3);
+console.log(seq); // ['d', 'e', 'c', 'd', 'e']`,
+    react:`function useSlidingWindow(initial) {
+  const [buffer, setBuffer] = useState(initial);
+  const shiftLeft = () => setBuffer(prev => {
+    const copy = [...prev];
+    copy.copyWithin(0, 1);
+    return copy;
+  });
+  return [buffer, shiftLeft];
+}`
+  },
+
+  {
+    id:'at', name:'at()', category:'accessors', effect:'immutable',
+    signature:'arr.at(index)',
+    description:`Returns the element at a given index, and accepts negative numbers to count back from the end — arr.at(-1) is always the last item.`,
+    js:`const colors = ['red', 'green', 'blue'];
+console.log(colors.at(-1)); // 'blue'`,
+    react:`function Breadcrumb({ path }) {
+  const current = path.at(-1); // last segment, no length math needed
+  return <span>{current}</span>;
+}`
+  },
+  {
+    id:'slice', name:'slice()', category:'accessors', effect:'immutable',
+    signature:'arr.slice(start?, end?)',
+    description:`Returns a shallow copy of a portion of the array, from a start index up to (but not including) an end index, without touching the original.`,
+    js:`const letters = ['a', 'b', 'c', 'd', 'e'];
+console.log(letters.slice(1, 3)); // ['b', 'c']`,
+    react:`function Pagination({ items, page, pageSize }) {
+  const start = page * pageSize;
+  const visible = items.slice(start, start + pageSize);
+  return visible.map((item, i) => <li key={i}>{item}</li>);
+}`
+  },
+  {
+    id:'concat', name:'concat()', category:'accessors', effect:'immutable',
+    signature:'arr.concat(arr2, ..., arrN)',
+    description:`Merges two or more arrays into a brand new array, leaving all of the originals untouched.`,
+    js:`const a = [1, 2];
+const b = [3, 4];
+console.log(a.concat(b, [5])); // [1, 2, 3, 4, 5]`,
+    react:`function CombinedFeed({ posts, ads }) {
+  const feed = posts.concat(ads);
+  return feed.map((item, i) => <div key={i}>{item.title}</div>);
+}`
+  },
+  {
+    id:'join', name:'join()', category:'accessors', effect:'immutable',
+    signature:'arr.join(separator?)',
+    description:`Glues every element into a single string, separated by whatever separator you pass in — a comma by default.`,
+    js:`const path = ['usr', 'local', 'bin'];
+console.log(path.join('/')); // 'usr/local/bin'`,
+    react:`function TagList({ tags }) {
+  return <p title={tags.join(', ')}>{tags.length} tags</p>;
+}`
+  },
+  {
+    id:'tostring', name:'toString()', category:'accessors', effect:'immutable',
+    signature:'arr.toString()',
+    description:`Converts the array to a comma-separated string — functionally the same as calling join() with no arguments.`,
+    js:`const nums = [1, 2, 3];
+console.log(nums.toString()); // '1,2,3'`,
+    react:`function DebugLabel({ values }) {
+  return <code>{values.toString()}</code>;
+}`
+  },
+  {
+    id:'flat', name:'flat()', category:'accessors', effect:'immutable',
+    signature:'arr.flat(depth?)',
+    description:`Flattens nested arrays into a single array, up to a depth you choose (or Infinity to flatten everything).`,
+    js:`const nested = [1, [2, 3], [4, [5, 6]]];
+console.log(nested.flat(2)); // [1, 2, 3, 4, 5, 6]`,
+    react:`function Comments({ threads }) {
+  // threads is an array of arrays of replies
+  const allReplies = threads.flat();
+  return <p>{allReplies.length} total replies</p>;
+}`
+  },
+
+  {
+    id:'indexof', name:'indexOf()', category:'search', effect:'immutable',
+    signature:'arr.indexOf(value, fromIndex?)',
+    description:`Finds the position of the first matching element using strict equality, or -1 if nothing matches.`,
+    js:`const fruits = ['fig', 'kiwi', 'plum', 'kiwi'];
+console.log(fruits.indexOf('kiwi')); // 1`,
+    react:`function StepIndicator({ steps, current }) {
+  const activeIndex = steps.indexOf(current);
+  return <p>Step {activeIndex + 1} of {steps.length}</p>;
+}`
+  },
+  {
+    id:'lastindexof', name:'lastIndexOf()', category:'search', effect:'immutable',
+    signature:'arr.lastIndexOf(value, fromIndex?)',
+    description:`The same idea as indexOf(), but searches from the end of the array backward — useful when a value might appear more than once.`,
+    js:`const fruits = ['fig', 'kiwi', 'plum', 'kiwi'];
+console.log(fruits.lastIndexOf('kiwi')); // 3`,
+    react:`function ChatLog({ messages, systemFlag }) {
+  const lastSystemMsg = messages.lastIndexOf(systemFlag);
+  return <p>Last system message at #{lastSystemMsg}</p>;
+}`
+  },
+  {
+    id:'includes', name:'includes()', category:'search', effect:'immutable',
+    signature:'arr.includes(value, fromIndex?)',
+    description:`Checks whether an array contains a value at all, returning true or false — and unlike indexOf(), it can correctly find NaN.`,
+    js:`const roles = ['admin', 'editor'];
+console.log(roles.includes('admin')); // true`,
+    react:`function NavLink({ path }) {
+  const allowed = ['/', '/about', '/contact'];
+  if (!allowed.includes(path)) return null;
+  return <a href={path}>{path}</a>;
+}`
+  },
+  {
+    id:'find', name:'find()', category:'search', effect:'immutable',
+    signature:'arr.find(testFn)',
+    description:`Returns the first element that satisfies a test function, or undefined if no element does.`,
+    js:`const users = [{ id: 1, active: false }, { id: 2, active: true }];
+const firstActive = users.find(u => u.active);
+console.log(firstActive); // { id: 2, active: true }`,
+    react:`function UserCard({ users, userId }) {
+  const user = users.find(u => u.id === userId);
+  if (!user) return <p>User not found</p>;
+  return <p>{user.name}</p>;
+}`
+  },
+  {
+    id:'findindex', name:'findIndex()', category:'search', effect:'immutable',
+    signature:'arr.findIndex(testFn)',
+    description:`Like find(), but returns the index of the first matching element instead of the element itself, or -1 if none match.`,
+    js:`const tasks = [{ done: true }, { done: false }];
+const idx = tasks.findIndex(t => !t.done);
+console.log(idx); // 1`,
+    react:`function TaskList({ tasks, setTasks }) {
+  const completeNext = () => {
+    const idx = tasks.findIndex(t => !t.done);
+    if (idx === -1) return;
+    setTasks(prev => prev.map((t, i) => (i === idx ? { ...t, done: true } : t)));
+  };
+  return <button onClick={completeNext}>Complete next task</button>;
+}`
+  },
+  {
+    id:'some', name:'some()', category:'search', effect:'immutable',
+    signature:'arr.some(testFn)',
+    description:`Tests whether at least one element passes a check, stopping and returning true as soon as it finds a match.`,
+    js:`const cart = [{ price: 0 }, { price: 20 }];
+console.log(cart.some(item => item.price === 0)); // true`,
+    react:`function CheckoutButton({ cart }) {
+  const hasFreeItem = cart.some(item => item.price === 0);
+  return <button disabled={hasFreeItem}>Checkout</button>;
+}`
+  },
+  {
+    id:'every', name:'every()', category:'search', effect:'immutable',
+    signature:'arr.every(testFn)',
+    description:`Tests whether every element passes a check, returning true only if all of them do.`,
+    js:`const form = [{ valid: true }, { valid: true }];
+console.log(form.every(field => field.valid)); // true`,
+    react:`function SubmitButton({ fields }) {
+  const canSubmit = fields.every(f => f.valid);
+  return <button disabled={!canSubmit}>Submit</button>;
+}`
+  },
+
+  {
+    id:'foreach', name:'forEach()', category:'transform', effect:'immutable',
+    signature:'arr.forEach(callbackFn)',
+    description:`Runs a function once for every element, purely for side effects. It always returns undefined, so it's not for building a new array.`,
+    js:`const nums = [1, 2, 3];
+nums.forEach(n => console.log(n * 2)); // logs 2, 4, 6`,
+    react:`function useLogChanges(list) {
+  useEffect(() => {
+    list.forEach(item => console.log('rendered', item));
+  }, [list]);
+}`
+  },
+  {
+    id:'map', name:'map()', category:'transform', effect:'immutable',
+    signature:'arr.map(callbackFn)',
+    description:`Builds a new array by running a function on every element — the workhorse for turning raw data into UI.`,
+    js:`const prices = [10, 20, 30];
+const withTax = prices.map(p => p * 1.08);
+console.log(withTax); // [10.8, 21.6, 32.4]`,
+    react:`function PriceList({ prices }) {
+  return (
+    <ul>
+      {prices.map(price => (
+        <li key={price}>\${(price * 1.08).toFixed(2)}</li>
+      ))}
+    </ul>
+  );
+}`
+  },
+  {
+    id:'filter', name:'filter()', category:'transform', effect:'immutable',
+    signature:'arr.filter(testFn)',
+    description:`Builds a new array containing only the elements that pass a test function.`,
+    js:`const inventory = [{ stock: 0 }, { stock: 5 }];
+const inStock = inventory.filter(item => item.stock > 0);
+console.log(inStock.length); // 1`,
+    react:`function InStockList({ products }) {
+  const available = products.filter(p => p.stock > 0);
+  return available.map(p => <li key={p.id}>{p.name}</li>);
+}`
+  },
+  {
+    id:'reduce', name:'reduce()', category:'transform', effect:'immutable',
+    signature:'arr.reduce(callbackFn, initialValue?)',
+    description:`Walks through the array left to right, combining every element into a single accumulated result.`,
+    js:`const cart = [{ price: 10 }, { price: 25 }];
+const total = cart.reduce((sum, item) => sum + item.price, 0);
+console.log(total); // 35`,
+    react:`function CartTotal({ items }) {
+  const total = items.reduce((sum, item) => sum + item.price, 0);
+  return <p>Total: \${total.toFixed(2)}</p>;
+}`
+  },
+  {
+    id:'reduceright', name:'reduceRight()', category:'transform', effect:'immutable',
+    signature:'arr.reduceRight(callbackFn, initialValue?)',
+    description:`Works exactly like reduce(), but walks through the array from the last element to the first.`,
+    js:`const parts = ['World', 'Hello, '];
+const sentence = parts.reduceRight((acc, part) => acc + part, '');
+console.log(sentence); // 'Hello, World'`,
+    react:`function BreadcrumbPath({ segments }) {
+  const path = segments.reduceRight((acc, seg) => seg + '/' + acc, '');
+  return <code>{path}</code>;
+}`
+  },
+  {
+    id:'flatmap', name:'flatMap()', category:'transform', effect:'immutable',
+    signature:'arr.flatMap(callbackFn)',
+    description:`Maps each element to a new value and flattens the result by one level in a single pass — handy when the mapping function itself returns an array.`,
+    js:`const sentences = ['hi there', 'good bye'];
+const words = sentences.flatMap(s => s.split(' '));
+console.log(words); // ['hi', 'there', 'good', 'bye']`,
+    react:`function TagCloud({ posts }) {
+  const allTags = posts.flatMap(post => post.tags);
+  return <p>{new Set(allTags).size} unique tags</p>;
+}`
+  },
+
+  {
+    id:'keys', name:'keys()', category:'iterators', effect:'immutable',
+    signature:'arr.keys()',
+    description:`Returns an iterator over the array's indexes, which you can step through with for...of or spread into a real array.`,
+    js:`const arr = ['a', 'b', 'c'];
+console.log([...arr.keys()]); // [0, 1, 2]`,
+    react:`function IndexedList({ items }) {
+  return [...items.keys()].map(i => <li key={i}>Row {i}: {items[i]}</li>);
+}`
+  },
+  {
+    id:'values', name:'values()', category:'iterators', effect:'immutable',
+    signature:'arr.values()',
+    description:`Returns an iterator over the array's values, so you can step through each element one at a time with for...of.`,
+    js:`const arr = ['a', 'b', 'c'];
+for (const v of arr.values()) console.log(v); // 'a', then 'b', then 'c'`,
+    react:`function usePlayback(frames) {
+  const iterator = useMemo(() => frames.values(), [frames]);
+  const next = () => iterator.next().value;
+  return next;
+}`
+  },
+  {
+    id:'entries', name:'entries()', category:'iterators', effect:'immutable',
+    signature:'arr.entries()',
+    description:`Returns an iterator of [index, value] pairs, giving you both position and content at each step.`,
+    js:`const arr = ['x', 'y'];
+for (const [i, v] of arr.entries()) console.log(i, v); // 0 'x', then 1 'y'`,
+    react:`function NumberedList({ items }) {
+  return [...items.entries()].map(([i, item]) => (
+    <li key={i}>{i + 1}. {item}</li>
+  ));
+}`
+  },
+
+  {
+    id:'length', name:'length', category:'property', effect:'property',
+    signature:'arr.length',
+    description:`A property, not a method, that reports how many elements are in the array. Setting it directly can even truncate the array.`,
+    js:`const arr = ['a', 'b', 'c'];
+console.log(arr.length); // 3
+
+arr.length = 1;
+console.log(arr); // ['a']`,
+    react:`function Counter({ items }) {
+  return <span>{items.length} item{items.length !== 1 ? 's' : ''}</span>;
+}`
+  },
+];
+
+/* =========================================================
+   RENDERING
+   ========================================================= */
+
+const state = { category:'all', query:'' };
+
+function escapeHtml(str){
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function highlight(code){
+  const escaped = escapeHtml(code);
+  const pattern = /(\/\/[^\n]*)|(`(?:\\[\s\S]|[^`\\])*`)|('(?:\\.|[^'\\])*')|("(?:\\.|[^"\\])*")|(&lt;\/?[A-Za-z][\w.]*)|(\b\d+(?:\.\d+)?\b)|(\b(?:const|let|var|function|return|if|else|for|of|in|new|class|extends|import|from|export|default|this|true|false|null|undefined|typeof|instanceof|await|async|try|catch|finally|throw|switch|case|break|continue|do|while|yield|static)\b)|([A-Za-z_$][\w$]*)(?=\()/g;
+  return escaped.replace(pattern, (m, comment, tmpl, single, double, tag, number, keyword, call) => {
+    if (comment) return `<span class="tok-comment">${comment}</span>`;
+    if (tmpl)    return `<span class="tok-string">${tmpl}</span>`;
+    if (single)  return `<span class="tok-string">${single}</span>`;
+    if (double)  return `<span class="tok-string">${double}</span>`;
+    if (tag)     return `<span class="tok-tag">${tag}</span>`;
+    if (number)  return `<span class="tok-number">${number}</span>`;
+    if (keyword) return `<span class="tok-keyword">${keyword}</span>`;
+    if (call)    return `<span class="tok-call">${call}</span>`;
+    return m;
+  });
+}
+
+function cardHtml(m, accent){
+  const fx = EFFECTS[m.effect];
+  return `
+    <article class="method-card" style="--accent:${accent}">
+      <div class="card-head">
+        <h3 class="method-name">${escapeHtml(m.name)}</h3>
+        <code class="method-sig">${escapeHtml(m.signature)}</code>
+        <span class="effect-badge" style="color:${fx.color};border:1px solid ${fx.color}66;background:${fx.color}14;">${fx.label}</span>
+      </div>
+      <p class="method-desc">${escapeHtml(m.description)}</p>
+      <div class="code-compare">
+        <div class="code-panel">
+          <div class="code-panel-head"><span>JavaScript</span><button class="copy-btn" data-id="${m.id}" data-field="js">Copy</button></div>
+          <pre><code>${highlight(m.js)}</code></pre>
+        </div>
+        <div class="code-panel">
+          <div class="code-panel-head"><span>React</span><button class="copy-btn" data-id="${m.id}" data-field="react">Copy</button></div>
+          <pre><code>${highlight(m.react)}</code></pre>
+        </div>
+      </div>
+    </article>`;
+}
+
+function render(){
+  const app = document.getElementById('app');
+  const q = state.query.trim().toLowerCase();
+  const filtered = METHODS.filter(m=>{
+    const matchesCat = state.category === 'all' || m.category === state.category;
+    const matchesQuery = !q ||
+      m.name.toLowerCase().includes(q) ||
+      m.description.toLowerCase().includes(q) ||
+      m.signature.toLowerCase().includes(q);
+    return matchesCat && matchesQuery;
+  });
+
+  document.getElementById('resultsCount').textContent =
+    `Showing ${filtered.length} of ${METHODS.length} methods and properties`;
+
+  if(filtered.length === 0){
+    app.innerHTML = `<div class="empty-state">No methods match "${escapeHtml(state.query)}". Try a different search.</div>`;
+    return;
+  }
+
+  app.innerHTML = CATEGORIES.map(cat=>{
+    const items = filtered.filter(m=>m.category===cat.id);
+    if(items.length===0) return '';
+    return `
+      <section class="section" id="${cat.id}">
+        <div class="section-head">
+          <h2>${cat.label}</h2>
+          <span class="section-verb" style="color:${cat.color}">${cat.verb}</span>
+          <span class="section-count">${items.length} ${items.length===1?'method':'methods'}</span>
+        </div>
+        <div class="card-grid">${items.map(m=>cardHtml(m, cat.color)).join('')}</div>
+      </section>`;
+  }).join('');
+
+  attachCopyHandlers();
+}
+
+function attachCopyHandlers(){
+  document.querySelectorAll('.copy-btn').forEach(btn=>{
+    btn.addEventListener('click', async ()=>{
+      const m = METHODS.find(x=>x.id===btn.dataset.id);
+      const text = btn.dataset.field === 'js' ? m.js : m.react;
+      const original = btn.textContent;
+      try{
+        await navigator.clipboard.writeText(text);
+        btn.textContent = 'Copied';
+      }catch(e){
+        btn.textContent = 'Select & copy';
+      }
+      setTimeout(()=>{ btn.textContent = original; }, 1400);
+    });
+  });
+}
+
+function buildChipNav(){
+  const nav = document.getElementById('chipNav');
+  const chips = [];
+
+  const allChip = document.createElement('button');
+  allChip.className = 'chip';
+  allChip.textContent = 'All methods';
+  allChip.dataset.cat = 'all';
+  allChip.dataset.color = '#e8e6e3';
+  nav.appendChild(allChip);
+  chips.push(allChip);
+
+  CATEGORIES.forEach(cat=>{
+    const chip = document.createElement('button');
+    chip.className = 'chip';
+    chip.textContent = cat.label;
+    chip.dataset.cat = cat.id;
+    chip.dataset.color = cat.color;
+    nav.appendChild(chip);
+    chips.push(chip);
+  });
+
+  function setActive(activeBtn){
+    chips.forEach(btn=>{
+      const isActive = btn === activeBtn;
+      const color = btn.dataset.color;
+      btn.style.borderColor = isActive ? color : 'var(--border)';
+      btn.style.background = isActive ? color + '22' : 'var(--panel)';
+      btn.style.color = isActive ? '#ffffff' : 'var(--text-dim)';
+    });
+  }
+  setActive(allChip);
+
+  nav.addEventListener('click', e=>{
+    const btn = e.target.closest('.chip');
+    if(!btn) return;
+    setActive(btn);
+    state.category = btn.dataset.cat;
+    render();
+  });
+}
+
+document.getElementById('search').addEventListener('input', e=>{
+  state.query = e.target.value;
+  render();
+});
+
+const toTopBtn = document.getElementById('toTop');
+window.addEventListener('scroll', ()=>{
+  toTopBtn.classList.toggle('visible', window.scrollY > 600);
+});
+toTopBtn.addEventListener('click', ()=>{
+  window.scrollTo({ top:0, behavior:'smooth' });
+});
+
+buildChipNav();
+render();
+</script>
+</body>
+</html>

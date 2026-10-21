@@ -56,7 +56,7 @@ console.log(racers.join(".")); // "max.niki.alonso"
 
 const set1 = [10, 20];
 const set2 = [30, 60];
-console.log(set1 + set2); // '10203036'
+console.log(set1 + set2); // '10203060'
 
 const result = set1.concat(set2); //
 console.log(result); // return new array with new value [10 ,20 ,30 ,60]
@@ -73,8 +73,8 @@ console.log(mix.length); // 6
 // array destructering
 
 var num = [10, 20, 43, 34, 45, 23, 54];
-var v1 = number[0];
-var v2 = number[2];
+var v1 =num[0];
+var v2 =num[2];
 console.log(v1, v2); // 10 20
 
 // es-6 way

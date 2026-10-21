@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Data Structures &amp; Algorithms — a reference for frontend engineers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+
+    --bg: #EBEDEE;
+    --bg-elevated: #FFFFFF;
+    --text: #1B1E24;
+    --text-dim: #5B616C;
+    --line: rgba(27,30,36,0.14);
+    --accent: #26796C;
+    --accent-soft: rgba(38,121,108,0.12);
+    --amber: #B4680A;
+    --amber-soft: rgba(180,104,10,0.12);
+    --rose: #B23F42;
+    --rose-soft: rgba(178,63,66,0.12);
+    --code-bg: #1B1E24;
+    --code-text: #E8E6DE;
+    --code-line: rgba(232,230,222,0.12);
+    --code-dim: #8B93A1;
+
+    --serif: 'IBM Plex Serif', Georgia, 'Times New Roman', serif;
+    --sans: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14171C;
+      --bg-elevated: #1A1E24;
+      --text: #E8E6DE;
+      --text-dim: #9BA1AC;
+      --line: rgba(232,230,222,0.14);
+      --accent: #5FC9B8;
+      --accent-soft: rgba(95,201,184,0.14);
+      --amber: #E8A63D;
+      --amber-soft: rgba(232,166,61,0.14);
+      --rose: #E2726F;
+      --rose-soft: rgba(226,114,111,0.14);
+      --code-bg: #10131A;
+      --code-line: rgba(232,230,222,0.10);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #14171C;
+    --bg-elevated: #1A1E24;
+    --text: #E8E6DE;
+    --text-dim: #9BA1AC;
+    --line: rgba(232,230,222,0.14);
+    --accent: #5FC9B8;
+    --accent-soft: rgba(95,201,184,0.14);
+    --amber: #E8A63D;
+    --amber-soft: rgba(232,166,61,0.14);
+    --rose: #E2726F;
+    --rose-soft: rgba(226,114,111,0.14);
+    --code-bg: #10131A;
+    --code-line: rgba(232,230,222,0.10);
+  }
+
+  html { scroll-padding-top: calc(96px + env(safe-area-inset-top, 0px)); }
+  *, *::before, *::after { box-sizing: inherit; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: var(--accent); }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 50;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar__row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 24px;
+  }
+  .topbar__mark {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text-dim);
+    white-space: nowrap;
+    flex: none;
+  }
+  .topbar__mark b { color: var(--accent); font-weight: 600; }
+  .chips {
+    display: flex;
+    gap: 6px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .chips::-webkit-scrollbar { display: none; }
+  .chip {
+    flex: none;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--text-dim);
+    text-decoration: none;
+    padding: 5px 10px;
+    border-radius: 100px;
+    border: 1px solid var(--line);
+    white-space: nowrap;
+    transition: border-color .15s, color .15s;
+  }
+  .chip:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* ---------- hero ---------- */
+  .hero {
+    padding: 56px 0 40px;
+    border-bottom: 1px solid var(--line);
+    animation: rise .5s ease-out;
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    margin: 0 0 14px;
+  }
+  .hero p.lede {
+    font-size: 16.5px;
+    color: var(--text-dim);
+    max-width: 56ch;
+    margin: 0;
+  }
+  .hero .tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 4px 10px;
+    border-radius: 5px;
+    margin-bottom: 18px;
+  }
+
+  /* ---------- contents ---------- */
+  .contents {
+    padding: 36px 0 44px;
+    border-bottom: 1px solid var(--line);
+  }
+  .contents h2 {
+    font-family: var(--serif);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-dim);
+    margin: 0 0 16px;
+  }
+  .toc-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px 24px;
+  }
+  .toc-list li a {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    text-decoration: none;
+    color: var(--text);
+    padding: 7px 0;
+    border-bottom: 1px solid transparent;
+  }
+  .toc-list li a:hover { color: var(--accent); }
+  .toc-list .num {
+    font-family: var(--mono);
+    font-size: 12.5px;
+    color: var(--text-dim);
+    flex: none;
+    width: 20px;
+  }
+  .toc-list .name { font-size: 14.5px; }
+
+  /* ---------- sections ---------- */
+  section.chapter {
+    padding: 52px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  section.chapter:last-of-type { border-bottom: none; }
+
+  .chapter__head {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+  .chapter__num {
+    font-family: var(--serif);
+    font-size: 15px;
+    color: var(--text-dim);
+    padding-top: 6px;
+    flex: none;
+    width: 26px;
+  }
+  .chapter__title h3 {
+    font-family: var(--serif);
+    font-size: 25px;
+    font-weight: 600;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+  }
+  .badges { display: flex; gap: 6px; flex-wrap: wrap; }
+  .badge {
+    font-family: var(--mono);
+    font-size: 12px;
+    padding: 3px 8px;
+    border-radius: 5px;
+    white-space: nowrap;
+  }
+  .badge.good { color: var(--accent); background: var(--accent-soft); }
+  .badge.mid  { color: var(--amber); background: var(--amber-soft); }
+  .badge.bad  { color: var(--rose); background: var(--rose-soft); }
+
+  .chapter p { margin: 0 0 14px; color: var(--text); }
+  .chapter ul.points {
+    margin: 0 0 18px;
+    padding-left: 20px;
+  }
+  .chapter ul.points li { margin-bottom: 6px; color: var(--text); }
+  .chapter ul.points li::marker { color: var(--text-dim); }
+
+  .aside {
+    border-left: 2px solid var(--accent);
+    background: var(--accent-soft);
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    font-size: 14px;
+    color: var(--text);
+    margin: 18px 0;
+  }
+  .aside b { color: var(--accent); font-weight: 600; }
+
+  /* ---------- code blocks ---------- */
+  .code-block {
+    background: var(--code-bg);
+    border: 1px solid var(--code-line);
+    border-radius: 8px;
+    overflow: hidden;
+    margin: 16px 0;
+  }
+  .code-block__bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--code-line);
+  }
+  .code-block__bar span {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--code-dim);
+    letter-spacing: 0.04em;
+  }
+  .copy-btn {
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--code-dim);
+    background: transparent;
+    border: 1px solid var(--code-line);
+    border-radius: 5px;
+    padding: 3px 9px;
+    cursor: pointer;
+    transition: color .15s, border-color .15s;
+  }
+  .copy-btn:hover { color: var(--code-text); border-color: var(--code-dim); }
+  .code-block pre {
+    margin: 0;
+    padding: 14px 16px;
+    overflow-x: auto;
+  }
+  .code-block code {
+    font-family: var(--mono);
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--code-text);
+    white-space: pre;
+  }
+  .cm { color: #7C8698; }          /* comment */
+
+  /* ---------- cheat sheet table ---------- */
+  .cheat-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13.5px;
+    margin-top: 8px;
+  }
+  .cheat-table th {
+    text-align: left;
+    font-family: var(--mono);
+    font-weight: 500;
+    font-size: 12px;
+    color: var(--text-dim);
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  .cheat-table td {
+    padding: 9px 10px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: middle;
+  }
+  .cheat-table td:first-child { color: var(--text); font-weight: 500; }
+  .cheat-table .m { font-family: var(--mono); font-size: 12.5px; }
+  .table-scroll { overflow-x: auto; border-radius: 8px; }
+
+  /* ---------- footer ---------- */
+  footer {
+    padding: 40px 0 64px;
+    color: var(--text-dim);
+    font-size: 13.5px;
+  }
+
+  /* ---------- back to top ---------- */
+  .top-btn {
+    position: fixed;
+    right: 20px;
+    bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--bg-elevated);
+    border: 1px solid var(--line);
+    color: var(--text-dim);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .2s, color .15s, border-color .15s;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    z-index: 40;
+    font-size: 16px;
+  }
+  .top-btn.show { opacity: 1; pointer-events: auto; }
+  .top-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+  @media (max-width: 560px) {
+    .hero h1 { font-size: 32px; }
+    .toc-list { grid-template-columns: 1fr; }
+    .chapter__title h3 { font-size: 22px; }
+    .wrap { padding: 0 18px; }
+    .topbar__row { padding: 10px 18px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero { animation: none; }
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar__row">
+    <div class="topbar__mark"><b>DSA</b> · for React devs</div>
+    <nav class="chips">
+      <a class="chip" href="#big-o">01 Big O</a>
+      <a class="chip" href="#arrays">02 Arrays</a>
+      <a class="chip" href="#linked-lists">03 Linked lists</a>
+      <a class="chip" href="#stacks">04 Stacks</a>
+      <a class="chip" href="#queues">05 Queues</a>
+      <a class="chip" href="#hash-maps">06 Hash maps</a>
+      <a class="chip" href="#recursion">07 Recursion</a>
+      <a class="chip" href="#trees">08 Trees</a>
+      <a class="chip" href="#heaps">09 Heaps</a>
+      <a class="chip" href="#graphs">10 Graphs</a>
+      <a class="chip" href="#sorting">11 Sorting</a>
+      <a class="chip" href="#searching">12 Searching</a>
+      <a class="chip" href="#two-pointers">13 Two pointers</a>
+      <a class="chip" href="#sliding-window">14 Sliding window</a>
+      <a class="chip" href="#dp">15 DP</a>
+      <a class="chip" href="#cheat-sheet">16 Cheat sheet</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <span class="tag">theory + one example each</span>
+    <h1>Data Structures &amp; Algorithms</h1>
+    <p class="lede">You already think in arrays, objects, and recursion — you use them to build UIs every day. This reframes that knowledge as the fifteen ideas that show up in interviews and underneath the frameworks you use, each with the concept, its complexity, and one small JS example.</p>
+  </header>
+
+  <nav class="contents" aria-label="Table of contents">
+    <h2>Contents</h2>
+    <ol class="toc-list">
+      <li><a href="#big-o"><span class="num">01</span><span class="name">Big O notation</span></a></li>
+      <li><a href="#arrays"><span class="num">02</span><span class="name">Arrays</span></a></li>
+      <li><a href="#linked-lists"><span class="num">03</span><span class="name">Linked lists</span></a></li>
+      <li><a href="#stacks"><span class="num">04</span><span class="name">Stacks</span></a></li>
+      <li><a href="#queues"><span class="num">05</span><span class="name">Queues</span></a></li>
+      <li><a href="#hash-maps"><span class="num">06</span><span class="name">Hash maps</span></a></li>
+      <li><a href="#recursion"><span class="num">07</span><span class="name">Recursion</span></a></li>
+      <li><a href="#trees"><span class="num">08</span><span class="name">Trees</span></a></li>
+      <li><a href="#heaps"><span class="num">09</span><span class="name">Heaps</span></a></li>
+      <li><a href="#graphs"><span class="num">10</span><span class="name">Graphs</span></a></li>
+      <li><a href="#sorting"><span class="num">11</span><span class="name">Sorting algorithms</span></a></li>
+      <li><a href="#searching"><span class="num">12</span><span class="name">Searching</span></a></li>
+      <li><a href="#two-pointers"><span class="num">13</span><span class="name">Two pointers</span></a></li>
+      <li><a href="#sliding-window"><span class="num">14</span><span class="name">Sliding window</span></a></li>
+      <li><a href="#dp"><span class="num">15</span><span class="name">Dynamic programming</span></a></li>
+      <li><a href="#cheat-sheet"><span class="num">16</span><span class="name">Complexity cheat sheet</span></a></li>
+    </ol>
+  </nav>
+
+  <!-- 01 BIG O -->
+  <section class="chapter" id="big-o">
+    <div class="chapter__head">
+      <div class="chapter__num">01</div>
+      <div class="chapter__title">
+        <h3>Big O notation</h3>
+        <div class="badges">
+          <span class="badge good">describes growth, not speed</span>
+        </div>
+      </div>
+    </div>
+    <p>Big O describes how the <b>runtime or memory</b> of an operation grows as the input grows — not how fast it runs on your machine. It ignores constants and focuses on the worst case, so you can compare two approaches independent of hardware.</p>
+    <ul class="points">
+      <li><b>O(1)</b> — constant. Same cost no matter the input size.</li>
+      <li><b>O(log n)</b> — logarithmic. The input is cut down each step (binary search).</li>
+      <li><b>O(n)</b> — linear. One pass over the input.</li>
+      <li><b>O(n log n)</b> — the cost of most good sorting algorithms.</li>
+      <li><b>O(n²)</b> — quadratic. A loop inside a loop.</li>
+      <li><b>O(2ⁿ)</b> — exponential. Doubles with every extra input item; avoid this.</li>
+    </ul>
+    <div class="aside"><b>Frontend angle —</b> this is exactly the instinct behind “don’t call <code>.find()</code> inside a <code>.map()</code>” or “memoize this selector.” Big O is the vocabulary for why that re-render fix mattered.</div>
+    <div class="code-block">
+      <div class="code-block__bar"><span>complexity.js</span><button class="copy-btn" type="button">Copy</button></div>
+      <pre><code><span class="cm">// O(1) — constant, doesn't grow with input size</span>
+function first(arr) {
+  return arr[0];
+}
+
+<span class="cm">// O(n) — linear, one pass through the input</span>
+function sum(arr) {
+  let total = 0;
+  for (let i = 0; i &lt; arr.length; i++) {
+    total += arr[i];
+  }
+  return total;
+}
+
+<span class="cm">// O(n²) — quadratic, nested loop over the input</span>
+function hasDuplicate(arr) {
+  for (let i = 0; i &lt; arr.length; i++) {
+    for (let j = i + 1; j &lt; arr.length; j++) {
+      if (arr[i] === arr[j]) return true;
+    }
+  }
+  return false;
+}
+
+<span class="cm">// O(log n) — the input is halved each step</span>
+function binarySearch(sorted, target) {
+  let lo = 0, hi = sorted.length - 1;
+  while (lo &lt;= hi) {
+    const mid = (lo + hi) &gt;&gt; 1;
+    if (sorted[mid] === target) return mid;
+    if (sorted[mid] &lt; target) lo = mid + 1;
+    else hi = mid - 1;
+  }
+  return -1;
+}</code></pre>
+    </div>
+  </section>
+
+  <!-- 02 ARRAYS -->
+  <section class="chapter" id="arrays">
+    <div class="chapter__head">
+      <div class="chapter__num">02</div>
+      <div class="chapter__title">
+        <h3>Arrays</h3>
+        <div class="badges">
+          <span class="badge good">access O(1)</span>
+          <span class="badge mid">search O(n)</span>
+          <span class="badge mid">insert at start O(n)</span>
+        </div>
+      </div>
+    </div>
+    <p>Elements sit in contiguous memory, indexed from zero. That layout is what makes direct access instant — the engine just computes an offset. Anything that shifts every other element, like inserting at the front, costs a full pass.</p>
+    <div class="aside"><b>Frontend angle —</b> this is <code>state</code> in a React list, and it's why keying by array index breaks when items reorder — the index is a memory-layout detail, not an identity.</div>
+    <div class="code-block">
+      <div class="code-block__bar"><span>arrays.js</span><button class="copy-btn" type="button">Copy</button></div>
+      <pre><code>const arr = [10, 20, 30];
+
+arr[1];           <span class="cm">// O(1) — direct index access</span>
+arr.push(40);     <span class="cm">// O(1) amortized — add to the end</span>
+arr.pop();         <span class="cm">// O(1) — remove from the end</span>
+arr.unshift(5);    <span class="cm">// O(n) — every element shifts right</span>
+arr.indexOf(30);   <span class="cm">// O(n) — linear scan to find a value</span></code></pre>
+    </div>
+  </section>
+
+  <!-- 03 LINKED LISTS -->
+  <section class="chapter" id="linked-lists">
+    <div class="chapter__head">
+      <div class="chapter__num">03</div>
+      <div class="chapter__title">
+        <h3>Linked lists</h3>
+        <div class="badges">
+          <span class="badge good">insert/delete at known node O(1)</span>
+          <span class="badge mid">access/search O(n)</span>
+        </div>
+      </div>
+    </div>
+    <p>Each node holds a value and a pointer to the next node — no contiguous memory required. That trade flips the array's strengths: no O(1) index access, but inserting or removing a node (once you're holding it) doesn't shift anything else. A <b>doubly</b> linked list adds a <code>prev</code> pointer too, so you can walk backwards.</p>
+    <div class="aside"><b>Frontend angle —</b> the DOM itself uses linked-list style pointers (<code>nextSibling</code>, <code>previousSibling</code>), and it's the shape behind an LRU cache or an undo/redo history.</div>
+    <div class="code-block">
+      <div class="code-block__bar"><span>linked-list.js</span><button class="copy-btn" type="button">Copy</button></div>
+      <pre><code>class ListNode {
+  constructor(value) {
+    this.value = value;
+    this.next = null;
+  }
+}
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+  }
+
+  append(value) {                <span class="cm">// O(n) without a tail pointer</span>
+    const node = new ListNode(value);
+    if (!this.head) {
+      this.head = node;
+      return;
+    }
+    let current = this.head;
+    while (current.next) {
+      current = current.next;
+    }
+    current.next = node;
+  }
+
+  toArray() {                    <span class="cm">// O(n)</span>
+    const values = [];
+    let current = this.head;
+    while (current) {
+      values.push(current.value);
+      current = current.next;
+    }
+    return values;
+  }
+}
+
+const list = new LinkedList();
+list.append(1);
+list.append(2);
+list.append(3);
+list.toArray(); <span class="cm">// [1, 2, 3]</span></code></pre>
+    </div>
+  </section>
+
+  <!-- 04 STACKS -->
+  <section class="chapter" id="stacks">
+    <div class="chapter__head">
+      <div class="chapter__num">04</div>
+      <div class="chapter__title">
+        <h3>Stacks</h3>
+        <div class="badges">
+          <span class="badge good">push / pop / peek O(1)</span>
+        </div>
+      </div>
+    </div>
+    <p><b>LIFO</b> — last in, first out. You only ever add or remove from the top. It's the structure behind the call stack itself, undo history, and matching up nested pairs like brackets or tags.</p>
+    <div class="aside"><b>Frontend angle —</b> the JS call stack that gives you stack traces, and modal/route history where “back” pops the last thing pushed.</div>
+    <div class="code-block">
+      <div class="code-block__bar"><span>stack.js</span><button class="copy-btn" type="button">Copy</button></div>
+      <pre><code><span class="cm">// classic use: check that brackets are balanced</span>
+function isBalanced(str) {
+  const stack = [];
+  const pairs = { ')': '(', ']': '[', '}': '{' };
+
+  for (const char of str) {
+    if (char === '(' || char === '[' || char === '{') {
+      stack.push(char);
+    } else if (char in pairs) {
+      if (stack.pop() !== pairs[char]) return false;
+    }
+  }
+  return stack.length === 0;
+}
+
+isBalanced('{[()]}'); <span class="cm">// true</span>
+isBalanced('{[(])}'); <span class="cm">// false</span></code></pre>
+    </div>
+  </section>
+
+  <!-- 05 QUEUES -->
+  <section class="chapter" id="queues">
+    <div class="chapter__head">
+      <div class="chapter__num">05</div>
+      <div class="chapter__title">
+        <h3>Queues</h3>
+        <div class="badges">
+          <span class="badge good">enqueue O(1)</span>
+          <span class="badge mid">dequeue O(n) on an array</span>
+        </div>
+      </div>
+    </div>
+    <p><b>FIFO</b> — first in, first out. Add at the back, remove from the front. Note that <code>Array.shift()</code> is actually O(n) because every remaining item shifts down one slot — for a true O(1) dequeue you'd back it with a linked list or a moving start index instead.</p>
+    <div class="aside"><b>Frontend angle —</b> a task queue for rate-limited API calls, or the order events get flushed in an event loop.</div>
+    <div class="code-block">
+      <div class="code-block__bar"><span>queue.js</span><button class="copy-btn" type="button">Copy</button></div>
+      <pre><code>class Queue {
+  constructor() {
+    this.items = [];
+  }
+  enqueue(value) { this.items.push(value); }  <span class="cm">// O(1)</span>
+  dequeue() { return this.items.shift(); }     <span class="cm">// O(n) — array shifts</span>
+  peek() { return this.items[0]; }
+}
+
+const queue = new Queue();
+queue.enqueue('a');
+queue.enqueue('b');
+queue.dequeue(); <span class="cm">// 'a'</span></code></pre>
+    </div>
+  </section>
+
+  <!-- 06 HASH MAPS -->
+  <section class="chapter" id="hash-maps">
+    <div class="chapter__head">
+      <div class="chapter__num">06</div>
+      <div class="chapter__title">
+        <h3>Hash maps</h3>
+        <div class="badges">
+          <span class="badge good">get / set / delete O(1) average</span>
+        </div>
+      </div>
+    </div>
+    <p>A key-value store where the key is hashed to compute where the value lives, giving average O(1) lookup. This is the single highest-leverage trick in interview DSA: swapping a nested loop for one pass plus a map turns O(n²) into O(n). In JS, reach for <code>Map</code> (any key type, ordered) or a plain object (string/symbol keys).</p>
+    <div class="aside"><b>Frontend angle —</b> memoizing selectors, deduping props by id, building lookup tables instead of calling <code>.find()</code> in a loop.</div>
+    <div class="code-block">
+      <div class="code-block__bar"><span>two-sum.js</span><button class="copy-btn" type="button">Copy</button></div>
+      <pre><code>function twoSum(nums, target) {
+  const seen = new Map(); <span class="cm">// value -&gt; index</span>
+
+  for (let i = 0; i &lt; nums.length; i++) {
+    const complement = target - nums[i];
+    if (seen.has(complement)) {
+      return [seen.get(complement), i];
+    }
+    seen.set(nums[i], i);
+  }
+  return [];
+}
+
+twoSum([2, 7, 11, 15], 9); <span class="cm">// [0, 1] — O(n) instead of O(n²)</span></code></pre>
+    </div>
+  </section>
+
+  <!-- 07 RECURSION -->
+  <section class="chapter" id="recursion">
+    <div class="chapter__head">
+      <div class="chapter__num">07</div>
+      <div class="chapter__title">
+        <h3>Recursion</h3>
+        <div class="badges">
+          <span class="badge mid">uses the call stack — watch depth</span>
+        </div>
+      </div>
+    </div>
+    <p>A function that calls itself on a smaller version of the problem, until it hits a <b>base case</b> that stops it. Every call sits on the call stack until it returns, so recursion trades explicit loops for implicit stack usage — powerful for tree- and graph-shaped problems, riskier for very deep or very large inputs.</p>
+    <div class="aside"><b>Frontend angle —</b> this is how you'd walk a nested comments tree, a JSON schema, or React's own element tree during reconciliation.</div>
+    <div class="code-block">
+      <div class="code-block__bar"><span>recursion.js</span><button class="copy-btn" type="button">Copy</button></div>
+      <pre><code>function factorial(n) {
+  if (n &lt;= 1) return 1;         <span class="cm">// base case</span>
+  return n * factorial(n - 1);  <span class="cm">// recursive case</span>
+}
+
+factorial(5); <span class="cm">// 120</span></code></pre>
+    </div>
+  </section>
+
+  <!-- 08 TREES -->
+  <section class="chapter" id="trees">
+    <div class="chapter__head">
+      <div class="chapter__num">08</div>
+      <div class="chapter__title">
+        <h3>Trees</h3>
+        <div class="badges">
+          <span class="badge good">balanced BST search O(log n)</span>
+          <span class="badge bad">worst case O(n) if unbalanced</span>
+        </div>
+      </div>
+    </div>
+    <p>A hierarchical structure: one root, each node with child nodes, no cycles. A <b>binary search tree</b> (BST) keeps every left child smaller and every right child larger, which is what makes search fast. The three depth-first walks are <b>preorder</b> (node, left, right), <b>inorder</b> (left, node, right — visits a BST in sorted order), and <b>postorder</b> (left, right, node); a <b>level-order</b> walk (breadth-first) visits row by row using a queue.</p>
+    <div class="aside"><b>Frontend angle —</b> the DOM is a tree, React's fiber tree is a tree, and any nested menu, file explorer, or org chart in your UI is one too.</div>
+    <div class="code-block">
+      <div class="code-block__bar"><span>bst.js</span><button class="copy-btn" type="button">Copy</button></div>
+      <pre><code>class TreeNode {
+  constructor(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+function insert(root, value) {
+  if (!root) return new TreeNode(value);
+  if (value &lt; root.value) root.left = insert(root.left, value);
+  else root.right = insert(root.right, value);
+  return root;
+}
+
+function inorder(root, result = []) {
+  if (!root) return result;
+  inorder(root.left, result);
+  result.push(root.value);
+  inorder(root.right, result);
+  return result;
+}
+
+let root = null;
+[5, 3, 8, 1, 4].forEach(n =&gt; { root = insert(root, n); });
+inorder(root); <span class="cm">// [1, 3, 4, 5, 8] — sorted, because it's a BST</span></code></pre>
+    </div>
+  </section>
+
+  <!-- 09 HEAPS -->
+  <section class="chapter" id="heaps">
+    <div class="chapter__head">
+      <div class="chapter__num">09</div>
+      <div class="chapter__title">
+        <h3>Heaps</h3>
+        <div class="badges">
+          <span class="badge good">peek min/max O(1)</span>
+          <span class="badge mid">real insert/pop O(log n)</span>
+        </div>
+      </div>
+    </div>
+    <p>A heap is a tree, usually stored as a flat array, that only guarantees one thing: in a <b>min-heap</b>, every parent is smaller than its children (the reverse for a max-heap) — so the smallest item is always at the root. That's what makes it the engine behind a <b>priority queue</b>. JS has no built-in heap; a real implementation sifts the new item up or down the array in O(log n). The version below trades that for clarity by re-sorting on every push.</p>
+    <div class="aside"><b>Frontend angle —</b> a "load the nearest N items first" queue, task schedulers, or picking the top-k results from a search without sorting the whole list.</div>
+    <div class="code-block">
+      <div class="code-block__bar"><span>min-heap.js</span><button class="copy-btn" type="button">Copy</button></div>
+      <pre><code><span class="cm">// simplified for clarity — sorts on every push (O(n log n) per insert).</span>
+<span class="cm">// a real heap sifts the new item up/down the array in O(log n) instead.</span>
+class MinHeap {
+  constructor() { this.items = []; }
+
+  push(value) {
+    this.items.push(value);
+    this.items.sort((a, b) =&gt; a - b);
+  }
+
+  pop() {
+    return this.items.shift(); <span class="cm">// smallest is always at the front</span>
+  }
+}
+
+const heap = new MinHeap();
+[5, 1, 4, 2].forEach(n =&gt; heap.push(n));
+heap.pop(); <span class="cm">// 1</span></code></pre>
+    </div>
+  </section>
+
+  <!-- 10 GRAPHS -->
+  <section class="chapter" id="graphs">
+    <div class="chapter__head">
+      <div class="chapter__num">10</div>
+      <div class="chapter__title">
+        <h3>Graphs</h3>
+        <div class="badges">
+          <span class="badge mid">BFS / DFS traversal O(V + E)</span>
+        </div>
+      </div>
+    </div>
+    <p>Nodes (vertices) connected by edges, which may be directed or undirected, weighted or not. A tree is really just a graph with no cycles. The two core traversals are <b>BFS</b> (breadth-first, using a queue — explores neighbor by neighbor, finds the shortest path in an unweighted graph) and <b>DFS</b> (depth-first, using a stack or recursion — follows one path as deep as it goes before backtracking).</p>
+    <div class="aside"><b>Frontend angle —</b> a component dependency graph, a routing/state machine, or the "who follows whom" shape of a social feed.</div>
+    <div class="code-block">
+      <div class="code-block__bar"><span>bfs.js</span><button class="copy-btn" type="button">Copy</button></div>
+      <pre><code>const graph = {
+  A: ['B', 'C'],
+  B: ['A', 'D'],
+  C: ['A', 'D'],
+  D: ['B', 'C'],
+};
+
+function bfs(graph, start) {
+  const visited = new Set([start]);
+  const queue = [start];
+  const order = [];
+
+  while (queue.length) {
+    const node = queue.shift();
+    order.push(node);
+    for (const neighbor of graph[node]) {
+      if (!visited.has(neighbor)) {
+        visited.add(neighbor);
+        queue.push(neighbor);
+      }
+    }
+  }
+  return order;
+}
+
+bfs(graph, 'A'); <span class="cm">// ['A', 'B', 'C', 'D']</span></code></pre>
+    </div>
+  </section>
+
+  <!-- 11 SORTING -->
+  <section class="chapter" id="sorting">
+    <div class="chapter__head">
+      <div class="chapter__num">11</div>
+      <div class="chapter__title">
+        <h3>Sorting algorithms</h3>
+        <div class="badges">
+          <span class="badge bad">bubble / insertion O(n²)</span>
+          <span class="badge good">merge / quick O(n log n)</span>
+        </div>
+      </div>
+    </div>
+    <p><b>Bubble sort</b> repeatedly swaps adjacent out-of-order pairs. <b>Insertion sort</b> builds up a sorted section one item at a time — fast on nearly-sorted data. Both are O(n²) and mostly useful for building intuition, not production. <b>Merge sort</b> splits the array in half recursively, sorts each half, then merges them — reliably O(n log n), stable, but needs extra memory. <b>Quick sort</b> picks a pivot, partitions everything smaller/larger around it, and recurses — O(n log n) on average, in place, but O(n²) on an unlucky pivot choice.</p>
+    <div class="aside"><b>Frontend angle —</b> in real code you'd call <code>arr.sort()</code> — V8's implementation is already a tuned hybrid (Timsort-like). These matter for understanding <i>why</i> it's fast and what trade-off it made.</div>
+    <div class="code-block">
+      <div class="code-block__bar"><span>bubble-sort.js</span><button class="copy-btn" type="button">Copy</button></div>
+      <pre><code>function bubbleSort(arr) {
+  for (let i = 0; i &lt; arr.length; i++) {
+    for (let j = 0; j &lt; arr.length - i - 1; j++) {
+      if (arr[j] &gt; arr[j + 1]) {
+        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+      }
+    }
+  }
+  return arr;
+}</code></pre>
+    </div>
+    <div class="code-block">
+      <div class="code-block__bar"><span>insertion-sort.js</span><button class="copy-btn" type="button">Copy</button></div>
+      <pre><code>function insertionSort(arr) {
+  for (let i = 1; i &lt; arr.length; i++) {
+    const current = arr[i];
+    let j = i - 1;
+    while (j &gt;= 0 &amp;&amp; arr[j] &gt; current) {
+      arr[j + 1] = arr[j];
+      j--;
+    }
+    arr[j + 1] = current;
+  }
+  return arr;
+}</code></pre>
+    </div>
+    <div class="code-block">
+      <div class="code-block__bar"><span>merge-sort.js</span><button class="copy-btn" type="button">Copy</button></div>
+      <pre><code>function mergeSort(arr) {
+  if (arr.length &lt;= 1) return arr;
+
+  const mid = arr.length &gt;&gt; 1;
+  const left = mergeSort(arr.slice(0, mid));
+  const right = mergeSort(arr.slice(mid));
+
+  return merge(left, right);
+}
+
+function merge(left, right) {
+  const result = [];
+  let i = 0, j = 0;
+
+  while (i &lt; left.length &amp;&amp; j &lt; right.length) {
+    result.push(left[i] &lt;= right[j] ? left[i++] : right[j++]);
+  }
+  return [...result, ...left.slice(i), ...right.slice(j)];
+}</code></pre>
+    </div>
+    <div class="code-block">
+      <div class="code-block__bar"><span>quick-sort.js</span><button class="copy-btn" type="button">Copy</button></div>
+      <pre><code>function quickSort(arr) {
+  if (arr.length &lt;= 1) return arr;
+
+  const [pivot, ...rest] = arr;
+  const left = rest.filter(n =&gt; n &lt; pivot);
+  const right = rest.filter(n =&gt; n &gt;= pivot);
+
+  return [...quickSort(left), pivot, ...quickSort(right)];
+}</code></pre>
+    </div>
+  </section>
+
+  <!-- 12 SEARCHING -->
+  <section class="chapter" id="searching">
+    <div class="chapter__head">
+      <div class="chapter__num">12</div>
+      <div class="chapter__title">
+        <h3>Searching</h3>
+        <div class="badges">
+          <span class="badge mid">linear O(n)</span>
+          <span class="badge good">binary O(log n), needs sorted input</span>
+        </div>
+      </div>
+    </div>
+    <p><b>Linear search</b> checks every item in order — works on anything, costs O(n). <b>Binary search</b> only works on sorted data, but repeatedly halves the search space by comparing against the middle element, landing at O(log n) — that's the difference between checking a million items one by one versus about twenty comparisons.</p>
+    <div class="code-block">
+      <div class="code-block__bar"><span>binary-search.js</span><button class="copy-btn" type="button">Copy</button></div>
+      <pre><code>function binarySearch(sortedArr, target) {
+  let low = 0;
+  let high = sortedArr.length - 1;
+
+  while (low &lt;= high) {
+    const mid = (low + high) &gt;&gt; 1;
+    if (sortedArr[mid] === target) return mid;
+    if (sortedArr[mid] &lt; target) low = mid + 1;
+    else high = mid - 1;
+  }
+  return -1; <span class="cm">// not found</span>
+}
+
+binarySearch([1, 3, 5, 7, 9, 11], 7); <span class="cm">// 3</span></code></pre>
+    </div>
+  </section>
+
+  <!-- 13 TWO POINTERS -->
+  <section class="chapter" id="two-pointers">
+    <div class="chapter__head">
+      <div class="chapter__num">13</div>
+      <div class="chapter__title">
+        <h3>Two pointers</h3>
+        <div class="badges">
+          <span class="badge good">O(n), often replaces O(n²)</span>
+        </div>
+      </div>
+    </div>
+    <p>A pattern rather than a data structure: walk two indices through the same array — often from opposite ends, sometimes both from the start — and move them based on a condition, instead of checking every pair. It's the go-to move whenever a nested loop over one array feels wasteful.</p>
+    <div class="code-block">
+      <div class="code-block__bar"><span>two-pointers.js</span><button class="copy-btn" type="button">Copy</button></div>
+      <pre><code>function hasPairWithSum(sortedArr, target) {
+  let left = 0;
+  let right = sortedArr.length - 1;
+
+  while (left &lt; right) {
+    const sum = sortedArr[left] + sortedArr[right];
+    if (sum === target) return true;
+    if (sum &lt; target) left++;
+    else right--;
+  }
+  return false;
+}
+
+hasPairWithSum([1, 2, 4, 7, 11], 15); <span class="cm">// true (4 + 11)</span></code></pre>
+    </div>
+  </section>
+
+  <!-- 14 SLIDING WINDOW -->
+  <section class="chapter" id="sliding-window">
+    <div class="chapter__head">
+      <div class="chapter__num">14</div>
+      <div class="chapter__title">
+        <h3>Sliding window</h3>
+        <div class="badges">
+          <span class="badge good">O(n), often replaces O(n·k)</span>
+        </div>
+      </div>
+    </div>
+    <p>Keep a "window" of elements — a contiguous slice of the array — and slide it forward one step at a time, updating a running result instead of recomputing it from scratch. Useful for anything about a subarray or substring: max/min sum of size k, longest substring without repeats, and similar.</p>
+    <div class="code-block">
+      <div class="code-block__bar"><span>sliding-window.js</span><button class="copy-btn" type="button">Copy</button></div>
+      <pre><code>function maxSubarraySum(arr, k) {
+  let windowSum = 0;
+  for (let i = 0; i &lt; k; i++) windowSum += arr[i];
+
+  let maxSum = windowSum;
+  for (let i = k; i &lt; arr.length; i++) {
+    windowSum += arr[i] - arr[i - k]; <span class="cm">// slide: add new, drop old</span>
+    maxSum = Math.max(maxSum, windowSum);
+  }
+  return maxSum;
+}
+
+maxSubarraySum([2, 1, 5, 1, 3, 2], 3); <span class="cm">// 9 — from [5, 1, 3]</span></code></pre>
+    </div>
+  </section>
+
+  <!-- 15 DP -->
+  <section class="chapter" id="dp">
+    <div class="chapter__head">
+      <div class="chapter__num">15</div>
+      <div class="chapter__title">
+        <h3>Dynamic programming</h3>
+        <div class="badges">
+          <span class="badge good">turns exponential into linear</span>
+        </div>
+      </div>
+    </div>
+    <p>DP applies when a problem has <b>overlapping subproblems</b> (you'd recompute the same thing many times) and <b>optimal substructure</b> (the answer builds from smaller answers). <b>Memoization</b> is top-down: recurse normally, but cache each result the first time you compute it. <b>Tabulation</b> is bottom-up: build the answer iteratively from the smallest case upward, no recursion at all.</p>
+    <div class="aside"><b>Frontend angle —</b> this is the same idea as <code>useMemo</code> or a memoized selector — don't redo an expensive computation you already have the answer to.</div>
+    <div class="code-block">
+      <div class="code-block__bar"><span>dp.js</span><button class="copy-btn" type="button">Copy</button></div>
+      <pre><code><span class="cm">// top-down — memoization</span>
+function fib(n, memo = {}) {
+  if (n &lt;= 1) return n;
+  if (memo[n]) return memo[n];
+  memo[n] = fib(n - 1, memo) + fib(n - 2, memo);
+  return memo[n];
+}
+
+<span class="cm">// bottom-up — tabulation</span>
+function climbStairs(n) {
+  const ways = [1, 1]; <span class="cm">// ways[0] = 1 (empty), ways[1] = 1</span>
+  for (let i = 2; i &lt;= n; i++) {
+    ways[i] = ways[i - 1] + ways[i - 2];
+  }
+  return ways[n];
+}
+
+climbStairs(5); <span class="cm">// 8</span></code></pre>
+    </div>
+  </section>
+
+  <!-- 16 CHEAT SHEET -->
+  <section class="chapter" id="cheat-sheet">
+    <div class="chapter__head">
+      <div class="chapter__num">16</div>
+      <div class="chapter__title">
+        <h3>Complexity cheat sheet</h3>
+      </div>
+    </div>
+    <p>The whole reference in one table — average-case time complexity for the operation you'd reach for most.</p>
+    <div class="table-scroll">
+      <table class="cheat-table">
+        <thead>
+          <tr><th>Structure</th><th>Access</th><th>Search</th><th>Insert</th><th>Delete</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Array</td><td class="m">O(1)</td><td class="m">O(n)</td><td class="m">O(n)</td><td class="m">O(n)</td></tr>
+          <tr><td>Linked list</td><td class="m">O(n)</td><td class="m">O(n)</td><td class="m">O(1)*</td><td class="m">O(1)*</td></tr>
+          <tr><td>Stack / Queue</td><td class="m">O(n)</td><td class="m">O(n)</td><td class="m">O(1)</td><td class="m">O(1)</td></tr>
+          <tr><td>Hash map</td><td class="m">—</td><td class="m">O(1)</td><td class="m">O(1)</td><td class="m">O(1)</td></tr>
+          <tr><td>BST (balanced)</td><td class="m">O(log n)</td><td class="m">O(log n)</td><td class="m">O(log n)</td><td class="m">O(log n)</td></tr>
+          <tr><td>Heap</td><td class="m">O(1) top</td><td class="m">O(n)</td><td class="m">O(log n)</td><td class="m">O(log n)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="margin-top:10px; font-size:13px; color:var(--text-dim);">*at a node you're already holding — finding that node is still O(n).</p>
+
+    <div class="table-scroll" style="margin-top:22px;">
+      <table class="cheat-table">
+        <thead>
+          <tr><th>Sort</th><th>Average</th><th>Worst</th><th>Space</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Bubble</td><td class="m">O(n²)</td><td class="m">O(n²)</td><td class="m">O(1)</td></tr>
+          <tr><td>Insertion</td><td class="m">O(n²)</td><td class="m">O(n²)</td><td class="m">O(1)</td></tr>
+          <tr><td>Merge</td><td class="m">O(n log n)</td><td class="m">O(n log n)</td><td class="m">O(n)</td></tr>
+          <tr><td>Quick</td><td class="m">O(n log n)</td><td class="m">O(n²)</td><td class="m">O(log n)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    A single-file reference — no build step, open it anywhere. Tap “Copy” on any snippet to grab the code.
+  </footer>
+
+</div>
+
+<button class="top-btn" type="button" aria-label="Back to top">↑</button>
+
+<script>
+  (function () {
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('.copy-btn');
+      if (!btn) return;
+      var block = btn.closest('.code-block');
+      var code = block && block.querySelector('code');
+      if (!code) return;
+      var text = code.textContent;
+      try {
+        navigator.clipboard.writeText(text).then(function () {
+          var original = btn.textContent;
+          btn.textContent = 'Copied';
+          setTimeout(function () { btn.textContent = original; }, 1400);
+        }).catch(function () {});
+      } catch (err) {}
+    });
+
+    var topBtn = document.querySelector('.top-btn');
+    if (topBtn) {
+      window.addEventListener('scroll', function () {
+        if (window.scrollY > 480) topBtn.classList.add('show');
+        else topBtn.classList.remove('show');
+      });
+      topBtn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
